@@ -21,20 +21,20 @@ jobs:
         language: [ 'csharp' ]
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
     - name: Setup NuGet.exe
-      uses: NuGet/setup-nuget@v1
+      uses: NuGet/setup-nuget@v2
       with:
         nuget-version: '6.x'
-    - name: Setup .NET 8.0 SDK
-      uses: actions/setup-dotnet@v1
+    - name: Setup .NET 10.0 SDK
+      uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '8.0.x'
+        dotnet-version: '10.0.x'
     - name: Set environment variables
       run: echo "COYOTE_CLI_TELEMETRY_OPTOUT=1" >> $GITHUB_ENV
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@v1
+      uses: github/codeql-action/init@v3
       with:
         languages: ${{ matrix.language }}
         # If you wish to specify custom queries, you can do so here or in a config file.
@@ -45,4 +45,4 @@ jobs:
       run: ./Scripts/build.ps1
       shell: pwsh
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v1
+      uses: github/codeql-action/analyze@v3
