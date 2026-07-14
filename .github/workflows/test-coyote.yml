@@ -86,9 +86,12 @@ jobs:
         with:
           dotnet-version: '8.0.x'
       - name: Download Coyote binaries
+        # The NuGet packages under bin/nuget are only produced by the Windows
+        # build job, and the samples restore from that local source, so every
+        # sample platform consumes the Windows artifact (managed/portable).
         uses: actions/download-artifact@v4
         with:
-          name: coyote-binaries-${{ matrix.platform }}
+          name: coyote-binaries-windows-latest
           path: ./bin
       - name: Build Coyote samples
         run: |
