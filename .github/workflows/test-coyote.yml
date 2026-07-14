@@ -58,13 +58,13 @@ jobs:
       - name: Archive Coyote binaries
         uses: actions/upload-artifact@v4
         with:
-          name: coyote-binaries
+          name: coyote-binaries-${{ matrix.platform }}
           path: ./bin
       - name: Archive test results
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: coyote-test-results
+          name: coyote-test-results-${{ matrix.platform }}
           path: ./Tests/**/TestResults
   build-and-test-samples:
     name: Build and test Coyote samples
@@ -88,7 +88,7 @@ jobs:
       - name: Download Coyote binaries
         uses: actions/download-artifact@v4
         with:
-          name: coyote-binaries
+          name: coyote-binaries-${{ matrix.platform }}
           path: ./bin
       - name: Build Coyote samples
         run: |

@@ -38,7 +38,7 @@ $runtime_version = FindDotNetRuntimeVersion -dotnet_runtime_path $dotnet_runtime
 # Restore the local ilverify tool.
 &dotnet nuget locals all --clear
 &dotnet tool restore
-&dotnet tool install dotnet-ilverify --version 10.0.0
+&dotnet tool update dotnet-ilverify --version 10.0.0
 &dotnet tool list
 $ilverify = "dotnet ilverify"
 
@@ -59,14 +59,18 @@ foreach ($kvp in $targets.GetEnumerator()) {
         }
 
         $target = "$PSScriptRoot/../Tests/$($kvp.Value)/$($kvp.Value).csproj"
-        if ($f -eq "net10.0") {
+        if ($f -eq "net10.0" -or $f -eq "net8.0") {
+            # Verify the rewritten IL against the reference assemblies of the matching runtime.
+            $fw_version = if ($f -eq "net10.0") { "10.0.0" } else { "8.0.0" }
+            $netcore_version = FindMatchingVersion -path $dotnet_runtime_path -version $fw_version
+            $aspnet_version = FindMatchingVersion -path $aspnet_runtime_path -version $fw_version
             $AssemblyName = GetAssemblyName($target)
-            $command = [IO.Path]::Combine($PSScriptRoot, "..", "Tests", $($kvp.Value), "bin", "net10.0", "$AssemblyName.dll")
+            $command = [IO.Path]::Combine($PSScriptRoot, "..", "Tests", $($kvp.Value), "bin", $f, "$AssemblyName.dll")
             $command = $command + ' -r "' + [IO.Path]::Combine( `
-                $PSScriptRoot, "..", "Tests", $($kvp.Value), "bin", "net10.0", "*.dll") + '"'
-            $command = $command + ' -r "' + [IO.Path]::Combine($PSScriptRoot, "..", "bin", "net10.0", "*.dll") + '"'
-            $command = $command + ' -r "' + [IO.Path]::Combine($dotnet_runtime_path, $runtime_version, "*.dll") + '"'
-            $command = $command + ' -r "' + [IO.Path]::Combine($aspnet_runtime_path, $runtime_version, "*.dll") + '"'
+                $PSScriptRoot, "..", "Tests", $($kvp.Value), "bin", $f, "*.dll") + '"'
+            $command = $command + ' -r "' + [IO.Path]::Combine($PSScriptRoot, "..", "bin", $f, "*.dll") + '"'
+            $command = $command + ' -r "' + [IO.Path]::Combine($dotnet_runtime_path, $netcore_version, "*.dll") + '"'
+            $command = $command + ' -r "' + [IO.Path]::Combine($aspnet_runtime_path, $aspnet_version, "*.dll") + '"'
             Invoke-ToolCommand -tool $ilverify -cmd $command -error_msg "found corrupted assembly rewriting"
         }
 
