@@ -9,6 +9,8 @@ the github repo</a>
 ### Prerequisites
 
 - [.NET 10.0 SDK](https://dotnet.microsoft.com/download/dotnet)
+- [.NET 8.0 SDK](https://dotnet.microsoft.com/download/dotnet) (the solution also builds the
+  `net8.0` target, and the post-build rewriting step runs the `net8.0` `coyote` tool)
 
 **Optional:**
 

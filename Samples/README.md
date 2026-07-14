@@ -35,8 +35,9 @@ to build reliable applications and services:
 
 To build and run the samples, you will need to:
 
-- Install the [.NET 8.0 SDK](https://dotnet.microsoft.com/download/dotnet).
-- Install the [.NET 8.0 version of the coyote
+- Install the [.NET 10.0 SDK](https://dotnet.microsoft.com/download/dotnet) and the
+  [.NET 8.0 SDK](https://dotnet.microsoft.com/download/dotnet) (the samples build for both targets).
+- Install the [.NET 10.0 version of the coyote
   tool](https://microsoft.github.io/coyote/get-started/install/).
 
 Once you are ready, build the samples by running the following script from the root of the

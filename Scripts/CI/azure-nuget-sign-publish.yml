@@ -17,6 +17,13 @@ steps:
   inputs:
     version: 8.0.x
 
+# Required by the EsrpCodeSigning@2 task host, not by the Coyote build targets.
+- task: UseDotNet@2
+  displayName: 'Install .NET Core 2.1 runtime for ESRP signing'
+  inputs:
+    packageType: runtime
+    version: 2.1.x
+
 - task: PowerShell@2
   displayName: 'Build Coyote projects'
   inputs:
