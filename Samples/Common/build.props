@@ -5,7 +5,7 @@
     <Company>Microsoft Corporation</Company>
     <Copyright>Copyright © Microsoft Corporation.</Copyright>
     <LangVersion>10.0</LangVersion>
-    <TargetFrameworks>net8.0</TargetFrameworks>
+    <TargetFrameworks>net10.0</TargetFrameworks>
     <UseLocalCoyote>False</UseLocalCoyote>
     <UseLocalNugetPackages>False</UseLocalNugetPackages>
     <UseNugetPackages>True</UseNugetPackages>

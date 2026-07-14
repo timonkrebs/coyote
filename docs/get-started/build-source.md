@@ -8,7 +8,7 @@ the github repo</a>
 
 ### Prerequisites
 
-- [.NET 8.0 SDK](https://dotnet.microsoft.com/download/dotnet)
+- [.NET 10.0 SDK](https://dotnet.microsoft.com/download/dotnet)
 
 **Optional:**
 
