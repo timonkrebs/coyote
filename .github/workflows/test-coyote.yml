@@ -25,17 +25,17 @@ jobs:
     env:
       COYOTE_CLI_TELEMETRY_OPTOUT: 1
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v5
       - name: Setup NuGet.exe
-        uses: NuGet/setup-nuget@v1
+        uses: NuGet/setup-nuget@v4
         with:
           nuget-version: '6.x'
       - name: Setup .NET 8.0 SDK
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: '8.0.x'
       - name: Setup .NET 6.0 SDK
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: '6.0.x'
       - name: Setup debugging tools
@@ -56,15 +56,21 @@ jobs:
         run: ./Scripts/run-tests.ps1 -ci
         shell: pwsh
       - name: Archive Coyote binaries
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: coyote-binaries
+          name: coyote-binaries-${{ matrix.platform }}
           path: ./bin
+      - name: Archive Coyote NuGet packages
+        if: ${{ matrix.platform == 'windows-latest' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: coyote-packages
+          path: ./bin/nuget
       - name: Archive test results
         if: failure()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: coyote-test-results
+          name: coyote-test-results-${{ matrix.platform }}
           path: ./Tests/**/TestResults
   build-and-test-samples:
     name: Build and test Coyote samples
@@ -76,16 +82,21 @@ jobs:
     env:
       COYOTE_CLI_TELEMETRY_OPTOUT: 1
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v5
       - name: Setup .NET 8.0 SDK
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: '8.0.x'
       - name: Download Coyote binaries
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
-          name: coyote-binaries
+          name: coyote-binaries-${{ matrix.platform }}
           path: ./bin
+      - name: Download Coyote NuGet packages
+        uses: actions/download-artifact@v4
+        with:
+          name: coyote-packages
+          path: ./bin/nuget
       - name: Build Coyote samples
         run: |
           ./Samples/Scripts/build.ps1 -local -nuget
