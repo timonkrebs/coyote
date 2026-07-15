@@ -77,13 +77,30 @@ Ship as three PRs so failures are attributable:
 | PR 2 | Phases 1–4, plus the `History.md` and signing-pipeline items of Phase 5 | The upgrade itself: build infrastructure, source, tests/tooling, samples. |
 | PR 3 | Remainder of Phase 5 | Docs sweep (CI-neutral; `paths-ignore` skips it). The `version.props` bump happens at release time, not in a PR. |
 
+**Version placeholder convention.** Where this plan writes `10.0.x`,
+`17.14.x`, `0.15.x`, etc., read "the latest matching release at implementation
+time". The literal `x` form is valid syntax only in workflow SDK-setup inputs
+(`actions/setup-dotnet` `dotnet-version`, Azure `UseDotNet`). NuGet version
+fields — `PackageReference`, `dotnet tool install --version`,
+`.config/dotnet-tools.json` — do not treat `x` as a wildcard: use an exact
+version there (NuGet floating syntax like `10.0.*` exists for
+`PackageReference`, but this repo's convention is exact pins, and tool
+manifests accept only exact versions).
+
 ### Phase 0 — unblock and modernize CI (independent of .NET 10)
 
 The workflows use actions that GitHub has disabled or deprecated:
 
 - `actions/upload-artifact@v3` / `download-artifact@v3` — **shut off January
-  2025; the `test-coyote.yml` jobs fail on these steps today.** → `@v4` (note:
-  v4 artifacts are immutable; same upload/download names still work here).
+  2025; the `test-coyote.yml` jobs fail on these steps today.** → `@v4`.
+  Breaking change to accommodate: v4 artifacts are immutable and a given name
+  can be uploaded only once per run, so the three `build-and-test` matrix legs
+  can no longer all upload `name: coyote-binaries`. Suffix the platform into
+  the name (`coyote-binaries-${{ matrix.platform }}`) and have each
+  `build-and-test-samples` matrix leg download its matching platform's
+  artifact. (This is also more correct than v3's behavior, which silently
+  merged the three uploads last-write-wins — only the Windows leg carries
+  `net462` outputs.)
 - `github/codeql-action@v1` — shut off; → `@v3` (`codeql-analysis.yml`).
 - `actions/checkout@v2` → `@v4`, `actions/setup-dotnet@v1` → `@v4`,
   `NuGet/setup-nuget@v1` → `@v2`.
@@ -95,13 +112,16 @@ is pure CI plumbing and the suite proves itself green once before the TFM flip.
 
 ### Phase 1 — build infrastructure flip
 
-1. **`global.json`** — pin the current .NET 10 SDK patch (10.0.1xx line, e.g.
-   the latest at implementation time):
+1. **`global.json`** — pin the .NET 10 SDK baseline and let it roll forward
+   across feature bands:
    ```json
-   { "sdk": { "version": "10.0.100", "rollForward": "latestPatch" } }
+   { "sdk": { "version": "10.0.100", "rollForward": "latestFeature" } }
    ```
-   Adding `rollForward` avoids the hard-pin friction the repo has had with
-   exact versions (`common.psm1` already fuzzy-matches by major.minor).
+   `latestFeature` — not `latestPatch`, which only accepts newer patches
+   within the 10.0.1xx feature band — also matches machines that have only a
+   newer band installed (10.0.2xx/10.0.4xx), avoiding the hard-pin friction
+   the repo has had with exact versions (`common.psm1` already fuzzy-matches
+   by major.minor).
 
 2. **`Common/build.props`**
    - TFM matrix block (lines 39–53): `net8.0` → `net10.0` as the base of
@@ -153,9 +173,10 @@ is pure CI plumbing and the suite proves itself green once before the TFM flip.
    - `Scripts/run-tests.ps1`: `ValidateSet` → `("net10.0", "net8.0", "net462")`
      with default `net10.0`; the ilverify block's four hardcoded `net8.0`
      paths → `net10.0`; `dotnet tool install dotnet-ilverify --version 8.0.0`
-     → the 10.0.x release.
-   - `.config/dotnet-tools.json`: `dotnet-ilverify` 8.0.0 → 10.0.x (keep in
-     sync with run-tests.ps1); optionally bump `dotnet-counters`/`dotnet-dump`.
+     → an exact 10.0.N version (NuGet `--version` has no `x` wildcard).
+   - `.config/dotnet-tools.json`: `dotnet-ilverify` 8.0.0 → the same exact
+     10.0.N pin (tool manifests require exact versions); optionally bump
+     `dotnet-counters`/`dotnet-dump`.
    - `Scripts/gen-docs.ps1`, `Scripts/run-benchmarks.ps1`,
      `Scripts/run-benchmark-history.ps1`: `net8.0` bin paths → `net10.0`.
 
