@@ -307,18 +307,59 @@ is pure CI plumbing and the suite proves itself green once before the TFM flip.
 |---|---|---|
 | Mono.Cecil 0.11.x mis-writes net10 assemblies | Rewriting corrupts binaries | ilverify gate already in `run-tests.ps1`; bump to 0.11.6; spike early. |
 | net10 BCL internals shift under intercepted APIs (Task/Monitor/Interlocked semantics) | Test flakiness or missed interceptions | Full bug-finding suite is the regression net; IL-diff logs reviewed by hand once. |
-| `System.Threading.Lock` (new since .NET 9): C# 13+/14 `lock` on a `Lock` field bypasses `Monitor`, so Coyote won't model it | Silent loss of coverage in user code that adopts `Lock` | Out of scope here; file a follow-up issue to add a `Rewriting.Types` model. Same for new `Interlocked` overloads on small ints and `Task.WhenEach`. |
+| `System.Threading.Lock` (new since .NET 9): C# 13+/14 `lock` on a `Lock` field bypasses `Monitor`, so Coyote won't model it | Silent loss of coverage in user code that adopts `Lock` | Out of scope here; tracked as follow-up work in section 7 (items 1–3), together with the new `Interlocked` overloads on small ints and `Task.WhenEach`. |
 | Old test/benchmark tooling can't host net10 | Suites fail to launch | Required bumps in Phase 3 (Test.Sdk 17.14.x, xunit 2.9.x, BDN 0.15.x). |
 | Self-hosted perf runner lacks .NET 10 | `test-performance.yml` fails | Install SDK on runner before merging (ops task). |
 | `System.CommandLine` 2.0.0-beta4 on net10 | Low — API is self-contained | Works as-is; migrating to stable 2.0 is a breaking-API follow-up, not part of this upgrade. |
 | Deprecated `FxCopAnalyzers` 2.9.2 | None at runtime; analyzer noise | Optional follow-up: replace with built-in NetAnalyzers; may surface new warnings (`TreatWarningsAsErrors` in Debug). |
 
-## 7. Explicitly out of scope (follow-up issues to file)
+## 7. Follow-up work (out of scope for the upgrade PRs)
 
-1. Model `System.Threading.Lock` and other post-net8 concurrency APIs in the
-   rewriting engine.
-2. Migrate `System.CommandLine` beta4 → stable 2.0 (breaking API changes).
-3. Replace `Microsoft.CodeAnalysis.FxCopAnalyzers` with NetAnalyzers; raise
+Issues are disabled on this repository, so the follow-ups are tracked here.
+Items 1–5 carry the context gathered while executing the upgrade (#3, #4).
+
+1. **Model `System.Threading.Lock` in the rewriting engine.** .NET 9
+   introduced `System.Threading.Lock`, and with C# 13+ a `lock` statement on a
+   `Lock`-typed field lowers to `Lock.EnterScope()`/`Lock.Scope.Dispose()`
+   instead of `Monitor.Enter`/`Exit`, so user code that adopts it silently
+   escapes Coyote's `Monitor` interception — the scheduler neither controls
+   nor detects races on those critical sections. Add a `Rewriting.Types` model
+   covering `Enter`, `TryEnter` (both overloads), `Exit`, `EnterScope`, and
+   the `Lock.Scope` ref struct's `Dispose`, delegating to the same
+   synchronization modeling `Monitor` uses; note the `Scope` is returned by
+   value, so the rewriting pass must handle the `EnterScope`/`Dispose` pair
+   rather than a plain method-call substitution. Add bug-finding tests
+   mirroring the existing `Monitor` tests.
+2. **Intercept the newer `Interlocked` overloads.** .NET 9+ added
+   `Interlocked.Exchange`/`CompareExchange` overloads for small integer types
+   (`byte`, `sbyte`, `short`, `ushort`, plus widened `And`/`Or` coverage).
+   The existing `Rewriting.Types.Threading.Interlocked` model does not cover
+   them, so those operations are invisible to race checking. Extend the model
+   and its tests.
+3. **Model `Task.WhenEach`.** .NET 9+ added
+   `Task.WhenEach(...)` returning `IAsyncEnumerable<Task>`/`Task<T>` streams;
+   systematic testing should control its scheduling the way `WhenAny`/
+   `WhenAll` are modeled today. Extend `Rewriting.Types.Threading.Tasks` and
+   add exploration tests.
+4. **Migrate the test suites to xunit v3 (or ≥ 2.6).** Blocked on a
+   behavioral change: newer xunit rejects `Timeout` on synchronous test
+   methods ("Tests marked with Timeout are only supported for async tests"),
+   and this repository applies `[Fact(Timeout = 5000)]` to hundreds of
+   synchronous tests. The upgrade therefore pinned xunit core to `v2.4.2`
+   while bumping only the VS adapter to `v2.8.2` (required because VSTest 18
+   in the .NET 10 SDK rejects the 2.4.5 adapter — missing `LogRaw`). The
+   migration needs the sync `Timeout` facts converted to async (or the
+   timeouts dropped), after which xunit core, the adapter, and the analyzers
+   can move forward together and the `xUnit1028` suppression in
+   `AsyncMethodRewritingTests` can be revisited.
+5. **Modernize the `Raft.Azure` sample off `Microsoft.Azure.ServiceBus`.**
+   The package is retired and pulls vulnerable `IdentityModel` 5.4.0
+   transitives, which the .NET 10 SDK's transitive NuGet audit flags; the
+   samples currently work around this with `NuGetAuditMode=direct` in
+   `Samples/Common/build.props`. Port the sample to
+   `Azure.Messaging.ServiceBus`, then remove the audit-mode override.
+6. Migrate `System.CommandLine` beta4 → stable 2.0 (breaking API changes).
+7. Replace `Microsoft.CodeAnalysis.FxCopAnalyzers` with NetAnalyzers; raise
    `LangVersion` beyond 10.0.
-4. Drop `net8.0` secondary target after its EOL (November 2026).
-5. `StyleCop.Analyzers` 1.1.118 → 1.2.0-beta (needed only if LangVersion is raised).
+8. Drop `net8.0` secondary target after its EOL (November 2026).
+9. `StyleCop.Analyzers` 1.1.118 → 1.2.0-beta (needed only if LangVersion is raised).
