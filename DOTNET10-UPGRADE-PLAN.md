@@ -100,8 +100,17 @@ The workflows use actions that GitHub has disabled or deprecated:
   `build-and-test-samples` matrix leg download its matching platform's
   artifact. (This is also more correct than v3's behavior, which silently
   merged the three uploads last-write-wins — only the Windows leg carries
-  `net462` outputs.)
-- `github/codeql-action@v1` — shut off; → `@v3` (`codeql-analysis.yml`).
+  `net462` outputs.) Second wrinkle: `Scripts/build.ps1 -ci -nuget` packs the
+  `Microsoft.Coyote*` NuGet packages **only on the Windows leg**, yet every
+  samples leg (all three OSes) restores them from `./bin/nuget` (the root
+  `NuGet.config` maps `Microsoft.Coyote*` there). Under v3 the merged artifact
+  carried the Windows-built `bin/nuget` to all legs; with per-platform names
+  it no longer would. The Windows build leg must therefore also upload
+  `bin/nuget` as a separate `coyote-packages` artifact, and every samples leg
+  downloads it into `./bin/nuget` alongside its platform's binaries artifact.
+- `github/codeql-action@v1` — shut off; → `@v4` (`codeql-analysis.yml`).
+  Go straight to v4 (the current major, released October 2025) rather than v3,
+  which is already scheduled for deprecation in December 2026.
 - `actions/checkout@v2` → `@v4`, `actions/setup-dotnet@v1` → `@v4`,
   `NuGet/setup-nuget@v1` → `@v2`.
 
@@ -238,8 +247,10 @@ is pure CI plumbing and the suite proves itself green once before the TFM flip.
 - `Samples/WebApps/PetImagesAspNet/PetImages.Tests`:
   `Microsoft.AspNetCore.TestHost` / `Microsoft.AspNetCore.Mvc.Testing`
   8.0.2 → 10.0.x (must match the runtime major). Test SDK/xunit bumps as in
-  Phase 3; `MSTest` 2.2.8 in `ImageGalleryAspNet/Tests.Coyote` → 3.x
-  recommended.
+  Phase 3; `MSTest` 2.2.8 → 3.x and `Microsoft.NET.Test.Sdk` 17.4.0 → 17.14.x
+  in **both** ImageGallery test projects — `ImageGalleryAspNet/Tests` and
+  `ImageGalleryAspNet/Tests.Coyote` (the latter references the former, so
+  upgrading only one leaves a pre-net10 testhost/adapter stack in the build).
 
 ### Phase 5 — docs, release metadata, publishing
 
