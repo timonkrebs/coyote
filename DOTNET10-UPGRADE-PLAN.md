@@ -55,7 +55,7 @@ usage, so the .NET 9+ removal does not affect Coyote.
 
 | Target | Today | After upgrade | Rationale |
 |---|---|---|---|
-| `net10.0` | — | **primary** | Current LTS (EOL Nov 2028), C# 14 toolchain. |
+| `net10.0` | — | **primary** | Current LTS (EOL Nov 2028). Note: the .NET 10 SDK defaults to C# 14, but this plan pins `LangVersion` to 10.0 across TFMs (see Phase 1); adopting newer language syntax is a follow-up. |
 | `net8.0` | primary | opt-in secondary (CI: `BUILD_NET8=yes`) | Still LTS until Nov 2026; gives consumers a migration window. Remove after Nov 2026. |
 | `net6.0` | opt-in secondary | **dropped** | EOL Nov 2024. |
 | `netstandard2.0` | yes | unchanged | Library compat + rewriting support for .NET Framework. |
@@ -69,9 +69,13 @@ for .NET 10 until they migrate.
 
 ## 4. Phased execution
 
-Ship as three PRs so failures are attributable: (0) CI unblock, (1) the
-upgrade itself (build + source + tests + samples), (2) docs sweep. Phase 0
-must land first — CI is currently unable to run at all (see below).
+Ship as three PRs so failures are attributable:
+
+| PR | Phases | Content |
+|---|---|---|
+| PR 1 | Phase 0 | CI unblock (deprecated actions). Must land first — CI is currently unable to run at all (see below). |
+| PR 2 | Phases 1–4, plus the `History.md` and signing-pipeline items of Phase 5 | The upgrade itself: build infrastructure, source, tests/tooling, samples. |
+| PR 3 | Remainder of Phase 5 | Docs sweep (CI-neutral; `paths-ignore` skips it). The `version.props` bump happens at release time, not in a PR. |
 
 ### Phase 0 — unblock and modernize CI (independent of .NET 10)
 
