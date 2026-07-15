@@ -1,5 +1,10 @@
 # Plan: Upgrade Coyote to .NET 10
 
+> **Status:** Phases 0–4 are complete — the CI modernization landed in #3 and
+> the `net10.0` upgrade in #4 (History.md and the signing pipeline included).
+> The documentation sweep completes the remainder of Phase 5; the
+> `version.props` bump to `1.8.0` happens at release time.
+
 This document is the implementation plan for moving Coyote's primary target
 framework from .NET 8 to .NET 10 (LTS, released November 2025, supported until
 November 2028), following the same playbook used for the .NET 6 → .NET 8
