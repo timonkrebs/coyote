@@ -5,7 +5,12 @@
     <RootNamespace>CoyoteCoverageReportMerger</RootNamespace>
     <PackageTags>coverage;merger;coyote</PackageTags>
     <OutputType>Exe</OutputType>
-    <OutputPath>..\..\bin\</OutputPath>
+    <!-- Use a project-local output path (like GenDoc): sharing ..\..\bin with
+         the coyote tool races against the test projects' AfterBuild rewrite
+         targets, which execute bin\net462\coyote.exe while this project may
+         still be copying different versions of shared dependencies (e.g.
+         System.ValueTuple) into the same folder during a parallel build. -->
+    <OutputPath>.\bin\</OutputPath>
     <NetStandard2Supported>false</NetStandard2Supported>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
