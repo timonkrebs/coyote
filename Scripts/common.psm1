@@ -23,7 +23,7 @@ function Invoke-CoyoteTool([String]$cmd, [String]$dotnet, [String]$framework, [S
         $command = "$coyote $cmd $target"
     }
 
-    if ($command -eq "rewrite" -and $framework -ne "net6.0" -and $framework -ne "net8.0" -and $IsWindows) {
+    if ($cmd -eq "rewrite" -and $framework -eq "net462" -and $IsWindows) {
         # NOTE: Mono.Cecil cannot sign assemblies on unix platforms.
         $command = "$command -snk $key"
     }
@@ -63,6 +63,17 @@ function Invoke-DotnetTest([String]$dotnet, [String]$project, [String]$target, [
     }
 
     $command = "test $target -f $framework --no-build -v $verbosity --logger 'trx' --blame --blame-crash"
+    if ($framework -eq "net8.0") {
+        # The secondary .NET target only exists in 'TargetFrameworks' when
+        # BUILD_NET8 is set (see Common/build.props), so it must also be set
+        # when evaluating the project for 'dotnet test', otherwise the run
+        # silently executes zero tests.
+        $command = "$command /p:BUILD_NET8=yes"
+    } elseif ($framework -eq "net462") {
+        # Same for the .NET Framework target and BUILD_NET462.
+        $command = "$command /p:BUILD_NET462=yes"
+    }
+
     if (!($filter -eq "")) {
         $command = "$command --filter $filter"
     }

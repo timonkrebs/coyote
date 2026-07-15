@@ -1,6 +1,16 @@
 ## vNext
-- Upgraded the `System.Text.Json` package to `v8.0.4` for the `netstandard2.0`
-  target framework, due to a vulnerability.
+- Added support for the `net10.0` target framework, which is now the primary
+  target framework.
+- Dropped support for the end-of-life `net6.0` target framework; the optional
+  secondary .NET target is now `net8.0`.
+- Upgraded the `System.Text.Json` package for the `netstandard2.0` target
+  framework to `v10.0.10`, and `Mono.Cecil` to `v0.11.6`.
+- Upgraded the test and benchmarking dependencies (`Microsoft.NET.Test.Sdk`,
+  `xunit.runner.visualstudio` to `v2.8.2` for compatibility with the VSTest
+  runner in the .NET 10 SDK, `BenchmarkDotNet`, `dotnet-ilverify`). Note that
+  the `xunit` framework itself intentionally stays on `v2.4.2`: newer releases
+  reject the `Timeout` property on the many synchronous test methods in this
+  repository, so that migration is tracked as separate follow-up work.
 - Dropped support for the `netcoreapp3.1` target framework, which reached end of
   life.
 

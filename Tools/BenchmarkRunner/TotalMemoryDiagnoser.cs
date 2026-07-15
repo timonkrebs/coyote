@@ -67,9 +67,11 @@ namespace Microsoft.Coyote.Benchmarking
             public string Legend => "Total GC memory";
             public string NumberFormat => "N";
             public UnitType UnitType => UnitType.Dimensionless;
-            public string Unit => SizeUnit.B.Name;
+            public string Unit => "B";
             public bool TheGreaterTheBetter => false;
             public int PriorityInCategory => 0;
+
+            public bool GetIsAvailable(Metric metric) => true;
         }
     }
 }

@@ -3,7 +3,7 @@
 
 Import-Module $PSScriptRoot/../Scripts/common.psm1 -Force
 
-$framework = "net8.0"
+$framework = "net10.0"
 $targets = [ordered]@{
     "rewriting" = "Tests.Rewriting"
     "rewriting-helpers" = "Tests.Rewriting.Helpers"
@@ -15,9 +15,9 @@ $targets = [ordered]@{
 $expected_hashes = [ordered]@{
     "rewriting" = "F5A50C959279CCC2A472B54B483D96488BD93C941B357F638C49B4B3462081E7"
     "rewriting-helpers" = "DF8CF299C162ECA5392793BF5E3E6D7C8B61A75E029501ED6F41C1DD1AD3183B"
-    "testing" = "60F9D004CB61985FCFE111D2E25912124353FB3A97F25A75F301F5B647E7136B"
-    "actors" = "11AAFFA693116B24EB3EA152EE96757D8E9F7C57FFD3213ED02CDF1E9180D3D7"
-    "actors-testing" = "492B76D5ADE4E6EEA94A4AD1A37AD9DF911C81660600609FA1E9DF5D1B7AD860"
+    "testing" = "92D4AAE67FF401C2BA602ED0E90A61C43715C053398840B897EE8F93E8FE9978"
+    "actors" = "2B953518CFCF688A66772D9D22EDC05006EAF12E924F3AC5EF844450576A2712"
+    "actors-testing" = "D11AFDFE4EA1D604423B07E650F5BC4495B04D70E48EA644D38387D3B2775716"
 }
 
 Write-Comment -prefix "." -text "Comparing the test rewriting diff logs" -color "yellow"

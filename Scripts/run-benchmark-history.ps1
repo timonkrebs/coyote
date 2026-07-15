@@ -41,7 +41,6 @@ function RestoreBenchmark() {
     Invoke-Expression "sed -i 's/\\Performance.Tests.csproj/\\Microsoft.Coyote.Performance.Tests.csproj/' $RootDir\Coyote.sln"
 }
 
-$benchmarks_dir = "$RootDir/Tools/BenchmarkRunner/bin/net8.0"
 $benchmark_runner = "BenchmarkRunner.exe"
 $index = 0
 
@@ -54,8 +53,18 @@ function ProcessCommit($commit) {
     Sleep 5
     Invoke-ToolCommand -tool "dotnet" -cmd "build-server shutdown"
     Sleep 5
+    # Resolve the runner that this commit just built: older commits target
+    # older frameworks (net8.0, net6.0, ...), so the output directory varies
+    # across the history and the most recently written runner is the one that
+    # belongs to the current commit.
+    $runner = Get-ChildItem "$RootDir/Tools/BenchmarkRunner/bin" -Recurse -Filter $benchmark_runner | `
+        Sort-Object LastWriteTime -Descending | Select-Object -First 1
+    if ($null -eq $runner) {
+        Write-Error "Unable to find $benchmark_runner under Tools/BenchmarkRunner/bin."
+        Exit 1
+    }
     $artifacts_dir = "$RootDir/benchmark_$commit"
-    Invoke-Expression "$benchmarks_dir/$benchmark_runner -outdir $artifacts_dir -commit $commit -cosmos $filter"
+    Invoke-Expression "$($runner.FullName) -outdir $artifacts_dir -commit $commit -cosmos $filter"
     if (-not (Test-Path $artifacts_dir)) {
         Write-Error "Unable to find the benchmark results ($artifacts_dir)."
         Exit 1

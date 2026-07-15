@@ -23,10 +23,10 @@ jobs:
         uses: NuGet/setup-nuget@v4
         with:
           nuget-version: '6.x'
-      - name: Setup .NET 8.0 SDK
+      - name: Setup .NET 10.0 SDK
         uses: actions/setup-dotnet@v5
         with:
-          dotnet-version: '8.0.x'
+          dotnet-version: '10.0.x'
       - name: Setup Powershell
         run: ./Scripts/install-pwsh.cmd
       - name: Build Coyote projects
