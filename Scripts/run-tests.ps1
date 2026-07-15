@@ -32,17 +32,24 @@ $dotnet_runtime_path = FindDotNetRuntimePath -dotnet $dotnet -runtime "NETCore"
 $aspnet_runtime_path = FindDotNetRuntimePath -dotnet $dotnet -runtime "AspNetCore"
 $runtime_version = FindDotNetRuntimeVersion -dotnet_runtime_path $dotnet_runtime_path
 
-# NOTE: we do some hacks to get around a known issue with dotnet tool
-# command being available after locally being restored.
-# Example: https://github.com/dotnet/sdk/issues/11820
 # Restore the local ilverify tool.
-&dotnet nuget locals all --clear
+# NOTE: do NOT clear the NuGet caches here ('dotnet nuget locals all --clear'):
+# this repository redirects the NuGet global packages folder to ./packages
+# (see NuGet.config), so clearing it after the build deletes the restored test
+# packages, which silently turns every 'dotnet test --no-build' invocation
+# below into a no-op that executes zero tests but still exits successfully.
 &dotnet tool restore
 &dotnet tool install dotnet-ilverify --version 8.0.0
 &dotnet tool list
 $ilverify = "dotnet ilverify"
 
 [System.Environment]::SetEnvironmentVariable('COYOTE_CLI_TELEMETRY_OPTOUT', '1')
+
+# Publish a results table to the GitHub Actions job summary, if available.
+if ($env:GITHUB_STEP_SUMMARY) {
+    "### Coyote test results`n`n| Project | Framework | Total | Passed | Failed | Skipped |`n|---|---|---|---|---|---|" | `
+        Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Encoding utf8 -Append
+}
 
 # Run all enabled tests.
 Write-Comment -text "Running the Coyote tests." -color "blue"

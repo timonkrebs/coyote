@@ -71,8 +71,30 @@ function Invoke-DotnetTest([String]$dotnet, [String]$project, [String]$target, [
         $command = "$command --logger $logger"
     }
 
+    $start_time = Get-Date
     $error_msg = "Failed to test '$project'"
     Invoke-ToolCommand -tool $dotnet -cmd $command -error_msg $error_msg
+
+    # The 'trx' logger above writes a results file into the project's
+    # TestResults directory. If this run produced no new results file then no
+    # tests were executed, which must fail loudly: 'dotnet test --no-build'
+    # exits successfully without running any tests when the restored NuGet
+    # packages backing the project are missing.
+    $results_dir = Join-Path -Path (Split-Path -Path $target -Parent) -ChildPath "TestResults"
+    $results = Get-ChildItem -Path "$results_dir/*.trx" -ErrorAction SilentlyContinue | `
+        Where-Object LastWriteTime -ge $start_time
+    if ($null -eq $results) {
+        Write-Error "No test results found for '$project' ($framework); 'dotnet test' did not execute any tests."
+        exit 1
+    }
+
+    $trx = $results | Sort-Object LastWriteTime | Select-Object -Last 1
+    $counters = ([xml](Get-Content $trx.FullName)).TestRun.ResultSummary.Counters
+    Write-Comment -prefix "....." -text "Executed $($counters.executed) tests: $($counters.passed) passed, $($counters.failed) failed" -color "green"
+    if ($env:GITHUB_STEP_SUMMARY) {
+        "| $project | $framework | $($counters.total) | $($counters.passed) | $($counters.failed) | $($counters.notExecuted) |" | `
+            Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Encoding utf8 -Append
+    }
 }
 
 # Runs the specified tool command.
