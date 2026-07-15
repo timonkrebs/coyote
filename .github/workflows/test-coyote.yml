@@ -56,7 +56,7 @@ jobs:
         run: ./Scripts/run-tests.ps1 -ci
         shell: pwsh
       - name: Archive Coyote binaries
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: coyote-binaries-${{ matrix.platform }}
           path: |
@@ -64,13 +64,13 @@ jobs:
             !./bin/nuget/**
       - name: Archive Coyote NuGet packages
         if: ${{ matrix.platform == 'windows-latest' }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: coyote-packages
           path: ./bin/nuget
       - name: Archive test results
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: coyote-test-results-${{ matrix.platform }}
           path: ./Tests/**/TestResults
@@ -90,12 +90,12 @@ jobs:
         with:
           dotnet-version: '8.0.x'
       - name: Download Coyote binaries
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: coyote-binaries-${{ matrix.platform }}
           path: ./bin
       - name: Download Coyote NuGet packages
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: coyote-packages
           path: ./bin/nuget
