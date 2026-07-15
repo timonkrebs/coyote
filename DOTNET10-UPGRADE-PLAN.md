@@ -240,8 +240,8 @@ is pure CI plumbing and the suite proves itself green once before the TFM flip.
      (`get-rewriting-diff-logs.ps1` exists for exactly this).
 4. **Workflows** (`test-coyote.yml`, `codeql-analysis.yml`,
    `test-performance.yml`): SDK setup steps 8.0.x/6.0.x → 10.0.x/8.0.x
-   (setup-dotnet@v4 accepts a multi-line `dotnet-version`, so the two steps can
-   merge into one).
+   (setup-dotnet@v5 — the major Phase 0 lands on — accepts a multi-line
+   `dotnet-version`, so the two steps can merge into one).
 
 ### Phase 4 — samples
 
