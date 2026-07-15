@@ -39,6 +39,12 @@ $runtime_version = FindDotNetRuntimeVersion -dotnet_runtime_path $dotnet_runtime
 # packages, which silently turns every 'dotnet test --no-build' invocation
 # below into a no-op that executes zero tests but still exits successfully.
 &dotnet tool restore
+# NOTE: the explicit install below is NOT redundant: the tool manifest also
+# lists 'microsoft.coyote.cli', whose mapped NuGet feed (./bin/nuget) only
+# exists on Windows where the packages are packed. On other platforms the
+# restore above fails on that package, which leaves 'ilverify' unavailable,
+# so it must be installed explicitly (its own feed is nuget.org).
+&dotnet tool install dotnet-ilverify --version 10.0.10
 &dotnet tool list
 $ilverify = "dotnet ilverify"
 
