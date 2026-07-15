@@ -89,12 +89,47 @@ function Invoke-DotnetTest([String]$dotnet, [String]$project, [String]$target, [
     }
 
     $trx = $results | Sort-Object LastWriteTime | Select-Object -Last 1
-    $counters = ([xml](Get-Content $trx.FullName)).TestRun.ResultSummary.Counters
+    $counters = Get-TestResultCounters -path $trx.FullName
+    if ($null -eq $counters) {
+        Write-Comment -prefix "....." -text "Unable to parse the test counters from '$($trx.Name)'." -color "yellow"
+        return
+    }
+
     Write-Comment -prefix "....." -text "Executed $($counters.executed) tests: $($counters.passed) passed, $($counters.failed) failed" -color "green"
     if ($env:GITHUB_STEP_SUMMARY) {
         "| $project | $framework | $($counters.total) | $($counters.passed) | $($counters.failed) | $($counters.notExecuted) |" | `
             Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Encoding utf8 -Append
     }
+}
+
+# Extracts the result counters from the specified TRX results file. The file is
+# streamed with an XmlReader because TRX files embed the captured test output
+# and can grow far beyond the document size limits of the '[xml]' cast.
+function Get-TestResultCounters([String]$path) {
+    $counters = $null
+    try {
+        $reader = [System.Xml.XmlReader]::Create($path)
+        try {
+            while ($reader.Read()) {
+                if ($reader.NodeType -eq [System.Xml.XmlNodeType]::Element -and $reader.LocalName -eq "Counters") {
+                    $counters = @{
+                        total = $reader.GetAttribute("total")
+                        executed = $reader.GetAttribute("executed")
+                        passed = $reader.GetAttribute("passed")
+                        failed = $reader.GetAttribute("failed")
+                        notExecuted = $reader.GetAttribute("notExecuted")
+                    }
+                    break
+                }
+            }
+        } finally {
+            $reader.Dispose()
+        }
+    } catch {
+        $counters = $null
+    }
+
+    return $counters
 }
 
 # Runs the specified tool command.
