@@ -108,11 +108,19 @@ The workflows use actions that GitHub has disabled or deprecated:
   it no longer would. The Windows build leg must therefore also upload
   `bin/nuget` as a separate `coyote-packages` artifact, and every samples leg
   downloads it into `./bin/nuget` alongside its platform's binaries artifact.
+  The same uniqueness rule applies to the failure-only `Archive test results`
+  step inside the `build-and-test` matrix: `name: coyote-test-results` must
+  also gain the platform suffix, or two failing legs would collide on upload.
 - `github/codeql-action@v1` — shut off; → `@v4` (`codeql-analysis.yml`).
   Go straight to v4 (the current major, released October 2025) rather than v3,
   which is already scheduled for deprecation in December 2026.
-- `actions/checkout@v2` → `@v4`, `actions/setup-dotnet@v1` → `@v4`,
-  `NuGet/setup-nuget@v1` → `@v2`.
+- `actions/checkout@v2` → `@v5`, `actions/setup-dotnet@v1` → `@v5`,
+  `NuGet/setup-nuget@v1` → `@v4`. Use these Node 24-based majors rather than
+  the Node 20 ones (`checkout@v4`, `setup-dotnet@v4`, `setup-nuget@v2`) —
+  GitHub's Node 20 runner deprecation completes during 2026, so the older
+  majors would queue up another forced CI fix. Verify the current major of
+  each action at implementation time, and apply the same Node 24 preference
+  to the artifact actions if newer majors exist by then.
 
 Files: `.github/workflows/test-coyote.yml`, `test-performance.yml`,
 `codeql-analysis.yml` (`publish-docs.yml` is Python/mkdocs; update
