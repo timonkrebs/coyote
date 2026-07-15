@@ -6,7 +6,7 @@
     <OutputPath>.\bin\</OutputPath>
     <NetStandard2Supported>false</NetStandard2Supported>
     <Framework462Supported>false</Framework462Supported>
-    <Net6Supported>false</Net6Supported>
+    <Net8Supported>false</Net8Supported>
     <IsPackable>false</IsPackable>
     <NoWarn>$(NoWarn),1591</NoWarn>
   </PropertyGroup>
@@ -16,6 +16,6 @@
     <ProjectReference Include="..\..\Source\Actors\Actors.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="BenchmarkDotNet" Version="0.12.1" />
+    <PackageReference Include="BenchmarkDotNet" Version="0.15.8" />
   </ItemGroup>
 </Project>

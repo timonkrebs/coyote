@@ -20,10 +20,14 @@ namespace Microsoft.Coyote.Rewriting.Tests
             await Task.CompletedTask;
         }
 
+        // This test intentionally returns 'Task<int>' to exercise rewriting of
+        // generic async test methods; the xunit v2 runner executes such tests.
+#pragma warning disable xUnit1028 // Test methods must have a supported return type
         [Fact(Timeout = 5000)]
         public async Task<int> TestRewritingGenericAsyncMethod()
         {
             return await Task.FromResult(1);
         }
+#pragma warning restore xUnit1028
     }
 }

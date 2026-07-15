@@ -2,8 +2,8 @@
 # Licensed under the MIT License.
 
 param(
-    [ValidateSet("net8.0", "net6.0", "net462")]
-    [string]$framework = "net8.0",
+    [ValidateSet("net10.0", "net8.0", "net462")]
+    [string]$framework = "net10.0",
     [ValidateSet("all", "runtime", "rewriting", "testing", "actors", "actors-testing", "tools")]
     [string]$test = "all",
     [string]$filter = "",
@@ -39,7 +39,7 @@ $runtime_version = FindDotNetRuntimeVersion -dotnet_runtime_path $dotnet_runtime
 # packages, which silently turns every 'dotnet test --no-build' invocation
 # below into a no-op that executes zero tests but still exits successfully.
 &dotnet tool restore
-&dotnet tool install dotnet-ilverify --version 8.0.0
+&dotnet tool install dotnet-ilverify --version 10.0.10
 &dotnet tool list
 $ilverify = "dotnet ilverify"
 
@@ -66,12 +66,12 @@ foreach ($kvp in $targets.GetEnumerator()) {
         }
 
         $target = "$PSScriptRoot/../Tests/$($kvp.Value)/$($kvp.Value).csproj"
-        if ($f -eq "net8.0") {
+        if ($f -eq "net10.0") {
             $AssemblyName = GetAssemblyName($target)
-            $command = [IO.Path]::Combine($PSScriptRoot, "..", "Tests", $($kvp.Value), "bin", "net8.0", "$AssemblyName.dll")
+            $command = [IO.Path]::Combine($PSScriptRoot, "..", "Tests", $($kvp.Value), "bin", "net10.0", "$AssemblyName.dll")
             $command = $command + ' -r "' + [IO.Path]::Combine( `
-                $PSScriptRoot, "..", "Tests", $($kvp.Value), "bin", "net8.0", "*.dll") + '"'
-            $command = $command + ' -r "' + [IO.Path]::Combine($PSScriptRoot, "..", "bin", "net8.0", "*.dll") + '"'
+                $PSScriptRoot, "..", "Tests", $($kvp.Value), "bin", "net10.0", "*.dll") + '"'
+            $command = $command + ' -r "' + [IO.Path]::Combine($PSScriptRoot, "..", "bin", "net10.0", "*.dll") + '"'
             $command = $command + ' -r "' + [IO.Path]::Combine($dotnet_runtime_path, $runtime_version, "*.dll") + '"'
             $command = $command + ' -r "' + [IO.Path]::Combine($aspnet_runtime_path, $runtime_version, "*.dll") + '"'
             Invoke-ToolCommand -tool $ilverify -cmd $command -error_msg "found corrupted assembly rewriting"
