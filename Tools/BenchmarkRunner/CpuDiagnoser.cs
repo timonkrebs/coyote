@@ -74,7 +74,7 @@ namespace Microsoft.Coyote.Benchmarking
             public string Legend => "Total CPU Usage of the test process";
             public string NumberFormat => "#0.0000";
             public UnitType UnitType => UnitType.Dimensionless;
-            public string Unit => "B";
+            public string Unit => "%";
             public bool TheGreaterTheBetter => false;
             public int PriorityInCategory => 0;
 
