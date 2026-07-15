@@ -14,6 +14,12 @@
     <CodeAnalysisRuleSetLocation>$(MSBuildThisFileDirectory)</CodeAnalysisRuleSetLocation>
     <CodeAnalysisRuleSet>$(CodeAnalysisRuleSetLocation)\codeanalysis.ruleset</CodeAnalysisRuleSet>
     <SatelliteResourceLanguages>en-US</SatelliteResourceLanguages>
+    <!-- The .NET 10 SDK audits transitive packages by default (the .NET 8 SDK
+         audited only direct references), which fails the restore of samples
+         that demonstrate older SDK clients (e.g. Microsoft.Azure.ServiceBus).
+         Keep the previous audit scope for the samples; they are demos and not
+         shipped packages. -->
+    <NuGetAuditMode>direct</NuGetAuditMode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
