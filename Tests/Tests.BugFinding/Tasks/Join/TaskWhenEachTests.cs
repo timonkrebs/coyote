@@ -98,6 +98,61 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
+        public void TestWhenEachEnumeratesOnlyOnce()
+        {
+            this.Test(async () =>
+            {
+                // Like the real enumerable, the first enumeration drains the stream and a
+                // second enumeration observes nothing -- two consumers must not split one
+                // completion stream between them.
+                var stream = Task.WhenEach(Task.Run(() => { }), Task.Run(() => { }));
+
+                int first = 0;
+                await foreach (Task task in stream)
+                {
+                    first++;
+                }
+
+                int second = 0;
+                await foreach (Task task in stream)
+                {
+                    second++;
+                }
+
+                Specification.Assert(
+                    first is 2 && second is 0,
+                    "Expected the first enumeration to drain the stream, found {0} then {1}.", first, second);
+            },
+            this.GetConfiguration().WithTestingIterations(100));
+        }
+
+        [Fact(Timeout = 5000)]
+        public void TestWhenEachExploresYieldOrdersOfCompletedTasks()
+        {
+            this.TestWithError(async () =>
+            {
+                // Both tasks complete BEFORE enumeration starts. The real enumerable yields
+                // them in true completion order, which is schedule-dependent, so exploration
+                // must be able to observe either order here.
+                var tcsA = new TaskCompletionSource<bool>();
+                var tcsB = new TaskCompletionSource<bool>();
+                tcsA.SetResult(true);
+                tcsB.SetResult(true);
+
+                Task first = null;
+                await foreach (Task task in Task.WhenEach(tcsA.Task, tcsB.Task))
+                {
+                    first ??= task;
+                }
+
+                Specification.Assert(first != tcsB.Task, "Task B yielded first.");
+            },
+            configuration: this.GetConfiguration().WithTestingIterations(200),
+            expectedError: "Task B yielded first.",
+            replay: true);
+        }
+
+        [Fact(Timeout = 5000)]
         public void TestWhenEachWithInvalidInput()
         {
             this.Test(() =>
