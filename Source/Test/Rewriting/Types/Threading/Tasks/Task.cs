@@ -328,6 +328,84 @@ namespace Microsoft.Coyote.Rewriting.Types.Threading.Tasks
             return task;
         }
 
+#if NET10_0_OR_GREATER
+        /// <summary>
+        /// Creates an async enumerable that yields the supplied tasks as they complete.
+        /// </summary>
+        public static IAsyncEnumerable<SystemTask> WhenEach(params SystemTask[] tasks) =>
+            CoyoteRuntime.Current.SchedulingPolicy is SchedulingPolicy.None ?
+                SystemTask.WhenEach(tasks) :
+                WhenEachInCompletionOrder(new List<SystemTask>(tasks));
+
+        /// <summary>
+        /// Creates an async enumerable that yields the supplied tasks as they complete.
+        /// </summary>
+        public static IAsyncEnumerable<SystemTask> WhenEach(ReadOnlySpan<SystemTask> tasks) =>
+            WhenEach(tasks.ToArray());
+
+        /// <summary>
+        /// Creates an async enumerable that yields the supplied tasks as they complete.
+        /// </summary>
+        public static IAsyncEnumerable<SystemTask> WhenEach(IEnumerable<SystemTask> tasks) =>
+            CoyoteRuntime.Current.SchedulingPolicy is SchedulingPolicy.None ?
+                SystemTask.WhenEach(tasks) :
+                WhenEachInCompletionOrder(new List<SystemTask>(tasks));
+
+        /// <summary>
+        /// Creates an async enumerable that yields the supplied tasks as they complete.
+        /// </summary>
+        public static IAsyncEnumerable<SystemTasks.Task<TResult>> WhenEach<TResult>(
+            params SystemTasks.Task<TResult>[] tasks) =>
+            CoyoteRuntime.Current.SchedulingPolicy is SchedulingPolicy.None ?
+                SystemTask.WhenEach(tasks) :
+                WhenEachInCompletionOrder(new List<SystemTasks.Task<TResult>>(tasks));
+
+        /// <summary>
+        /// Creates an async enumerable that yields the supplied tasks as they complete.
+        /// </summary>
+        public static IAsyncEnumerable<SystemTasks.Task<TResult>> WhenEach<TResult>(
+            ReadOnlySpan<SystemTasks.Task<TResult>> tasks) =>
+            WhenEach(tasks.ToArray());
+
+        /// <summary>
+        /// Creates an async enumerable that yields the supplied tasks as they complete.
+        /// </summary>
+        public static IAsyncEnumerable<SystemTasks.Task<TResult>> WhenEach<TResult>(
+            IEnumerable<SystemTasks.Task<TResult>> tasks) =>
+            CoyoteRuntime.Current.SchedulingPolicy is SchedulingPolicy.None ?
+                SystemTask.WhenEach(tasks) :
+                WhenEachInCompletionOrder(new List<SystemTasks.Task<TResult>>(tasks));
+
+        /// <summary>
+        /// Yields the given tasks in completion order under scheduler control. Each round
+        /// performs the controlled equivalent of a WaitAny (pausing the consuming operation
+        /// until at least one remaining task completes at a scheduling point), then yields
+        /// the first completed task. Every await the consumer performs on the returned
+        /// enumerable therefore resolves inline on an already-completed value, so no task
+        /// machinery escapes the scheduler's control.
+        /// </summary>
+        private static async IAsyncEnumerable<TTask> WhenEachInCompletionOrder<TTask>(List<TTask> remaining)
+            where TTask : SystemTask
+        {
+            // Inline no-op await: gives the method the async-iterator shape the signature
+            // requires without introducing an uncontrolled asynchronous hop.
+            await SystemTask.CompletedTask;
+            while (remaining.Count > 0)
+            {
+                var runtime = CoyoteRuntime.Current;
+                if (runtime.SchedulingPolicy != SchedulingPolicy.None)
+                {
+                    TaskServices.WaitUntilAnyTaskCompletes(runtime, remaining.ToArray());
+                }
+
+                int index = remaining.FindIndex(t => t.IsCompleted);
+                TTask next = remaining[index];
+                remaining.RemoveAt(index);
+                yield return next;
+            }
+        }
+#endif
+
         /// <summary>
         /// Waits for all of the provided task objects to complete execution.
         /// </summary>

@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
+using Microsoft.Coyote.Specifications;
 using Xunit;
 using Xunit.Abstractions;
 using Interlocked = System.Threading.Interlocked;
@@ -525,6 +526,190 @@ namespace Microsoft.Coyote.BugFinding.Tests
                 Assert.Equal(0x12345670u, Interlocked.Or(ref value, 0x7654321));
                 Assert.Equal(0x17755771u, value);
             }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
+        }
+#endif
+
+#if NET10_0_OR_GREATER
+        private enum TestColor : byte
+        {
+            Red = 0,
+            Green = 1,
+            Blue = 2,
+        }
+
+        [Fact(Timeout = 5000)]
+        public void TestInterlockedExchangeByte()
+        {
+            this.Test(() =>
+            {
+                byte value = 42;
+                Assert.Equal(42, Interlocked.Exchange(ref value, 123));
+                Assert.Equal(123, value);
+            }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
+        }
+
+        [Fact(Timeout = 5000)]
+        public void TestInterlockedExchangeSByte()
+        {
+            this.Test(() =>
+            {
+                sbyte value = -42;
+                Assert.Equal(-42, Interlocked.Exchange(ref value, -123));
+                Assert.Equal(-123, value);
+            }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
+        }
+
+        [Fact(Timeout = 5000)]
+        public void TestInterlockedExchangeShort()
+        {
+            this.Test(() =>
+            {
+                short value = 42;
+                Assert.Equal(42, Interlocked.Exchange(ref value, 12345));
+                Assert.Equal(12345, value);
+            }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
+        }
+
+        [Fact(Timeout = 5000)]
+        public void TestInterlockedExchangeUShort()
+        {
+            this.Test(() =>
+            {
+                ushort value = 42;
+                Assert.Equal(42, Interlocked.Exchange(ref value, 12345));
+                Assert.Equal(12345, value);
+            }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
+        }
+
+        [Fact(Timeout = 5000)]
+        public void TestInterlockedExchangeEnum()
+        {
+            this.Test(() =>
+            {
+                // The generic Exchange lost its reference-type constraint in .NET 9, so it
+                // now binds for enums and must round-trip through the model unchanged.
+                TestColor value = TestColor.Red;
+                Assert.Equal(TestColor.Red, Interlocked.Exchange(ref value, TestColor.Green));
+                Assert.Equal(TestColor.Green, value);
+            }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
+        }
+
+        [Fact(Timeout = 5000)]
+        public void TestInterlockedCompareExchangeByte()
+        {
+            this.Test(() =>
+            {
+                byte value = 42;
+
+                Assert.Equal(42, Interlocked.CompareExchange(ref value, 123, 41));
+                Assert.Equal(42, value);
+
+                Assert.Equal(42, Interlocked.CompareExchange(ref value, 123, 42));
+                Assert.Equal(123, value);
+            }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
+        }
+
+        [Fact(Timeout = 5000)]
+        public void TestInterlockedCompareExchangeSByte()
+        {
+            this.Test(() =>
+            {
+                sbyte value = -42;
+
+                Assert.Equal(-42, Interlocked.CompareExchange(ref value, -123, -41));
+                Assert.Equal(-42, value);
+
+                Assert.Equal(-42, Interlocked.CompareExchange(ref value, -123, -42));
+                Assert.Equal(-123, value);
+            }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
+        }
+
+        [Fact(Timeout = 5000)]
+        public void TestInterlockedCompareExchangeShort()
+        {
+            this.Test(() =>
+            {
+                short value = 42;
+
+                Assert.Equal(42, Interlocked.CompareExchange(ref value, 12345, 41));
+                Assert.Equal(42, value);
+
+                Assert.Equal(42, Interlocked.CompareExchange(ref value, 12345, 42));
+                Assert.Equal(12345, value);
+            }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
+        }
+
+        [Fact(Timeout = 5000)]
+        public void TestInterlockedCompareExchangeUShort()
+        {
+            this.Test(() =>
+            {
+                ushort value = 42;
+
+                Assert.Equal(42, Interlocked.CompareExchange(ref value, 12345, 41));
+                Assert.Equal(42, value);
+
+                Assert.Equal(42, Interlocked.CompareExchange(ref value, 12345, 42));
+                Assert.Equal(12345, value);
+            }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
+        }
+
+        [Fact(Timeout = 5000)]
+        public void TestInterlockedByteLostUpdateDetection()
+        {
+            this.TestWithError(async () =>
+            {
+                byte counter = 0;
+
+                // BUG (seeded): a read-modify-write composed from two separate atomic
+                // operations instead of a CAS loop, so two concurrent increments can both
+                // read 0 and both write 1. The reads and writes are the ONLY scheduling
+                // points in these tasks, so the lost update is discoverable only if the
+                // byte overloads of CompareExchange/Exchange are intercepted by the model.
+                static void BrokenIncrement(ref byte location)
+                {
+                    byte value = Interlocked.CompareExchange(ref location, 0, 0);
+                    Interlocked.Exchange(ref location, (byte)(value + 1));
+                }
+
+                Task t1 = Task.Run(() => BrokenIncrement(ref counter));
+                Task t2 = Task.Run(() => BrokenIncrement(ref counter));
+                await Task.WhenAll(t1, t2);
+
+                byte result = Interlocked.CompareExchange(ref counter, 0, 0);
+                Specification.Assert(result is 2, "Detected lost update.");
+            },
+            configuration: this.GetConfiguration().WithTestingIterations(200)
+                .WithAtomicOperationRaceCheckingEnabled(true),
+            expectedError: "Detected lost update.",
+            replay: true);
+        }
+
+        [Fact(Timeout = 5000)]
+        public void TestInterlockedInt16LostUpdateDetection()
+        {
+            this.TestWithError(async () =>
+            {
+                short counter = 0;
+
+                // Same seeded lost update as the byte variant, over the 16-bit overloads.
+                static void BrokenIncrement(ref short location)
+                {
+                    short value = Interlocked.CompareExchange(ref location, 0, 0);
+                    Interlocked.Exchange(ref location, (short)(value + 1));
+                }
+
+                Task t1 = Task.Run(() => BrokenIncrement(ref counter));
+                Task t2 = Task.Run(() => BrokenIncrement(ref counter));
+                await Task.WhenAll(t1, t2);
+
+                short result = Interlocked.CompareExchange(ref counter, 0, 0);
+                Specification.Assert(result is 2, "Detected lost update.");
+            },
+            configuration: this.GetConfiguration().WithTestingIterations(200)
+                .WithAtomicOperationRaceCheckingEnabled(true),
+            expectedError: "Detected lost update.",
+            replay: true);
         }
 #endif
 

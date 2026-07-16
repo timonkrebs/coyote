@@ -341,15 +341,21 @@ Items 1–5 carry the context gathered while executing the upgrade (#3, #4).
    likewise not modeled (controlled scopes carry no lock identity).
 2. **Intercept the newer `Interlocked` overloads.** .NET 9+ added
    `Interlocked.Exchange`/`CompareExchange` overloads for small integer types
-   (`byte`, `sbyte`, `short`, `ushort`, plus widened `And`/`Or` coverage).
-   The existing `Rewriting.Types.Threading.Interlocked` model does not cover
-   them, so those operations are invisible to race checking. Extend the model
-   and its tests.
+   (`byte`, `sbyte`, `short`, `ushort`) and removed the reference-type
+   constraint from the generic pair (no new `And`/`Or` overloads exist — an
+   earlier revision of this item claimed otherwise). The existing
+   `Rewriting.Types.Threading.Interlocked` model did not cover them, so those
+   operations were invisible to race checking.
+   **Status: delivered** (eight small-int overloads plus unconstrained
+   generics on net10.0; lost-update detection tests pin the interception).
 3. **Model `Task.WhenEach`.** .NET 9+ added
    `Task.WhenEach(...)` returning `IAsyncEnumerable<Task>`/`Task<T>` streams;
    systematic testing should control its scheduling the way `WhenAny`/
-   `WhenAll` are modeled today. Extend `Rewriting.Types.Threading.Tasks` and
-   add exploration tests.
+   `WhenAll` are modeled today.
+   **Status: delivered** (all six overloads; the model yields tasks in
+   completion order via the same controlled wait `WaitAny` uses, so every
+   consumer await resolves inline on a completed value and completion orders
+   are explored — pinned by a test that requires both orders to be found).
 4. **Migrate the test suites to xunit v3 (or ≥ 2.6).** Blocked on a
    behavioral change: newer xunit rejects `Timeout` on synchronous test
    methods ("Tests marked with Timeout are only supported for async tests"),
