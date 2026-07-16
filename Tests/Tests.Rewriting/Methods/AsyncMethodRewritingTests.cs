@@ -1,9 +1,8 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Rewriting.Tests
 {
@@ -14,7 +13,7 @@ namespace Microsoft.Coyote.Rewriting.Tests
         {
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestRewritingAsyncMethod()
         {
             await Task.CompletedTask;
@@ -23,7 +22,7 @@ namespace Microsoft.Coyote.Rewriting.Tests
         // This test intentionally returns 'Task<int>' to exercise rewriting of
         // generic async test methods; the xunit v2 runner executes such tests.
 #pragma warning disable xUnit1028 // Test methods must have a supported return type
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task<int> TestRewritingGenericAsyncMethod()
         {
             return await Task.FromResult(1);

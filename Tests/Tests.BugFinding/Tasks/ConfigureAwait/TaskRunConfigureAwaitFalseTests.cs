@@ -4,7 +4,6 @@
 using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.BugFinding.Tests
 {
@@ -15,7 +14,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         {
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestRunParallelTask()
         {
             this.Test(async () =>
@@ -31,7 +30,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestRunParallelTaskFailure()
         {
             this.TestWithError(async () =>
@@ -49,7 +48,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestRunParallelSynchronousTask()
         {
             this.Test(async () =>
@@ -66,7 +65,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestRunParallelSynchronousTaskFailure()
         {
             this.TestWithError(async () =>
@@ -85,7 +84,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestRunParallelAsynchronousTask()
         {
             this.Test(async () =>
@@ -102,7 +101,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestRunParallelAsynchronousTaskFailure()
         {
             this.TestWithError(async () =>
@@ -121,7 +120,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestRunNestedParallelSynchronousTask()
         {
             this.Test(async () =>
@@ -143,7 +142,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAwaitNestedParallelSynchronousTaskFailure()
         {
             this.TestWithError(async () =>
@@ -167,7 +166,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAwaitNestedParallelAsynchronousTask()
         {
             this.Test(async () =>
@@ -189,7 +188,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAwaitNestedParallelAsynchronousTaskFailure()
         {
             this.TestWithError(async () =>
@@ -213,7 +212,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestRunParallelTaskWithResult()
         {
             this.Test(async () =>
@@ -230,7 +229,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestRunParallelTaskWithResultFailure()
         {
             this.TestWithError(async () =>
@@ -249,7 +248,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestRunParallelSynchronousTaskWithResult()
         {
             this.Test(async () =>
@@ -267,7 +266,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestRunParallelSynchronousTaskWithResultFailure()
         {
             this.TestWithError(async () =>
@@ -287,7 +286,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestRunParallelAsynchronousTaskWithResult()
         {
             this.Test(async () =>
@@ -305,7 +304,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestRunParallelAsynchronousTaskWithResultFailure()
         {
             this.TestWithError(async () =>
@@ -325,7 +324,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestRunNestedParallelSynchronousTaskWithResult()
         {
             this.Test(async () =>
@@ -346,7 +345,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestRunNestedParallelSynchronousTaskWithResultFailure()
         {
             this.TestWithError(async () =>
@@ -369,7 +368,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestRunNestedParallelAsynchronousTaskWithResult()
         {
             this.Test(async () =>
@@ -390,7 +389,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestRunNestedParallelAsynchronousTaskWithResultFailure()
         {
             this.TestWithError(async () =>

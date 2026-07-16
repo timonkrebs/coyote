@@ -1,10 +1,9 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
 using Microsoft.Coyote.Actors.UnitTesting;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.Tests.StateMachines
 {
@@ -120,7 +119,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestClassEventHandler()
         {
             var configuration = this.GetConfiguration();
@@ -131,7 +130,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
             test.Assert(test.ActorInstance.Count == 1, "HandleE1 was not called.");
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestClassEventHandlerOverride()
         {
             var configuration = this.GetConfiguration();
@@ -142,7 +141,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
             test.Assert(test.ActorInstance.Count == 1, "HandleInitE1 was not called.");
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestClassEventHandlerDeferOverride()
         {
             var configuration = this.GetConfiguration();
@@ -153,7 +152,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
             test.Assert(test.ActorInstance.Count == 1, "HandleActiveE1 was not called.");
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestClassEventHandlerWildcardOverride()
         {
             var configuration = this.GetConfiguration();

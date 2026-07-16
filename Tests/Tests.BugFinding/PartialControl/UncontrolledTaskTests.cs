@@ -4,7 +4,6 @@
 using System.Threading.Tasks;
 using Microsoft.Coyote.Tests.Common.Tasks;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.BugFinding.Tests
 {
@@ -15,7 +14,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         {
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestDetectedUncontrolledDelay()
         {
             this.Test(async () =>
@@ -27,7 +26,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
                 .WithTestingIterations(10));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestDetectedUncontrolledDelayWithNoPartialControl()
         {
             this.TestWithError(async () =>
@@ -43,7 +42,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestDetectedUncontrolledTaskAwaiter()
         {
             this.Test(async () =>
@@ -53,7 +52,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(10));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestDetectedUncontrolledGenericTaskAwaiter()
         {
             this.Test(async () =>
@@ -63,7 +62,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(10));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestDetectedUncontrolledTaskAwaiterWithGenericArgument()
         {
             this.Test(async () =>

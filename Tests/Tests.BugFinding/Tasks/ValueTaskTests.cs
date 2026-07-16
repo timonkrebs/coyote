@@ -4,7 +4,6 @@
 using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.BugFinding.Tests
 {
@@ -30,7 +29,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
 #if NET
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAwaitSynchronousValueTask()
         {
             this.Test(async () =>
@@ -42,7 +41,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAwaitSynchronousValueTaskFailure()
         {
             this.TestWithError(async () =>
@@ -57,7 +56,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 #endif
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAwaitAsynchronousValueTask()
         {
             this.Test(async () =>
@@ -69,7 +68,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAwaitAsynchronousValueTaskFailure()
         {
             this.TestWithError(async () =>
@@ -98,7 +97,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
 #if NET
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAwaitNestedSynchronousValueTask()
         {
             this.Test(async () =>
@@ -110,7 +109,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAwaitNestedSynchronousValueTaskFailure()
         {
             this.TestWithError(async () =>
@@ -125,7 +124,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 #endif
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAwaitNestedAsynchronousValueTask()
         {
             this.Test(async () =>
@@ -137,7 +136,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAwaitNestedAsynchronousValueTaskFailure()
         {
             this.TestWithError(async () =>
@@ -152,7 +151,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
 #if NET
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAwaitSynchronousValueTaskWithResult()
         {
             this.Test(async () =>
@@ -164,7 +163,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAwaitSynchronousValueTaskWithResultFailure()
         {
             this.TestWithError(async () =>
@@ -179,7 +178,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 #endif
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAwaitAsynchronousValueTaskWithResult()
         {
             this.Test(async () =>
@@ -191,7 +190,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAwaitAsynchronousValueTaskWithResultFailure()
         {
             this.TestWithError(async () =>
@@ -220,7 +219,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
 #if NET
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAwaitNestedSynchronousValueTaskWithResult()
         {
             this.Test(async () =>
@@ -232,7 +231,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAwaitNestedSynchronousValueTaskWithResultFailure()
         {
             this.TestWithError(async () =>
@@ -247,7 +246,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 #endif
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAwaitNestedAsynchronousValueTaskWithResult()
         {
             this.Test(async () =>
@@ -259,7 +258,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAwaitNestedAsynchronousValueTaskWithResultFailure()
         {
             this.TestWithError(async () =>
@@ -282,7 +281,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             await NestedGetWriteResultWithDelayAsync(entry, value).AsTask();
 
 #if NET
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAwaitConvertedSynchronousValueTaskWithResult()
         {
             this.Test(async () =>
@@ -295,7 +294,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAwaitConvertedSynchronousValueTaskWithResultFailure()
         {
             this.TestWithError(async () =>
@@ -311,7 +310,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 #endif
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAwaitConvertedAsynchronousValueTaskWithResult()
         {
             this.Test(async () =>
@@ -324,7 +323,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAwaitConvertedAsynchronousValueTaskWithResultFailure()
         {
             this.TestWithError(async () =>

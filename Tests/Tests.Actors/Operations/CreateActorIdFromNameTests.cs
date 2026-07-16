@@ -6,7 +6,6 @@ using Microsoft.Coyote.Runtime;
 using Microsoft.Coyote.Specifications;
 using Microsoft.Coyote.Tests.Common.Events;
 using Xunit;
-using Xunit.Abstractions;
 using SystemTask = System.Threading.Tasks.Task;
 
 namespace Microsoft.Coyote.Actors.Tests
@@ -73,7 +72,7 @@ namespace Microsoft.Coyote.Actors.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestCreateActorIdFromName1()
         {
             this.Test(async r =>
@@ -90,7 +89,7 @@ namespace Microsoft.Coyote.Actors.Tests
             Configuration.Create());
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestCreateActorIdFromName2()
         {
             this.Test(async r =>
@@ -130,7 +129,7 @@ namespace Microsoft.Coyote.Actors.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestCreateActorIdFromName4()
         {
             this.TestWithError(r =>
@@ -142,7 +141,7 @@ namespace Microsoft.Coyote.Actors.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestCreateActorIdFromName5()
         {
             if (this.SchedulingPolicy is SchedulingPolicy.None)
@@ -199,7 +198,7 @@ namespace Microsoft.Coyote.Actors.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestCreateActorIdFromName6()
         {
             if (this.SchedulingPolicy is SchedulingPolicy.None)
@@ -221,7 +220,7 @@ namespace Microsoft.Coyote.Actors.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestCreateActorIdFromName7()
         {
             this.Test(r =>
@@ -263,7 +262,7 @@ namespace Microsoft.Coyote.Actors.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestCreateActorIdFromName8()
         {
             this.Test(async r =>

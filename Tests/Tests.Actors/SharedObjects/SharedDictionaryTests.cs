@@ -4,7 +4,6 @@
 using System.Threading.Tasks;
 using Microsoft.Coyote.Actors.SharedObjects;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.Tests.SharedObjects
 {
@@ -243,7 +242,7 @@ namespace Microsoft.Coyote.Actors.Tests.SharedObjects
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestProductionSharedDictionary1()
         {
             var runtime = RuntimeFactory.Create();
@@ -263,7 +262,7 @@ namespace Microsoft.Coyote.Actors.Tests.SharedObjects
             Assert.False(failed);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestProductionSharedDictionary2()
         {
             var runtime = RuntimeFactory.Create();
@@ -283,7 +282,7 @@ namespace Microsoft.Coyote.Actors.Tests.SharedObjects
             Assert.True(failed);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestProductionSharedDictionary3()
         {
             var runtime = RuntimeFactory.Create();
@@ -306,7 +305,7 @@ namespace Microsoft.Coyote.Actors.Tests.SharedObjects
             Assert.False(failed);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestProductionSharedDictionary4()
         {
             var runtime = RuntimeFactory.Create();
@@ -326,7 +325,7 @@ namespace Microsoft.Coyote.Actors.Tests.SharedObjects
             Assert.False(failed);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestProductionSharedDictionary5()
         {
             var runtime = RuntimeFactory.Create();

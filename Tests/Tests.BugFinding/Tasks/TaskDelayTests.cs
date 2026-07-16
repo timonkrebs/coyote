@@ -5,7 +5,6 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.BugFinding.Tests
 {
@@ -25,7 +24,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterleavingsInLoopWithSynchronousDelays()
         {
             this.Test(async () =>
@@ -45,7 +44,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterleavingsInLoopWithAsynchronousDelays()
         {
             this.TestWithError(async () =>
@@ -88,7 +87,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             await WriteWithDelayAsync(entry, value, delay, repeat);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterleavingsInNestedSynchronousDelay()
         {
             this.Test(async () =>
@@ -102,7 +101,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterleavingsInNestedAsynchronousDelay()
         {
             this.TestWithError(async () =>
@@ -118,7 +117,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterleavingsInNestedSynchronousDelays()
         {
             this.Test(async () =>
@@ -132,7 +131,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterleavingsInNestedAsynchronousDelays()
         {
             this.TestWithError(async () =>
@@ -148,7 +147,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterleavingsInRepeatedNestedSynchronousDelays()
         {
             this.Test(async () =>
@@ -162,7 +161,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterleavingsInRepeatedNestedAsynchronousDelays()
         {
             this.TestWithError(async () =>
@@ -178,7 +177,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterleavingsInLambdaSynchronousDelays()
         {
             this.Test(async () =>
@@ -199,7 +198,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterleavingsInLambdaAsynchronousDelays()
         {
             this.TestWithError(async () =>
@@ -222,7 +221,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterleavingsInLocalFunctionSynchronousDelays()
         {
             this.Test(async () =>
@@ -241,7 +240,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterleavingsInLocalFunctionAsynchronousDelays()
         {
             this.TestWithError(async () =>
@@ -272,7 +271,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             });
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestParallelInterleavingsInNestedSynchronousDelays()
         {
             this.Test(async () =>
@@ -284,7 +283,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestParallelInterleavingsInNestedAsynchronousDelays()
         {
             this.TestWithError(async () =>

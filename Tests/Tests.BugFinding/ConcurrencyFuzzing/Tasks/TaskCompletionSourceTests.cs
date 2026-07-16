@@ -1,9 +1,9 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 #if NET
 using Microsoft.Coyote.Runtime;
-using Xunit.Abstractions;
+using Xunit;
 
 namespace Microsoft.Coyote.BugFinding.Tests.SystematicFuzzing
 {

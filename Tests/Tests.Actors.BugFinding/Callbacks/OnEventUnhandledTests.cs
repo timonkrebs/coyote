@@ -5,7 +5,6 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.Coyote.Tests.Common.Events;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.BugFinding.Tests
 {
@@ -31,7 +30,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestOnEventUnhandledCalledInActor()
         {
             this.TestWithError(r =>
@@ -63,7 +62,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestOnEventUnhandledCalledInStateMachine()
         {
             this.TestWithError(r =>
@@ -92,7 +91,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestOnExceptionCalledAfterOnEventUnhandledInActor()
         {
             this.Test(r =>
@@ -125,7 +124,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestOnExceptionCalledAfterOnEventUnhandledInStateMachine()
         {
             this.Test(r =>
@@ -153,7 +152,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventUnhandledExceptionPropagationInActor()
         {
             this.TestWithError(r =>
@@ -187,7 +186,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventUnhandledExceptionPropagationInStateMachine()
         {
             this.TestWithError(r =>
@@ -220,7 +219,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestOnEventUnhandledNotCalledInActor()
         {
             this.Test(r =>
@@ -257,7 +256,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestOnEventUnhandledNotCalledInStateMachine()
         {
             this.Test(r =>

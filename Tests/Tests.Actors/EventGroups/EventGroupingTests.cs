@@ -5,7 +5,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Coyote.Rewriting;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.Tests
 {
@@ -65,7 +64,7 @@ namespace Microsoft.Coyote.Actors.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestNullEventGroup()
         {
             this.Test(async r =>
@@ -95,7 +94,7 @@ namespace Microsoft.Coyote.Actors.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventGroupSetByHand()
         {
             this.Test(async r =>
@@ -107,7 +106,7 @@ namespace Microsoft.Coyote.Actors.Tests
             });
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventGroupChangedBySend()
         {
             this.Test(async r =>
@@ -139,7 +138,7 @@ namespace Microsoft.Coyote.Actors.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventGroupClearedByCreate()
         {
             this.Test(async r =>
@@ -178,7 +177,7 @@ namespace Microsoft.Coyote.Actors.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventGroupClearedBySend()
         {
             this.Test(async r =>
@@ -231,7 +230,7 @@ namespace Microsoft.Coyote.Actors.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestNullEventGroupPropagation()
         {
             this.Test(async r =>
@@ -273,7 +272,7 @@ namespace Microsoft.Coyote.Actors.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventGroupTwoActorsSendBack()
         {
             this.Test(async r =>
@@ -313,7 +312,7 @@ namespace Microsoft.Coyote.Actors.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventGroupTwoActorsSendBackCleared()
         {
             this.Test(async r =>
@@ -364,7 +363,7 @@ namespace Microsoft.Coyote.Actors.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventGroupThreeActorGroup()
         {
             this.Test(async r =>
@@ -412,7 +411,7 @@ namespace Microsoft.Coyote.Actors.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventGroupSetOnReceive()
         {
             this.Test(async r =>

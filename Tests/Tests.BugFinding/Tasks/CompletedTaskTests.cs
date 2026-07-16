@@ -5,7 +5,6 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.BugFinding.Tests
 {
@@ -16,14 +15,14 @@ namespace Microsoft.Coyote.BugFinding.Tests
         {
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestCompletedTask()
         {
             Task task = Task.CompletedTask;
             Assert.True(task.IsCompleted);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestCanceledTask()
         {
             CancellationToken token = new CancellationToken(true);
@@ -31,7 +30,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             Assert.True(task.IsCanceled);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestCanceledTaskWithResult()
         {
             CancellationToken token = new CancellationToken(true);
@@ -39,7 +38,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             Assert.True(task.IsCanceled);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestFailedTask()
         {
             Task task = Task.FromException(new InvalidOperationException());
@@ -48,7 +47,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             Assert.Equal(typeof(InvalidOperationException), task.Exception.InnerException.GetType());
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestFailedTaskWithResult()
         {
             Task<int> task = Task.FromException<int>(new InvalidOperationException());

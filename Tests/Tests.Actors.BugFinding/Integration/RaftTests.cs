@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.BugFinding.Tests
 {
@@ -1216,7 +1215,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Theory(Timeout = 10000)]
+        [Theory(Timeout = 300000)]
         [InlineData(3)]
         public async Task TestMultipleLeadersInRaftProtocol(uint seed)
         {

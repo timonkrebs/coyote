@@ -9,7 +9,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Coyote.Runtime;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
 {
@@ -36,7 +35,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAddExceptionFilter()
         {
             // The rewritten code should add a !(e is ThreadInterruptedException) filter
@@ -57,7 +56,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAddExceptionFilter2()
         {
             // The rewritten code should add a !(e is ThreadInterruptedException) filter
@@ -78,7 +77,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAddExceptionFilter3()
         {
             // The rewritten code should add a !(e is ThreadInterruptedException) filter
@@ -99,7 +98,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAddExceptionFilter4()
         {
             // The non-rewritten code should allow the ThreadInterruptedException through
@@ -120,7 +119,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAddExceptionFilter5()
         {
             // The non-rewritten code should allow the ThreadInterruptedException through
@@ -142,7 +141,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAddExceptionFilter6()
         {
             // The non-rewritten code should allow the ThreadInterruptedException through
@@ -166,7 +165,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEditComplexFilter()
         {
             // The rewritten code should add a !(e is ThreadInterruptedException) filter
@@ -190,7 +189,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEditComplexFilter2()
         {
             // The rewritten code should add a !(e is ThreadInterruptedException) filter
@@ -210,7 +209,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEditComplexFilter3()
         {
             // The rewritten code should add a !(e is ThreadInterruptedException) filter
@@ -236,7 +235,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEditComplexFilter4()
         {
             // The rewritten code should add a !(e is ThreadInterruptedException) filter
@@ -258,7 +257,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestIgnoreRethrowCase()
         {
             // The non-rewritten code should rethrow the exception
@@ -280,7 +279,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestIgnoreRethrowCase2()
         {
             // The non-rewritten code should rethrow the exception
@@ -314,7 +313,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestConditionalTryCatch()
         {
             this.RunTestWithException<InvalidOperationException>(TestConditionalTryCatchMethod);
@@ -347,7 +346,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMultiCatchBlock()
         {
             this.RunTestWithException<InvalidOperationException>(TestMultiCatchBlockMethod);
@@ -376,7 +375,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMultiCatchFilter()
         {
             this.RunTestWithException<InvalidOperationException>(TestMultiCatchFilterMethod);
@@ -409,7 +408,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMultiCatchBlockWithFilter()
         {
             this.RunTestWithException<InvalidOperationException>(TestMultiCatchBlockWithFilterMethod);
@@ -437,7 +436,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestExceptionHandlerInsideLock()
         {
             this.RunTestWithException<InvalidOperationException>(TestExceptionHandlerInsideLockMethod);
@@ -469,7 +468,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestTryUsingTry()
         {
             this.Test(TestTryUsingTryMethod);

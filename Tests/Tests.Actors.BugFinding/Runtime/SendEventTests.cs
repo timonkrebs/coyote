@@ -3,7 +3,6 @@
 
 using System.Threading.Tasks;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.BugFinding.Tests.Runtime
 {
@@ -39,7 +38,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Runtime
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSendEvent()
         {
             this.TestWithError(r =>

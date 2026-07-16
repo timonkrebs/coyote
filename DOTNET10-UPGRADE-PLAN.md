@@ -363,19 +363,41 @@ Items 1–5 carry the context gathered while executing the upgrade (#3, #4).
    synchronous tests. The upgrade therefore pinned xunit core to `v2.4.2`
    while bumping only the VS adapter to `v2.8.2` (required because VSTest 18
    in the .NET 10 SDK rejects the 2.4.5 adapter — missing `LogRaw`).
-   **Status: delivered for the "≥ 2.6" half** — the 1,097 synchronous
-   `Timeout` facts are converted to `async Task` (bodies unchanged and still
+   **Status: delivered in full.** The "≥ 2.6" half converted the 1,097
+   synchronous `Timeout` facts to `async Task` (bodies unchanged and still
    synchronous, `CS1998` suppressed per test project; the timeouts stay the
    best-effort guard they always were, since a synchronously-blocking body
    never returns control for the runner's watchdog — enforcement would need
    `await Task.Run(...)` bodies, a deliberate behavioral decision left out
-   here), xunit core is on `v2.9.3` with its current analyzers, and the
-   `xUnit1028` suppression was re-validated: the v2.9 runner still executes
-   the deliberately `Task<int>`-returning rewriting test. The **xunit v3**
-   half remains open and has a structural blocker: v3 supports `net472+`
-   and `net8+` only, while the rewriting test projects still build and run
-   on `net462`; moving to v3 means bumping the test-only TFM to `net472`
-   (products can stay `net462`) and adopting the v3 runner model.
+   here). The **v3** half then moved the test-only .NET Framework target
+   from `net462` to `net472` (v3's minimum; products keep `net462`, both
+   riding the same `BUILD_NET462` opt-in) and the suites to `xunit.v3`
+   `3.2.2`: the six runnable test projects reference the metapackage plus
+   `xunit.runner.visualstudio` `3.1.5` and are executables now, as the v3
+   runner model requires, while the shared `Tests.Common` library references
+   the `xunit.v3.extensibility.core`/`xunit.v3.assert` split. The product's
+   xunit integration is deliberately untouched — `Microsoft.Coyote.Test`
+   keeps shipping the `xunit.abstractions` (v2) typed `TestOutputLogger` and
+   `coyote test` constructor injection for external consumers — so the
+   suites carry their own v3-typed `TestOutputLogger` copy, and the xunit
+   test-loading tests load a parameterless-constructor fixture instead of
+   the test class itself (the v2 injection branch still works for v2
+   consumers but no longer has in-repo coverage). `RewritingOptions` learned
+   to resolve `$(TargetFramework)` from `v4.7.2` assemblies, and the netfx
+   rewrite steps use dedicated `rewrite.netfx.coyote.json` configs invoked
+   with the `net462` CLI (the tool has no `net472` build, and the config
+   token would otherwise resolve from the CLI's own framework). One genuine
+   semantics change surfaced empirically: v2 raced the timeout only against
+   the test's returned task, so a body that ran synchronously (as these
+   suites' explorations do) could never trip it — v3 instead enforces
+   `Timeout` in wall-clock terms for every Task-returning test. Several
+   explorations legitimately run past the old, decorative `5000` values
+   (fuzzing injects real delays, liveness challenges explore many
+   iterations), so all 1,173 timeouts are now a uniform `300000`: a genuine
+   hang guard at last (a stuck test fails in five minutes instead of riding
+   the job timeout) with ample headroom for loaded CI runners. The
+   `xUnit1028`-suppressed `Task<int>`-returning rewriting specimen still
+   executes under v3.
 5. **Modernize the `Raft.Azure` sample off `Microsoft.Azure.ServiceBus`.**
    The package is retired and pulls vulnerable `IdentityModel` 5.4.0
    transitives, which the .NET 10 SDK's transitive NuGet audit flags; the

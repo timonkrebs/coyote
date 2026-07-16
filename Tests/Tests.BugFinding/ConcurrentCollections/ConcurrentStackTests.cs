@@ -5,7 +5,6 @@ using System.Collections.Concurrent;
 using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.BugFinding.Tests.ConcurrentCollections
 {
@@ -16,7 +15,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.ConcurrentCollections
         {
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestConcurrentStackProperties()
         {
             this.Test(() =>
@@ -35,7 +34,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.ConcurrentCollections
             configuration: this.GetConfiguration().WithTestingIterations(100));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestConcurrentStackMethods()
         {
             this.Test(() =>
@@ -68,7 +67,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.ConcurrentCollections
             configuration: this.GetConfiguration().WithTestingIterations(100));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestConcurrentStackMethodsWithRaceCondition()
         {
             this.TestWithError(() =>

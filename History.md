@@ -35,6 +35,18 @@
   synchronously, so `CS1998` is suppressed in the test projects and the
   timeouts remain the same best-effort guard they were on `v2.4.2`, which
   ignored them for synchronous tests).
+- Migrated the test suites onwards to `xunit.v3` (`v3.2.2`, VS runner
+  `v3.1.5`): the test projects are executables now, as the v3 runner model
+  requires, and their optional .NET Framework target moved from `net462` to
+  `net472` (v3's minimum; the shipped packages keep their `net462` assets
+  unchanged). Because v3 enforces `Timeout` in wall-clock terms even for
+  tests whose bodies run synchronously (v2 could not), the per-test timeouts
+  are raised to a uniform five minutes and act as a genuine hang guard now.
+  The `Microsoft.Coyote.Test` package's xunit integration — the
+  `TestOutputLogger` and the `coyote test` constructor injection typed
+  against the v2 `xunit.abstractions` — is intentionally unchanged, and
+  `$(TargetFramework)` in rewriting configurations now also resolves from
+  `net472` assemblies.
 - Dropped support for the `netcoreapp3.1` target framework, which reached end of
   life.
 

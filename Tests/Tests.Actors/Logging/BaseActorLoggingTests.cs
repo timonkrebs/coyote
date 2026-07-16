@@ -1,9 +1,9 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
-using Xunit.Abstractions;
+using Xunit;
 
 namespace Microsoft.Coyote.Actors.Tests.Logging
 {

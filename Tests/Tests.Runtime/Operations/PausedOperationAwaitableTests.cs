@@ -8,7 +8,6 @@ using Microsoft.Coyote.Rewriting.Types.Runtime.CompilerServices;
 using Microsoft.Coyote.Runtime.CompilerServices;
 using Microsoft.Coyote.Specifications;
 using Xunit;
-using Xunit.Abstractions;
 using CoyoteTypes = Microsoft.Coyote.Rewriting.Types;
 using SystemCompiler = System.Runtime.CompilerServices;
 
@@ -73,7 +72,7 @@ namespace Microsoft.Coyote.Runtime.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestPausedOperationAwaitablePersistsOperation()
         {
             this.RunSystematicTest(() =>
@@ -93,7 +92,7 @@ namespace Microsoft.Coyote.Runtime.Tests
             configuration: this.GetConfiguration().WithTestingIterations(100));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestPausedOperationAwaitableResumesAsynchronously()
         {
             this.RunSystematicTest(() =>
@@ -129,7 +128,7 @@ namespace Microsoft.Coyote.Runtime.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestPausedOperationAwaitableRunsAsynchronously()
         {
             this.RunSystematicTest(() =>

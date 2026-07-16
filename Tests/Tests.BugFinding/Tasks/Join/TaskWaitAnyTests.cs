@@ -6,7 +6,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.BugFinding.Tests
 {
@@ -29,7 +28,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             entry.Value = value;
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWaitAnyWithTwoSynchronousTasks()
         {
             this.TestWithError(() =>
@@ -48,7 +47,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWaitAnyWithTwoAsynchronousTasks()
         {
             this.TestWithError(() =>
@@ -66,7 +65,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWaitAnyWithTwoParallelTasks()
         {
             this.TestWithError(() =>
@@ -94,7 +93,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWaitAnyWithTwoSynchronousTaskWithResults()
         {
             this.TestWithError(() =>
@@ -114,7 +113,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWaitAnyWithTwoAsynchronousTaskWithResults()
         {
             this.TestWithError(() =>
@@ -133,7 +132,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWaitAnyWithTwoParallelSynchronousTaskWithResults()
         {
             this.TestWithError(() =>
@@ -162,7 +161,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWaitAnyWithTwoParallelAsynchronousTaskWithResults()
         {
             this.TestWithError(() =>
@@ -191,7 +190,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWaitAnyWithIncompleteTask()
         {
             this.Test(async () =>
@@ -205,7 +204,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWaitAnyWithIncompleteGenericTask()
         {
             this.Test(async () =>
@@ -219,7 +218,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWaitAnyWithExceptionThrown()
         {
             this.TestWithException<InvalidOperationException>(async () =>

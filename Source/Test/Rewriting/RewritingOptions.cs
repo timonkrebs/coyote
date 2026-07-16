@@ -314,7 +314,9 @@ namespace Microsoft.Coyote.Rewriting
                 }
                 else if (tokens[0] == ".NETFramework")
                 {
-                    resolvedTargetFramework = tokens[1] is "v4.6.2" ? "net462" : resolvedTargetFramework;
+                    resolvedTargetFramework = tokens[1] is "v4.6.2" ? "net462" :
+                        tokens[1] is "v4.7.2" ? "net472" :
+                        resolvedTargetFramework;
                 }
             }
 

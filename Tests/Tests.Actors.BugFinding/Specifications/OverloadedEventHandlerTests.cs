@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Microsoft.Coyote.Tests.Common.Events;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
 {
@@ -44,7 +43,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
 #pragma warning restore CA1801 // Parameter not used
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestOverloadedMonitorEventHandler()
         {
             this.Test(r =>

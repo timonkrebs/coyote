@@ -4,7 +4,6 @@
 using System.Threading.Tasks;
 using Microsoft.Coyote.Runtime;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.Tests
 {
@@ -52,7 +51,7 @@ namespace Microsoft.Coyote.Actors.Tests
         {
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSendNullEvent()
         {
             var passed = false;
@@ -83,7 +82,7 @@ namespace Microsoft.Coyote.Actors.Tests
             Assert.True(passed, "Sending event to null actor didn't raise an Assert");
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSendNullEventInActor()
         {
             TaskCompletionSource<bool> completed = new TaskCompletionSource<bool>();
@@ -97,7 +96,7 @@ namespace Microsoft.Coyote.Actors.Tests
             Assert.True(result, "Sending null event didn't raise an Assert on null exception");
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSendNullSendorInActor()
         {
             TaskCompletionSource<bool> completed = new TaskCompletionSource<bool>();

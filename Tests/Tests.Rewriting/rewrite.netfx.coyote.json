@@ -1,0 +1,7 @@
+{
+  "AssembliesPath": "./bin/net472",
+  "Assemblies": [
+    "Microsoft.Coyote.Tests.Rewriting.exe",
+    "Microsoft.Coyote.Tests.Rewriting.Helpers.dll"
+  ]
+}

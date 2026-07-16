@@ -5,7 +5,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.BugFinding.Tests.DataRaceChecking
 {
@@ -16,7 +15,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.DataRaceChecking
         {
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSharedAccessRaceWithMemoryAccessInterleaving()
         {
             this.TestWithError(() =>
@@ -52,7 +51,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.DataRaceChecking
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSharedAccessRaceWithControlFlowInterleaving()
         {
             this.TestWithError(() =>

@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.Coyote.Tests.Common.Events;
 using Microsoft.Coyote.Tests.Common.Tasks;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.BugFinding.Tests
 {
@@ -36,7 +35,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestDelayInActor()
         {
             this.Test(r =>
@@ -63,7 +62,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestDelayInStateMachine()
         {
             this.Test(r =>
@@ -90,7 +89,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestDelayWithOtherSynchronizationContextInActor()
         {
             this.Test(r =>
@@ -117,7 +116,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestDelayWithOtherSynchronizationContextInStateMachine()
         {
             this.Test(r =>
@@ -147,7 +146,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestDelayLoopWithOtherSynchronizationContextInActor()
         {
             this.Test(r =>
@@ -183,7 +182,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestDelayLoopWithOtherSynchronizationContextInStateMachine()
         {
             this.Test(r =>
@@ -210,7 +209,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestUncontrolledDelayInActor()
         {
             this.TestWithError(r =>
@@ -241,7 +240,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestUncontrolledDelayInStateMachine()
         {
             this.TestWithError(r =>
@@ -272,7 +271,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestUncontrolledDelayWithOtherSynchronizationContextInActor()
         {
             this.TestWithError(r =>
@@ -303,7 +302,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestUncontrolledDelayWithOtherSynchronizationContextInStateMachine()
         {
             this.TestWithError(r =>
@@ -337,7 +336,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestUncontrolledDelayLoopWithOtherSynchronizationContextInActor()
         {
             this.TestWithError(r =>
@@ -377,7 +376,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestUncontrolledDelayLoopWithOtherSynchronizationContextInStateMachine()
         {
             this.TestWithError(r =>

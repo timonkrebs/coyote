@@ -1,11 +1,10 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
 using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.Tests
 {
@@ -110,7 +109,7 @@ namespace Microsoft.Coyote.Actors.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSyncSendBlocks()
         {
             await this.RunAsync(async r =>
@@ -169,7 +168,7 @@ namespace Microsoft.Coyote.Actors.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSendCycleDoesNotDeadlock()
         {
             await this.RunAsync(async r =>
@@ -266,7 +265,7 @@ namespace Microsoft.Coyote.Actors.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMachineHaltsOnSendExec()
         {
             var config = this.GetConfiguration();
@@ -343,7 +342,7 @@ namespace Microsoft.Coyote.Actors.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestHandledExceptionOnSendExec()
         {
             await this.RunAsync(async r =>
@@ -364,7 +363,7 @@ namespace Microsoft.Coyote.Actors.Tests
             handleFailures: false);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestUnHandledExceptionOnSendExec()
         {
             await this.RunAsync(async r =>
@@ -418,7 +417,7 @@ namespace Microsoft.Coyote.Actors.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestUnhandledEventOnSendExec()
         {
             await this.RunAsync(async r =>

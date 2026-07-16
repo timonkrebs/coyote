@@ -1,10 +1,9 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
 using Microsoft.Coyote.Actors.UnitTesting;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.Tests
 {
@@ -98,7 +97,7 @@ namespace Microsoft.Coyote.Actors.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestHandleEventInStateMachine()
         {
             var result = new Result();
@@ -113,7 +112,7 @@ namespace Microsoft.Coyote.Actors.Tests
             test.Assert(result.Value == 1, $"Incorrect result '{result.Value}'");
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestHandleMultipleEventsInStateMachine()
         {
             var result = new Result();

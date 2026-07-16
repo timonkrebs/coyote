@@ -4,7 +4,6 @@
 using System.Threading.Tasks;
 using Microsoft.Coyote.Tests.Common.Events;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.BugFinding.Tests
 {
@@ -41,7 +40,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
 #pragma warning restore CA1801 // Parameter not used
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestOverloadedEventHandlerInActor()
         {
             this.Test(r =>
@@ -81,7 +80,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
 #pragma warning restore CA1801 // Parameter not used
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestOverloadedEventHandlerInStateMachine()
         {
             this.Test(r =>

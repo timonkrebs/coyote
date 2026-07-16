@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Microsoft.Coyote.Tests.Common.Events;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.BugFinding.Tests
 {
@@ -82,7 +81,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestOnEventDequeuedWithHaltOutcomeInActor()
         {
             this.Test(r =>
@@ -121,7 +120,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestOnEventDequeuedWithHaltOutcomeInStateMachine()
         {
             this.Test(r =>
@@ -155,7 +154,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestOnEventDequeuedWithHandledExceptionOutcomeInActor()
         {
             this.TestWithError(r =>
@@ -196,7 +195,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestOnEventDequeuedWithHandledExceptionOutcomeInStateMachine()
         {
             this.TestWithError(r =>
@@ -232,7 +231,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestOnEventDequeuedWithThrowExceptionOutcomeInActor()
         {
             this.TestWithException<InvalidOperationException>(r =>
@@ -272,7 +271,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestOnEventDequeuedWithThrowExceptionOutcomeInStateMachine()
         {
             this.TestWithException<InvalidOperationException>(r =>

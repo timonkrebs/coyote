@@ -6,7 +6,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Xunit;
-using Xunit.Abstractions;
 using TaskStatus = System.Threading.Tasks.TaskStatus;
 
 namespace Microsoft.Coyote.BugFinding.Tests
@@ -30,7 +29,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             entry.Value = value;
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestNoSynchronousTaskExceptionStatus()
         {
             this.Test(async () =>
@@ -46,7 +45,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestNoAsynchronousTaskExceptionStatus()
         {
             this.Test(async () =>
@@ -62,7 +61,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestNoParallelSynchronousTaskExceptionStatus()
         {
             this.Test(async () =>
@@ -82,7 +81,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestNoParallelAsynchronousTaskExceptionStatus()
         {
             this.Test(async () =>
@@ -102,7 +101,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestNoParallelFuncTaskExceptionStatus()
         {
             this.Test(async () =>
@@ -138,7 +137,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             ThrowException<InvalidOperationException>();
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSynchronousTaskExceptionStatus()
         {
             this.Test(async () =>
@@ -165,7 +164,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAsynchronousTaskExceptionStatus()
         {
             this.Test(async () =>
@@ -192,7 +191,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestParallelSynchronousTaskExceptionStatus()
         {
             this.Test(async () =>
@@ -223,7 +222,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestParallelAsynchronousTaskExceptionStatus()
         {
             this.Test(async () =>
@@ -255,7 +254,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestParallelFuncTaskExceptionStatus()
         {
             this.Test(async () =>

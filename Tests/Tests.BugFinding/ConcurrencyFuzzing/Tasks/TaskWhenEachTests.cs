@@ -3,7 +3,7 @@
 
 #if NET10_0_OR_GREATER
 using Microsoft.Coyote.Runtime;
-using Xunit.Abstractions;
+using Xunit;
 
 namespace Microsoft.Coyote.BugFinding.Tests.SystematicFuzzing
 {

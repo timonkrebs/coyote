@@ -1,10 +1,9 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
-using Microsoft.Coyote.SystematicTesting.Frameworks.XUnit;
+using Microsoft.Coyote.Tests.Common;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.Tests
 {
@@ -27,7 +26,7 @@ namespace Microsoft.Coyote.Actors.Tests
         {
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEnqueueDequeueEvents()
         {
             int numMessages = 10000;
@@ -60,7 +59,7 @@ namespace Microsoft.Coyote.Actors.Tests
             Assert.True(dequeueTask.IsCompleted);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEnqueueReceiveEvents()
         {
             int numMessages = 10000;
@@ -89,7 +88,7 @@ namespace Microsoft.Coyote.Actors.Tests
             Assert.True(receiveTask.IsCompleted);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEnqueueReceiveEventsAlternateType()
         {
             int numMessages = 10000;

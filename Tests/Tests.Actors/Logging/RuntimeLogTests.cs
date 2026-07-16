@@ -4,10 +4,8 @@
 using System.Threading.Tasks;
 using Microsoft.Coyote.Logging;
 using Microsoft.Coyote.Runtime;
-using Microsoft.Coyote.SystematicTesting.Frameworks.XUnit;
 using Microsoft.Coyote.Tests.Common;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.Tests.Logging
 {
@@ -18,7 +16,7 @@ namespace Microsoft.Coyote.Actors.Tests.Logging
         {
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestCustomActorRuntimeLog()
         {
             Configuration config = this.GetConfiguration().WithVerbosityEnabled(VerbosityLevel.Info);

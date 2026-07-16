@@ -3,7 +3,6 @@
 
 using System.Threading.Tasks;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.BugFinding.Tests
 {
@@ -34,7 +33,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSetTaskCompletionSourceInActorInitializeAsync()
         {
             this.Test(async r =>
@@ -65,7 +64,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSetTaskCompletionSourceInStateMachineOnEntry()
         {
             this.Test(async r =>
@@ -91,7 +90,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSetTaskCompletionSourceInActorHandler()
         {
             this.Test(async r =>
@@ -123,7 +122,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSetTaskCompletionSourceInStateMachineHandler()
         {
             this.Test(async r =>
@@ -147,7 +146,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAwaitTaskCompletionSourceInActorInitializeAsync()
         {
             this.Test(r =>
@@ -175,7 +174,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAwaitTaskCompletionSourceInStateMachineOnEntry()
         {
             this.Test(r =>
@@ -198,7 +197,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAwaitTaskCompletionSourceInActorHandler()
         {
             this.Test(r =>
@@ -227,7 +226,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAwaitTaskCompletionSourceInStateMachineHandler()
         {
             this.Test(r =>

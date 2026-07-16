@@ -6,7 +6,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.BugFinding.Tests
 {
@@ -29,7 +28,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             entry.Value = value;
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWaitAllWithTwoSynchronousTasks()
         {
             this.TestWithError(() =>
@@ -45,7 +44,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWaitAllWithTwoAsynchronousTasks()
         {
             this.TestWithError(() =>
@@ -61,7 +60,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWaitAllWithTwoParallelTasks()
         {
             this.TestWithError(() =>
@@ -86,7 +85,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWaitAllWithTwoSynchronousTaskWithResults()
         {
             this.TestWithError(() =>
@@ -103,7 +102,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWaitAllWithTwoAsynchronousTaskWithResults()
         {
             this.TestWithError(() =>
@@ -119,7 +118,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWaitAllWithTwoParallelSynchronousTaskWithResults()
         {
             this.TestWithError(() =>
@@ -147,7 +146,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWaitAllWithTwoParallelAsynchronousTaskWithResults()
         {
             this.TestWithError(() =>
@@ -173,7 +172,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWaitAllDeadlock()
         {
             this.TestWithError(async () =>
@@ -191,7 +190,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWaitAllWithResultsAndDeadlock()
         {
             this.TestWithError(async () =>
@@ -209,7 +208,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWaitAllWithExceptionThrown()
         {
             this.TestWithException<InvalidOperationException>(() =>

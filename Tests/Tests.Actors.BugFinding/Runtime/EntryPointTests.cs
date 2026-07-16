@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 using Microsoft.Coyote.Logging;
 using Microsoft.Coyote.Runtime;
 using Microsoft.Coyote.SystematicTesting;
-using Microsoft.Coyote.SystematicTesting.Frameworks.XUnit;
+using Microsoft.Coyote.Tests.Common;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.BugFinding.Tests.Runtime
 {
@@ -89,34 +88,34 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Runtime
         }
 #pragma warning restore xUnit1013 // Public method should be marked as test
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestVoidEntryPoint() => this.CheckTestMethod(nameof(VoidTestWithNoRuntime));
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestVoidEntryPointWithRuntime() => this.CheckTestMethod(nameof(VoidTestWithRuntime));
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestVoidEntryPointWithActorRuntime() => this.CheckTestMethod(nameof(VoidTestWithActorRuntime));
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestTaskEntryPoint() => this.CheckTestMethod(nameof(TaskTestWithNoRuntime));
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestTaskEntryPointWithRuntime() => this.CheckTestMethod(nameof(TaskTestWithRuntime));
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestTaskEntryPointWithActorRuntime() => this.CheckTestMethod(nameof(TaskTestWithActorRuntime));
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAsyncTaskEntryPoint() => this.CheckTestMethod(nameof(AsyncTaskTestWithNoRuntime));
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAsyncTaskEntryPointWithRuntime() => this.CheckTestMethod(nameof(AsyncTaskTestWithRuntime));
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAsyncTaskEntryPointWithActorRuntime() => this.CheckTestMethod(nameof(AsyncTaskTestWithActorRuntime));
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestUnspecifiedEntryPoint()
         {
             string name = string.Empty;
@@ -131,7 +130,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Runtime
             Assert.StartsWith(expected, actual);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestNotExistingEntryPoint()
         {
             string name = "NotExistingEntryPoint";
@@ -145,7 +144,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Runtime
             Assert.StartsWith(expected, actual);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAmbiguousEntryPoint()
         {
             string name = "VoidTest";

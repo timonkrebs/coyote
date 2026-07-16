@@ -4,7 +4,6 @@
 using System;
 using System.Threading.Tasks;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.BugFinding.Tests.Runtime
 {
@@ -23,7 +22,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Runtime
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestThrowExceptionFromEntryPoint()
         {
             this.TestWithException<InvalidOperationException>(r =>
@@ -33,7 +32,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Runtime
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestThrowExceptionFromAsyncEntryPoint()
         {
             this.TestWithException<InvalidOperationException>(async r =>
@@ -44,7 +43,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Runtime
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestThrowExceptionFromEntryPointWithActor()
         {
             this.TestWithException<InvalidOperationException>(r =>

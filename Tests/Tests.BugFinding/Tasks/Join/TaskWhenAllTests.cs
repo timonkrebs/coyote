@@ -7,7 +7,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.BugFinding.Tests
 {
@@ -30,7 +29,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             entry.Value = value;
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWhenAllWithTwoSynchronousTasks()
         {
             this.TestWithError(async () =>
@@ -46,7 +45,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWhenAllWithTwoAsynchronousTasks()
         {
             this.TestWithError(async () =>
@@ -62,7 +61,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWhenAllWithTwoParallelTasks()
         {
             this.TestWithError(async () =>
@@ -88,7 +87,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWhenAllWithTwoSynchronousTaskWithResults()
         {
             this.TestWithError(async () =>
@@ -106,7 +105,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWhenAllWithTwoAsynchronousTaskWithResults()
         {
             this.TestWithError(async () =>
@@ -123,7 +122,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWhenAllWithTwoParallelSynchronousTaskWithResults()
         {
             this.TestWithError(async () =>
@@ -152,7 +151,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWhenAllWithTwoParallelAsynchronousTaskWithResults()
         {
             this.TestWithError(async () =>
@@ -179,7 +178,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWhenAllWithAsyncCaller()
         {
             this.TestWithError(async () =>
@@ -207,7 +206,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWhenAllWithResultAndAsyncCaller()
         {
             this.TestWithError(async () =>
@@ -235,7 +234,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWhenAllWithBlockingWait()
         {
             this.Test(() =>
@@ -249,7 +248,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(100));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWhenAllWithException()
         {
             this.TestWithError(async () =>
@@ -303,7 +302,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWhenAllWithResultsAndException()
         {
             this.TestWithError(async () =>
@@ -359,7 +358,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWhenAllDeadlock()
         {
             this.TestWithError(async () =>
@@ -377,7 +376,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWhenAllWithResultsAndDeadlock()
         {
             this.TestWithError(async () =>

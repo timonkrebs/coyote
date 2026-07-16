@@ -4,10 +4,13 @@
     <AssemblyName>Microsoft.Coyote.Tests.Tools</AssemblyName>
     <RootNamespace>Microsoft.Coyote.Tools.Tests</RootNamespace>
     <OutputPath>.\bin\</OutputPath>
+    <OutputType>Exe</OutputType>
     <NetStandard2Supported>false</NetStandard2Supported>
+    <Framework462Supported>false</Framework462Supported>
+    <Framework472Supported>true</Framework472Supported>
     <Net8Supported>false</Net8Supported>
     <IsPackable>false</IsPackable>
-    <NoWarn>$(NoWarn),1591,1998,xUnit1030,xUnit1031</NoWarn>
+    <NoWarn>$(NoWarn),1591,1998,xUnit1030,xUnit1031,xUnit1051</NoWarn>
   </PropertyGroup>
   <Import Project="..\..\Common\build.props" />
   <Import Project="..\..\Common\key.props" />
@@ -19,8 +22,8 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
-    <PackageReference Include="xunit" Version="2.9.3" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
+    <PackageReference Include="xunit.v3" Version="3.2.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5" />
   </ItemGroup>
   <ItemGroup>
     <None Update="xunit.runner.json">

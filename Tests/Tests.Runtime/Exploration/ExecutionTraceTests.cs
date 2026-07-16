@@ -4,7 +4,6 @@
 using System.Threading.Tasks;
 using Microsoft.Coyote.SystematicTesting;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Runtime.Tests
 {
@@ -15,7 +14,7 @@ namespace Microsoft.Coyote.Runtime.Tests
         {
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestExecutionTraceAddSchedulingDecisions()
         {
             ExecutionTrace trace = ExecutionTrace.Create();
@@ -65,7 +64,7 @@ namespace Microsoft.Coyote.Runtime.Tests
             Assert.True((trace[4] as ExecutionTrace.SchedulingStep).SequenceId is 2);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestExecutionTraceAddNondeterministicBooleanDecisions()
         {
             ExecutionTrace trace = ExecutionTrace.Create();
@@ -96,7 +95,7 @@ namespace Microsoft.Coyote.Runtime.Tests
             Assert.True((trace[2] as ExecutionTrace.BooleanChoiceStep).Value is true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestExecutionTraceAddNondeterministicIntegerDecisions()
         {
             ExecutionTrace trace = ExecutionTrace.Create();
@@ -127,7 +126,7 @@ namespace Microsoft.Coyote.Runtime.Tests
             Assert.True((trace[2] as ExecutionTrace.IntegerChoiceStep).Value is 4);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestExecutionTraceAddMixedChoices()
         {
             ExecutionTrace trace = ExecutionTrace.Create();
@@ -175,7 +174,7 @@ namespace Microsoft.Coyote.Runtime.Tests
             Assert.True((trace[4] as ExecutionTrace.IntegerChoiceStep).Value is 5);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestExecutionTraceExtendWithShorter()
         {
             ExecutionTrace trace = ExecutionTrace.Create();
@@ -220,7 +219,7 @@ namespace Microsoft.Coyote.Runtime.Tests
             Assert.True((trace[2] as ExecutionTrace.BooleanChoiceStep).Value is true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestExecutionTraceExtendWithLonger()
         {
             ExecutionTrace trace = ExecutionTrace.Create();
@@ -281,7 +280,7 @@ namespace Microsoft.Coyote.Runtime.Tests
             Assert.True((trace[4] as ExecutionTrace.IntegerChoiceStep).Value is 5);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestExecutionTraceReplaceWithEmpty()
         {
             ExecutionTrace trace = ExecutionTrace.Create();
@@ -302,7 +301,7 @@ namespace Microsoft.Coyote.Runtime.Tests
             Assert.True(trace.Length is 0);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestExecutionTraceReplaceWithShorter()
         {
             ExecutionTrace trace = ExecutionTrace.Create();
@@ -340,7 +339,7 @@ namespace Microsoft.Coyote.Runtime.Tests
             Assert.True((trace[1] as ExecutionTrace.IntegerChoiceStep).Value is 5);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestExecutionTraceReplaceWithLonger()
         {
             ExecutionTrace trace = ExecutionTrace.Create();

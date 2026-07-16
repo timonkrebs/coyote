@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.Coyote.Tests.Common.Events;
 using Microsoft.Coyote.Tests.Common.Tasks;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.BugFinding.Tests
 {
@@ -36,7 +35,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestYieldInActor()
         {
             this.Test(r =>
@@ -63,7 +62,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestYieldInStateMachine()
         {
             this.Test(r =>
@@ -93,7 +92,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestYieldLoopInActor()
         {
             this.Test(r =>
@@ -129,7 +128,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestYieldLoopInStateMachine()
         {
             this.Test(r =>
@@ -156,7 +155,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestUncontrolledYieldInActor()
         {
             this.TestWithError(r =>
@@ -187,7 +186,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestUncontrolledYieldInStateMachine()
         {
             this.TestWithError(r =>
@@ -221,7 +220,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestUncontrolledYieldLoopInActor()
         {
             this.TestWithError(r =>
@@ -261,7 +260,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestUncontrolledYieldLoopInStateMachine()
         {
             this.TestWithError(r =>

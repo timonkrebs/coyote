@@ -7,7 +7,6 @@ using Microsoft.Coyote.Specifications;
 using Microsoft.Coyote.Tests.Common;
 using Microsoft.Coyote.Tests.Common.Events;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.BugFinding.Tests.Coverage
 {
@@ -43,7 +42,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Coverage
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestTrivialActivityCoverage()
         {
             var configuration = this.GetConfiguration();
@@ -93,7 +92,7 @@ Total specification monitor coverage: N/A
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMachineStateTransitionActivityCoverage()
         {
             var configuration = this.GetConfiguration();
@@ -149,7 +148,7 @@ Total specification monitor coverage: N/A
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMachineRaiseEventActivityCoverage()
         {
             var configuration = this.GetConfiguration();
@@ -237,7 +236,7 @@ Total specification monitor coverage: N/A
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMachineSendEventActivityCoverage()
         {
             var configuration = this.GetConfiguration();
@@ -300,7 +299,7 @@ Total specification monitor coverage: N/A
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestCoverageOnMultipleTests()
         {
             var configuration = this.GetConfiguration();
@@ -380,7 +379,7 @@ Total specification monitor coverage: N/A
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestUncoveredEvents()
         {
             var configuration = this.GetConfiguration();
@@ -459,7 +458,7 @@ Total specification monitor coverage: N/A
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestPushStateActivityCoverage()
         {
             var configuration = this.GetConfiguration();
@@ -566,7 +565,7 @@ Total specification monitor coverage: N/A
         }
 
         // Make sure we get coverage information for Monitors.
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMonitorActivityCoverage()
         {
             var configuration = this.GetConfiguration();

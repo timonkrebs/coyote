@@ -5,7 +5,6 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Xunit;
-using Xunit.Abstractions;
 using MonitorEvent = Microsoft.Coyote.Specifications.Monitor.Event;
 
 namespace Microsoft.Coyote.Actors.BugFinding.Tests.Runtime
@@ -83,7 +82,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Runtime
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSendAndExecuteNoDeadlockWithReceive()
         {
             this.Test(r =>
@@ -92,7 +91,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Runtime
             });
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSendAndExecuteDeadlockWithReceive()
         {
             this.TestWithError(r =>
@@ -172,7 +171,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Runtime
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSyncSendToReceive()
         {
             this.Test(r =>
@@ -182,7 +181,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Runtime
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSyncSendSometimesDoesNotHandle()
         {
             this.TestWithError(r =>
@@ -251,7 +250,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Runtime
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSendBlocks()
         {
             this.Test(r =>
@@ -297,7 +296,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Runtime
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSendCycleDoesNotDeadlock()
         {
             this.Test(r =>
@@ -381,7 +380,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Runtime
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMachineHaltsOnSendExec()
         {
             this.Test(r =>
@@ -474,7 +473,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Runtime
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestHandledExceptionOnSendExec()
         {
             this.Test(r =>
@@ -485,7 +484,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Runtime
             configuration: this.GetConfiguration().WithTestingIterations(100));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestUnhandledExceptionOnSendExec()
         {
             this.TestWithException<InvalidOperationException>(r =>
@@ -520,7 +519,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Runtime
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestUnhandledEventOnSendExec1()
         {
             this.TestWithError(r =>
@@ -559,7 +558,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Runtime
             private void Handle() => this.RaiseEvent(new E3());
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestUnhandledEventOnSendExec2()
         {
             this.Test(r =>

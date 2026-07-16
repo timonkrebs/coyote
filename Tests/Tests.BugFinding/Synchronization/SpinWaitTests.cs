@@ -3,7 +3,6 @@
 
 using System.Threading.Tasks;
 using Xunit;
-using Xunit.Abstractions;
 using Interlocked = System.Threading.Interlocked;
 using SpinWait = System.Threading.SpinWait;
 using Thread = System.Threading.Thread;
@@ -18,7 +17,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
 #if NET
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSpinCount()
         {
             this.Test(() =>
@@ -51,7 +50,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 #endif
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSpinUntil()
         {
             this.Test(() =>
@@ -62,7 +61,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
 #if NET
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSpinUntilMultithreaded()
         {
             this.Test(() =>
@@ -94,7 +93,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 #endif
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSpinUntilDeadlock()
         {
             this.TestWithError(() =>
@@ -161,7 +160,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSpinWaitStack()
         {
             var configuration = this.GetConfiguration().WithTestingIterations(100)

@@ -1,0 +1,7 @@
+{
+  "AssembliesPath": "./bin/net472",
+  "Assemblies": [
+    "Microsoft.Coyote.Tests.Actors.exe",
+    "Microsoft.Coyote.Tests.Actors.BugFinding.exe"
+  ]
+}

@@ -4,7 +4,6 @@
 using System.Threading.Tasks;
 using Microsoft.Coyote.Actors.SharedObjects;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.BugFinding.Tests.SharedObjects
 {
@@ -73,7 +72,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.SharedObjects
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSharedDictionary1()
         {
             this.TestWithError(r =>
@@ -103,7 +102,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.SharedObjects
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSharedDictionary2()
         {
             this.TestWithException<System.Collections.Generic.KeyNotFoundException>(r =>
@@ -153,7 +152,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.SharedObjects
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSharedDictionary3()
         {
             this.Test(r =>
@@ -202,7 +201,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.SharedObjects
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSharedDictionary4()
         {
             this.Test(r =>
@@ -266,7 +265,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.SharedObjects
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSharedDictionary5()
         {
             this.Test(r =>
@@ -277,7 +276,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.SharedObjects
             configuration: this.GetConfiguration().WithTestingIterations(50));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSharedDictionary6()
         {
             this.Test(r =>
@@ -325,7 +324,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.SharedObjects
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSharedDictionary7()
         {
             this.TestWithError(r =>

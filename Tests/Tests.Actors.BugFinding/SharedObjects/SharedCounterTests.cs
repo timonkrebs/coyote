@@ -4,7 +4,6 @@
 using System.Threading.Tasks;
 using Microsoft.Coyote.Actors.SharedObjects;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.BugFinding.Tests.SharedObjects
 {
@@ -75,7 +74,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.SharedObjects
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSharedCounter1()
         {
             this.TestWithError(r =>
@@ -152,7 +151,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.SharedObjects
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSharedCounter2()
         {
             this.Test(r =>
@@ -162,7 +161,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.SharedObjects
             configuration: this.GetConfiguration().WithTestingIterations(50));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSharedCounter3()
         {
             this.TestWithError(r =>
@@ -174,7 +173,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.SharedObjects
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSharedCounter4()
         {
             this.TestWithError(r =>
@@ -186,7 +185,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.SharedObjects
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSharedCounter5()
         {
             this.TestWithError(r =>
@@ -248,7 +247,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.SharedObjects
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSharedCounter6()
         {
             this.Test(r =>

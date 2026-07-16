@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Microsoft.Coyote.Runtime;
 using Microsoft.Coyote.Specifications;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.BugFinding.Tests
 {
@@ -17,7 +16,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         {
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestTaskYield()
         {
             this.Test(async () =>
@@ -27,7 +26,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestDoubleTaskYield()
         {
             this.Test(async () =>
@@ -38,7 +37,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAsynchronousTaskYield()
         {
             this.Test(async () =>
@@ -53,7 +52,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestParallelTaskYield()
         {
             this.Test(async () =>
@@ -69,7 +68,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestTwoParallelTasksYield()
         {
             this.Test(async () =>
@@ -90,7 +89,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestTwoParallelTasksWriteWithYield()
         {
             if (this.SchedulingPolicy is SchedulingPolicy.Fuzzing)
@@ -127,7 +126,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestTwoParallelTasksWriteWithYieldFailure()
         {
             this.TestWithError(async () =>
@@ -150,7 +149,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestTwoAsynchronousTasksWriteWithYieldFailure()
         {
             this.TestWithError(async () =>
@@ -184,7 +183,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             await WriteWithYieldAsync(entry, value);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterleavingsInNestedYield()
         {
             this.TestWithError(async () =>
@@ -200,7 +199,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterleavingsInNestedYields()
         {
             this.TestWithError(async () =>
@@ -216,7 +215,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterleavingsInLambdaYields()
         {
             this.TestWithError(async () =>
@@ -239,7 +238,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterleavingsInLocalFunctionYields()
         {
             this.TestWithError(async () =>
@@ -270,7 +269,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             });
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterleavingsInNestedParallelYields()
         {
             this.TestWithError(async () =>
