@@ -98,6 +98,62 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
+        public void TestWhenEachWithInvalidInput()
+        {
+            this.Test(() =>
+            {
+                // Argument validation must happen eagerly at the call and match the invoked
+                // API: ArgumentNullException for a null collection, ArgumentException for a
+                // null entry -- not a deferred NullReferenceException at enumeration time.
+                Exception nullCollection = Record.Exception(() => Task.WhenEach((Task[])null));
+                Specification.Assert(
+                    nullCollection is ArgumentNullException,
+                    "Expected ArgumentNullException for a null collection, found {0}.",
+                    nullCollection?.GetType().Name ?? "no exception");
+
+                Exception nullEntry = Record.Exception(() => Task.WhenEach(Task.CompletedTask, null));
+                Specification.Assert(
+                    nullEntry is ArgumentException && nullEntry is not ArgumentNullException,
+                    "Expected ArgumentException for a null entry, found {0}.",
+                    nullEntry?.GetType().Name ?? "no exception");
+            },
+            this.GetConfiguration().WithTestingIterations(10));
+        }
+
+        [Fact(Timeout = 5000)]
+        public void TestWhenEachWithCancellation()
+        {
+            this.Test(async () =>
+            {
+                // A token canceled before iteration must cancel the stream on the first
+                // move, even when a completed task would otherwise be ready to yield. The
+                // enumerator is taken explicitly with the token (the WithCancellation sugar
+                // lowers to ConfiguredCancelableAsyncEnumerable, which the rewriting engine
+                // does not model yet -- tracked as follow-up work in the upgrade plan).
+                using var cts = new CancellationTokenSource();
+                cts.Cancel();
+
+                bool canceled = false;
+                var enumerator = Task.WhenEach(Task.CompletedTask).GetAsyncEnumerator(cts.Token);
+                try
+                {
+                    await enumerator.MoveNextAsync();
+                }
+                catch (OperationCanceledException)
+                {
+                    canceled = true;
+                }
+                finally
+                {
+                    await enumerator.DisposeAsync();
+                }
+
+                Specification.Assert(canceled, "The canceled token did not cancel the stream.");
+            },
+            this.GetConfiguration().WithTestingIterations(10));
+        }
+
+        [Fact(Timeout = 5000)]
         public void TestWhenEachExploresCompletionOrders()
         {
             this.TestWithError(async () =>

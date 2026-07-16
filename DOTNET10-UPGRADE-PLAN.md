@@ -378,3 +378,12 @@ Items 1–5 carry the context gathered while executing the upgrade (#3, #4).
    `LangVersion` beyond 10.0.
 8. Drop `net8.0` secondary target after its EOL (November 2026).
 9. `StyleCop.Analyzers` 1.1.118 → 1.2.0-beta (needed only if LangVersion is raised).
+10. **Model `ConfiguredCancelableAsyncEnumerable`.** Rewritten user code that
+    consumes an async stream through `await foreach (... in xs.WithCancellation(ct))`
+    produces unverifiable IL today: the type rewriting maps the awaiter type the
+    compiler expects (`ConfiguredValueTaskAwaitable`) but not the
+    `ConfiguredCancelableAsyncEnumerable`/`Enumerator` that produces it, so the
+    rewritten call still returns the BCL struct and the stack types disagree
+    (caught by ilverify while testing `Task.WhenEach`; plain `await foreach` and
+    explicit `GetAsyncEnumerator(ct)` are unaffected). Add rewriting models for
+    the configured async-stream wrapper types.

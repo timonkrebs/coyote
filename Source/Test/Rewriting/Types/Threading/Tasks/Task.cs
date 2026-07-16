@@ -335,7 +335,7 @@ namespace Microsoft.Coyote.Rewriting.Types.Threading.Tasks
         public static IAsyncEnumerable<SystemTask> WhenEach(params SystemTask[] tasks) =>
             CoyoteRuntime.Current.SchedulingPolicy is SchedulingPolicy.None ?
                 SystemTask.WhenEach(tasks) :
-                WhenEachInCompletionOrder(new List<SystemTask>(tasks));
+                WhenEachInCompletionOrder(ValidateAndSnapshotTasks(tasks));
 
         /// <summary>
         /// Creates an async enumerable that yields the supplied tasks as they complete.
@@ -349,7 +349,7 @@ namespace Microsoft.Coyote.Rewriting.Types.Threading.Tasks
         public static IAsyncEnumerable<SystemTask> WhenEach(IEnumerable<SystemTask> tasks) =>
             CoyoteRuntime.Current.SchedulingPolicy is SchedulingPolicy.None ?
                 SystemTask.WhenEach(tasks) :
-                WhenEachInCompletionOrder(new List<SystemTask>(tasks));
+                WhenEachInCompletionOrder(ValidateAndSnapshotTasks(tasks));
 
         /// <summary>
         /// Creates an async enumerable that yields the supplied tasks as they complete.
@@ -358,7 +358,7 @@ namespace Microsoft.Coyote.Rewriting.Types.Threading.Tasks
             params SystemTasks.Task<TResult>[] tasks) =>
             CoyoteRuntime.Current.SchedulingPolicy is SchedulingPolicy.None ?
                 SystemTask.WhenEach(tasks) :
-                WhenEachInCompletionOrder(new List<SystemTasks.Task<TResult>>(tasks));
+                WhenEachInCompletionOrder(ValidateAndSnapshotTasks(tasks));
 
         /// <summary>
         /// Creates an async enumerable that yields the supplied tasks as they complete.
@@ -374,7 +374,30 @@ namespace Microsoft.Coyote.Rewriting.Types.Threading.Tasks
             IEnumerable<SystemTasks.Task<TResult>> tasks) =>
             CoyoteRuntime.Current.SchedulingPolicy is SchedulingPolicy.None ?
                 SystemTask.WhenEach(tasks) :
-                WhenEachInCompletionOrder(new List<SystemTasks.Task<TResult>>(tasks));
+                WhenEachInCompletionOrder(ValidateAndSnapshotTasks(tasks));
+
+        /// <summary>
+        /// Validates the tasks argument like the invoked API does and snapshots it: a null
+        /// collection or a null entry must throw eagerly at the call, not lazily when the
+        /// (deferred) iterator is first moved, and not as a NullReferenceException from the
+        /// controlled wait.
+        /// </summary>
+        private static List<TTask> ValidateAndSnapshotTasks<TTask>(IEnumerable<TTask> tasks)
+            where TTask : SystemTask
+        {
+            if (tasks is null)
+            {
+                throw new ArgumentNullException(nameof(tasks));
+            }
+
+            var snapshot = new List<TTask>(tasks);
+            if (snapshot.Contains(null))
+            {
+                throw new ArgumentException("The tasks argument included a null value.", nameof(tasks));
+            }
+
+            return snapshot;
+        }
 
         /// <summary>
         /// Yields the given tasks in completion order under scheduler control. Each round
@@ -384,7 +407,9 @@ namespace Microsoft.Coyote.Rewriting.Types.Threading.Tasks
         /// enumerable therefore resolves inline on an already-completed value, so no task
         /// machinery escapes the scheduler's control.
         /// </summary>
-        private static async IAsyncEnumerable<TTask> WhenEachInCompletionOrder<TTask>(List<TTask> remaining)
+        private static async IAsyncEnumerable<TTask> WhenEachInCompletionOrder<TTask>(
+            List<TTask> remaining,
+            [System.Runtime.CompilerServices.EnumeratorCancellation] SystemCancellationToken cancellationToken = default)
             where TTask : SystemTask
         {
             // Inline no-op await: gives the method the async-iterator shape the signature
@@ -392,6 +417,11 @@ namespace Microsoft.Coyote.Rewriting.Types.Threading.Tasks
             await SystemTask.CompletedTask;
             while (remaining.Count > 0)
             {
+                // The token arrives through WithCancellation/GetAsyncEnumerator. The invoked
+                // API observes it while waiting for the next completion; the controlled wait
+                // has no token, so it is approximated at the top of every round.
+                cancellationToken.ThrowIfCancellationRequested();
+
                 var runtime = CoyoteRuntime.Current;
                 if (runtime.SchedulingPolicy != SchedulingPolicy.None)
                 {
@@ -399,6 +429,14 @@ namespace Microsoft.Coyote.Rewriting.Types.Threading.Tasks
                 }
 
                 int index = remaining.FindIndex(t => t.IsCompleted);
+                if (index < 0)
+                {
+                    // Under the fuzzing policy the controlled wait only injects a delay
+                    // rather than guaranteeing a completion, so fall through to the real
+                    // wait, exactly like the WaitAny model above does.
+                    index = SystemTask.WaitAny(remaining.ToArray());
+                }
+
                 TTask next = remaining[index];
                 remaining.RemoveAt(index);
                 yield return next;
