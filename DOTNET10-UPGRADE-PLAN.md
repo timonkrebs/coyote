@@ -411,6 +411,18 @@ Items 1–5 carry the context gathered while executing the upgrade (#3, #4).
    samples currently work around this with `NuGetAuditMode=direct` in
    `Samples/Common/build.props`. Port the sample to
    `Azure.Messaging.ServiceBus`, then remove the audit-mode override.
+   **Status: delivered.** The port is mechanical (`TopicClient` →
+   `ServiceBusSender`, `MessageReceiver` → `ServiceBusReceiver` owned by a
+   `ServiceBusClient`, `ManagementClient` → `ServiceBusAdministrationClient`,
+   `Message.Label` → `ServiceBusMessage.Subject`) and wire-compatible: `To`,
+   `ReplyTo` and the subject map to the same AMQP fields the old client
+   used. The audit override is gone from `Samples/Common/build.props`, and
+   the equivalent override in `Tools/BenchmarkRunner` turned out to be
+   misattributed to Service Bus — its advisories (`System.ServiceModel.*`
+   4.5.0, GHSA-p9wx-v264-q34p) came from `Microsoft.Azure.Cosmos` 3.10.1
+   transitives, resolved by moving to 3.12.0 (the version the samples
+   already use, which the audit accepts). The full transitive NuGet audit
+   is now active repository-wide with no overrides.
 6. Migrate `System.CommandLine` beta4 → stable 2.0 (breaking API changes).
 7. Replace `Microsoft.CodeAnalysis.FxCopAnalyzers` with NetAnalyzers; raise
    `LangVersion` beyond 10.0.

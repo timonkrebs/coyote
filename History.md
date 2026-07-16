@@ -51,6 +51,13 @@
   dependency chain references: on .NET Framework the generated binding
   redirects target that higher version, so deploying the older assembly
   failed every `TestingEngine` construction on `net472`.
+- Modernized the `CloudMessaging` sample's `Raft.Azure` host from the retired
+  `Microsoft.Azure.ServiceBus` package to `Azure.Messaging.ServiceBus`
+  (`v7.20.2`), and removed the `NuGetAuditMode` overrides that known-vulnerable
+  transitives had forced on the samples and the benchmark runner (the latter's
+  advisories traced to `Microsoft.Azure.Cosmos` `v3.10.1`, now `v3.12.0`), so
+  the .NET 10 SDK's full transitive vulnerability audit is active across the
+  repository.
 - Dropped support for the `netcoreapp3.1` target framework, which reached end of
   life.
 
