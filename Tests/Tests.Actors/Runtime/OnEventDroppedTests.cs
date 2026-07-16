@@ -232,7 +232,7 @@ namespace Microsoft.Coyote.Actors.Tests
 
                 r.OnFailure += (ex) =>
                 {
-                    Assert.True(false);
+                    Assert.Fail();
                     tcs.SetResult(false);
                 };
 

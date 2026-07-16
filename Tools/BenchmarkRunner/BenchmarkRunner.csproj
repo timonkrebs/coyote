@@ -9,6 +9,11 @@
     <Framework462Supported>false</Framework462Supported>
     <Net8Supported>false</Net8Supported>
     <IsPackable>false</IsPackable>
+    <!-- Same override the samples use (see Samples/Common/build.props): the retired
+         Microsoft.Azure.ServiceBus dependency pulls transitives with known advisories
+         (NU1902), which Debug's warnings-as-errors would turn into a build break.
+         Removing the package is follow-up item 5 in DOTNET10-UPGRADE-PLAN.md. -->
+    <NuGetAuditMode>direct</NuGetAuditMode>
     <NoWarn>$(NoWarn);</NoWarn>
   </PropertyGroup>
   <Import Project="..\..\Common\build.props" />

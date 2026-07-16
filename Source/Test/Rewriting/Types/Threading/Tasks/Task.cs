@@ -441,7 +441,8 @@ namespace Microsoft.Coyote.Rewriting.Types.Threading.Tasks
         /// value, so no task machinery escapes the scheduler's control.
         /// </summary>
         private static async IAsyncEnumerable<TTask> WhenEachInCompletionOrder<TTask>(
-            List<TTask> remaining, SystemCancellationToken cancellationToken)
+            List<TTask> remaining,
+            [System.Runtime.CompilerServices.EnumeratorCancellation] SystemCancellationToken cancellationToken)
             where TTask : SystemTask
         {
             // Inline no-op await: gives the method the async-iterator shape the signature

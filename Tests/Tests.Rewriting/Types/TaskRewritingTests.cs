@@ -17,25 +17,25 @@ namespace Microsoft.Coyote.Rewriting.Tests
         [Fact(Timeout = 5000)]
         public async Task TestRewritingTaskWhenAll()
         {
-            Task.WhenAll(Task.CompletedTask);
+            await Task.WhenAll(Task.CompletedTask);
         }
 
         [Fact(Timeout = 5000)]
         public async Task TestRewritingGenericTaskWhenAll()
         {
-            Task.WhenAll(Task.FromResult(1));
+            await Task.WhenAll(Task.FromResult(1));
         }
 
         [Fact(Timeout = 5000)]
         public async Task TestRewritingTaskWhenAny()
         {
-            Task.WhenAny(Task.CompletedTask);
+            await Task.WhenAny(Task.CompletedTask);
         }
 
         [Fact(Timeout = 5000)]
         public async Task TestRewritingGenericTaskWhenAny()
         {
-            Task.WhenAny(Task.FromResult(1));
+            await Task.WhenAny(Task.FromResult(1));
         }
     }
 }
