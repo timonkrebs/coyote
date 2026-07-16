@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
@@ -19,7 +19,7 @@ namespace Microsoft.Coyote.Actors.Tests.Logging
         }
 
         [Fact(Timeout = 5000)]
-        public void TestGraphLogger()
+        public async Task TestGraphLogger()
         {
             Configuration config = this.GetConfiguration().WithVerbosityEnabled(VerbosityLevel.Info);
             this.Test(async runtime =>
@@ -152,7 +152,7 @@ namespace Microsoft.Coyote.Actors.Tests.Logging
         }
 
         [Fact(Timeout = 5000)]
-        public void TestGraphLoggerInstances()
+        public async Task TestGraphLoggerInstances()
         {
             Configuration config = this.GetConfiguration().WithVerbosityEnabled(VerbosityLevel.Info);
             this.Test(async runtime =>
@@ -180,7 +180,7 @@ namespace Microsoft.Coyote.Actors.Tests.Logging
         }
 
         [Fact(Timeout = 5000)]
-        public void TestGraphLoggerCollapsed()
+        public async Task TestGraphLoggerCollapsed()
         {
             Configuration config = this.GetConfiguration().WithVerbosityEnabled(VerbosityLevel.Info);
             this.Test(async runtime =>

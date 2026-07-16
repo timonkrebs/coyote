@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
@@ -32,7 +32,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOnEventUnhandledCalledInActor()
+        public async Task TestOnEventUnhandledCalledInActor()
         {
             this.TestWithError(r =>
             {
@@ -64,7 +64,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOnEventUnhandledCalledInStateMachine()
+        public async Task TestOnEventUnhandledCalledInStateMachine()
         {
             this.TestWithError(r =>
             {
@@ -93,7 +93,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOnExceptionCalledAfterOnEventUnhandledInActor()
+        public async Task TestOnExceptionCalledAfterOnEventUnhandledInActor()
         {
             this.Test(r =>
             {
@@ -126,7 +126,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOnExceptionCalledAfterOnEventUnhandledInStateMachine()
+        public async Task TestOnExceptionCalledAfterOnEventUnhandledInStateMachine()
         {
             this.Test(r =>
             {
@@ -154,7 +154,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestEventUnhandledExceptionPropagationInActor()
+        public async Task TestEventUnhandledExceptionPropagationInActor()
         {
             this.TestWithError(r =>
             {
@@ -188,7 +188,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestEventUnhandledExceptionPropagationInStateMachine()
+        public async Task TestEventUnhandledExceptionPropagationInStateMachine()
         {
             this.TestWithError(r =>
             {
@@ -221,7 +221,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOnEventUnhandledNotCalledInActor()
+        public async Task TestOnEventUnhandledNotCalledInActor()
         {
             this.Test(r =>
             {
@@ -258,7 +258,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOnEventUnhandledNotCalledInStateMachine()
+        public async Task TestOnEventUnhandledNotCalledInStateMachine()
         {
             this.Test(r =>
             {

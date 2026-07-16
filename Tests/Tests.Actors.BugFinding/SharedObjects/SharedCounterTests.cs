@@ -1,6 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+using System.Threading.Tasks;
 using Microsoft.Coyote.Actors.SharedObjects;
 using Xunit;
 using Xunit.Abstractions;
@@ -75,7 +76,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.SharedObjects
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSharedCounter1()
+        public async Task TestSharedCounter1()
         {
             this.TestWithError(r =>
             {
@@ -152,7 +153,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.SharedObjects
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSharedCounter2()
+        public async Task TestSharedCounter2()
         {
             this.Test(r =>
             {
@@ -162,7 +163,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.SharedObjects
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSharedCounter3()
+        public async Task TestSharedCounter3()
         {
             this.TestWithError(r =>
             {
@@ -174,7 +175,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.SharedObjects
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSharedCounter4()
+        public async Task TestSharedCounter4()
         {
             this.TestWithError(r =>
             {
@@ -186,7 +187,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.SharedObjects
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSharedCounter5()
+        public async Task TestSharedCounter5()
         {
             this.TestWithError(r =>
             {
@@ -248,7 +249,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.SharedObjects
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSharedCounter6()
+        public async Task TestSharedCounter6()
         {
             this.Test(r =>
             {

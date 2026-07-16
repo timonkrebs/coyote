@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
@@ -74,7 +74,7 @@ namespace Microsoft.Coyote.Runtime.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestPausedOperationAwaitablePersistsOperation()
+        public async Task TestPausedOperationAwaitablePersistsOperation()
         {
             this.RunSystematicTest(() =>
             {
@@ -94,7 +94,7 @@ namespace Microsoft.Coyote.Runtime.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestPausedOperationAwaitableResumesAsynchronously()
+        public async Task TestPausedOperationAwaitableResumesAsynchronously()
         {
             this.RunSystematicTest(() =>
             {
@@ -130,7 +130,7 @@ namespace Microsoft.Coyote.Runtime.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestPausedOperationAwaitableRunsAsynchronously()
+        public async Task TestPausedOperationAwaitableRunsAsynchronously()
         {
             this.RunSystematicTest(() =>
             {

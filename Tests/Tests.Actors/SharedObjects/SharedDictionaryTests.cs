@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
@@ -244,7 +244,7 @@ namespace Microsoft.Coyote.Actors.Tests.SharedObjects
         }
 
         [Fact(Timeout = 5000)]
-        public void TestProductionSharedDictionary1()
+        public async Task TestProductionSharedDictionary1()
         {
             var runtime = RuntimeFactory.Create();
             var counter = SharedDictionary.Create<int, string>(runtime);
@@ -264,7 +264,7 @@ namespace Microsoft.Coyote.Actors.Tests.SharedObjects
         }
 
         [Fact(Timeout = 5000)]
-        public void TestProductionSharedDictionary2()
+        public async Task TestProductionSharedDictionary2()
         {
             var runtime = RuntimeFactory.Create();
             var counter = SharedDictionary.Create<int, string>(runtime);
@@ -284,7 +284,7 @@ namespace Microsoft.Coyote.Actors.Tests.SharedObjects
         }
 
         [Fact(Timeout = 5000)]
-        public void TestProductionSharedDictionary3()
+        public async Task TestProductionSharedDictionary3()
         {
             var runtime = RuntimeFactory.Create();
             var counter = SharedDictionary.Create<int, string>(runtime);
@@ -307,7 +307,7 @@ namespace Microsoft.Coyote.Actors.Tests.SharedObjects
         }
 
         [Fact(Timeout = 5000)]
-        public void TestProductionSharedDictionary4()
+        public async Task TestProductionSharedDictionary4()
         {
             var runtime = RuntimeFactory.Create();
             var counter = SharedDictionary.Create<int, string>(runtime);
@@ -327,7 +327,7 @@ namespace Microsoft.Coyote.Actors.Tests.SharedObjects
         }
 
         [Fact(Timeout = 5000)]
-        public void TestProductionSharedDictionary5()
+        public async Task TestProductionSharedDictionary5()
         {
             var runtime = RuntimeFactory.Create();
             var counter = SharedDictionary.Create<int, string>(runtime);

@@ -1,6 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+using System.Threading.Tasks;
 using Microsoft.Coyote.Tests.Common.Events;
 using Xunit;
 using Xunit.Abstractions;
@@ -32,7 +33,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestDuplicateDoEventHandlerInActor()
+        public async Task TestDuplicateDoEventHandlerInActor()
         {
             this.TestWithError(r =>
             {
@@ -64,7 +65,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestDuplicateDoEventHandlerInStateMachine()
+        public async Task TestDuplicateDoEventHandlerInStateMachine()
         {
             this.TestWithError(r =>
             {
@@ -92,7 +93,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestDuplicateGotoEventHandlerInStateMachine()
+        public async Task TestDuplicateGotoEventHandlerInStateMachine()
         {
             this.TestWithError(r =>
             {
@@ -120,7 +121,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestDuplicatePushEventHandlerInStateMachine()
+        public async Task TestDuplicatePushEventHandlerInStateMachine()
         {
             this.TestWithError(r =>
             {
@@ -156,7 +157,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInheritedDuplicateDoEventHandlerInStateMachine()
+        public async Task TestInheritedDuplicateDoEventHandlerInStateMachine()
         {
             this.TestWithError(r =>
             {
@@ -188,7 +189,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInheritedDuplicateGotoEventHandlerInStateMachine()
+        public async Task TestInheritedDuplicateGotoEventHandlerInStateMachine()
         {
             this.TestWithError(r =>
             {
@@ -220,7 +221,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInheritedDuplicatePushEventHandlerInStateMachine()
+        public async Task TestInheritedDuplicatePushEventHandlerInStateMachine()
         {
             this.TestWithError(r =>
             {
@@ -255,7 +256,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestDuplicateMixedEventHandlerInStateMachine()
+        public async Task TestDuplicateMixedEventHandlerInStateMachine()
         {
             this.TestWithError(r =>
             {

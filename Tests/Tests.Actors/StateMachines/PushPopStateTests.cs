@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
@@ -193,7 +193,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
         }
 
         [Fact(Timeout = 5000)]
-        public void TestDuplicateHandler()
+        public async Task TestDuplicateHandler()
         {
             string actual = null;
             try
@@ -227,7 +227,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
         }
 
         [Fact(Timeout = 5000)]
-        public void TestDuplicateHandler2()
+        public async Task TestDuplicateHandler2()
         {
             string actual = null;
             try
@@ -274,7 +274,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInheritedDuplicateHandler()
+        public async Task TestInheritedDuplicateHandler()
         {
             string actual = null;
             try

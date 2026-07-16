@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
@@ -83,7 +83,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOnEventDequeuedWithHaltOutcomeInActor()
+        public async Task TestOnEventDequeuedWithHaltOutcomeInActor()
         {
             this.Test(r =>
             {
@@ -122,7 +122,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOnEventDequeuedWithHaltOutcomeInStateMachine()
+        public async Task TestOnEventDequeuedWithHaltOutcomeInStateMachine()
         {
             this.Test(r =>
             {
@@ -156,7 +156,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOnEventDequeuedWithHandledExceptionOutcomeInActor()
+        public async Task TestOnEventDequeuedWithHandledExceptionOutcomeInActor()
         {
             this.TestWithError(r =>
             {
@@ -197,7 +197,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOnEventDequeuedWithHandledExceptionOutcomeInStateMachine()
+        public async Task TestOnEventDequeuedWithHandledExceptionOutcomeInStateMachine()
         {
             this.TestWithError(r =>
             {
@@ -233,7 +233,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOnEventDequeuedWithThrowExceptionOutcomeInActor()
+        public async Task TestOnEventDequeuedWithThrowExceptionOutcomeInActor()
         {
             this.TestWithException<InvalidOperationException>(r =>
             {
@@ -273,7 +273,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOnEventDequeuedWithThrowExceptionOutcomeInStateMachine()
+        public async Task TestOnEventDequeuedWithThrowExceptionOutcomeInStateMachine()
         {
             this.TestWithException<InvalidOperationException>(r =>
             {

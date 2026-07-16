@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
@@ -34,7 +34,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSafetyMonitorInvocationInSynchronousTask()
+        public async Task TestSafetyMonitorInvocationInSynchronousTask()
         {
             this.TestWithError(async () =>
             {
@@ -53,7 +53,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSafetyMonitorInvocationInAsynchronousTask()
+        public async Task TestSafetyMonitorInvocationInAsynchronousTask()
         {
             this.TestWithError(async () =>
             {
@@ -72,7 +72,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSafetyMonitorInvocationInParallelTask()
+        public async Task TestSafetyMonitorInvocationInParallelTask()
         {
             this.TestWithError(async () =>
             {
@@ -88,7 +88,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSafetyMonitorInvocationInParallelSynchronousTask()
+        public async Task TestSafetyMonitorInvocationInParallelSynchronousTask()
         {
             this.TestWithError(async () =>
             {
@@ -105,7 +105,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSafetyMonitorInvocationInParallelAsynchronousTask()
+        public async Task TestSafetyMonitorInvocationInParallelAsynchronousTask()
         {
             this.TestWithError(async () =>
             {
@@ -122,7 +122,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSafetyMonitorInvocationInNestedParallelSynchronousTask()
+        public async Task TestSafetyMonitorInvocationInNestedParallelSynchronousTask()
         {
             this.TestWithError(async () =>
             {

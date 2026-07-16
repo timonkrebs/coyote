@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
@@ -74,7 +74,7 @@ namespace Microsoft.Coyote.Actors.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestCreateActorIdFromName1()
+        public async Task TestCreateActorIdFromName1()
         {
             this.Test(async r =>
             {
@@ -91,7 +91,7 @@ namespace Microsoft.Coyote.Actors.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestCreateActorIdFromName2()
+        public async Task TestCreateActorIdFromName2()
         {
             this.Test(async r =>
             {
@@ -131,7 +131,7 @@ namespace Microsoft.Coyote.Actors.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestCreateActorIdFromName4()
+        public async Task TestCreateActorIdFromName4()
         {
             this.TestWithError(r =>
             {
@@ -143,7 +143,7 @@ namespace Microsoft.Coyote.Actors.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestCreateActorIdFromName5()
+        public async Task TestCreateActorIdFromName5()
         {
             if (this.SchedulingPolicy is SchedulingPolicy.None)
             {
@@ -200,7 +200,7 @@ namespace Microsoft.Coyote.Actors.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestCreateActorIdFromName6()
+        public async Task TestCreateActorIdFromName6()
         {
             if (this.SchedulingPolicy is SchedulingPolicy.None)
             {
@@ -222,7 +222,7 @@ namespace Microsoft.Coyote.Actors.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestCreateActorIdFromName7()
+        public async Task TestCreateActorIdFromName7()
         {
             this.Test(r =>
             {
@@ -264,7 +264,7 @@ namespace Microsoft.Coyote.Actors.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestCreateActorIdFromName8()
+        public async Task TestCreateActorIdFromName8()
         {
             this.Test(async r =>
             {

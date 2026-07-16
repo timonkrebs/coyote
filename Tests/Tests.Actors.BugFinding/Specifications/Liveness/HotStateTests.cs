@@ -1,7 +1,8 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Microsoft.Coyote.Testing;
 using Microsoft.Coyote.Tests.Common.Events;
@@ -167,7 +168,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestHotStateMonitor()
+        public async Task TestHotStateMonitor()
         {
             var configuration = this.GetConfiguration().WithDFSStrategy();
             this.TestWithError(r =>

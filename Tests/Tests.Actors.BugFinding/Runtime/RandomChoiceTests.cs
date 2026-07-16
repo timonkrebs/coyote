@@ -1,6 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -22,7 +23,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Runtime
         }
 
         [Fact(Timeout = 5000)]
-        public void TestRandomChoice()
+        public async Task TestRandomChoice()
         {
             this.Test(r =>
             {

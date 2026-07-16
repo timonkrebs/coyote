@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
@@ -22,7 +22,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAsyncInvocation()
+        public async Task TestAsyncInvocation()
         {
             this.TestWithError(async () =>
             {
@@ -36,7 +36,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestCompletedTask()
+        public async Task TestCompletedTask()
         {
             Task task = Task.CompletedTask;
             Assert.True(task.IsCompleted);

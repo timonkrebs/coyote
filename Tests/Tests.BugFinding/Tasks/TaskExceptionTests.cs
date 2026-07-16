@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
@@ -31,7 +31,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestNoSynchronousTaskExceptionStatus()
+        public async Task TestNoSynchronousTaskExceptionStatus()
         {
             this.Test(async () =>
             {
@@ -47,7 +47,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestNoAsynchronousTaskExceptionStatus()
+        public async Task TestNoAsynchronousTaskExceptionStatus()
         {
             this.Test(async () =>
             {
@@ -63,7 +63,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestNoParallelSynchronousTaskExceptionStatus()
+        public async Task TestNoParallelSynchronousTaskExceptionStatus()
         {
             this.Test(async () =>
             {
@@ -83,7 +83,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestNoParallelAsynchronousTaskExceptionStatus()
+        public async Task TestNoParallelAsynchronousTaskExceptionStatus()
         {
             this.Test(async () =>
             {
@@ -103,7 +103,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestNoParallelFuncTaskExceptionStatus()
+        public async Task TestNoParallelFuncTaskExceptionStatus()
         {
             this.Test(async () =>
             {
@@ -139,7 +139,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSynchronousTaskExceptionStatus()
+        public async Task TestSynchronousTaskExceptionStatus()
         {
             this.Test(async () =>
             {
@@ -166,7 +166,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAsynchronousTaskExceptionStatus()
+        public async Task TestAsynchronousTaskExceptionStatus()
         {
             this.Test(async () =>
             {
@@ -193,7 +193,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestParallelSynchronousTaskExceptionStatus()
+        public async Task TestParallelSynchronousTaskExceptionStatus()
         {
             this.Test(async () =>
             {
@@ -224,7 +224,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestParallelAsynchronousTaskExceptionStatus()
+        public async Task TestParallelAsynchronousTaskExceptionStatus()
         {
             this.Test(async () =>
             {
@@ -256,7 +256,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestParallelFuncTaskExceptionStatus()
+        public async Task TestParallelFuncTaskExceptionStatus()
         {
             this.Test(async () =>
             {

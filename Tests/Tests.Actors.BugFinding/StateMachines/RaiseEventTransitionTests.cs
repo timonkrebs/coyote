@@ -1,6 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+using System.Threading.Tasks;
 using Microsoft.Coyote.Tests.Common.Events;
 using Xunit;
 using Xunit.Abstractions;
@@ -36,7 +37,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestRaiseEventTransition()
+        public async Task TestRaiseEventTransition()
         {
             this.TestWithError(r =>
             {
@@ -67,7 +68,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestRaiseEventTransitionOnExit()
+        public async Task TestRaiseEventTransitionOnExit()
         {
             var expectedError = "M2() has performed a 'RaiseEvent' transition from an OnExit action.";
             this.TestWithError(r =>

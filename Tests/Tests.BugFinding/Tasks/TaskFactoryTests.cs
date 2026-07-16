@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading;
@@ -19,7 +19,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestStartNewTask()
+        public async Task TestStartNewTask()
         {
             this.TestWithError(async () =>
             {
@@ -38,7 +38,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestStartNewTaskWithSynchronousAwait()
+        public async Task TestStartNewTaskWithSynchronousAwait()
         {
             this.TestWithError(async () =>
             {
@@ -58,7 +58,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestStartNewTaskWithAsynchronousAwait()
+        public async Task TestStartNewTaskWithAsynchronousAwait()
         {
             this.TestWithError(async () =>
             {
@@ -78,7 +78,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestStartNewNestedTaskWithSynchronousAwait()
+        public async Task TestStartNewNestedTaskWithSynchronousAwait()
         {
             this.TestWithError(async () =>
             {
@@ -103,7 +103,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestStartNewNestedTaskWithAsynchronousAwait()
+        public async Task TestStartNewNestedTaskWithAsynchronousAwait()
         {
             this.TestWithError(async () =>
             {
@@ -128,7 +128,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestStartNewTaskWithResult()
+        public async Task TestStartNewTaskWithResult()
         {
             this.TestWithError(async () =>
             {
@@ -148,7 +148,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestStartNewTaskWithSynchronousResult()
+        public async Task TestStartNewTaskWithSynchronousResult()
         {
             this.TestWithError(async () =>
             {
@@ -169,7 +169,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestStartNewTaskWithAsynchronousResult()
+        public async Task TestStartNewTaskWithAsynchronousResult()
         {
             this.TestWithError(async () =>
             {
@@ -190,7 +190,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestStartNewNestedTaskWithSynchronousResult()
+        public async Task TestStartNewNestedTaskWithSynchronousResult()
         {
             this.TestWithError(async () =>
             {
@@ -214,7 +214,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestStartNewNestedTaskWithAsynchronousResult()
+        public async Task TestStartNewNestedTaskWithAsynchronousResult()
         {
             this.TestWithError(async () =>
             {
@@ -238,7 +238,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestGenericStartNewTaskWithResult()
+        public async Task TestGenericStartNewTaskWithResult()
         {
             this.TestWithError(async () =>
             {
@@ -258,7 +258,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestGenericStartNewTaskWithSynchronousResult()
+        public async Task TestGenericStartNewTaskWithSynchronousResult()
         {
             this.TestWithError(async () =>
             {
@@ -279,7 +279,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestGenericStartNewTaskWithAsynchronousResult()
+        public async Task TestGenericStartNewTaskWithAsynchronousResult()
         {
             this.TestWithError(async () =>
             {
@@ -300,7 +300,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestGenericStartNewNestedTaskWithSynchronousResult()
+        public async Task TestGenericStartNewNestedTaskWithSynchronousResult()
         {
             this.TestWithError(async () =>
             {
@@ -324,7 +324,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestGenericStartNewNestedTaskWithAsynchronousResult()
+        public async Task TestGenericStartNewNestedTaskWithAsynchronousResult()
         {
             this.TestWithError(async () =>
             {
@@ -348,7 +348,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestStartNewCanceledTask()
+        public async Task TestStartNewCanceledTask()
         {
             this.TestWithException<TaskCanceledException>(async () =>
             {
@@ -360,7 +360,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestStartNewTaskCancelation()
+        public async Task TestStartNewTaskCancelation()
         {
             this.TestWithException<TaskCanceledException>(async () =>
             {
@@ -374,7 +374,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestStartNewCanceledTaskWithAsynchronousAwait()
+        public async Task TestStartNewCanceledTaskWithAsynchronousAwait()
         {
             this.TestWithException<TaskCanceledException>(async () =>
             {
@@ -386,7 +386,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestStartNewTaskCancelationWithAsynchronousAwait()
+        public async Task TestStartNewTaskCancelationWithAsynchronousAwait()
         {
             this.TestWithException<TaskCanceledException>(async () =>
             {

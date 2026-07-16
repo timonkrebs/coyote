@@ -20,7 +20,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestLockMutualExclusion()
+        public async Task TestLockMutualExclusion()
         {
             this.Test(async () =>
             {
@@ -60,7 +60,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestLockScopeMutualExclusion()
+        public async Task TestLockScopeMutualExclusion()
         {
             this.Test(async () =>
             {
@@ -103,7 +103,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestLockReentrancy()
+        public async Task TestLockReentrancy()
         {
             this.Test(() =>
             {
@@ -129,7 +129,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestLockAndMonitorAreIndependent()
+        public async Task TestLockAndMonitorAreIndependent()
         {
             this.TestWithError(async () =>
             {
@@ -182,7 +182,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestLockRaceDetection()
+        public async Task TestLockRaceDetection()
         {
             this.TestWithError(async () =>
             {

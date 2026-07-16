@@ -1,6 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -25,7 +26,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestUnbalancedPopStateTransition()
+        public async Task TestUnbalancedPopStateTransition()
         {
             this.TestWithError(r =>
             {
@@ -54,7 +55,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestPopStateTransitionOnExit()
+        public async Task TestPopStateTransitionOnExit()
         {
             var expectedError = "M2() has performed a 'PopState' transition from an OnExit action.";
             this.TestWithError(r =>

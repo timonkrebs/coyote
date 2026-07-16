@@ -1,7 +1,8 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
+using System.Threading.Tasks;
 using Microsoft.Coyote.Actors.Timers;
 using Microsoft.Coyote.Specifications;
 using Xunit;
@@ -56,7 +57,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestTimerLiveness()
+        public async Task TestTimerLiveness()
         {
             this.Test(r =>
             {

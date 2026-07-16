@@ -1,6 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+using System.Threading.Tasks;
 using Microsoft.Coyote.Tests.Common.Events;
 using Xunit;
 using Xunit.Abstractions;
@@ -644,7 +645,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
         // ==================================================================================================================
 
         [Fact(Timeout = 5000)]
-        public void TestMachineStateInheritingAbstractState()
+        public async Task TestMachineStateInheritingAbstractState()
         {
             this.TestWithError(r =>
             {
@@ -654,7 +655,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMachineStateInheritingStateDuplicateStart()
+        public async Task TestMachineStateInheritingStateDuplicateStart()
         {
             this.TestWithError(r =>
             {
@@ -664,7 +665,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMachineStateInheritingStateOnEntry()
+        public async Task TestMachineStateInheritingStateOnEntry()
         {
             this.TestWithError(r =>
             {
@@ -674,7 +675,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMachineStateOverridingStateOnEntry()
+        public async Task TestMachineStateOverridingStateOnEntry()
         {
             this.TestWithError(r =>
             {
@@ -684,7 +685,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMachineStateInheritingStateOnEventDoAction()
+        public async Task TestMachineStateInheritingStateOnEventDoAction()
         {
             this.TestWithError(r =>
             {
@@ -694,7 +695,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMachineStateOverridingStateOnEventDoAction()
+        public async Task TestMachineStateOverridingStateOnEventDoAction()
         {
             this.TestWithError(r =>
             {
@@ -704,7 +705,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMachineStateOverridingTwoStatesOnEventDoAction()
+        public async Task TestMachineStateOverridingTwoStatesOnEventDoAction()
         {
             this.TestWithError(r =>
             {
@@ -714,7 +715,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMachineStateOverridingDeepStateOnEventDoAction()
+        public async Task TestMachineStateOverridingDeepStateOnEventDoAction()
         {
             this.TestWithError(r =>
             {
@@ -724,7 +725,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMachineStateInheritingStateOnEventGotoState()
+        public async Task TestMachineStateInheritingStateOnEventGotoState()
         {
             this.TestWithError(r =>
             {
@@ -734,7 +735,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMachineStateOverridingStateOnEventGotoState()
+        public async Task TestMachineStateOverridingStateOnEventGotoState()
         {
             this.TestWithError(r =>
             {
@@ -744,7 +745,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMachineStateOverridingTwoStatesOnEventGotoState()
+        public async Task TestMachineStateOverridingTwoStatesOnEventGotoState()
         {
             this.TestWithError(r =>
             {
@@ -754,7 +755,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMachineStateOverridingDeepStateOnEventGotoState()
+        public async Task TestMachineStateOverridingDeepStateOnEventGotoState()
         {
             this.TestWithError(r =>
             {
@@ -764,7 +765,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMachineStateInheritingStateOnEventPushState()
+        public async Task TestMachineStateInheritingStateOnEventPushState()
         {
             this.TestWithError(r =>
             {
@@ -774,7 +775,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMachineStateOverridingStateOnEventPushState()
+        public async Task TestMachineStateOverridingStateOnEventPushState()
         {
             this.TestWithError(r =>
             {
@@ -784,7 +785,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMachineStateOverridingTwoStatesOnEventPushState()
+        public async Task TestMachineStateOverridingTwoStatesOnEventPushState()
         {
             this.TestWithError(r =>
             {
@@ -794,7 +795,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMachineStateOverridingDeepStateOnEventPushState()
+        public async Task TestMachineStateOverridingDeepStateOnEventPushState()
         {
             this.TestWithError(r =>
             {
@@ -804,7 +805,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMachineInheritActionsFromClass()
+        public async Task TestMachineInheritActionsFromClass()
         {
             this.TestWithError(r =>
             {
@@ -814,7 +815,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMachineClassActionTransitions()
+        public async Task TestMachineClassActionTransitions()
         {
             this.TestWithError(r =>
             {

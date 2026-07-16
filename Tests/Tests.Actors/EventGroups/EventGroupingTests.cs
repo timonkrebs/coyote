@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading;
@@ -66,7 +66,7 @@ namespace Microsoft.Coyote.Actors.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestNullEventGroup()
+        public async Task TestNullEventGroup()
         {
             this.Test(async r =>
             {
@@ -96,7 +96,7 @@ namespace Microsoft.Coyote.Actors.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestEventGroupSetByHand()
+        public async Task TestEventGroupSetByHand()
         {
             this.Test(async r =>
             {
@@ -108,7 +108,7 @@ namespace Microsoft.Coyote.Actors.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestEventGroupChangedBySend()
+        public async Task TestEventGroupChangedBySend()
         {
             this.Test(async r =>
             {
@@ -140,7 +140,7 @@ namespace Microsoft.Coyote.Actors.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestEventGroupClearedByCreate()
+        public async Task TestEventGroupClearedByCreate()
         {
             this.Test(async r =>
             {
@@ -179,7 +179,7 @@ namespace Microsoft.Coyote.Actors.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestEventGroupClearedBySend()
+        public async Task TestEventGroupClearedBySend()
         {
             this.Test(async r =>
             {
@@ -232,7 +232,7 @@ namespace Microsoft.Coyote.Actors.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestNullEventGroupPropagation()
+        public async Task TestNullEventGroupPropagation()
         {
             this.Test(async r =>
             {
@@ -274,7 +274,7 @@ namespace Microsoft.Coyote.Actors.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestEventGroupTwoActorsSendBack()
+        public async Task TestEventGroupTwoActorsSendBack()
         {
             this.Test(async r =>
             {
@@ -314,7 +314,7 @@ namespace Microsoft.Coyote.Actors.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestEventGroupTwoActorsSendBackCleared()
+        public async Task TestEventGroupTwoActorsSendBackCleared()
         {
             this.Test(async r =>
             {
@@ -365,7 +365,7 @@ namespace Microsoft.Coyote.Actors.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestEventGroupThreeActorGroup()
+        public async Task TestEventGroupThreeActorGroup()
         {
             this.Test(async r =>
             {
@@ -413,7 +413,7 @@ namespace Microsoft.Coyote.Actors.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestEventGroupSetOnReceive()
+        public async Task TestEventGroupSetOnReceive()
         {
             this.Test(async r =>
             {

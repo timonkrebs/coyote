@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
@@ -103,7 +103,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestTwoActorIntegration1()
+        public async Task TestTwoActorIntegration1()
         {
             this.TestWithError(r =>
             {
@@ -192,7 +192,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestTwoActorIntegration2()
+        public async Task TestTwoActorIntegration2()
         {
             this.TestWithError(r =>
             {
@@ -288,7 +288,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestTwoActorIntegration3()
+        public async Task TestTwoActorIntegration3()
         {
             this.TestWithError(r =>
             {
@@ -375,7 +375,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestTwoActorIntegration4()
+        public async Task TestTwoActorIntegration4()
         {
             this.TestWithError(r =>
             {
@@ -434,7 +434,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestTwoActorIntegration5()
+        public async Task TestTwoActorIntegration5()
         {
             this.TestWithError(r =>
             {

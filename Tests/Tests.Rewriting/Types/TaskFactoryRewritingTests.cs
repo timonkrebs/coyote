@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
@@ -16,21 +16,21 @@ namespace Microsoft.Coyote.Rewriting.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestRewritingTaskFactoryStartNew()
+        public async Task TestRewritingTaskFactoryStartNew()
         {
-            Task.Factory.StartNew(() => { });
+            await Task.Factory.StartNew(() => { });
         }
 
         [Fact(Timeout = 5000)]
-        public void TestRewritingGenericTaskFactoryStartNew()
+        public async Task TestRewritingGenericTaskFactoryStartNew()
         {
-            Task<int>.Factory.StartNew(() => 1);
+            await Task<int>.Factory.StartNew(() => 1);
         }
 
         [Fact(Timeout = 5000)]
-        public void TestRewritingNestedGenericTaskFactoryStartNew()
+        public async Task TestRewritingNestedGenericTaskFactoryStartNew()
         {
-            Task<Task<int>>.Factory.StartNew(() => Task.FromResult(1));
+            await Task<Task<int>>.Factory.StartNew(() => Task.FromResult(1));
         }
 #pragma warning restore CA2008 // Do not create tasks without passing a TaskScheduler
     }

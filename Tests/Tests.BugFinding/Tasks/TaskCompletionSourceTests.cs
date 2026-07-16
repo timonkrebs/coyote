@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 #if NET
@@ -19,7 +19,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSetResult()
+        public async Task TestSetResult()
         {
             this.TestWithError(async () =>
             {
@@ -35,7 +35,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestTrySetResult()
+        public async Task TestTrySetResult()
         {
             this.TestWithError(async () =>
             {
@@ -53,7 +53,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAsynchronousSetResult()
+        public async Task TestAsynchronousSetResult()
         {
             this.Test(async () =>
             {
@@ -76,7 +76,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAsynchronousSetResultTask()
+        public async Task TestAsynchronousSetResultTask()
         {
             this.Test(async () =>
             {
@@ -99,7 +99,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAsynchronousSetResultWithTwoAwaiters()
+        public async Task TestAsynchronousSetResultWithTwoAwaiters()
         {
             this.Test(async () =>
             {
@@ -123,7 +123,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSetCanceled()
+        public async Task TestSetCanceled()
         {
             this.TestWithError(async () =>
             {
@@ -151,7 +151,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestTrySetCanceled()
+        public async Task TestTrySetCanceled()
         {
             this.TestWithError(async () =>
             {
@@ -181,7 +181,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAsynchronousSetCanceled()
+        public async Task TestAsynchronousSetCanceled()
         {
             this.Test(async () =>
             {
@@ -210,7 +210,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSetException()
+        public async Task TestSetException()
         {
             this.TestWithError(async () =>
             {
@@ -238,7 +238,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestTrySetException()
+        public async Task TestTrySetException()
         {
             this.TestWithError(async () =>
             {
@@ -268,7 +268,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAsynchronousSetException()
+        public async Task TestAsynchronousSetException()
         {
             this.Test(async () =>
             {
@@ -297,7 +297,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInvalidSetResult()
+        public async Task TestInvalidSetResult()
         {
             this.TestWithError(() =>
             {
@@ -323,7 +323,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInvalidSetCanceled()
+        public async Task TestInvalidSetCanceled()
         {
             this.TestWithError(() =>
             {
@@ -349,7 +349,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInvalidSetException()
+        public async Task TestInvalidSetException()
         {
             this.TestWithError(() =>
             {
@@ -375,7 +375,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestIsCompleted()
+        public async Task TestIsCompleted()
         {
             this.TestWithError(async () =>
             {

@@ -1,6 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Xunit;
 using Xunit.Abstractions;
@@ -73,7 +74,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestCompleteness1()
+        public async Task TestCompleteness1()
         {
             this.TestWithError(r =>
             {
@@ -87,7 +88,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestCompleteness2()
+        public async Task TestCompleteness2()
         {
             this.TestWithError(r =>
             {

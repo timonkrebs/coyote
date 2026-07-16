@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
@@ -19,7 +19,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWaitParallelTaskBeforeWrite()
+        public async Task TestWaitParallelTaskBeforeWrite()
         {
             this.Test(() =>
             {
@@ -39,7 +39,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWaitParallelTaskAfterWrite()
+        public async Task TestWaitParallelTaskAfterWrite()
         {
             this.TestWithError(() =>
             {
@@ -67,7 +67,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWaitParallelTaskWithSynchronousInvocationAfterWrite()
+        public async Task TestWaitParallelTaskWithSynchronousInvocationAfterWrite()
         {
             this.TestWithError(() =>
             {
@@ -95,7 +95,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWaitParallelTaskWithAsynchronousInvocationAfterWrite()
+        public async Task TestWaitParallelTaskWithAsynchronousInvocationAfterWrite()
         {
             this.TestWithError(() =>
             {
@@ -117,7 +117,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWaitTaskWithTimeout()
+        public async Task TestWaitTaskWithTimeout()
         {
             // TODO: we do not yet support timeouts in testing, so we will improve this test later,
             // for now we just want to make sure it executes under binary rewriting.
@@ -142,7 +142,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWaitTaskWithCancellationToken()
+        public async Task TestWaitTaskWithCancellationToken()
         {
             // TODO: we do not yet support cancelation in testing, so we will improve this test later,
             // for now we just want to make sure it executes under binary rewriting.
@@ -168,7 +168,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWaitTaskWithTimeoutAndCancellationToken()
+        public async Task TestWaitTaskWithTimeoutAndCancellationToken()
         {
             // TODO: we do not yet support timeout and cancelation in testing, so we will improve this test later,
             // for now we just want to make sure it executes under binary rewriting.
@@ -194,7 +194,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWaitTaskWithException()
+        public async Task TestWaitTaskWithException()
         {
             this.TestWithError(() =>
             {
@@ -228,7 +228,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWaitAsyncTaskWithException()
+        public async Task TestWaitAsyncTaskWithException()
         {
             this.TestWithError(() =>
             {

@@ -1,9 +1,10 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Xunit;
 using Xunit.Abstractions;
@@ -830,7 +831,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
 
         [Theory(Timeout = 10000)]
         [InlineData(20)]
-        public void TestLivenessBugInChordProtocol(uint seed)
+        public async Task TestLivenessBugInChordProtocol(uint seed)
         {
             var configuration = this.GetConfiguration();
             configuration.MaxUnfairSchedulingSteps = 200;

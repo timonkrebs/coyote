@@ -1,6 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -29,7 +30,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestGotoStateTransition()
+        public async Task TestGotoStateTransition()
         {
             this.Test(r =>
             {
@@ -72,7 +73,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestGotoTransitionToNonExistingState()
+        public async Task TestGotoTransitionToNonExistingState()
         {
             this.TestWithError(r =>
             {
@@ -105,7 +106,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestGotoStateTransitionWithOnExit()
+        public async Task TestGotoStateTransitionWithOnExit()
         {
             this.TestWithError(r =>
             {
@@ -134,7 +135,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestGotoStateTransitionOnExit()
+        public async Task TestGotoStateTransitionOnExit()
         {
             var expectedError = "M4() has performed a 'GotoState' transition from an OnExit action.";
             this.TestWithError(r =>

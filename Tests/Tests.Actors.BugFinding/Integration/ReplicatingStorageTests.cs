@@ -1,8 +1,9 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Xunit;
 using Xunit.Abstractions;
@@ -856,7 +857,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
 
         [Theory(Timeout = 10000)]
         [InlineData(1)]
-        public void TestReplicatingStorageLivenessBug(uint seed)
+        public async Task TestReplicatingStorageLivenessBug(uint seed)
         {
             var configuration = this.GetConfiguration();
             configuration.MaxUnfairSchedulingSteps = 200;

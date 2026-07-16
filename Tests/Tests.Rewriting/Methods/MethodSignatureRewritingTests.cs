@@ -1,7 +1,8 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -18,13 +19,13 @@ namespace Microsoft.Coyote.Rewriting.Tests
         private static TaskAwaiter<T> GetGenericTaskAwaiter<T>(TaskAwaiter<T> taskAwaiter) => taskAwaiter;
 
         [Fact(Timeout = 5000)]
-        public void TestRewritingTaskAwaiterInMethodSignature()
+        public async Task TestRewritingTaskAwaiterInMethodSignature()
         {
             GetTaskAwaiter(default(TaskAwaiter));
         }
 
         [Fact(Timeout = 5000)]
-        public void TestRewritingGenericTaskAwaiterInMethodSignature()
+        public async Task TestRewritingGenericTaskAwaiterInMethodSignature()
         {
             GetGenericTaskAwaiter<int>(default(TaskAwaiter<int>));
         }

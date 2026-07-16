@@ -1,7 +1,8 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.Coyote.Tests.Common.Tasks;
 using Xunit;
 using Xunit.Abstractions;
@@ -16,7 +17,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.SystematicFuzzing
         }
 
         [Fact(Timeout = 5000)]
-        public void TestFuzzingFallbackAfterUncontrolledDelay()
+        public async Task TestFuzzingFallbackAfterUncontrolledDelay()
         {
             var configuration = this.GetConfiguration()
                 .WithSystematicFuzzingFallbackEnabled(true)
@@ -31,7 +32,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.SystematicFuzzing
         }
 
         [Fact(Timeout = 5000)]
-        public void TestFuzzingFallbackAfterUncontrolledInvocation()
+        public async Task TestFuzzingFallbackAfterUncontrolledInvocation()
         {
             var configuration = this.GetConfiguration()
                 .WithSystematicFuzzingFallbackEnabled(true)

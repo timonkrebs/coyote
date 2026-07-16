@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
@@ -30,7 +30,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWaitAnyWithTwoSynchronousTasks()
+        public async Task TestWaitAnyWithTwoSynchronousTasks()
         {
             this.TestWithError(() =>
             {
@@ -49,7 +49,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWaitAnyWithTwoAsynchronousTasks()
+        public async Task TestWaitAnyWithTwoAsynchronousTasks()
         {
             this.TestWithError(() =>
             {
@@ -67,7 +67,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWaitAnyWithTwoParallelTasks()
+        public async Task TestWaitAnyWithTwoParallelTasks()
         {
             this.TestWithError(() =>
             {
@@ -95,7 +95,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWaitAnyWithTwoSynchronousTaskWithResults()
+        public async Task TestWaitAnyWithTwoSynchronousTaskWithResults()
         {
             this.TestWithError(() =>
             {
@@ -115,7 +115,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWaitAnyWithTwoAsynchronousTaskWithResults()
+        public async Task TestWaitAnyWithTwoAsynchronousTaskWithResults()
         {
             this.TestWithError(() =>
             {
@@ -134,7 +134,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWaitAnyWithTwoParallelSynchronousTaskWithResults()
+        public async Task TestWaitAnyWithTwoParallelSynchronousTaskWithResults()
         {
             this.TestWithError(() =>
             {
@@ -163,7 +163,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWaitAnyWithTwoParallelAsynchronousTaskWithResults()
+        public async Task TestWaitAnyWithTwoParallelAsynchronousTaskWithResults()
         {
             this.TestWithError(() =>
             {
@@ -192,7 +192,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWaitAnyWithIncompleteTask()
+        public async Task TestWaitAnyWithIncompleteTask()
         {
             this.Test(async () =>
             {
@@ -206,7 +206,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWaitAnyWithIncompleteGenericTask()
+        public async Task TestWaitAnyWithIncompleteGenericTask()
         {
             this.Test(async () =>
             {
@@ -220,7 +220,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWaitAnyWithExceptionThrown()
+        public async Task TestWaitAnyWithExceptionThrown()
         {
             this.TestWithException<InvalidOperationException>(async () =>
             {

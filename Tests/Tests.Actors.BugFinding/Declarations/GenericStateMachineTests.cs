@@ -1,6 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -45,7 +46,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestGenericMachine1()
+        public async Task TestGenericMachine1()
         {
             this.Test(r =>
             {
@@ -54,7 +55,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestGenericMachine2()
+        public async Task TestGenericMachine2()
         {
             this.Test(r =>
             {

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
@@ -44,7 +44,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 10000)]
-        public void TestBasicTimerOperationInActor()
+        public async Task TestBasicTimerOperationInActor()
         {
             var config = new TimerCountEvent();
             this.Test(r =>
@@ -83,7 +83,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 10000)]
-        public void TestBasicTimerOperationInStateMachine()
+        public async Task TestBasicTimerOperationInStateMachine()
         {
             var config = new TimerCountEvent();
             this.Test(r =>
@@ -123,7 +123,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 10000)]
-        public void TestBasicPeriodicTimerOperationInActor()
+        public async Task TestBasicPeriodicTimerOperationInActor()
         {
             var config = new TimerCountEvent();
             this.Test(r =>
@@ -168,7 +168,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 10000)]
-        public void TestBasicPeriodicTimerOperationInStateMachine()
+        public async Task TestBasicPeriodicTimerOperationInStateMachine()
         {
             var config = new TimerCountEvent();
             this.Test(r =>
@@ -229,7 +229,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 10000)]
-        public void TestDropTimeoutsAfterTimerDisposal()
+        public async Task TestDropTimeoutsAfterTimerDisposal()
         {
             var config = new TimerCountEvent();
             this.Test(r =>
@@ -255,7 +255,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 10000)]
-        public void TestIllegalDueTimeSpecification()
+        public async Task TestIllegalDueTimeSpecification()
         {
             this.TestWithError(r =>
             {
@@ -281,7 +281,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 10000)]
-        public void TestIllegalPeriodSpecification()
+        public async Task TestIllegalPeriodSpecification()
         {
             this.TestWithError(r =>
             {
@@ -333,7 +333,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 10000)]
-        public void TestTimerDisposedByNonOwner()
+        public async Task TestTimerDisposedByNonOwner()
         {
             this.TestWithError(r =>
             {
@@ -370,7 +370,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 10000)]
-        public void TestExplicitHaltWithTimer()
+        public async Task TestExplicitHaltWithTimer()
         {
             this.Test(r =>
             {
@@ -440,7 +440,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 10000)]
-        public void TestCustomTimerEvent()
+        public async Task TestCustomTimerEvent()
         {
             var config = new T6.ConfigEvent { Test = T6.TestType.CustomTimer };
             this.Test(r =>
@@ -452,7 +452,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 10000)]
-        public void TestCustomPeriodicTimerEvent()
+        public async Task TestCustomPeriodicTimerEvent()
         {
             var config = new T6.ConfigEvent { Test = T6.TestType.CustomPeriodicTimer };
             this.Test(r =>

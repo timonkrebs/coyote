@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
@@ -39,7 +39,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterleavingsWithOneSynchronousTaskInActor()
+        public async Task TestInterleavingsWithOneSynchronousTaskInActor()
         {
             this.Test(r =>
             {
@@ -69,7 +69,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterleavingsWithOneSynchronousTaskInStateMachine()
+        public async Task TestInterleavingsWithOneSynchronousTaskInStateMachine()
         {
             this.Test(r =>
             {
@@ -93,7 +93,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterleavingsWithOneAsynchronousTaskInActor()
+        public async Task TestInterleavingsWithOneAsynchronousTaskInActor()
         {
             this.TestWithError(r =>
             {
@@ -127,7 +127,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterleavingsWithOneAsynchronousTaskInStateMachine()
+        public async Task TestInterleavingsWithOneAsynchronousTaskInStateMachine()
         {
             this.TestWithError(r =>
             {
@@ -156,7 +156,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterleavingsWithOneParallelTaskInActor()
+        public async Task TestInterleavingsWithOneParallelTaskInActor()
         {
             this.TestWithError(r =>
             {
@@ -193,7 +193,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterleavingsWithOneParallelTaskInStateMachine()
+        public async Task TestInterleavingsWithOneParallelTaskInStateMachine()
         {
             this.TestWithError(r =>
             {
@@ -220,7 +220,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterleavingsWithTwoSynchronousTasksInActor()
+        public async Task TestInterleavingsWithTwoSynchronousTasksInActor()
         {
             this.Test(r =>
             {
@@ -253,7 +253,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterleavingsWithTwoSynchronousTasksInStateMachine()
+        public async Task TestInterleavingsWithTwoSynchronousTasksInStateMachine()
         {
             this.Test(r =>
             {
@@ -278,7 +278,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterleavingsWithTwoAsynchronousTasksInActor()
+        public async Task TestInterleavingsWithTwoAsynchronousTasksInActor()
         {
             this.TestWithError(r =>
             {
@@ -313,7 +313,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterleavingsWithTwoAsynchronousTasksInStateMachine()
+        public async Task TestInterleavingsWithTwoAsynchronousTasksInStateMachine()
         {
             this.TestWithError(r =>
             {
@@ -347,7 +347,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterleavingsWithTwoParallelTasksInActor()
+        public async Task TestInterleavingsWithTwoParallelTasksInActor()
         {
             this.TestWithError(r =>
             {
@@ -389,7 +389,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterleavingsWithTwoParallelTasksInStateMachine()
+        public async Task TestInterleavingsWithTwoParallelTasksInStateMachine()
         {
             this.TestWithError(r =>
             {
@@ -423,7 +423,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterleavingsWithNestedParallelTasksInActor()
+        public async Task TestInterleavingsWithNestedParallelTasksInActor()
         {
             this.TestWithError(r =>
             {
@@ -465,7 +465,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterleavingsWithNestedParallelTasksInStateMachine()
+        public async Task TestInterleavingsWithNestedParallelTasksInStateMachine()
         {
             this.TestWithError(r =>
             {

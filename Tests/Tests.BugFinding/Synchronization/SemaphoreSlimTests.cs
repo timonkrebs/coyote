@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading;
@@ -18,7 +18,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSemaphoreSlimWithSingleAccess()
+        public async Task TestSemaphoreSlimWithSingleAccess()
         {
             this.Test(() =>
             {
@@ -38,7 +38,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSemaphoreSlimWithDoubleAccess()
+        public async Task TestSemaphoreSlimWithDoubleAccess()
         {
             this.Test(() =>
             {
@@ -60,7 +60,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSemaphoreSlimWithNoInitialAccess()
+        public async Task TestSemaphoreSlimWithNoInitialAccess()
         {
             this.Test(() =>
             {
@@ -78,7 +78,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestParallelSemaphoreSlim()
+        public async Task TestParallelSemaphoreSlim()
         {
             this.Test(() =>
             {
@@ -121,7 +121,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestParallelSemaphoreSlimWithDoubleAccess()
+        public async Task TestParallelSemaphoreSlimWithDoubleAccess()
         {
             this.TestWithError(() =>
             {
@@ -161,7 +161,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAsyncSemaphoreSlim()
+        public async Task TestAsyncSemaphoreSlim()
         {
             this.Test(() =>
             {
@@ -204,7 +204,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAsyncSemaphoreSlimWithDoubleAccess()
+        public async Task TestAsyncSemaphoreSlimWithDoubleAccess()
         {
             this.TestWithError(() =>
             {
@@ -244,7 +244,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAsyncSemaphoreSlimWithBlockingWait()
+        public async Task TestAsyncSemaphoreSlimWithBlockingWait()
         {
             this.Test(() =>
             {
@@ -278,7 +278,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMixedSemaphoreSlim()
+        public async Task TestMixedSemaphoreSlim()
         {
             this.Test(() =>
             {
@@ -312,7 +312,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMixedSemaphoreSlimWithDoubleAccess()
+        public async Task TestMixedSemaphoreSlimWithDoubleAccess()
         {
             this.TestWithError(() =>
             {
@@ -352,7 +352,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestParallelSemaphoreSlimWithNoInitialAccess()
+        public async Task TestParallelSemaphoreSlimWithNoInitialAccess()
         {
             this.Test(() =>
             {
@@ -388,7 +388,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestParallelSemaphoreSlimWithNoInitialAccessAndExpectedOrder()
+        public async Task TestParallelSemaphoreSlimWithNoInitialAccessAndExpectedOrder()
         {
             this.TestWithError(() =>
             {
@@ -432,7 +432,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestParallelSemaphoreSlimWithNoInitialAccessAndExpectedAltOrder()
+        public async Task TestParallelSemaphoreSlimWithNoInitialAccessAndExpectedAltOrder()
         {
             this.TestWithError(() =>
             {
@@ -477,7 +477,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAsyncSemaphoreSlimWithNoInitialAccess()
+        public async Task TestAsyncSemaphoreSlimWithNoInitialAccess()
         {
             this.Test(() =>
             {
@@ -513,7 +513,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAsyncSemaphoreSlimWithNoInitialAccessAndExpectedOrder()
+        public async Task TestAsyncSemaphoreSlimWithNoInitialAccessAndExpectedOrder()
         {
             this.TestWithError(() =>
             {
@@ -558,7 +558,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAsyncSemaphoreSlimWithNoInitialAccessAndExpectedAltOrder()
+        public async Task TestAsyncSemaphoreSlimWithNoInitialAccessAndExpectedAltOrder()
         {
             this.TestWithError(() =>
             {
@@ -602,7 +602,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMixedSemaphoreSlimWithNoInitialAccess()
+        public async Task TestMixedSemaphoreSlimWithNoInitialAccess()
         {
             this.Test(() =>
             {
@@ -638,7 +638,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMixedSemaphoreSlimWithNoInitialAccessAndExpectedOrder()
+        public async Task TestMixedSemaphoreSlimWithNoInitialAccessAndExpectedOrder()
         {
             this.TestWithError(() =>
             {
@@ -682,7 +682,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMixedSemaphoreSlimWithNoInitialAccessAndExpectedAltOrder()
+        public async Task TestMixedSemaphoreSlimWithNoInitialAccessAndExpectedAltOrder()
         {
             this.TestWithError(() =>
             {
@@ -727,7 +727,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMixedAltSemaphoreSlimWithNoInitialAccess()
+        public async Task TestMixedAltSemaphoreSlimWithNoInitialAccess()
         {
             this.Test(() =>
             {
@@ -763,7 +763,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMixedAltSemaphoreSlimWithNoInitialAccessAndExpectedOrder()
+        public async Task TestMixedAltSemaphoreSlimWithNoInitialAccessAndExpectedOrder()
         {
             this.TestWithError(() =>
             {
@@ -808,7 +808,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMixedAltSemaphoreSlimWithNoInitialAccessAndExpectedAltOrder()
+        public async Task TestMixedAltSemaphoreSlimWithNoInitialAccessAndExpectedAltOrder()
         {
             this.TestWithError(() =>
             {
@@ -852,7 +852,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMixedSemaphoreSlimForUnexpectedOrder()
+        public async Task TestMixedSemaphoreSlimForUnexpectedOrder()
         {
             this.Test(() =>
             {
@@ -895,7 +895,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSemaphoreSlimWithAsyncContinuationAfterAwait()
+        public async Task TestSemaphoreSlimWithAsyncContinuationAfterAwait()
         {
             this.Test(async () =>
             {
@@ -915,7 +915,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSemaphoreSlimWithDeadlock()
+        public async Task TestSemaphoreSlimWithDeadlock()
         {
             this.TestWithError(() =>
             {
@@ -931,7 +931,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSemaphoreSlimWithAsyncDeadlock()
+        public async Task TestSemaphoreSlimWithAsyncDeadlock()
         {
             this.TestWithError(async () =>
             {

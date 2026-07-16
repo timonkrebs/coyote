@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
@@ -120,7 +120,7 @@ namespace Microsoft.Coyote.Actors.Tests
         }
 
         [Fact(Timeout = 10000)]
-        public void TestNoMemoryLeakAfterHalt()
+        public async Task TestNoMemoryLeakAfterHalt()
         {
             this.Test(r =>
             {

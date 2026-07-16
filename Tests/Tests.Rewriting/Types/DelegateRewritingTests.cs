@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
@@ -16,13 +16,13 @@ namespace Microsoft.Coyote.Rewriting.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestRewritingAction()
+        public async Task TestRewritingAction()
         {
             _ = new Action<Task>(task => { });
         }
 
         [Fact(Timeout = 5000)]
-        public void TestRewritingFunc()
+        public async Task TestRewritingFunc()
         {
             _ = new Func<Task>(() => Task.CompletedTask);
         }

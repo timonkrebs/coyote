@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Collections.Generic;
@@ -18,7 +18,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterleave()
+        public async Task TestInterleave()
         {
             this.TestWithError(async () =>
             {
@@ -51,7 +51,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestYield()
+        public async Task TestYield()
         {
             this.TestWithError(async () =>
             {
@@ -84,7 +84,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSuppressTaskInterleaving()
+        public async Task TestSuppressTaskInterleaving()
         {
             this.Test(async () =>
             {
@@ -107,7 +107,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAvoidSuppressTaskInterleaving()
+        public async Task TestAvoidSuppressTaskInterleaving()
         {
             this.TestWithError(async () =>
             {
@@ -133,7 +133,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSuppressAndResumeTaskInterleaving()
+        public async Task TestSuppressAndResumeTaskInterleaving()
         {
             this.TestWithError(async () =>
             {
@@ -157,7 +157,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSuppressLockInterleaving()
+        public async Task TestSuppressLockInterleaving()
         {
             this.Test(async () =>
             {
@@ -203,7 +203,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSuppressNoResumeTaskInterleaving()
+        public async Task TestSuppressNoResumeTaskInterleaving()
         {
             this.Test(async () =>
             {
@@ -216,7 +216,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestNestedSuppressInterleaving()
+        public async Task TestNestedSuppressInterleaving()
         {
             this.Test(() =>
             {

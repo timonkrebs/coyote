@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
@@ -17,7 +17,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedReadLong()
+        public async Task TestInterlockedReadLong()
         {
             this.Test(() =>
             {
@@ -28,7 +28,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
 
 #if NET
         [Fact(Timeout = 5000)]
-        public void TestInterlockedReadULong()
+        public async Task TestInterlockedReadULong()
         {
             this.Test(() =>
             {
@@ -39,7 +39,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
 #endif
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedAddInt()
+        public async Task TestInterlockedAddInt()
         {
             this.Test(() =>
             {
@@ -58,7 +58,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedAddLong()
+        public async Task TestInterlockedAddLong()
         {
             this.Test(() =>
             {
@@ -78,7 +78,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
 
 #if NET
         [Fact(Timeout = 5000)]
-        public void TestInterlockedAddUInt()
+        public async Task TestInterlockedAddUInt()
         {
             this.Test(() =>
             {
@@ -97,7 +97,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedAddULong()
+        public async Task TestInterlockedAddULong()
         {
             this.Test(() =>
             {
@@ -117,7 +117,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
 #endif
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedIncrementInt()
+        public async Task TestInterlockedIncrementInt()
         {
             this.Test(() =>
             {
@@ -128,7 +128,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedIncrementLong()
+        public async Task TestInterlockedIncrementLong()
         {
             this.Test(() =>
             {
@@ -140,7 +140,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
 
 #if NET
         [Fact(Timeout = 5000)]
-        public void TestInterlockedIncrementUInt()
+        public async Task TestInterlockedIncrementUInt()
         {
             this.Test(() =>
             {
@@ -151,7 +151,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedIncrementULong()
+        public async Task TestInterlockedIncrementULong()
         {
             this.Test(() =>
             {
@@ -163,7 +163,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
 #endif
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedDecrementInt()
+        public async Task TestInterlockedDecrementInt()
         {
             this.Test(() =>
             {
@@ -174,7 +174,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedDecrementLong()
+        public async Task TestInterlockedDecrementLong()
         {
             this.Test(() =>
             {
@@ -186,7 +186,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
 
 #if NET
         [Fact(Timeout = 5000)]
-        public void TestInterlockedDecrementUInt()
+        public async Task TestInterlockedDecrementUInt()
         {
             this.Test(() =>
             {
@@ -197,7 +197,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedDecrementULong()
+        public async Task TestInterlockedDecrementULong()
         {
             this.Test(() =>
             {
@@ -209,7 +209,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
 #endif
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedExchangeInt()
+        public async Task TestInterlockedExchangeInt()
         {
             this.Test(() =>
             {
@@ -220,7 +220,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedExchangeLong()
+        public async Task TestInterlockedExchangeLong()
         {
             this.Test(() =>
             {
@@ -232,7 +232,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
 
 #if NET
         [Fact(Timeout = 5000)]
-        public void TestInterlockedExchangeUInt()
+        public async Task TestInterlockedExchangeUInt()
         {
             this.Test(() =>
             {
@@ -243,7 +243,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedExchangeULong()
+        public async Task TestInterlockedExchangeULong()
         {
             this.Test(() =>
             {
@@ -255,7 +255,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
 #endif
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedExchangeFloat()
+        public async Task TestInterlockedExchangeFloat()
         {
             this.Test(() =>
             {
@@ -266,7 +266,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedExchangeDouble()
+        public async Task TestInterlockedExchangeDouble()
         {
             this.Test(() =>
             {
@@ -277,7 +277,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedExchangeObject()
+        public async Task TestInterlockedExchangeObject()
         {
             this.Test(() =>
             {
@@ -291,7 +291,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedExchangeBoxedObject()
+        public async Task TestInterlockedExchangeBoxedObject()
         {
             this.Test(() =>
             {
@@ -308,7 +308,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedCompareExchangeInt()
+        public async Task TestInterlockedCompareExchangeInt()
         {
             this.Test(() =>
             {
@@ -323,7 +323,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedCompareExchangeLong()
+        public async Task TestInterlockedCompareExchangeLong()
         {
             this.Test(() =>
             {
@@ -339,7 +339,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
 
 #if NET
         [Fact(Timeout = 5000)]
-        public void TestInterlockedCompareExchangeUInt()
+        public async Task TestInterlockedCompareExchangeUInt()
         {
             this.Test(() =>
             {
@@ -354,7 +354,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedCompareExchangeULong()
+        public async Task TestInterlockedCompareExchangeULong()
         {
             this.Test(() =>
             {
@@ -370,7 +370,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
 #endif
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedCompareExchangeFloat()
+        public async Task TestInterlockedCompareExchangeFloat()
         {
             this.Test(() =>
             {
@@ -385,7 +385,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedCompareExchangeDouble()
+        public async Task TestInterlockedCompareExchangeDouble()
         {
             this.Test(() =>
             {
@@ -400,7 +400,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedCompareExchangeObject()
+        public async Task TestInterlockedCompareExchangeObject()
         {
             this.Test(() =>
             {
@@ -417,7 +417,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedCompareExchangeBoxedObject()
+        public async Task TestInterlockedCompareExchangeBoxedObject()
         {
             this.Test(() =>
             {
@@ -441,7 +441,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
 
 #if NET
         [Fact(Timeout = 5000)]
-        public void TestInterlockedAndInt()
+        public async Task TestInterlockedAndInt()
         {
             this.Test(() =>
             {
@@ -452,7 +452,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedAndLong()
+        public async Task TestInterlockedAndLong()
         {
             this.Test(() =>
             {
@@ -463,7 +463,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedAndUInt()
+        public async Task TestInterlockedAndUInt()
         {
             this.Test(() =>
             {
@@ -474,7 +474,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedAndULong()
+        public async Task TestInterlockedAndULong()
         {
             this.Test(() =>
             {
@@ -485,7 +485,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedOrInt()
+        public async Task TestInterlockedOrInt()
         {
             this.Test(() =>
             {
@@ -496,7 +496,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedOrLong()
+        public async Task TestInterlockedOrLong()
         {
             this.Test(() =>
             {
@@ -507,7 +507,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedOrUInt()
+        public async Task TestInterlockedOrUInt()
         {
             this.Test(() =>
             {
@@ -518,7 +518,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedOrULong()
+        public async Task TestInterlockedOrULong()
         {
             this.Test(() =>
             {
@@ -538,7 +538,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedExchangeByte()
+        public async Task TestInterlockedExchangeByte()
         {
             this.Test(() =>
             {
@@ -549,7 +549,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedExchangeSByte()
+        public async Task TestInterlockedExchangeSByte()
         {
             this.Test(() =>
             {
@@ -560,7 +560,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedExchangeShort()
+        public async Task TestInterlockedExchangeShort()
         {
             this.Test(() =>
             {
@@ -571,7 +571,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedExchangeUShort()
+        public async Task TestInterlockedExchangeUShort()
         {
             this.Test(() =>
             {
@@ -582,7 +582,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedExchangeEnum()
+        public async Task TestInterlockedExchangeEnum()
         {
             this.Test(() =>
             {
@@ -595,7 +595,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedCompareExchangeByte()
+        public async Task TestInterlockedCompareExchangeByte()
         {
             this.Test(() =>
             {
@@ -610,7 +610,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedCompareExchangeSByte()
+        public async Task TestInterlockedCompareExchangeSByte()
         {
             this.Test(() =>
             {
@@ -625,7 +625,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedCompareExchangeShort()
+        public async Task TestInterlockedCompareExchangeShort()
         {
             this.Test(() =>
             {
@@ -640,7 +640,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedCompareExchangeUShort()
+        public async Task TestInterlockedCompareExchangeUShort()
         {
             this.Test(() =>
             {
@@ -655,7 +655,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedByteLostUpdateDetection()
+        public async Task TestInterlockedByteLostUpdateDetection()
         {
             this.TestWithError(async () =>
             {
@@ -686,7 +686,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedInt16LostUpdateDetection()
+        public async Task TestInterlockedInt16LostUpdateDetection()
         {
             this.TestWithError(async () =>
             {
@@ -714,7 +714,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
 #endif
 
         [Fact(Timeout = 5000)]
-        public void TestInterlockedConcurrentIncrementInt()
+        public async Task TestInterlockedConcurrentIncrementInt()
         {
             this.Test(() =>
             {

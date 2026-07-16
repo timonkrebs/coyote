@@ -1,7 +1,8 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Xunit;
 using Xunit.Abstractions;
@@ -16,7 +17,7 @@ namespace Microsoft.Coyote.Runtime.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestThreadOperationInstrumentation()
+        public async Task TestThreadOperationInstrumentation()
         {
             this.RunSystematicTest(() =>
             {

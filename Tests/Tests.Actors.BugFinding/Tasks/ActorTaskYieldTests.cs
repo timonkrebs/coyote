@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
@@ -37,7 +37,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestYieldInActor()
+        public async Task TestYieldInActor()
         {
             this.Test(r =>
             {
@@ -64,7 +64,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestYieldInStateMachine()
+        public async Task TestYieldInStateMachine()
         {
             this.Test(r =>
             {
@@ -94,7 +94,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestYieldLoopInActor()
+        public async Task TestYieldLoopInActor()
         {
             this.Test(r =>
             {
@@ -130,7 +130,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestYieldLoopInStateMachine()
+        public async Task TestYieldLoopInStateMachine()
         {
             this.Test(r =>
             {
@@ -157,7 +157,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestUncontrolledYieldInActor()
+        public async Task TestUncontrolledYieldInActor()
         {
             this.TestWithError(r =>
             {
@@ -188,7 +188,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestUncontrolledYieldInStateMachine()
+        public async Task TestUncontrolledYieldInStateMachine()
         {
             this.TestWithError(r =>
             {
@@ -222,7 +222,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestUncontrolledYieldLoopInActor()
+        public async Task TestUncontrolledYieldLoopInActor()
         {
             this.TestWithError(r =>
             {
@@ -262,7 +262,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestUncontrolledYieldLoopInStateMachine()
+        public async Task TestUncontrolledYieldLoopInStateMachine()
         {
             this.TestWithError(r =>
             {

@@ -1,6 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+using System.Threading.Tasks;
 using Microsoft.Coyote.Tests.Common.Tasks;
 using Xunit;
 using Xunit.Abstractions;
@@ -16,7 +17,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
 
 #if NET
         [Fact(Timeout = 5000)]
-        public void TestDetectedUncontrolledValueTaskAwaiter()
+        public async Task TestDetectedUncontrolledValueTaskAwaiter()
         {
             this.Test(async () =>
             {
@@ -26,7 +27,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestDetectedUncontrolledGenericValueTaskAwaiter()
+        public async Task TestDetectedUncontrolledGenericValueTaskAwaiter()
         {
             this.Test(async () =>
             {
@@ -36,7 +37,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestDetectedUncontrolledValueTaskAwaiterWithGenericArgument()
+        public async Task TestDetectedUncontrolledValueTaskAwaiterWithGenericArgument()
         {
             this.Test(async () =>
             {

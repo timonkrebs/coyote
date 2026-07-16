@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
@@ -31,7 +31,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWhenAllWithTwoSynchronousTasks()
+        public async Task TestWhenAllWithTwoSynchronousTasks()
         {
             this.TestWithError(async () =>
             {
@@ -47,7 +47,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWhenAllWithTwoAsynchronousTasks()
+        public async Task TestWhenAllWithTwoAsynchronousTasks()
         {
             this.TestWithError(async () =>
             {
@@ -63,7 +63,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWhenAllWithTwoParallelTasks()
+        public async Task TestWhenAllWithTwoParallelTasks()
         {
             this.TestWithError(async () =>
             {
@@ -89,7 +89,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWhenAllWithTwoSynchronousTaskWithResults()
+        public async Task TestWhenAllWithTwoSynchronousTaskWithResults()
         {
             this.TestWithError(async () =>
             {
@@ -107,7 +107,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWhenAllWithTwoAsynchronousTaskWithResults()
+        public async Task TestWhenAllWithTwoAsynchronousTaskWithResults()
         {
             this.TestWithError(async () =>
             {
@@ -124,7 +124,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWhenAllWithTwoParallelSynchronousTaskWithResults()
+        public async Task TestWhenAllWithTwoParallelSynchronousTaskWithResults()
         {
             this.TestWithError(async () =>
             {
@@ -153,7 +153,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWhenAllWithTwoParallelAsynchronousTaskWithResults()
+        public async Task TestWhenAllWithTwoParallelAsynchronousTaskWithResults()
         {
             this.TestWithError(async () =>
             {
@@ -180,7 +180,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWhenAllWithAsyncCaller()
+        public async Task TestWhenAllWithAsyncCaller()
         {
             this.TestWithError(async () =>
             {
@@ -208,7 +208,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWhenAllWithResultAndAsyncCaller()
+        public async Task TestWhenAllWithResultAndAsyncCaller()
         {
             this.TestWithError(async () =>
             {
@@ -236,7 +236,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWhenAllWithBlockingWait()
+        public async Task TestWhenAllWithBlockingWait()
         {
             this.Test(() =>
             {
@@ -250,7 +250,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWhenAllWithException()
+        public async Task TestWhenAllWithException()
         {
             this.TestWithError(async () =>
             {
@@ -304,7 +304,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWhenAllWithResultsAndException()
+        public async Task TestWhenAllWithResultsAndException()
         {
             this.TestWithError(async () =>
             {
@@ -360,7 +360,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWhenAllDeadlock()
+        public async Task TestWhenAllDeadlock()
         {
             this.TestWithError(async () =>
             {
@@ -378,7 +378,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWhenAllWithResultsAndDeadlock()
+        public async Task TestWhenAllWithResultsAndDeadlock()
         {
             this.TestWithError(async () =>
             {

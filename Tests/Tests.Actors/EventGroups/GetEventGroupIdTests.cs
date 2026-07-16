@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
@@ -46,7 +46,7 @@ namespace Microsoft.Coyote.Actors.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestGetEventGroupIdNotSet()
+        public async Task TestGetEventGroupIdNotSet()
         {
             this.Test(async r =>
             {
@@ -76,7 +76,7 @@ namespace Microsoft.Coyote.Actors.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestGetEventGroupIdSet()
+        public async Task TestGetEventGroupIdSet()
         {
             this.Test(async r =>
             {

@@ -1,6 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+using System.Threading.Tasks;
 using Microsoft.Coyote.Logging;
 using Microsoft.Coyote.Runtime;
 using Microsoft.Coyote.SystematicTesting.Frameworks.XUnit;
@@ -18,7 +19,7 @@ namespace Microsoft.Coyote.Actors.Tests.Logging
         }
 
         [Fact(Timeout = 5000)]
-        public void TestCustomActorRuntimeLog()
+        public async Task TestCustomActorRuntimeLog()
         {
             Configuration config = this.GetConfiguration().WithVerbosityEnabled(VerbosityLevel.Info);
             this.Test(async runtime =>

@@ -1,8 +1,9 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.Coyote.Logging;
 using Microsoft.Coyote.SystematicTesting;
 using Microsoft.Coyote.Tests.Common;
@@ -28,7 +29,7 @@ namespace Microsoft.Coyote.Runtime.Tests.Logging
         }
 
         [Fact(Timeout = 5000)]
-        public void TestDefaultTestingEngineLogger()
+        public async Task TestDefaultTestingEngineLogger()
         {
             string observed = string.Empty;
             using var stream = new MemoryStream();
@@ -91,7 +92,7 @@ namespace Microsoft.Coyote.Runtime.Tests.Logging
         }
 
         [Fact(Timeout = 5000)]
-        public void TestConsoleTestingEngineLogger()
+        public async Task TestConsoleTestingEngineLogger()
         {
             string observed = string.Empty;
             using var stream = new MemoryStream();
@@ -169,7 +170,7 @@ namespace Microsoft.Coyote.Runtime.Tests.Logging
         }
 
         [Fact(Timeout = 5000)]
-        public void TestCustomTestingEngineLogger()
+        public async Task TestCustomTestingEngineLogger()
         {
             var config = this.GetConfiguration().WithRandomStrategy().WithTestingIterations(2).WithRandomGeneratorSeed(0)
                 .WithTestIterationsRunToCompletion().WithVerbosityEnabled(VerbosityLevel.Info);

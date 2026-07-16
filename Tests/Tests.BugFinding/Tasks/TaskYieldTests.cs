@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
@@ -18,7 +18,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestTaskYield()
+        public async Task TestTaskYield()
         {
             this.Test(async () =>
             {
@@ -28,7 +28,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestDoubleTaskYield()
+        public async Task TestDoubleTaskYield()
         {
             this.Test(async () =>
             {
@@ -39,7 +39,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAsynchronousTaskYield()
+        public async Task TestAsynchronousTaskYield()
         {
             this.Test(async () =>
             {
@@ -54,7 +54,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestParallelTaskYield()
+        public async Task TestParallelTaskYield()
         {
             this.Test(async () =>
             {
@@ -70,7 +70,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestTwoParallelTasksYield()
+        public async Task TestTwoParallelTasksYield()
         {
             this.Test(async () =>
             {
@@ -91,7 +91,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestTwoParallelTasksWriteWithYield()
+        public async Task TestTwoParallelTasksWriteWithYield()
         {
             if (this.SchedulingPolicy is SchedulingPolicy.Fuzzing)
             {
@@ -128,7 +128,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestTwoParallelTasksWriteWithYieldFailure()
+        public async Task TestTwoParallelTasksWriteWithYieldFailure()
         {
             this.TestWithError(async () =>
             {
@@ -151,7 +151,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestTwoAsynchronousTasksWriteWithYieldFailure()
+        public async Task TestTwoAsynchronousTasksWriteWithYieldFailure()
         {
             this.TestWithError(async () =>
             {
@@ -185,7 +185,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterleavingsInNestedYield()
+        public async Task TestInterleavingsInNestedYield()
         {
             this.TestWithError(async () =>
             {
@@ -201,7 +201,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterleavingsInNestedYields()
+        public async Task TestInterleavingsInNestedYields()
         {
             this.TestWithError(async () =>
             {
@@ -217,7 +217,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterleavingsInLambdaYields()
+        public async Task TestInterleavingsInLambdaYields()
         {
             this.TestWithError(async () =>
             {
@@ -240,7 +240,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterleavingsInLocalFunctionYields()
+        public async Task TestInterleavingsInLocalFunctionYields()
         {
             this.TestWithError(async () =>
             {
@@ -271,7 +271,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterleavingsInNestedParallelYields()
+        public async Task TestInterleavingsInNestedParallelYields()
         {
             this.TestWithError(async () =>
             {

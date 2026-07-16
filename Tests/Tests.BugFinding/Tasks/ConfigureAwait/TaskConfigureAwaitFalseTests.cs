@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
@@ -28,7 +28,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAwaitSynchronousTask()
+        public async Task TestAwaitSynchronousTask()
         {
             this.Test(async () =>
             {
@@ -40,7 +40,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAwaitSynchronousTaskFailure()
+        public async Task TestAwaitSynchronousTaskFailure()
         {
             this.TestWithError(async () =>
             {
@@ -54,7 +54,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAwaitAsynchronousTask()
+        public async Task TestAwaitAsynchronousTask()
         {
             this.Test(async () =>
             {
@@ -66,7 +66,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAwaitAsynchronousTaskFailure()
+        public async Task TestAwaitAsynchronousTaskFailure()
         {
             this.TestWithError(async () =>
             {
@@ -92,7 +92,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAwaitNestedSynchronousTask()
+        public async Task TestAwaitNestedSynchronousTask()
         {
             this.Test(async () =>
             {
@@ -104,7 +104,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAwaitNestedSynchronousTaskFailure()
+        public async Task TestAwaitNestedSynchronousTaskFailure()
         {
             this.TestWithError(async () =>
             {
@@ -118,7 +118,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAwaitNestedAsynchronousTask()
+        public async Task TestAwaitNestedAsynchronousTask()
         {
             this.Test(async () =>
             {
@@ -130,7 +130,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAwaitNestedAsynchronousTaskFailure()
+        public async Task TestAwaitNestedAsynchronousTaskFailure()
         {
             this.TestWithError(async () =>
             {
@@ -144,7 +144,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAwaitSynchronousTaskWithResult()
+        public async Task TestAwaitSynchronousTaskWithResult()
         {
             this.Test(async () =>
             {
@@ -156,7 +156,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAwaitSynchronousTaskWithResultFailure()
+        public async Task TestAwaitSynchronousTaskWithResultFailure()
         {
             this.TestWithError(async () =>
             {
@@ -170,7 +170,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAwaitAsynchronousTaskWithResult()
+        public async Task TestAwaitAsynchronousTaskWithResult()
         {
             this.Test(async () =>
             {
@@ -182,7 +182,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAwaitAsynchronousTaskWithResultFailure()
+        public async Task TestAwaitAsynchronousTaskWithResultFailure()
         {
             this.TestWithError(async () =>
             {
@@ -208,7 +208,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAwaitNestedSynchronousTaskWithResult()
+        public async Task TestAwaitNestedSynchronousTaskWithResult()
         {
             this.Test(async () =>
             {
@@ -220,7 +220,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAwaitNestedSynchronousTaskWithResultFailure()
+        public async Task TestAwaitNestedSynchronousTaskWithResultFailure()
         {
             this.TestWithError(async () =>
             {
@@ -234,7 +234,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAwaitNestedAsynchronousTaskWithResult()
+        public async Task TestAwaitNestedAsynchronousTaskWithResult()
         {
             this.Test(async () =>
             {
@@ -246,7 +246,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAwaitNestedAsynchronousTaskWithResultFailure()
+        public async Task TestAwaitNestedAsynchronousTaskWithResultFailure()
         {
             this.TestWithError(async () =>
             {

@@ -1,6 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+using System.Threading.Tasks;
 using Microsoft.Coyote.Tests.Common.Tasks;
 using Xunit;
 using Xunit.Abstractions;
@@ -15,7 +16,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestDetectedUncontrolledDelay()
+        public async Task TestDetectedUncontrolledDelay()
         {
             this.Test(async () =>
             {
@@ -27,7 +28,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestDetectedUncontrolledDelayWithNoPartialControl()
+        public async Task TestDetectedUncontrolledDelayWithNoPartialControl()
         {
             this.TestWithError(async () =>
             {
@@ -43,7 +44,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestDetectedUncontrolledTaskAwaiter()
+        public async Task TestDetectedUncontrolledTaskAwaiter()
         {
             this.Test(async () =>
             {
@@ -53,7 +54,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestDetectedUncontrolledGenericTaskAwaiter()
+        public async Task TestDetectedUncontrolledGenericTaskAwaiter()
         {
             this.Test(async () =>
             {
@@ -63,7 +64,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestDetectedUncontrolledTaskAwaiterWithGenericArgument()
+        public async Task TestDetectedUncontrolledTaskAwaiterWithGenericArgument()
         {
             this.Test(async () =>
             {

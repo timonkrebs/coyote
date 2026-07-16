@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
@@ -100,7 +100,7 @@ namespace Microsoft.Coyote.Rewriting.Tests
 #pragma warning restore CA1000 // Do not declare static members on generic types
 
         [Fact(Timeout = 5000)]
-        public void TestUncontrolledMethodReturnsAwaiter()
+        public async Task TestUncontrolledMethodReturnsAwaiter()
         {
             this.Test(async () =>
             {
@@ -109,7 +109,7 @@ namespace Microsoft.Coyote.Rewriting.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestUncontrolledMethodReturnsGenericAwaiter()
+        public async Task TestUncontrolledMethodReturnsGenericAwaiter()
         {
             this.Test(async () =>
             {
@@ -118,7 +118,7 @@ namespace Microsoft.Coyote.Rewriting.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestUncontrolledMethodReturnsAwaiterWithGenericArgument()
+        public async Task TestUncontrolledMethodReturnsAwaiterWithGenericArgument()
         {
             this.Test(async () =>
             {
@@ -127,7 +127,7 @@ namespace Microsoft.Coyote.Rewriting.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestUncontrolledMethodReturnsTask()
+        public async Task TestUncontrolledMethodReturnsTask()
         {
             this.Test(async () =>
             {
@@ -137,7 +137,7 @@ namespace Microsoft.Coyote.Rewriting.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestUncontrolledMethodReturnsTaskFromGenericClass()
+        public async Task TestUncontrolledMethodReturnsTaskFromGenericClass()
         {
             this.Test(async () =>
             {
@@ -147,7 +147,7 @@ namespace Microsoft.Coyote.Rewriting.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestUncontrolledMethodReturnsGenericTask()
+        public async Task TestUncontrolledMethodReturnsGenericTask()
         {
             this.Test(async () =>
             {
@@ -157,7 +157,7 @@ namespace Microsoft.Coyote.Rewriting.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestUncontrolledMethodReturnsGenericTaskArray()
+        public async Task TestUncontrolledMethodReturnsGenericTaskArray()
         {
             this.Test(async () =>
             {
@@ -167,7 +167,7 @@ namespace Microsoft.Coyote.Rewriting.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestUncontrolledMethodReturnsValueTupleTask()
+        public async Task TestUncontrolledMethodReturnsValueTupleTask()
         {
             this.Test(async () =>
             {
@@ -177,7 +177,7 @@ namespace Microsoft.Coyote.Rewriting.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestUncontrolledMethodReturnsGenericValueTupleTask()
+        public async Task TestUncontrolledMethodReturnsGenericValueTupleTask()
         {
             this.Test(async () =>
             {
@@ -187,7 +187,7 @@ namespace Microsoft.Coyote.Rewriting.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestUncontrolledMethodReturnsGenericNestedValueTupleTask()
+        public async Task TestUncontrolledMethodReturnsGenericNestedValueTupleTask()
         {
             this.Test(async () =>
             {
@@ -197,7 +197,7 @@ namespace Microsoft.Coyote.Rewriting.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestUncontrolledMethodReturnsGenericTaskFromGenericClass()
+        public async Task TestUncontrolledMethodReturnsGenericTaskFromGenericClass()
         {
             this.Test(async () =>
             {
@@ -207,7 +207,7 @@ namespace Microsoft.Coyote.Rewriting.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestUncontrolledMethodReturnsGenericArrayTaskFromGenericClass()
+        public async Task TestUncontrolledMethodReturnsGenericArrayTaskFromGenericClass()
         {
             this.Test(async () =>
             {
@@ -217,7 +217,7 @@ namespace Microsoft.Coyote.Rewriting.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestUncontrolledMethodReturnsGenericTaskFromGenericMethod()
+        public async Task TestUncontrolledMethodReturnsGenericTaskFromGenericMethod()
         {
             this.Test(async () =>
             {
@@ -227,7 +227,7 @@ namespace Microsoft.Coyote.Rewriting.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestUncontrolledMethodReturnsGenericValueTupleTaskFromGenericMethod()
+        public async Task TestUncontrolledMethodReturnsGenericValueTupleTaskFromGenericMethod()
         {
             this.Test(async () =>
             {
@@ -237,7 +237,7 @@ namespace Microsoft.Coyote.Rewriting.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestUncontrolledMethodReturnsGenericTaskFromGenericClassLargeStack()
+        public async Task TestUncontrolledMethodReturnsGenericTaskFromGenericClassLargeStack()
         {
             this.Test(async () =>
             {
@@ -253,7 +253,7 @@ namespace Microsoft.Coyote.Rewriting.Tests
 
 #if NET
         [Fact(Timeout = 5000)]
-        public void TestUncontrolledMethodReturnsValueTask()
+        public async Task TestUncontrolledMethodReturnsValueTask()
         {
             this.Test(async () =>
             {
@@ -263,7 +263,7 @@ namespace Microsoft.Coyote.Rewriting.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestUncontrolledMethodReturnsValueTaskFromGenericClass()
+        public async Task TestUncontrolledMethodReturnsValueTaskFromGenericClass()
         {
             this.Test(async () =>
             {
@@ -273,7 +273,7 @@ namespace Microsoft.Coyote.Rewriting.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestUncontrolledMethodReturnsGenericValueTask()
+        public async Task TestUncontrolledMethodReturnsGenericValueTask()
         {
             this.Test(async () =>
             {
@@ -283,7 +283,7 @@ namespace Microsoft.Coyote.Rewriting.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestUncontrolledMethodReturnsGenericValueTaskArray()
+        public async Task TestUncontrolledMethodReturnsGenericValueTaskArray()
         {
             this.Test(async () =>
             {
@@ -293,7 +293,7 @@ namespace Microsoft.Coyote.Rewriting.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestUncontrolledMethodReturnsGenericValueTaskFromGenericClass()
+        public async Task TestUncontrolledMethodReturnsGenericValueTaskFromGenericClass()
         {
             this.Test(async () =>
             {
@@ -303,7 +303,7 @@ namespace Microsoft.Coyote.Rewriting.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestUncontrolledMethodReturnsGenericArrayValueTaskFromGenericClass()
+        public async Task TestUncontrolledMethodReturnsGenericArrayValueTaskFromGenericClass()
         {
             this.Test(async () =>
             {
@@ -313,7 +313,7 @@ namespace Microsoft.Coyote.Rewriting.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestUncontrolledMethodReturnsGenericValueTaskFromGenericMethod()
+        public async Task TestUncontrolledMethodReturnsGenericValueTaskFromGenericMethod()
         {
             this.Test(async () =>
             {
@@ -323,7 +323,7 @@ namespace Microsoft.Coyote.Rewriting.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestUncontrolledMethodReturnsGenericValueTaskFromGenericClassLargeStack()
+        public async Task TestUncontrolledMethodReturnsGenericValueTaskFromGenericClassLargeStack()
         {
             this.Test(async () =>
             {

@@ -1,7 +1,8 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Xunit;
 using Xunit.Abstractions;
@@ -16,7 +17,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestThreadStartAndJoin()
+        public async Task TestThreadStartAndJoin()
         {
             this.Test(() =>
             {
@@ -37,7 +38,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestParameterizedThreadStartAndJoin()
+        public async Task TestParameterizedThreadStartAndJoin()
         {
             this.Test(() =>
             {
@@ -61,7 +62,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestThreadStartAndJoinStress()
+        public async Task TestThreadStartAndJoinStress()
         {
             this.Test(() =>
             {

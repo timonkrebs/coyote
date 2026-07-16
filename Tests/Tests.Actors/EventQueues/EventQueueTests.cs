@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
@@ -43,7 +43,7 @@ namespace Microsoft.Coyote.Actors.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestEnqueueEvent()
+        public async Task TestEnqueueEvent()
         {
             var logger = new TestOutputLogger(this.TestOutput);
             using var queue = new TestEventQueue(logger, (notification, evt, _) => { });
@@ -63,7 +63,7 @@ namespace Microsoft.Coyote.Actors.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestDequeueEvent()
+        public async Task TestDequeueEvent()
         {
             var logger = new TestOutputLogger(this.TestOutput);
             using var queue = new TestEventQueue(logger, (notification, evt, _) => { });
@@ -102,7 +102,7 @@ namespace Microsoft.Coyote.Actors.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestEnqueueEventWithHandlerNotRunning()
+        public async Task TestEnqueueEventWithHandlerNotRunning()
         {
             var logger = new TestOutputLogger(this.TestOutput);
             using var queue = new TestEventQueue(logger, (notification, evt, _) => { });
@@ -116,7 +116,7 @@ namespace Microsoft.Coyote.Actors.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestRaiseEvent()
+        public async Task TestRaiseEvent()
         {
             var logger = new TestOutputLogger(this.TestOutput);
             using var queue = new TestEventQueue(logger, (notification, evt, _) => { });
@@ -425,7 +425,7 @@ namespace Microsoft.Coyote.Actors.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestIgnoreEvent()
+        public async Task TestIgnoreEvent()
         {
             int notificationCount = 0;
             var logger = new TestOutputLogger(this.TestOutput);
@@ -458,7 +458,7 @@ namespace Microsoft.Coyote.Actors.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestDeferEvent()
+        public async Task TestDeferEvent()
         {
             int notificationCount = 0;
             var logger = new TestOutputLogger(this.TestOutput);

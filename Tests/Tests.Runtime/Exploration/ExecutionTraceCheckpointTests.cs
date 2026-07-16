@@ -1,7 +1,8 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
 using CoyoteTypes = Microsoft.Coyote.Rewriting.Types;
@@ -37,7 +38,7 @@ namespace Microsoft.Coyote.Runtime.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestExecutionTraceCheckpoint()
+        public async Task TestExecutionTraceCheckpoint()
         {
             uint numSequencesFound = 0;
             bool isSnapshotReset = true;

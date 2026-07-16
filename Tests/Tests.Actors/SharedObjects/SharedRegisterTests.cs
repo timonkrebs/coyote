@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
@@ -58,7 +58,7 @@ namespace Microsoft.Coyote.Actors.Tests.SharedObjects
         }
 
         [Fact(Timeout = 5000)]
-        public void TestProductionSharedRegister()
+        public async Task TestProductionSharedRegister()
         {
             var runtime = RuntimeFactory.Create();
             var counter = SharedRegister.Create(runtime, 0);

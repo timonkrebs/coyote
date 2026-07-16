@@ -1,6 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
 using Interlocked = System.Threading.Interlocked;
@@ -18,7 +19,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
 
 #if NET
         [Fact(Timeout = 5000)]
-        public void TestSpinCount()
+        public async Task TestSpinCount()
         {
             this.Test(() =>
             {
@@ -51,7 +52,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
 #endif
 
         [Fact(Timeout = 5000)]
-        public void TestSpinUntil()
+        public async Task TestSpinUntil()
         {
             this.Test(() =>
             {
@@ -62,7 +63,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
 
 #if NET
         [Fact(Timeout = 5000)]
-        public void TestSpinUntilMultithreaded()
+        public async Task TestSpinUntilMultithreaded()
         {
             this.Test(() =>
             {
@@ -94,7 +95,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
 #endif
 
         [Fact(Timeout = 5000)]
-        public void TestSpinUntilDeadlock()
+        public async Task TestSpinUntilDeadlock()
         {
             this.TestWithError(() =>
             {
@@ -161,7 +162,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSpinWaitStack()
+        public async Task TestSpinWaitStack()
         {
             var configuration = this.GetConfiguration().WithTestingIterations(100)
                 .WithAtomicOperationRaceCheckingEnabled(true);

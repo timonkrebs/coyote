@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Collections.Concurrent;
@@ -17,7 +17,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.ConcurrentCollections
         }
 
         [Fact(Timeout = 5000)]
-        public void TestConcurrentDictionaryProperties()
+        public async Task TestConcurrentDictionaryProperties()
         {
             this.Test(() =>
             {
@@ -35,7 +35,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.ConcurrentCollections
         }
 
         [Fact(Timeout = 5000)]
-        public void TestConcurrentDictionaryMethodsSubsetOne()
+        public async Task TestConcurrentDictionaryMethodsSubsetOne()
         {
             this.Test(() =>
             {
@@ -74,7 +74,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.ConcurrentCollections
         }
 
         [Fact(Timeout = 5000)]
-        public void TestConcurrentDictionaryMethodsSubsetOneWithRaceCondition()
+        public async Task TestConcurrentDictionaryMethodsSubsetOneWithRaceCondition()
         {
             this.TestWithError(() =>
             {
@@ -101,7 +101,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.ConcurrentCollections
         }
 
         [Fact(Timeout = 5000)]
-        public void TestConcurrentDictionaryMethodsSubsetTwo()
+        public async Task TestConcurrentDictionaryMethodsSubsetTwo()
         {
             this.Test(() =>
             {
@@ -135,7 +135,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.ConcurrentCollections
         }
 
         [Fact(Timeout = 5000)]
-        public void TestConcurrentDictionaryMethodsSubsetTwoWithRaceCondition()
+        public async Task TestConcurrentDictionaryMethodsSubsetTwoWithRaceCondition()
         {
             this.TestWithError(() =>
             {
