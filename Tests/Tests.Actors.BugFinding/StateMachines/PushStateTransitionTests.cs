@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Collections.Generic;
@@ -55,7 +55,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestPushStateTransition()
+        public async Task TestPushStateTransition()
         {
             this.TestWithError(r =>
             {
@@ -92,7 +92,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestPushAndPopStateTransitions()
+        public async Task TestPushAndPopStateTransitions()
         {
             this.Test(r =>
             {
@@ -124,7 +124,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestPushStateTransitionWithOnExitSkipped()
+        public async Task TestPushStateTransitionWithOnExitSkipped()
         {
             this.Test(r =>
             {
@@ -167,7 +167,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestPushTransitionToNonExistingState()
+        public async Task TestPushTransitionToNonExistingState()
         {
             this.TestWithError(r =>
             {
@@ -209,7 +209,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestPushStateTransitionViaEvent()
+        public async Task TestPushStateTransitionViaEvent()
         {
             this.Test(r =>
             {
@@ -236,7 +236,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestPushStateTransitionOnExit()
+        public async Task TestPushStateTransitionOnExit()
         {
             var expectedError = "M6() has performed a 'PushState' transition from an OnExit action.";
             this.TestWithError(r =>
@@ -349,7 +349,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestPushStateNotInheritGoto()
+        public async Task TestPushStateNotInheritGoto()
         {
             string expectedError = "M7() received event 'E3' that cannot be handled.";
             var log = new LogEvent();
@@ -414,7 +414,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestPushStateNotInheritPush()
+        public async Task TestPushStateNotInheritPush()
         {
             var log = new LogEvent();
             this.Test(r =>

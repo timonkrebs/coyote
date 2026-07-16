@@ -1,7 +1,8 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Xunit;
 using Xunit.Abstractions;
@@ -16,7 +17,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.DataRaceChecking
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSharedAccessRaceWithMemoryAccessInterleaving()
+        public async Task TestSharedAccessRaceWithMemoryAccessInterleaving()
         {
             this.TestWithError(() =>
             {
@@ -52,7 +53,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.DataRaceChecking
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSharedAccessRaceWithControlFlowInterleaving()
+        public async Task TestSharedAccessRaceWithControlFlowInterleaving()
         {
             this.TestWithError(() =>
             {

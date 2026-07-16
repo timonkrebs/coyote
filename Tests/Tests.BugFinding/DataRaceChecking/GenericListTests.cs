@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Collections.Generic;
@@ -16,7 +16,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.DataRaceChecking
         }
 
         [Fact(Timeout = 5000)]
-        public void TestGenericListAddDataRace()
+        public async Task TestGenericListAddDataRace()
         {
             this.TestWithError(async () =>
             {
@@ -40,7 +40,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.DataRaceChecking
         }
 
         [Fact(Timeout = 5000)]
-        public void TestGenericListIndex()
+        public async Task TestGenericListIndex()
         {
             this.Test(async () =>
             {
@@ -65,7 +65,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.DataRaceChecking
         }
 
         [Fact(Timeout = 5000)]
-        public void TestGenericListIndexDataRace()
+        public async Task TestGenericListIndexDataRace()
         {
             this.TestWithError(async () =>
             {
@@ -92,7 +92,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.DataRaceChecking
         }
 
         [Fact(Timeout = 5000)]
-        public void TestGenericListCapacityDataRace()
+        public async Task TestGenericListCapacityDataRace()
         {
             this.TestWithError(async () =>
             {

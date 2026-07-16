@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Collections.Generic;
@@ -105,7 +105,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestChallenge14WithDeadlock()
+        public async Task TestChallenge14WithDeadlock()
         {
             this.TestWithError(() =>
             {
@@ -129,7 +129,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestChallenge14WithFix()
+        public async Task TestChallenge14WithFix()
         {
             this.Test(() =>
             {

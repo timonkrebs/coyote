@@ -1,6 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Xunit;
 using Xunit.Abstractions;
@@ -102,7 +103,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMachineMonitorIntegration1()
+        public async Task TestMachineMonitorIntegration1()
         {
             this.TestWithError(r =>
             {
@@ -115,7 +116,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMachineMonitorIntegration2()
+        public async Task TestMachineMonitorIntegration2()
         {
             this.Test(r =>
             {
@@ -126,7 +127,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMachineMonitorIntegration3()
+        public async Task TestMachineMonitorIntegration3()
         {
             this.Test(r =>
             {

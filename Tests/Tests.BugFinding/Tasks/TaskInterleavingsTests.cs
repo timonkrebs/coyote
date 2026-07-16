@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Collections.Generic;
@@ -31,7 +31,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterleavingsWithOneSynchronousTask()
+        public async Task TestInterleavingsWithOneSynchronousTask()
         {
             this.Test(async () =>
             {
@@ -45,7 +45,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterleavingsWithOneAsynchronousTask()
+        public async Task TestInterleavingsWithOneAsynchronousTask()
         {
             this.TestWithError(async () =>
             {
@@ -63,7 +63,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterleavingsWithOneParallelTask()
+        public async Task TestInterleavingsWithOneParallelTask()
         {
             this.TestWithError(async () =>
             {
@@ -84,7 +84,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterleavingsWithTwoSynchronousTasks()
+        public async Task TestInterleavingsWithTwoSynchronousTasks()
         {
             this.Test(async () =>
             {
@@ -101,7 +101,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterleavingsWithTwoAsynchronousTasks()
+        public async Task TestInterleavingsWithTwoAsynchronousTasks()
         {
             this.TestWithError(async () =>
             {
@@ -120,7 +120,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterleavingsWithTwoParallelTasks()
+        public async Task TestInterleavingsWithTwoParallelTasks()
         {
             this.TestWithError(async () =>
             {
@@ -146,7 +146,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInterleavingsWithNestedParallelTasks()
+        public async Task TestInterleavingsWithNestedParallelTasks()
         {
             // When this test is running in systematic fuzzing mode, it is entirely dependent on real
             // task scheduling, which even with 1000 iterations is never guaranteed to hit the assert.
@@ -178,7 +178,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestExploreAllInterleavings()
+        public async Task TestExploreAllInterleavings()
         {
             SortedSet<string> results = new SortedSet<string>();
             string success = "Explored interleavings.";

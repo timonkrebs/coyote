@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
@@ -17,14 +17,14 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestCompletedTask()
+        public async Task TestCompletedTask()
         {
             Task task = Task.CompletedTask;
             Assert.True(task.IsCompleted);
         }
 
         [Fact(Timeout = 5000)]
-        public void TestCanceledTask()
+        public async Task TestCanceledTask()
         {
             CancellationToken token = new CancellationToken(true);
             Task task = Task.FromCanceled(token);
@@ -32,7 +32,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestCanceledTaskWithResult()
+        public async Task TestCanceledTaskWithResult()
         {
             CancellationToken token = new CancellationToken(true);
             Task<int> task = Task.FromCanceled<int>(token);
@@ -40,7 +40,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestFailedTask()
+        public async Task TestFailedTask()
         {
             Task task = Task.FromException(new InvalidOperationException());
             Assert.True(task.IsFaulted);
@@ -49,7 +49,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestFailedTaskWithResult()
+        public async Task TestFailedTaskWithResult()
         {
             Task<int> task = Task.FromException<int>(new InvalidOperationException());
             Assert.True(task.IsFaulted);

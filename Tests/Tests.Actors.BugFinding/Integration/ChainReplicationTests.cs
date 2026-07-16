@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Collections.Generic;
@@ -1513,7 +1513,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
 
         [Theory(Timeout = 10000)]
         [InlineData(980)]
-        public void TestSequenceNotSortedInChainReplicationProtocol(uint seed)
+        public async Task TestSequenceNotSortedInChainReplicationProtocol(uint seed)
         {
             this.TestWithError(r =>
             {

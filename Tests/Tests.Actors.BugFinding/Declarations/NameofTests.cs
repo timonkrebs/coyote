@@ -1,6 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -125,7 +126,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAllNameofWithNameof()
+        public async Task TestAllNameofWithNameof()
         {
             this.Test(r =>
             {
@@ -136,7 +137,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAllNameofWithoutNameof()
+        public async Task TestAllNameofWithoutNameof()
         {
             this.Test(r =>
             {

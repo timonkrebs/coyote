@@ -1,6 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Microsoft.Coyote.Tests.Common.Events;
 using Xunit;
@@ -51,7 +52,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestCreateActorWithId1()
+        public async Task TestCreateActorWithId1()
         {
             this.Test(r =>
             {
@@ -156,7 +157,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestCreateActorWithId2()
+        public async Task TestCreateActorWithId2()
         {
             this.Test(r =>
             {
@@ -182,7 +183,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestCreateActorWithId3()
+        public async Task TestCreateActorWithId3()
         {
             this.TestWithError(r =>
             {
@@ -194,7 +195,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestCreateActorWithId4()
+        public async Task TestCreateActorWithId4()
         {
             this.TestWithError(r =>
             {
@@ -247,7 +248,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestCreateActorWithId5()
+        public async Task TestCreateActorWithId5()
         {
             this.TestWithError(r =>
             {

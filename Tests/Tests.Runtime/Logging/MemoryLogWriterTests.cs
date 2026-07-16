@@ -1,9 +1,10 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.Coyote.Logging;
 using Microsoft.Coyote.Tests.Common;
 using Xunit;
@@ -42,7 +43,7 @@ namespace Microsoft.Coyote.Runtime.Tests.Logging
         }
 
         [Fact(Timeout = 5000)]
-        public void TestLogWriterNoneVerbosity()
+        public async Task TestLogWriterNoneVerbosity()
         {
             (string logged, string observed) = this.WriteAllSeverityMessages(VerbosityLevel.None);
             Assert.Equal(StringExtensions.FormatLines(
@@ -55,7 +56,7 @@ namespace Microsoft.Coyote.Runtime.Tests.Logging
         }
 
         [Fact(Timeout = 5000)]
-        public void TestLogWriterErrorVerbosity()
+        public async Task TestLogWriterErrorVerbosity()
         {
             (string logged, string observed) = this.WriteAllSeverityMessages(VerbosityLevel.Error);
             Assert.Equal(StringExtensions.FormatLines(
@@ -69,7 +70,7 @@ namespace Microsoft.Coyote.Runtime.Tests.Logging
         }
 
         [Fact(Timeout = 5000)]
-        public void TestLogWriterWarningVerbosity()
+        public async Task TestLogWriterWarningVerbosity()
         {
             (string logged, string observed) = this.WriteAllSeverityMessages(VerbosityLevel.Warning);
             Assert.Equal(StringExtensions.FormatLines(
@@ -84,7 +85,7 @@ namespace Microsoft.Coyote.Runtime.Tests.Logging
         }
 
         [Fact(Timeout = 5000)]
-        public void TestLogWriterInfoVerbosity()
+        public async Task TestLogWriterInfoVerbosity()
         {
             (string logged, string observed) = this.WriteAllSeverityMessages(VerbosityLevel.Info);
             string expected = StringExtensions.FormatLines(
@@ -97,7 +98,7 @@ namespace Microsoft.Coyote.Runtime.Tests.Logging
         }
 
         [Fact(Timeout = 5000)]
-        public void TestLogWriterDebugVerbosity()
+        public async Task TestLogWriterDebugVerbosity()
         {
             (string logged, string observed) = this.WriteAllSeverityMessages(VerbosityLevel.Debug);
             string expected = StringExtensions.FormatLines(
@@ -111,7 +112,7 @@ namespace Microsoft.Coyote.Runtime.Tests.Logging
         }
 
         [Fact(Timeout = 5000)]
-        public void TestLogWriterExhaustiveVerbosity()
+        public async Task TestLogWriterExhaustiveVerbosity()
         {
             (string logged, string observed) = this.WriteAllSeverityMessages(VerbosityLevel.Exhaustive);
             string expected = StringExtensions.FormatLines(
@@ -146,7 +147,7 @@ namespace Microsoft.Coyote.Runtime.Tests.Logging
         }
 
         [Fact(Timeout = 5000)]
-        public void TestLogWriterConsoleOutput()
+        public async Task TestLogWriterConsoleOutput()
         {
             Configuration config = this.GetConfiguration().WithVerbosityEnabled().WithConsoleLoggingEnabled();
             using var logWriter = new MemoryLogWriter(config);
@@ -162,7 +163,7 @@ namespace Microsoft.Coyote.Runtime.Tests.Logging
         }
 
         [Fact(Timeout = 5000)]
-        public void TestLogWriterForceConsoleOutput()
+        public async Task TestLogWriterForceConsoleOutput()
         {
             Configuration config = this.GetConfiguration().WithVerbosityEnabled().WithConsoleLoggingEnabled(false);
             using var logWriter = new MemoryLogWriter(config, true);
@@ -178,7 +179,7 @@ namespace Microsoft.Coyote.Runtime.Tests.Logging
         }
 
         [Fact(Timeout = 5000)]
-        public void TestLogWriterNullOutput()
+        public async Task TestLogWriterNullOutput()
         {
             Configuration config = this.GetConfiguration().WithVerbosityEnabled();
             using var logWriter = new MemoryLogWriter(config);

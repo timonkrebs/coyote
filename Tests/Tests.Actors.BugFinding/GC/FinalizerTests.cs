@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
@@ -48,7 +48,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestActorFinalizerInvoked()
+        public async Task TestActorFinalizerInvoked()
         {
             var tracker = new GCTracker();
 
@@ -90,7 +90,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestStateMachineFinalizerInvoked()
+        public async Task TestStateMachineFinalizerInvoked()
         {
             var tracker = new GCTracker();
 

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
@@ -29,7 +29,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestTaskRunInActor()
+        public async Task TestTaskRunInActor()
         {
             this.Test(r =>
             {
@@ -61,7 +61,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestTaskRunInStateMachine()
+        public async Task TestTaskRunInStateMachine()
         {
             this.Test(r =>
             {
@@ -86,7 +86,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestTaskRunAsyncInActor()
+        public async Task TestTaskRunAsyncInActor()
         {
             this.Test(r =>
             {
@@ -119,7 +119,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestTaskRunAsyncInStateMachine()
+        public async Task TestTaskRunAsyncInStateMachine()
         {
             this.Test(r =>
             {
@@ -149,7 +149,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestNestedTaskRunInActor()
+        public async Task TestNestedTaskRunInActor()
         {
             this.Test(r =>
             {
@@ -187,7 +187,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestNestedTaskRunInStateMachine()
+        public async Task TestNestedTaskRunInStateMachine()
         {
             this.Test(r =>
             {

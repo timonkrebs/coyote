@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
@@ -35,10 +35,10 @@ namespace Microsoft.Coyote.Tools.Tests
 #pragma warning restore CA1822 // Mark members as static
 
         [Fact(Timeout = 5000)]
-        public void TestVoidEntryPoint() => this.CheckTestMethod(nameof(this.VoidTest));
+        public async Task TestVoidEntryPoint() => this.CheckTestMethod(nameof(this.VoidTest));
 
         [Fact(Timeout = 5000)]
-        public void TestTaskEntryPoint() => this.CheckTestMethod(nameof(this.TaskTest));
+        public async Task TestTaskEntryPoint() => this.CheckTestMethod(nameof(this.TaskTest));
 
         private void CheckTestMethod(string name)
         {

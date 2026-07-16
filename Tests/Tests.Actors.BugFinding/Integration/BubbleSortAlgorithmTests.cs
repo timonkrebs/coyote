@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Collections.Generic;
@@ -107,7 +107,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 10000)]
-        public void TestBubbleSortAlgorithm()
+        public async Task TestBubbleSortAlgorithm()
         {
             this.Test(r =>
             {

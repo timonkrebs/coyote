@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
@@ -37,7 +37,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAddExceptionFilter()
+        public async Task TestAddExceptionFilter()
         {
             // The rewritten code should add a !(e is ThreadInterruptedException) filter
             // which should allow this exception to escape the catch block.
@@ -58,7 +58,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAddExceptionFilter2()
+        public async Task TestAddExceptionFilter2()
         {
             // The rewritten code should add a !(e is ThreadInterruptedException) filter
             // which should allow this exception to escape the catch block.
@@ -79,7 +79,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAddExceptionFilter3()
+        public async Task TestAddExceptionFilter3()
         {
             // The rewritten code should add a !(e is ThreadInterruptedException) filter
             // which should allow this exception to escape the catch block.
@@ -100,7 +100,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAddExceptionFilter4()
+        public async Task TestAddExceptionFilter4()
         {
             // The non-rewritten code should allow the ThreadInterruptedException through
             // and the rewritten code should be the same because the code should not be rewritten.
@@ -121,7 +121,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAddExceptionFilter5()
+        public async Task TestAddExceptionFilter5()
         {
             // The non-rewritten code should allow the ThreadInterruptedException through
             // and the rewritten code should be the same because the code should not be rewritten.
@@ -143,7 +143,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAddExceptionFilter6()
+        public async Task TestAddExceptionFilter6()
         {
             // The non-rewritten code should allow the ThreadInterruptedException through
             // and the rewritten code should be the same because the code should not be rewritten.
@@ -167,7 +167,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
         }
 
         [Fact(Timeout = 5000)]
-        public void TestEditComplexFilter()
+        public async Task TestEditComplexFilter()
         {
             // The rewritten code should add a !(e is ThreadInterruptedException) filter
             // which should allow this exception to escape the catch block.
@@ -191,7 +191,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
         }
 
         [Fact(Timeout = 5000)]
-        public void TestEditComplexFilter2()
+        public async Task TestEditComplexFilter2()
         {
             // The rewritten code should add a !(e is ThreadInterruptedException) filter
             // which should allow this exception to escape the catch block.
@@ -211,7 +211,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
         }
 
         [Fact(Timeout = 5000)]
-        public void TestEditComplexFilter3()
+        public async Task TestEditComplexFilter3()
         {
             // The rewritten code should add a !(e is ThreadInterruptedException) filter
             // which should allow this exception to escape the catch block.
@@ -237,7 +237,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
         }
 
         [Fact(Timeout = 5000)]
-        public void TestEditComplexFilter4()
+        public async Task TestEditComplexFilter4()
         {
             // The rewritten code should add a !(e is ThreadInterruptedException) filter
             // which should allow this exception to escape the catch block.
@@ -259,7 +259,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
         }
 
         [Fact(Timeout = 5000)]
-        public void TestIgnoreRethrowCase()
+        public async Task TestIgnoreRethrowCase()
         {
             // The non-rewritten code should rethrow the exception
             // and the rewritten code should be the same because the code should not be rewritten.
@@ -281,7 +281,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
         }
 
         [Fact(Timeout = 5000)]
-        public void TestIgnoreRethrowCase2()
+        public async Task TestIgnoreRethrowCase2()
         {
             // The non-rewritten code should rethrow the exception
             // and the rewritten code should be the same because the code should not be rewritten.
@@ -315,7 +315,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
         }
 
         [Fact(Timeout = 5000)]
-        public void TestConditionalTryCatch()
+        public async Task TestConditionalTryCatch()
         {
             this.RunTestWithException<InvalidOperationException>(TestConditionalTryCatchMethod);
         }
@@ -348,7 +348,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMultiCatchBlock()
+        public async Task TestMultiCatchBlock()
         {
             this.RunTestWithException<InvalidOperationException>(TestMultiCatchBlockMethod);
         }
@@ -377,7 +377,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMultiCatchFilter()
+        public async Task TestMultiCatchFilter()
         {
             this.RunTestWithException<InvalidOperationException>(TestMultiCatchFilterMethod);
         }
@@ -410,7 +410,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMultiCatchBlockWithFilter()
+        public async Task TestMultiCatchBlockWithFilter()
         {
             this.RunTestWithException<InvalidOperationException>(TestMultiCatchBlockWithFilterMethod);
         }
@@ -438,7 +438,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
         }
 
         [Fact(Timeout = 5000)]
-        public void TestExceptionHandlerInsideLock()
+        public async Task TestExceptionHandlerInsideLock()
         {
             this.RunTestWithException<InvalidOperationException>(TestExceptionHandlerInsideLockMethod);
         }
@@ -470,7 +470,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
         }
 
         [Fact(Timeout = 5000)]
-        public void TestTryUsingTry()
+        public async Task TestTryUsingTry()
         {
             this.Test(TestTryUsingTryMethod);
         }

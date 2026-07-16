@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
@@ -43,7 +43,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOnInitializeAsyncInActor()
+        public async Task TestOnInitializeAsyncInActor()
         {
             this.TestWithError(r =>
             {
@@ -78,7 +78,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOnInitializeAsyncInStateMachine()
+        public async Task TestOnInitializeAsyncInStateMachine()
         {
             this.TestWithError(r =>
             {
@@ -109,7 +109,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOnInitializeAsyncWithEventInActor()
+        public async Task TestOnInitializeAsyncWithEventInActor()
         {
             this.TestWithError(r =>
             {
@@ -144,7 +144,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOnInitializeAsyncWithEventInStateMachine()
+        public async Task TestOnInitializeAsyncWithEventInStateMachine()
         {
             this.TestWithError(r =>
             {
@@ -186,7 +186,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOnInitializeAsyncWithOnEntryInStateMachine()
+        public async Task TestOnInitializeAsyncWithOnEntryInStateMachine()
         {
             this.TestWithError(r =>
             {

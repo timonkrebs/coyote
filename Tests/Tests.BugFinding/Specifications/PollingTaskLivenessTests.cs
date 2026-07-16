@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
@@ -17,7 +17,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestPollingTaskLivenessProperty()
+        public async Task TestPollingTaskLivenessProperty()
         {
             this.Test(async () =>
             {
@@ -54,7 +54,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestPollingTaskLivenessPropertyWithDoubleDelay()
+        public async Task TestPollingTaskLivenessPropertyWithDoubleDelay()
         {
             this.Test(async () =>
             {
@@ -91,7 +91,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestPollingTaskLivenessPropertyFailure()
+        public async Task TestPollingTaskLivenessPropertyFailure()
         {
             this.TestWithError(async () =>
             {

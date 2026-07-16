@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
@@ -23,7 +23,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
         }
 
         [Fact(Timeout = 5000)]
-        public void TestThreadInterruptedExceptionRethrow()
+        public async Task TestThreadInterruptedExceptionRethrow()
         {
             this.Test(() =>
             {
@@ -40,7 +40,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
         }
 
         [Fact(Timeout = 5000)]
-        public void TestThreadInterruptedExceptionExplicitRethrow()
+        public async Task TestThreadInterruptedExceptionExplicitRethrow()
         {
             this.Test(() =>
             {
@@ -59,7 +59,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
         }
 
         [Fact(Timeout = 5000)]
-        public void TestThreadInterruptedExceptionDoubleRethrow()
+        public async Task TestThreadInterruptedExceptionDoubleRethrow()
         {
             this.Test(() =>
             {
@@ -83,7 +83,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
         }
 
         [Fact(Timeout = 5000)]
-        public void TestThreadInterruptedExceptionInEmptyCatchBlock()
+        public async Task TestThreadInterruptedExceptionInEmptyCatchBlock()
         {
             this.Test(() =>
             {
@@ -100,7 +100,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
         }
 
         [Fact(Timeout = 5000)]
-        public void TestThreadInterruptedExceptionInDoubleEmptyCatchBlock()
+        public async Task TestThreadInterruptedExceptionInDoubleEmptyCatchBlock()
         {
             this.Test(() =>
             {
@@ -124,7 +124,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
         }
 
         [Fact(Timeout = 5000)]
-        public void TestThreadInterruptedExceptionRethrowInEmptyCatchBlock()
+        public async Task TestThreadInterruptedExceptionRethrowInEmptyCatchBlock()
         {
             this.Test(() =>
             {
@@ -148,7 +148,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
         }
 
         [Fact(Timeout = 5000)]
-        public void TestThreadInterruptedExceptionInNonEmptyCatchBlock()
+        public async Task TestThreadInterruptedExceptionInNonEmptyCatchBlock()
         {
             this.Test(() =>
             {
@@ -170,7 +170,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
         }
 
         [Fact(Timeout = 5000)]
-        public void TestThreadInterruptedExceptionInNonEmptyCatchBlockAsync()
+        public async Task TestThreadInterruptedExceptionInNonEmptyCatchBlockAsync()
         {
             this.Test(async () =>
             {
@@ -200,7 +200,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
         }
 
         [Fact(Timeout = 5000)]
-        public void TestThreadInterruptedExceptionInNonEmptyCatchBlockGenericAsync()
+        public async Task TestThreadInterruptedExceptionInNonEmptyCatchBlockGenericAsync()
         {
             this.Test(async () =>
             {

@@ -1,6 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
 using Volatile = System.Threading.Volatile;
@@ -15,7 +16,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestVolatileReadLong()
+        public async Task TestVolatileReadLong()
         {
             this.Test(() =>
             {
@@ -25,7 +26,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestVolatileReadULong()
+        public async Task TestVolatileReadULong()
         {
             this.Test(() =>
             {
@@ -35,7 +36,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestVolatileWriteLong()
+        public async Task TestVolatileWriteLong()
         {
             this.Test(() =>
             {
@@ -46,7 +47,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestVolatileWriteULong()
+        public async Task TestVolatileWriteULong()
         {
             this.Test(() =>
             {

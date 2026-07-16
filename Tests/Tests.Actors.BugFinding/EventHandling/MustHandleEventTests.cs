@@ -1,6 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -31,7 +32,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMustHandleEventNotTriggeredInStateMachine()
+        public async Task TestMustHandleEventNotTriggeredInStateMachine()
         {
             this.Test(r =>
             {
@@ -52,7 +53,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMustHandleDeferredEventInStateMachine()
+        public async Task TestMustHandleDeferredEventInStateMachine()
         {
             this.TestWithError(r =>
             {
@@ -78,7 +79,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMustHandleEventAfterHaltInStateMachine()
+        public async Task TestMustHandleEventAfterHaltInStateMachine()
         {
             this.TestWithError(r =>
             {
@@ -110,7 +111,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMustHandleEventAfterSendingHaltInStateMachine()
+        public async Task TestMustHandleEventAfterSendingHaltInStateMachine()
         {
             this.TestWithError(r =>
             {
@@ -141,7 +142,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMustHandleDeferredEventAfterStateTransition()
+        public async Task TestMustHandleDeferredEventAfterStateTransition()
         {
             this.TestWithError(r =>
             {

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
@@ -57,7 +57,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestExceptionSuppressedDuringInitializationInActor()
+        public async Task TestExceptionSuppressedDuringInitializationInActor()
         {
             this.Test(r =>
             {
@@ -92,7 +92,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestExceptionSuppressedInEntryActionInStateMachine()
+        public async Task TestExceptionSuppressedInEntryActionInStateMachine()
         {
             this.Test(r =>
             {
@@ -128,7 +128,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestExceptionSuppressedInActionInActor()
+        public async Task TestExceptionSuppressedInActionInActor()
         {
             this.Test(r =>
             {
@@ -169,7 +169,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestExceptionSuppressedInActionInStateMachine()
+        public async Task TestExceptionSuppressedInActionInStateMachine()
         {
             this.Test(r =>
             {
@@ -206,7 +206,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestExceptionSuppressedIAfterAwaitInActor()
+        public async Task TestExceptionSuppressedIAfterAwaitInActor()
         {
             this.Test(r =>
             {
@@ -248,7 +248,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestExceptionSuppressedIAfterAwaitInStateMachine()
+        public async Task TestExceptionSuppressedIAfterAwaitInStateMachine()
         {
             this.Test(r =>
             {
@@ -294,7 +294,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestExceptionSuppressedInExitActionInStateMachine()
+        public async Task TestExceptionSuppressedInExitActionInStateMachine()
         {
             this.Test(r =>
             {
@@ -321,7 +321,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestExceptionNotSuppressedDuringInitializationInActor()
+        public async Task TestExceptionNotSuppressedDuringInitializationInActor()
         {
             this.TestWithException<Ex2>(r =>
             {
@@ -357,7 +357,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestExceptionNotSuppressedInEntryActionInStateMachine()
+        public async Task TestExceptionNotSuppressedInEntryActionInStateMachine()
         {
             this.TestWithException<Ex2>(r =>
             {
@@ -392,7 +392,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSendDuringOnExceptionInActor()
+        public async Task TestSendDuringOnExceptionInActor()
         {
             this.TestWithError(r =>
             {
@@ -436,7 +436,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSendDuringOnExceptionInStateMachine()
+        public async Task TestSendDuringOnExceptionInStateMachine()
         {
             this.TestWithError(r =>
             {
@@ -485,7 +485,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestHaltOnUnhandledExceptionInActor()
+        public async Task TestHaltOnUnhandledExceptionInActor()
         {
             this.Test(r =>
             {
@@ -520,7 +520,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestHaltOnUnhandledExceptionInStateMachine()
+        public async Task TestHaltOnUnhandledExceptionInStateMachine()
         {
             this.Test(r =>
             {
@@ -549,7 +549,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestHaltOnUnhandledEventExceptionInActor()
+        public async Task TestHaltOnUnhandledEventExceptionInActor()
         {
             this.Test(r =>
             {
@@ -591,7 +591,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestHaltOnUnhandledEventExceptionInStateMachine()
+        public async Task TestHaltOnUnhandledEventExceptionInStateMachine()
         {
             this.Test(r =>
             {
@@ -621,7 +621,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSendOnUnhandledEventExceptionInActor()
+        public async Task TestSendOnUnhandledEventExceptionInActor()
         {
             this.Test(r =>
             {
@@ -655,7 +655,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSendOnUnhandledEventExceptionInStateMachine()
+        public async Task TestSendOnUnhandledEventExceptionInStateMachine()
         {
             this.Test(r =>
             {

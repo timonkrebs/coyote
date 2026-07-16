@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Linq;
@@ -63,7 +63,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Runtime
         }
 
         [Fact(Timeout = 5000)]
-        public void TestRuntimeQueries()
+        public async Task TestRuntimeQueries()
         {
             this.Test(async r =>
             {

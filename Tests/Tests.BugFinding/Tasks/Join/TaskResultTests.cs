@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
@@ -18,7 +18,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestParallelTaskResultBeforeWrite()
+        public async Task TestParallelTaskResultBeforeWrite()
         {
             this.Test(() =>
             {
@@ -40,7 +40,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestParallelTaskResultAfterWrite()
+        public async Task TestParallelTaskResultAfterWrite()
         {
             this.TestWithError(() =>
             {
@@ -70,7 +70,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestParallelTaskResultWithSynchronousInvocationAfterWrite()
+        public async Task TestParallelTaskResultWithSynchronousInvocationAfterWrite()
         {
             this.TestWithError(() =>
             {
@@ -100,7 +100,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestParallelTaskResultWithAsynchronousInvocationAfterWrite()
+        public async Task TestParallelTaskResultWithAsynchronousInvocationAfterWrite()
         {
             this.TestWithError(() =>
             {
@@ -124,7 +124,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestTaskResultWithException()
+        public async Task TestTaskResultWithException()
         {
             this.TestWithError(() =>
             {
@@ -159,7 +159,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAsyncTaskResultWithException()
+        public async Task TestAsyncTaskResultWithException()
         {
             this.TestWithError(() =>
             {

@@ -1,6 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+using System.Threading.Tasks;
 using Microsoft.Coyote.SystematicTesting;
 using Xunit;
 using Xunit.Abstractions;
@@ -15,7 +16,7 @@ namespace Microsoft.Coyote.Runtime.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestExecutionTraceAddSchedulingDecisions()
+        public async Task TestExecutionTraceAddSchedulingDecisions()
         {
             ExecutionTrace trace = ExecutionTrace.Create();
             Assert.True(trace.Length is 0);
@@ -65,7 +66,7 @@ namespace Microsoft.Coyote.Runtime.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestExecutionTraceAddNondeterministicBooleanDecisions()
+        public async Task TestExecutionTraceAddNondeterministicBooleanDecisions()
         {
             ExecutionTrace trace = ExecutionTrace.Create();
             Assert.True(trace.Length is 0);
@@ -96,7 +97,7 @@ namespace Microsoft.Coyote.Runtime.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestExecutionTraceAddNondeterministicIntegerDecisions()
+        public async Task TestExecutionTraceAddNondeterministicIntegerDecisions()
         {
             ExecutionTrace trace = ExecutionTrace.Create();
             Assert.True(trace.Length is 0);
@@ -127,7 +128,7 @@ namespace Microsoft.Coyote.Runtime.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestExecutionTraceAddMixedChoices()
+        public async Task TestExecutionTraceAddMixedChoices()
         {
             ExecutionTrace trace = ExecutionTrace.Create();
             Assert.True(trace.Length is 0);
@@ -175,7 +176,7 @@ namespace Microsoft.Coyote.Runtime.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestExecutionTraceExtendWithShorter()
+        public async Task TestExecutionTraceExtendWithShorter()
         {
             ExecutionTrace trace = ExecutionTrace.Create();
             Assert.True(trace.Length is 0);
@@ -220,7 +221,7 @@ namespace Microsoft.Coyote.Runtime.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestExecutionTraceExtendWithLonger()
+        public async Task TestExecutionTraceExtendWithLonger()
         {
             ExecutionTrace trace = ExecutionTrace.Create();
             Assert.True(trace.Length is 0);
@@ -281,7 +282,7 @@ namespace Microsoft.Coyote.Runtime.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestExecutionTraceReplaceWithEmpty()
+        public async Task TestExecutionTraceReplaceWithEmpty()
         {
             ExecutionTrace trace = ExecutionTrace.Create();
             Assert.True(trace.Length is 0);
@@ -302,7 +303,7 @@ namespace Microsoft.Coyote.Runtime.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestExecutionTraceReplaceWithShorter()
+        public async Task TestExecutionTraceReplaceWithShorter()
         {
             ExecutionTrace trace = ExecutionTrace.Create();
             Assert.True(trace.Length is 0);
@@ -340,7 +341,7 @@ namespace Microsoft.Coyote.Runtime.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestExecutionTraceReplaceWithLonger()
+        public async Task TestExecutionTraceReplaceWithLonger()
         {
             ExecutionTrace trace = ExecutionTrace.Create();
             Assert.True(trace.Length is 0);

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
@@ -35,7 +35,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestLivenessMonitorInvocationInSynchronousTask()
+        public async Task TestLivenessMonitorInvocationInSynchronousTask()
         {
             this.Test(async () =>
             {
@@ -52,7 +52,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestLivenessMonitorInvocationInAsynchronousTask()
+        public async Task TestLivenessMonitorInvocationInAsynchronousTask()
         {
             this.Test(async () =>
             {
@@ -69,7 +69,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestLivenessMonitorInvocationInParallelTask()
+        public async Task TestLivenessMonitorInvocationInParallelTask()
         {
             this.Test(async () =>
             {
@@ -83,7 +83,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestLivenessMonitorInvocationInParallelSynchronousTask()
+        public async Task TestLivenessMonitorInvocationInParallelSynchronousTask()
         {
             this.Test(async () =>
             {
@@ -98,7 +98,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestLivenessMonitorInvocationInParallelAsynchronousTask()
+        public async Task TestLivenessMonitorInvocationInParallelAsynchronousTask()
         {
             this.Test(async () =>
             {
@@ -113,7 +113,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestLivenessMonitorInvocationInNestedParallelSynchronousTask()
+        public async Task TestLivenessMonitorInvocationInNestedParallelSynchronousTask()
         {
             this.Test(async () =>
             {
@@ -131,7 +131,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestLivenessMonitorInvocationInSynchronousTaskFailure()
+        public async Task TestLivenessMonitorInvocationInSynchronousTaskFailure()
         {
             this.TestWithError(async () =>
             {
@@ -149,7 +149,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestLivenessMonitorInvocationInAsynchronousTaskFailure()
+        public async Task TestLivenessMonitorInvocationInAsynchronousTaskFailure()
         {
             this.TestWithError(async () =>
             {
@@ -167,7 +167,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestLivenessMonitorInvocationInParallelTaskFailure()
+        public async Task TestLivenessMonitorInvocationInParallelTaskFailure()
         {
             this.TestWithError(async () =>
             {
@@ -182,7 +182,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestLivenessMonitorInvocationInParallelSynchronousTaskFailure()
+        public async Task TestLivenessMonitorInvocationInParallelSynchronousTaskFailure()
         {
             this.TestWithError(async () =>
             {
@@ -198,7 +198,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestLivenessMonitorInvocationInParallelAsynchronousTaskFailure()
+        public async Task TestLivenessMonitorInvocationInParallelAsynchronousTaskFailure()
         {
             this.TestWithError(async () =>
             {
@@ -214,7 +214,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestLivenessMonitorInvocationInNestedParallelSynchronousTaskFailure()
+        public async Task TestLivenessMonitorInvocationInNestedParallelSynchronousTaskFailure()
         {
             this.TestWithError(async () =>
             {

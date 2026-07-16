@@ -362,11 +362,20 @@ Items 1–5 carry the context gathered while executing the upgrade (#3, #4).
    and this repository applies `[Fact(Timeout = 5000)]` to hundreds of
    synchronous tests. The upgrade therefore pinned xunit core to `v2.4.2`
    while bumping only the VS adapter to `v2.8.2` (required because VSTest 18
-   in the .NET 10 SDK rejects the 2.4.5 adapter — missing `LogRaw`). The
-   migration needs the sync `Timeout` facts converted to async (or the
-   timeouts dropped), after which xunit core, the adapter, and the analyzers
-   can move forward together and the `xUnit1028` suppression in
-   `AsyncMethodRewritingTests` can be revisited.
+   in the .NET 10 SDK rejects the 2.4.5 adapter — missing `LogRaw`).
+   **Status: delivered for the "≥ 2.6" half** — the 1,097 synchronous
+   `Timeout` facts are converted to `async Task` (bodies unchanged and still
+   synchronous, `CS1998` suppressed per test project; the timeouts stay the
+   best-effort guard they always were, since a synchronously-blocking body
+   never returns control for the runner's watchdog — enforcement would need
+   `await Task.Run(...)` bodies, a deliberate behavioral decision left out
+   here), xunit core is on `v2.9.3` with its current analyzers, and the
+   `xUnit1028` suppression was re-validated: the v2.9 runner still executes
+   the deliberately `Task<int>`-returning rewriting test. The **xunit v3**
+   half remains open and has a structural blocker: v3 supports `net472+`
+   and `net8+` only, while the rewriting test projects still build and run
+   on `net462`; moving to v3 means bumping the test-only TFM to `net472`
+   (products can stay `net462`) and adopting the v3 runner model.
 5. **Modernize the `Raft.Azure` sample off `Microsoft.Azure.ServiceBus`.**
    The package is retired and pulls vulnerable `IdentityModel` 5.4.0
    transitives, which the .NET 10 SDK's transitive NuGet audit flags; the

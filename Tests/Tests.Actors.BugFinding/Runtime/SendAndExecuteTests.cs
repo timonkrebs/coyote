@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
@@ -84,7 +84,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Runtime
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSendAndExecuteNoDeadlockWithReceive()
+        public async Task TestSendAndExecuteNoDeadlockWithReceive()
         {
             this.Test(r =>
             {
@@ -93,7 +93,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Runtime
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSendAndExecuteDeadlockWithReceive()
+        public async Task TestSendAndExecuteDeadlockWithReceive()
         {
             this.TestWithError(r =>
             {
@@ -173,7 +173,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Runtime
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSyncSendToReceive()
+        public async Task TestSyncSendToReceive()
         {
             this.Test(r =>
             {
@@ -183,7 +183,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Runtime
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSyncSendSometimesDoesNotHandle()
+        public async Task TestSyncSendSometimesDoesNotHandle()
         {
             this.TestWithError(r =>
             {
@@ -252,7 +252,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Runtime
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSendBlocks()
+        public async Task TestSendBlocks()
         {
             this.Test(r =>
             {
@@ -298,7 +298,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Runtime
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSendCycleDoesNotDeadlock()
+        public async Task TestSendCycleDoesNotDeadlock()
         {
             this.Test(r =>
             {
@@ -382,7 +382,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Runtime
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMachineHaltsOnSendExec()
+        public async Task TestMachineHaltsOnSendExec()
         {
             this.Test(r =>
             {
@@ -475,7 +475,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Runtime
         }
 
         [Fact(Timeout = 5000)]
-        public void TestHandledExceptionOnSendExec()
+        public async Task TestHandledExceptionOnSendExec()
         {
             this.Test(r =>
             {
@@ -486,7 +486,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Runtime
         }
 
         [Fact(Timeout = 5000)]
-        public void TestUnhandledExceptionOnSendExec()
+        public async Task TestUnhandledExceptionOnSendExec()
         {
             this.TestWithException<InvalidOperationException>(r =>
             {
@@ -521,7 +521,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Runtime
         }
 
         [Fact(Timeout = 5000)]
-        public void TestUnhandledEventOnSendExec1()
+        public async Task TestUnhandledEventOnSendExec1()
         {
             this.TestWithError(r =>
             {
@@ -560,7 +560,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Runtime
         }
 
         [Fact(Timeout = 5000)]
-        public void TestUnhandledEventOnSendExec2()
+        public async Task TestUnhandledEventOnSendExec2()
         {
             this.Test(r =>
             {

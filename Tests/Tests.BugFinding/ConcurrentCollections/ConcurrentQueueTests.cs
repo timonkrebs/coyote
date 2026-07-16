@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Collections.Concurrent;
@@ -17,7 +17,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.ConcurrentCollections
         }
 
         [Fact(Timeout = 5000)]
-        public void TestConcurrentQueueProperties()
+        public async Task TestConcurrentQueueProperties()
         {
             this.Test(() =>
             {
@@ -38,7 +38,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.ConcurrentCollections
         }
 
         [Fact(Timeout = 5000)]
-        public void TestConcurrentQueueMethods()
+        public async Task TestConcurrentQueueMethods()
         {
             this.Test(() =>
             {
@@ -72,7 +72,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.ConcurrentCollections
         }
 
         [Fact(Timeout = 5000)]
-        public void TestConcurrentQueueMethodsWithRaceCondition()
+        public async Task TestConcurrentQueueMethodsWithRaceCondition()
         {
             this.TestWithError(() =>
             {

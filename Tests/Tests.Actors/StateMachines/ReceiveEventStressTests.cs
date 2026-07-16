@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
@@ -93,7 +93,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
         }
 
         [Fact(Timeout = 20000)]
-        public void TestReceiveEvent()
+        public async Task TestReceiveEvent()
         {
             this.Test(async r =>
             {
@@ -164,7 +164,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
         }
 
         [Fact(Timeout = 20000)]
-        public void TestReceiveEventAlternate()
+        public async Task TestReceiveEventAlternate()
         {
             this.Test(async r =>
             {
@@ -227,7 +227,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
         }
 
         [Fact(Timeout = 20000)]
-        public void TestReceiveEventExchange()
+        public async Task TestReceiveEventExchange()
         {
             this.Test(async r =>
             {

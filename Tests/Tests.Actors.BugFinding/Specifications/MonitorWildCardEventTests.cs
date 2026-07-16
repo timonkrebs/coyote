@@ -1,6 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Xunit;
 using Xunit.Abstractions;
@@ -70,7 +71,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestIgnoreWildCardEvent()
+        public async Task TestIgnoreWildCardEvent()
         {
             this.Test(r =>
             {
@@ -82,7 +83,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestDoActionOnWildCardEvent()
+        public async Task TestDoActionOnWildCardEvent()
         {
             this.TestWithError(r =>
             {
@@ -93,7 +94,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestGotoStateOnWildCardEvent()
+        public async Task TestGotoStateOnWildCardEvent()
         {
             this.TestWithError(r =>
             {

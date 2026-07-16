@@ -1,8 +1,9 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.Coyote.Logging;
 using Microsoft.Coyote.Runtime;
 using Microsoft.Coyote.SystematicTesting.Frameworks.XUnit;
@@ -20,7 +21,7 @@ namespace Microsoft.Coyote.Actors.Tests.Logging
         }
 
         [Fact(Timeout = 5000)]
-        public void TestDefaultActorLogger()
+        public async Task TestDefaultActorLogger()
         {
             Configuration config = this.GetConfiguration().WithVerbosityEnabled(VerbosityLevel.Info);
             this.Test(async runtime =>
@@ -45,7 +46,7 @@ namespace Microsoft.Coyote.Actors.Tests.Logging
         }
 
         [Fact(Timeout = 5000)]
-        public void TestConsoleActorLogger()
+        public async Task TestConsoleActorLogger()
         {
             Configuration config = this.GetConfiguration().WithVerbosityEnabled(VerbosityLevel.Info)
                 .WithConsoleLoggingEnabled();
@@ -94,7 +95,7 @@ namespace Microsoft.Coyote.Actors.Tests.Logging
         }
 
         [Fact(Timeout = 5000)]
-        public void TestCustomActorLogger()
+        public async Task TestCustomActorLogger()
         {
             Configuration config = this.GetConfiguration().WithVerbosityEnabled(VerbosityLevel.Info);
             using var logger = new MemoryLogger(config.VerbosityLevel);

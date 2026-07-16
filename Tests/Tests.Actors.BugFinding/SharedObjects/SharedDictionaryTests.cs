@@ -1,6 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+using System.Threading.Tasks;
 using Microsoft.Coyote.Actors.SharedObjects;
 using Xunit;
 using Xunit.Abstractions;
@@ -73,7 +74,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.SharedObjects
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSharedDictionary1()
+        public async Task TestSharedDictionary1()
         {
             this.TestWithError(r =>
             {
@@ -103,7 +104,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.SharedObjects
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSharedDictionary2()
+        public async Task TestSharedDictionary2()
         {
             this.TestWithException<System.Collections.Generic.KeyNotFoundException>(r =>
             {
@@ -153,7 +154,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.SharedObjects
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSharedDictionary3()
+        public async Task TestSharedDictionary3()
         {
             this.Test(r =>
             {
@@ -202,7 +203,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.SharedObjects
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSharedDictionary4()
+        public async Task TestSharedDictionary4()
         {
             this.Test(r =>
             {
@@ -266,7 +267,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.SharedObjects
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSharedDictionary5()
+        public async Task TestSharedDictionary5()
         {
             this.Test(r =>
             {
@@ -277,7 +278,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.SharedObjects
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSharedDictionary6()
+        public async Task TestSharedDictionary6()
         {
             this.Test(r =>
             {
@@ -325,7 +326,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.SharedObjects
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSharedDictionary7()
+        public async Task TestSharedDictionary7()
         {
             this.TestWithError(r =>
             {

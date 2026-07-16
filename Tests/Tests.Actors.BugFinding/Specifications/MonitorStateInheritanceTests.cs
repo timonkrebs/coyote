@@ -1,6 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Microsoft.Coyote.Tests.Common.Events;
 using Xunit;
@@ -331,7 +332,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMonitorStateInheritingAbstractState()
+        public async Task TestMonitorStateInheritingAbstractState()
         {
             this.TestWithError(r =>
             {
@@ -342,7 +343,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMonitorStateInheritingStateDuplicateStart()
+        public async Task TestMonitorStateInheritingStateDuplicateStart()
         {
             this.TestWithError(r =>
             {
@@ -352,7 +353,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMonitorStateInheritingStateOnEntry()
+        public async Task TestMonitorStateInheritingStateOnEntry()
         {
             this.TestWithError(r =>
             {
@@ -362,7 +363,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMonitorStateOverridingStateOnEntry()
+        public async Task TestMonitorStateOverridingStateOnEntry()
         {
             this.Test(r =>
             {
@@ -371,7 +372,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMonitorStateInheritingStateOnEventDoAction()
+        public async Task TestMonitorStateInheritingStateOnEventDoAction()
         {
             this.TestWithError(r =>
             {
@@ -382,7 +383,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMonitorStateOverridingStateOnEventDoAction()
+        public async Task TestMonitorStateOverridingStateOnEventDoAction()
         {
             this.Test(r =>
             {
@@ -392,7 +393,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMonitorStateOverridingTwoStatesOnEventDoAction()
+        public async Task TestMonitorStateOverridingTwoStatesOnEventDoAction()
         {
             this.Test(r =>
             {
@@ -402,7 +403,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMonitorStateOverridingDeepStateOnEventDoAction()
+        public async Task TestMonitorStateOverridingDeepStateOnEventDoAction()
         {
             this.Test(r =>
             {
@@ -412,7 +413,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMonitorStateInheritingStateOnEventGotoState()
+        public async Task TestMonitorStateInheritingStateOnEventGotoState()
         {
             this.TestWithError(r =>
             {
@@ -423,7 +424,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMonitorStateOverridingStateOnEventGotoState()
+        public async Task TestMonitorStateOverridingStateOnEventGotoState()
         {
             this.TestWithError(r =>
             {
@@ -434,7 +435,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMonitorStateOverridingTwoStatesOnEventGotoState()
+        public async Task TestMonitorStateOverridingTwoStatesOnEventGotoState()
         {
             this.TestWithError(r =>
             {
@@ -445,7 +446,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMonitorStateOverridingDeepStateOnEventGotoState()
+        public async Task TestMonitorStateOverridingDeepStateOnEventGotoState()
         {
             this.TestWithError(r =>
             {

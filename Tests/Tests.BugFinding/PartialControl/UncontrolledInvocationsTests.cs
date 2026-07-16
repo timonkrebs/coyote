@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
@@ -17,7 +17,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestUncontrolledContinueWithTaskInvocation()
+        public async Task TestUncontrolledContinueWithTaskInvocation()
         {
             this.Test(() =>
             {
@@ -30,7 +30,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestUncontrolledContinueWithTaskInvocationWithNoPartialControl()
+        public async Task TestUncontrolledContinueWithTaskInvocationWithNoPartialControl()
         {
             this.TestWithError(() =>
             {
@@ -45,7 +45,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestUncontrolledTimerInvocation()
+        public async Task TestUncontrolledTimerInvocation()
         {
             this.Test(() =>
             {
@@ -57,7 +57,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestUncontrolledTimerInvocationWithNoPartialControl()
+        public async Task TestUncontrolledTimerInvocationWithNoPartialControl()
         {
             this.TestWithError(() =>
             {

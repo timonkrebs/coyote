@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
@@ -40,7 +40,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSendEventDroppedAfterHaltInActor()
+        public async Task TestSendEventDroppedAfterHaltInActor()
         {
             this.TestWithError(r =>
             {
@@ -71,7 +71,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSendEventDroppedAfterHaltInStateMachine()
+        public async Task TestSendEventDroppedAfterHaltInStateMachine()
         {
             this.TestWithError(r =>
             {
@@ -96,7 +96,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestRuntimeEventDroppedAfterHaltInActor()
+        public async Task TestRuntimeEventDroppedAfterHaltInActor()
         {
             this.TestWithError(r =>
             {
@@ -113,7 +113,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOnEventDroppedParametersInActor()
+        public async Task TestOnEventDroppedParametersInActor()
         {
             this.Test(r =>
             {
@@ -144,7 +144,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestRuntimeEventDroppedAfterHaltInStateMachine()
+        public async Task TestRuntimeEventDroppedAfterHaltInStateMachine()
         {
             this.TestWithError(r =>
             {
@@ -161,7 +161,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOnEventDroppedParametersInStateMachine()
+        public async Task TestOnEventDroppedParametersInStateMachine()
         {
             this.Test(r =>
             {
@@ -229,7 +229,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestEventProcessedOrDroppedInActor()
+        public async Task TestEventProcessedOrDroppedInActor()
         {
             this.Test(r =>
             {
@@ -289,7 +289,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestEventProcessedOrDroppedInStateMachine()
+        public async Task TestEventProcessedOrDroppedInStateMachine()
         {
             this.Test(r =>
             {

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
@@ -26,7 +26,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestReceiveEventInActor()
+        public async Task TestReceiveEventInActor()
         {
             this.TestWithError(r =>
             {
@@ -53,7 +53,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestReceiveEventInStateMachine()
+        public async Task TestReceiveEventInStateMachine()
         {
             this.TestWithError(r =>
             {
@@ -127,7 +127,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestExchangedReceiveEventInActor()
+        public async Task TestExchangedReceiveEventInActor()
         {
             this.Test(r =>
             {
@@ -162,7 +162,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOneActorReceiveEventFailure()
+        public async Task TestOneActorReceiveEventFailure()
         {
             this.TestWithError(r =>
             {
@@ -175,7 +175,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestTwoActorsReceiveEventFailure()
+        public async Task TestTwoActorsReceiveEventFailure()
         {
             this.TestWithError(r =>
             {
@@ -189,7 +189,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestThreeActorsReceiveEventFailure()
+        public async Task TestThreeActorsReceiveEventFailure()
         {
             this.TestWithError(r =>
             {
@@ -282,7 +282,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestExchangedReceiveEventInStateMachine()
+        public async Task TestExchangedReceiveEventInStateMachine()
         {
             this.Test(r =>
             {
@@ -322,7 +322,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOneStateMachineReceiveEventFailure()
+        public async Task TestOneStateMachineReceiveEventFailure()
         {
             this.TestWithError(r =>
             {
@@ -335,7 +335,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestTwoStateMachinesReceiveEventFailure()
+        public async Task TestTwoStateMachinesReceiveEventFailure()
         {
             this.TestWithError(r =>
             {
@@ -349,7 +349,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestThreeStateMachinesReceiveEventFailure()
+        public async Task TestThreeStateMachinesReceiveEventFailure()
         {
             this.TestWithError(r =>
             {

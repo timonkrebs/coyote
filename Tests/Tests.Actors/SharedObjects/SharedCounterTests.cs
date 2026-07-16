@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
@@ -101,7 +101,7 @@ namespace Microsoft.Coyote.Actors.Tests.SharedObjects
         }
 
         [Fact(Timeout = 5000)]
-        public void TestProductionSharedCounter1()
+        public async Task TestProductionSharedCounter1()
         {
             var runtime = RuntimeFactory.Create();
             var counter = SharedCounter.Create(runtime, 0);
@@ -124,7 +124,7 @@ namespace Microsoft.Coyote.Actors.Tests.SharedObjects
         }
 
         [Fact(Timeout = 5000)]
-        public void TestProductionSharedCounter2()
+        public async Task TestProductionSharedCounter2()
         {
             var runtime = RuntimeFactory.Create();
             var counter = SharedCounter.Create(runtime, 0);

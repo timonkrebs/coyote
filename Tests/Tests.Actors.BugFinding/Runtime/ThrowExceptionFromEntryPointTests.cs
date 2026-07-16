@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
@@ -24,7 +24,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Runtime
         }
 
         [Fact(Timeout = 5000)]
-        public void TestThrowExceptionFromEntryPoint()
+        public async Task TestThrowExceptionFromEntryPoint()
         {
             this.TestWithException<InvalidOperationException>(r =>
             {
@@ -34,7 +34,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Runtime
         }
 
         [Fact(Timeout = 5000)]
-        public void TestThrowExceptionFromAsyncEntryPoint()
+        public async Task TestThrowExceptionFromAsyncEntryPoint()
         {
             this.TestWithException<InvalidOperationException>(async r =>
             {
@@ -45,7 +45,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Runtime
         }
 
         [Fact(Timeout = 5000)]
-        public void TestThrowExceptionFromEntryPointWithActor()
+        public async Task TestThrowExceptionFromEntryPointWithActor()
         {
             this.TestWithException<InvalidOperationException>(r =>
             {

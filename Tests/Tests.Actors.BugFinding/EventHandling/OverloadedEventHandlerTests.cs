@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
@@ -42,7 +42,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOverloadedEventHandlerInActor()
+        public async Task TestOverloadedEventHandlerInActor()
         {
             this.Test(r =>
             {
@@ -82,7 +82,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOverloadedEventHandlerInStateMachine()
+        public async Task TestOverloadedEventHandlerInStateMachine()
         {
             this.Test(r =>
             {

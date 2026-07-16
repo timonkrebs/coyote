@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
@@ -23,7 +23,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSimpleMonitor()
+        public async Task TestSimpleMonitor()
         {
             this.Test(async () =>
             {
@@ -36,7 +36,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMonitorWithReentrancy1()
+        public async Task TestMonitorWithReentrancy1()
         {
             this.Test(() =>
             {
@@ -47,7 +47,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMonitorWithReentrancy2()
+        public async Task TestMonitorWithReentrancy2()
         {
             this.Test(async () =>
             {
@@ -60,7 +60,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMonitorWithReentrancy3()
+        public async Task TestMonitorWithReentrancy3()
         {
             this.Test(async () =>
             {
@@ -73,7 +73,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMonitorWithInvalidSyncObject()
+        public async Task TestMonitorWithInvalidSyncObject()
         {
             this.TestWithException<ArgumentNullException>(() =>
             {
@@ -83,7 +83,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMonitorWithInvalidWaitState()
+        public async Task TestMonitorWithInvalidWaitState()
         {
             this.TestWithException<SynchronizationLockException>(() =>
             {
@@ -98,7 +98,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMonitorWithInvalidPulseState()
+        public async Task TestMonitorWithInvalidPulseState()
         {
             this.TestWithException<SynchronizationLockException>(() =>
             {
@@ -113,7 +113,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMonitorWithInvalidPulseAllState()
+        public async Task TestMonitorWithInvalidPulseAllState()
         {
             this.TestWithException<SynchronizationLockException>(() =>
             {
@@ -128,7 +128,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMonitorWithInvalidUsage()
+        public async Task TestMonitorWithInvalidUsage()
         {
             this.TestWithError(async () =>
             {
@@ -155,7 +155,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestComplexMonitor()
+        public async Task TestComplexMonitor()
         {
             this.Test(async () =>
             {

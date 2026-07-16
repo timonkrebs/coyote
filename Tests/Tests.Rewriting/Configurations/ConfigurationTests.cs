@@ -1,9 +1,10 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -17,7 +18,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Configuration
         }
 
         [Fact(Timeout = 5000)]
-        public void TestJsonConfigurationDifferentOutputDirectory()
+        public async Task TestJsonConfigurationDifferentOutputDirectory()
         {
             string configDirectory = GetJsonConfigurationDirectory("Configurations");
             string configPath = Path.Combine(configDirectory, "test1.coyote.json");
@@ -40,7 +41,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Configuration
         }
 
         [Fact(Timeout = 5000)]
-        public void TestJsonConfigurationReplacingBinaries()
+        public async Task TestJsonConfigurationReplacingBinaries()
         {
             string configDirectory = GetJsonConfigurationDirectory("Configurations");
             string configPath = Path.Combine(configDirectory, "test2.coyote.json");

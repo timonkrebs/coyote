@@ -1,6 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+using System.Threading.Tasks;
 using Microsoft.Coyote.Actors.SharedObjects;
 using Xunit;
 using Xunit.Abstractions;
@@ -107,7 +108,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.SharedObjects
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSharedRegister1()
+        public async Task TestSharedRegister1()
         {
             this.Test(r =>
             {
@@ -117,7 +118,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.SharedObjects
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSharedRegister2()
+        public async Task TestSharedRegister2()
         {
             this.TestWithError(r =>
             {
@@ -186,7 +187,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.SharedObjects
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSharedRegister3()
+        public async Task TestSharedRegister3()
         {
             this.Test(r =>
             {
@@ -196,7 +197,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.SharedObjects
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSharedRegister4()
+        public async Task TestSharedRegister4()
         {
             this.TestWithError(r =>
             {

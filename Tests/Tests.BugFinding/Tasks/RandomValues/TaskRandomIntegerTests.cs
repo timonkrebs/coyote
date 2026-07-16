@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
@@ -16,7 +16,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestRandomIntegerInSynchronousTask()
+        public async Task TestRandomIntegerInSynchronousTask()
         {
             this.TestWithError(async () =>
             {
@@ -45,7 +45,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestRandomIntegerInAsynchronousTask()
+        public async Task TestRandomIntegerInAsynchronousTask()
         {
             this.TestWithError(async () =>
             {
@@ -74,7 +74,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestRandomIntegerInParallelTask()
+        public async Task TestRandomIntegerInParallelTask()
         {
             this.TestWithError(async () =>
             {
@@ -101,7 +101,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestRandomIntegerInParallelSynchronousTask()
+        public async Task TestRandomIntegerInParallelSynchronousTask()
         {
             this.TestWithError(async () =>
             {
@@ -129,7 +129,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestRandomIntegerInParallelAsynchronousTask()
+        public async Task TestRandomIntegerInParallelAsynchronousTask()
         {
             this.TestWithError(async () =>
             {
@@ -157,7 +157,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestRandomIntegerInNestedParallelSynchronousTask()
+        public async Task TestRandomIntegerInNestedParallelSynchronousTask()
         {
             this.TestWithError(async () =>
             {

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
@@ -36,7 +36,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSchedulingPointsDuringMonitor()
+        public async Task TestSchedulingPointsDuringMonitor()
         {
             this.TestWithError(() =>
             {
@@ -70,7 +70,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.Specifications
         }
 
         [Fact(Timeout = 5000)]
-        public void TestSuppressedSchedulingPointsDuringMonitor()
+        public async Task TestSuppressedSchedulingPointsDuringMonitor()
         {
             this.Test(async () =>
             {

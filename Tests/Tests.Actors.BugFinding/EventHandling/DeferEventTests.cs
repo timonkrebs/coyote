@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
@@ -82,7 +82,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestDeferSentEventHandledInStateMachine()
+        public async Task TestDeferSentEventHandledInStateMachine()
         {
             this.TestWithError(r =>
             {

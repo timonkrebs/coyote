@@ -1,8 +1,9 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.Coyote.SystematicTesting;
 using Xunit;
 using Xunit.Abstractions;
@@ -18,7 +19,7 @@ namespace Microsoft.Coyote.Runtime.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMemoryLeakInRuntime()
+        public async Task TestMemoryLeakInRuntime()
         {
             uint iterations = 1000;
             Configuration configuration = Configuration.Create()

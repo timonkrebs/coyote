@@ -1,7 +1,8 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Diagnostics;
+using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Microsoft.Coyote.Tests.Common;
 using Microsoft.Coyote.Tests.Common.Events;
@@ -43,7 +44,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Coverage
         }
 
         [Fact(Timeout = 5000)]
-        public void TestTrivialActivityCoverage()
+        public async Task TestTrivialActivityCoverage()
         {
             var configuration = this.GetConfiguration();
             configuration.IsActivityCoverageReported = true;
@@ -93,7 +94,7 @@ Total specification monitor coverage: N/A
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMachineStateTransitionActivityCoverage()
+        public async Task TestMachineStateTransitionActivityCoverage()
         {
             var configuration = this.GetConfiguration();
             configuration.IsActivityCoverageReported = true;
@@ -149,7 +150,7 @@ Total specification monitor coverage: N/A
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMachineRaiseEventActivityCoverage()
+        public async Task TestMachineRaiseEventActivityCoverage()
         {
             var configuration = this.GetConfiguration();
             configuration.IsActivityCoverageReported = true;
@@ -237,7 +238,7 @@ Total specification monitor coverage: N/A
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMachineSendEventActivityCoverage()
+        public async Task TestMachineSendEventActivityCoverage()
         {
             var configuration = this.GetConfiguration();
             configuration.IsActivityCoverageReported = true;
@@ -300,7 +301,7 @@ Total specification monitor coverage: N/A
         }
 
         [Fact(Timeout = 5000)]
-        public void TestCoverageOnMultipleTests()
+        public async Task TestCoverageOnMultipleTests()
         {
             var configuration = this.GetConfiguration();
             configuration.IsActivityCoverageReported = true;
@@ -380,7 +381,7 @@ Total specification monitor coverage: N/A
         }
 
         [Fact(Timeout = 5000)]
-        public void TestUncoveredEvents()
+        public async Task TestUncoveredEvents()
         {
             var configuration = this.GetConfiguration();
             configuration.IsActivityCoverageReported = true;
@@ -459,7 +460,7 @@ Total specification monitor coverage: N/A
         }
 
         [Fact(Timeout = 5000)]
-        public void TestPushStateActivityCoverage()
+        public async Task TestPushStateActivityCoverage()
         {
             var configuration = this.GetConfiguration();
             configuration.IsActivityCoverageReported = true;
@@ -566,7 +567,7 @@ Total specification monitor coverage: N/A
 
         // Make sure we get coverage information for Monitors.
         [Fact(Timeout = 5000)]
-        public void TestMonitorActivityCoverage()
+        public async Task TestMonitorActivityCoverage()
         {
             var configuration = this.GetConfiguration();
             configuration.IsActivityCoverageReported = true;

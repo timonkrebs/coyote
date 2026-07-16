@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
@@ -55,7 +55,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestStartStopTimerInActor()
+        public async Task TestStartStopTimerInActor()
         {
             this.TestWithError(r =>
             {
@@ -93,7 +93,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestStartStopTimerInStateMachine()
+        public async Task TestStartStopTimerInStateMachine()
         {
             this.TestWithError(r =>
             {

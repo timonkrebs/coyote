@@ -1,7 +1,8 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Xunit;
 using Xunit.Abstractions;
@@ -1217,7 +1218,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
 
         [Theory(Timeout = 10000)]
         [InlineData(3)]
-        public void TestMultipleLeadersInRaftProtocol(uint seed)
+        public async Task TestMultipleLeadersInRaftProtocol(uint seed)
         {
             var configuration = this.GetConfiguration();
             configuration.MaxUnfairSchedulingSteps = 100;

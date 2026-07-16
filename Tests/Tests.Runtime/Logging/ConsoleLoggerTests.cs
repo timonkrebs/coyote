@@ -1,8 +1,9 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.Coyote.Logging;
 using Microsoft.Coyote.Tests.Common;
 using Xunit;
@@ -37,7 +38,7 @@ namespace Microsoft.Coyote.Runtime.Tests.Logging
         }
 
         [Fact(Timeout = 5000)]
-        public void TestConsoleLoggerNoneVerbosity()
+        public async Task TestConsoleLoggerNoneVerbosity()
         {
             string result = this.WriteAllSeverityMessages(VerbosityLevel.None);
             string expected = StringExtensions.FormatLines(
@@ -46,7 +47,7 @@ namespace Microsoft.Coyote.Runtime.Tests.Logging
         }
 
         [Fact(Timeout = 5000)]
-        public void TestConsoleLoggerErrorVerbosity()
+        public async Task TestConsoleLoggerErrorVerbosity()
         {
             string result = this.WriteAllSeverityMessages(VerbosityLevel.Error);
             string expected = StringExtensions.FormatLines(
@@ -56,7 +57,7 @@ namespace Microsoft.Coyote.Runtime.Tests.Logging
         }
 
         [Fact(Timeout = 5000)]
-        public void TestConsoleLoggerWarningVerbosity()
+        public async Task TestConsoleLoggerWarningVerbosity()
         {
             string result = this.WriteAllSeverityMessages(VerbosityLevel.Warning);
             string expected = StringExtensions.FormatLines(
@@ -67,7 +68,7 @@ namespace Microsoft.Coyote.Runtime.Tests.Logging
         }
 
         [Fact(Timeout = 5000)]
-        public void TestConsoleLoggerInfoVerbosity()
+        public async Task TestConsoleLoggerInfoVerbosity()
         {
             string result = this.WriteAllSeverityMessages(VerbosityLevel.Info);
             string expected = StringExtensions.FormatLines(
@@ -79,7 +80,7 @@ namespace Microsoft.Coyote.Runtime.Tests.Logging
         }
 
         [Fact(Timeout = 5000)]
-        public void TestConsoleLoggerDebugVerbosity()
+        public async Task TestConsoleLoggerDebugVerbosity()
         {
             string result = this.WriteAllSeverityMessages(VerbosityLevel.Debug);
             string expected = StringExtensions.FormatLines(
@@ -92,7 +93,7 @@ namespace Microsoft.Coyote.Runtime.Tests.Logging
         }
 
         [Fact(Timeout = 5000)]
-        public void TestConsoleLoggerExhaustiveVerbosity()
+        public async Task TestConsoleLoggerExhaustiveVerbosity()
         {
             string result = this.WriteAllSeverityMessages(VerbosityLevel.Exhaustive);
             string expected = StringExtensions.FormatLines(

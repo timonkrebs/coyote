@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading;
@@ -17,7 +17,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAlreadyCanceledParallelTask()
+        public async Task TestAlreadyCanceledParallelTask()
         {
             this.TestWithException<TaskCanceledException>(async () =>
             {
@@ -29,7 +29,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAlreadyCanceledAsynchronousTask()
+        public async Task TestAlreadyCanceledAsynchronousTask()
         {
             this.TestWithException<TaskCanceledException>(async () =>
             {
@@ -44,7 +44,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAlreadyCanceledParallelTaskWithResult()
+        public async Task TestAlreadyCanceledParallelTaskWithResult()
         {
             this.TestWithException<TaskCanceledException>(async () =>
             {
@@ -56,7 +56,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAlreadyCanceledAsynchronousTaskWithResult()
+        public async Task TestAlreadyCanceledAsynchronousTaskWithResult()
         {
             this.TestWithException<TaskCanceledException>(async () =>
             {
@@ -72,7 +72,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestCancelParallelTask()
+        public async Task TestCancelParallelTask()
         {
             this.TestWithException<TaskCanceledException>(async () =>
             {
@@ -86,7 +86,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestCancelAsynchronousTask()
+        public async Task TestCancelAsynchronousTask()
         {
             this.TestWithException<TaskCanceledException>(async () =>
             {
@@ -104,7 +104,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestCancelParallelTaskWithResult()
+        public async Task TestCancelParallelTaskWithResult()
         {
             this.TestWithException<TaskCanceledException>(async () =>
             {
@@ -118,7 +118,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestCancelAsynchronousTaskWithResult()
+        public async Task TestCancelAsynchronousTaskWithResult()
         {
             this.TestWithException<TaskCanceledException>(async () =>
             {
@@ -137,7 +137,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestAwaitNestedAsynchronousTask()
+        public async Task TestAwaitNestedAsynchronousTask()
         {
             this.TestWithException<TaskCanceledException>(async () =>
             {
@@ -157,7 +157,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestCancelNestedAsynchronousTaskWithResult()
+        public async Task TestCancelNestedAsynchronousTaskWithResult()
         {
             this.TestWithException<TaskCanceledException>(async () =>
             {

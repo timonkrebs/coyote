@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
@@ -27,7 +27,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInvokeInternalMethod()
+        public async Task TestInvokeInternalMethod()
         {
             var configuration = this.GetConfiguration();
             var test = new ActorTestKit<M1>(configuration: configuration);
@@ -68,7 +68,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
         }
 
         [Fact(Timeout = 5000)]
-        public void TestInvokePrivateMethod()
+        public async Task TestInvokePrivateMethod()
         {
             var configuration = this.GetConfiguration();
             var test = new ActorTestKit<M3>(configuration: configuration);

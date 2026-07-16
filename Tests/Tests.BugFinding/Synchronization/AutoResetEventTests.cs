@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading;
@@ -17,7 +17,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWaitSetReset()
+        public async Task TestWaitSetReset()
         {
             this.Test(() =>
             {
@@ -42,7 +42,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWaitAlreadySignaled()
+        public async Task TestWaitAlreadySignaled()
         {
             this.Test(() =>
             {
@@ -55,7 +55,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWaitDeadlock()
+        public async Task TestWaitDeadlock()
         {
             this.TestWithError(() =>
             {
@@ -70,7 +70,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestResetDeadlock()
+        public async Task TestResetDeadlock()
         {
             this.TestWithError(() =>
             {
@@ -94,7 +94,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWaitWithAllIndexesSet()
+        public async Task TestWaitWithAllIndexesSet()
         {
             this.Test(() =>
             {
@@ -159,7 +159,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWaitWithInnerIndexesSet()
+        public async Task TestWaitWithInnerIndexesSet()
         {
             this.Test(() =>
             {
@@ -211,7 +211,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWaitWithAllIndexesReset()
+        public async Task TestWaitWithAllIndexesReset()
         {
             this.Test(() =>
             {
@@ -245,7 +245,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMultiThreadedWait()
+        public async Task TestMultiThreadedWait()
         {
             this.Test(() =>
             {
@@ -273,7 +273,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMultiThreadedWaitDeadlock()
+        public async Task TestMultiThreadedWaitDeadlock()
         {
             this.TestWithError(() =>
             {
@@ -309,7 +309,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWaitAll()
+        public async Task TestWaitAll()
         {
             this.Test(() =>
             {
@@ -343,7 +343,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWaitAny()
+        public async Task TestWaitAny()
         {
             this.Test(() =>
             {
@@ -374,7 +374,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestPingPong()
+        public async Task TestPingPong()
         {
             this.Test(() =>
             {

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
@@ -17,7 +17,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestLockUnlock()
+        public async Task TestLockUnlock()
         {
             this.Test(() =>
             {
@@ -39,7 +39,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestReentrantLock()
+        public async Task TestReentrantLock()
         {
             this.Test(() =>
             {
@@ -60,7 +60,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWaitPulse()
+        public async Task TestWaitPulse()
         {
             this.Test(async () =>
             {
@@ -96,7 +96,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMonitorWithLockTaken()
+        public async Task TestMonitorWithLockTaken()
         {
             this.Test(() =>
             {

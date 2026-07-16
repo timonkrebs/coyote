@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
@@ -26,7 +26,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestGenericClass()
+        public async Task TestGenericClass()
         {
             this.Test(async () =>
             {
@@ -56,7 +56,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestGenericNestedClass()
+        public async Task TestGenericNestedClass()
         {
             this.Test(async () =>
             {
@@ -87,7 +87,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestGenericNestedMethod()
+        public async Task TestGenericNestedMethod()
         {
             this.Test(async () =>
             {
@@ -122,7 +122,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestGenericResult()
+        public async Task TestGenericResult()
         {
             this.Test(async () =>
             {

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
@@ -68,7 +68,7 @@ namespace Microsoft.Coyote.Actors.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMultiPayloadMultiLevel()
+        public async Task TestMultiPayloadMultiLevel()
         {
             MultiPayloadMultiLevelTester.Test();
         }
@@ -129,7 +129,7 @@ namespace Microsoft.Coyote.Actors.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestMultiPayloadMultiLevelGeneric()
+        public async Task TestMultiPayloadMultiLevelGeneric()
         {
             MultiPayloadMultiLevelGenericTester.Test();
         }
@@ -212,7 +212,7 @@ namespace Microsoft.Coyote.Actors.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestEventInheritanceInStateMachine()
+        public async Task TestEventInheritanceInStateMachine()
         {
             var tcs = new TaskCompletionSource<bool>();
             var configuration = this.GetConfiguration();

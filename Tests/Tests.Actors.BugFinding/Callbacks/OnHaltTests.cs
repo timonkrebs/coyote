@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
@@ -44,7 +44,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOnHaltAsyncAfterSendInActor()
+        public async Task TestOnHaltAsyncAfterSendInActor()
         {
             this.TestWithError(r =>
             {
@@ -75,7 +75,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOnHaltAsyncAfterSendInStateMachine()
+        public async Task TestOnHaltAsyncAfterSendInStateMachine()
         {
             this.TestWithError(r =>
             {
@@ -103,7 +103,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOnHaltAsyncAfterRaiseInStateMachine()
+        public async Task TestOnHaltAsyncAfterRaiseInStateMachine()
         {
             this.TestWithError(r =>
             {
@@ -128,7 +128,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOnHaltAsyncWithReceiveInActor()
+        public async Task TestOnHaltAsyncWithReceiveInActor()
         {
             this.TestWithError(r =>
             {
@@ -155,7 +155,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOnHaltAsyncWithReceiveInStateMachine()
+        public async Task TestOnHaltAsyncWithReceiveInStateMachine()
         {
             this.TestWithError(r =>
             {
@@ -208,7 +208,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOnHaltAsyncWithAPIsInActor()
+        public async Task TestOnHaltAsyncWithAPIsInActor()
         {
             this.Test(r =>
             {
@@ -245,7 +245,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOnHaltAsyncWithAPIsInStateMachine()
+        public async Task TestOnHaltAsyncWithAPIsInStateMachine()
         {
             this.Test(r =>
             {
@@ -276,7 +276,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOnHaltAsyncWithWildCardInStateMachine()
+        public async Task TestOnHaltAsyncWithWildCardInStateMachine()
         {
             this.TestWithError(r =>
             {

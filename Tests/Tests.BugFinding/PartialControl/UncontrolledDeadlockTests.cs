@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
@@ -35,7 +35,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestUncontrolledDeadlock()
+        public async Task TestUncontrolledDeadlock()
         {
             this.TestWithError(async () =>
             {
@@ -65,7 +65,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestUncontrolledDeadlockReportedAsNoBug()
+        public async Task TestUncontrolledDeadlockReportedAsNoBug()
         {
             this.Test(async () =>
             {

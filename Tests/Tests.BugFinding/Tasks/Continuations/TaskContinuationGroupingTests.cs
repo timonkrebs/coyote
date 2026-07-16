@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
@@ -17,7 +17,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestTaskContinuationGroupingWithCompletedTask()
+        public async Task TestTaskContinuationGroupingWithCompletedTask()
         {
             this.Test(async () =>
             {
@@ -31,7 +31,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestTaskContinuationGroupingWithYield()
+        public async Task TestTaskContinuationGroupingWithYield()
         {
             this.Test(async () =>
             {
@@ -45,7 +45,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestTaskContinuationGroupingWithDelay()
+        public async Task TestTaskContinuationGroupingWithDelay()
         {
             this.Test(async () =>
             {
@@ -59,7 +59,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestTaskContinuationGroupingWithTaskRun()
+        public async Task TestTaskContinuationGroupingWithTaskRun()
         {
             this.Test(async () =>
             {
@@ -89,7 +89,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestTaskContinuationGroupingWithAsyncTaskRun()
+        public async Task TestTaskContinuationGroupingWithAsyncTaskRun()
         {
             this.Test(async () =>
             {
@@ -123,7 +123,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestTaskContinuationGroupingWithYieldedTaskRun()
+        public async Task TestTaskContinuationGroupingWithYieldedTaskRun()
         {
             this.Test(async () =>
             {
@@ -157,7 +157,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestTaskContinuationGroupingWithDelayedTaskRun()
+        public async Task TestTaskContinuationGroupingWithDelayedTaskRun()
         {
             this.Test(async () =>
             {
@@ -191,7 +191,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestTaskContinuationGroupingWithNestedAsyncTaskRun()
+        public async Task TestTaskContinuationGroupingWithNestedAsyncTaskRun()
         {
             this.Test(async () =>
             {
@@ -245,7 +245,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestTaskContinuationGroupingWithNestedYieldedTaskRun()
+        public async Task TestTaskContinuationGroupingWithNestedYieldedTaskRun()
         {
             this.Test(async () =>
             {
@@ -299,7 +299,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestTaskContinuationGroupingWithNestedDelayedTaskRun()
+        public async Task TestTaskContinuationGroupingWithNestedDelayedTaskRun()
         {
             this.Test(async () =>
             {

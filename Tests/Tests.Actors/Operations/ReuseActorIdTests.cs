@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
@@ -20,7 +20,7 @@ namespace Microsoft.Coyote.Actors.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestReuseActorId()
+        public async Task TestReuseActorId()
         {
             this.TestWithException<InvalidOperationException>(r =>
             {
@@ -31,7 +31,7 @@ namespace Microsoft.Coyote.Actors.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestReuseNamedActorId()
+        public async Task TestReuseNamedActorId()
         {
             this.TestWithException<InvalidOperationException>(r =>
             {
@@ -43,7 +43,7 @@ namespace Microsoft.Coyote.Actors.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestReuseActorIdWithHaltRace()
+        public async Task TestReuseActorIdWithHaltRace()
         {
             this.TestWithException<InvalidOperationException>(r =>
             {
@@ -58,7 +58,7 @@ namespace Microsoft.Coyote.Actors.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestReuseNamedActorIdWithHaltRace()
+        public async Task TestReuseNamedActorIdWithHaltRace()
         {
             this.TestWithException<InvalidOperationException>(r =>
             {
@@ -74,7 +74,7 @@ namespace Microsoft.Coyote.Actors.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestReuseActorIdAfterHalt()
+        public async Task TestReuseActorIdAfterHalt()
         {
             this.Test(async r =>
             {
@@ -108,7 +108,7 @@ namespace Microsoft.Coyote.Actors.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestReuseNamedActorIdAfterHalt()
+        public async Task TestReuseNamedActorIdAfterHalt()
         {
             this.Test(async r =>
             {

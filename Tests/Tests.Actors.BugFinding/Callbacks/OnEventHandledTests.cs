@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
@@ -133,7 +133,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOnEventHandledInStateMachine()
+        public async Task TestOnEventHandledInStateMachine()
         {
             this.Test(r =>
             {
@@ -205,7 +205,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOnEventHandledInHaltedActor()
+        public async Task TestOnEventHandledInHaltedActor()
         {
             this.Test(r =>
             {
@@ -242,7 +242,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOnEventHandledInHaltedStateMachine()
+        public async Task TestOnEventHandledInHaltedStateMachine()
         {
             this.Test(r =>
             {
@@ -294,7 +294,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOnEventHandledWithHaltOutcomeInActor()
+        public async Task TestOnEventHandledWithHaltOutcomeInActor()
         {
             this.Test(r =>
             {
@@ -333,7 +333,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOnEventHandledWithHaltOutcomeInStateMachine()
+        public async Task TestOnEventHandledWithHaltOutcomeInStateMachine()
         {
             this.Test(r =>
             {
@@ -367,7 +367,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOnEventHandledWithHandledExceptionOutcomeInActor()
+        public async Task TestOnEventHandledWithHandledExceptionOutcomeInActor()
         {
             this.TestWithError(r =>
             {
@@ -408,7 +408,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOnEventHandledWithHandledExceptionOutcomeInStateMachine()
+        public async Task TestOnEventHandledWithHandledExceptionOutcomeInStateMachine()
         {
             this.TestWithError(r =>
             {
@@ -444,7 +444,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOnEventHandledWithThrowExceptionOutcomeInActor()
+        public async Task TestOnEventHandledWithThrowExceptionOutcomeInActor()
         {
             this.TestWithException<InvalidOperationException>(r =>
             {
@@ -484,7 +484,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestOnEventHandledWithThrowExceptionOutcomeInStateMachine()
+        public async Task TestOnEventHandledWithThrowExceptionOutcomeInStateMachine()
         {
             this.TestWithException<InvalidOperationException>(r =>
             {

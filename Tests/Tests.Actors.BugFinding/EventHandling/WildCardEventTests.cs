@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Collections.Generic;
@@ -84,7 +84,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWildCardEventInActor()
+        public async Task TestWildCardEventInActor()
         {
             var config = new LogEvent();
             this.Test(r =>
@@ -145,7 +145,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWildCardEventInStateMachine()
+        public async Task TestWildCardEventInStateMachine()
         {
             var config = new LogEvent();
             this.Test(r =>
@@ -202,7 +202,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWildGotoInStateMachine()
+        public async Task TestWildGotoInStateMachine()
         {
             var config = new LogEvent();
             this.Test(r =>
@@ -273,7 +273,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWildcardPushInStateMachine()
+        public async Task TestWildcardPushInStateMachine()
         {
             var config = new LogEvent();
             this.Test(r =>
@@ -342,7 +342,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWildcardOverrideActionStateMachine()
+        public async Task TestWildcardOverrideActionStateMachine()
         {
             var config = new LogEvent();
             this.Test(r =>
@@ -400,7 +400,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWildcardOverrideDeferStateMachine()
+        public async Task TestWildcardOverrideDeferStateMachine()
         {
             var config = new LogEvent();
             this.Test(r =>
@@ -459,7 +459,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
-        public void TestWildcardOverrideIgnoreStateMachine()
+        public async Task TestWildcardOverrideIgnoreStateMachine()
         {
             var config = new LogEvent();
             this.Test(r =>

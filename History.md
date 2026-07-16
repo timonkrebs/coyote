@@ -27,10 +27,14 @@
   framework to `v10.0.10`, and `Mono.Cecil` to `v0.11.6`.
 - Upgraded the test and benchmarking dependencies (`Microsoft.NET.Test.Sdk`,
   `xunit.runner.visualstudio` to `v2.8.2` for compatibility with the VSTest
-  runner in the .NET 10 SDK, `BenchmarkDotNet`, `dotnet-ilverify`). Note that
-  the `xunit` framework itself intentionally stays on `v2.4.2`: newer releases
-  reject the `Timeout` property on the many synchronous test methods in this
-  repository, so that migration is tracked as separate follow-up work.
+  runner in the .NET 10 SDK, `BenchmarkDotNet`, `dotnet-ilverify`).
+- Upgraded the `xunit` framework from the long-pinned `v2.4.2` to `v2.9.3`.
+  Newer xunit rejects the `Timeout` property on synchronous test methods, so
+  the 1,097 synchronous `[Fact(Timeout = ...)]` tests across the suites are
+  now `async Task`-shaped (their bodies still run the explorations
+  synchronously, so `CS1998` is suppressed in the test projects and the
+  timeouts remain the same best-effort guard they were on `v2.4.2`, which
+  ignored them for synchronous tests).
 - Dropped support for the `netcoreapp3.1` target framework, which reached end of
   life.
 
