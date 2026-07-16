@@ -52,7 +52,9 @@ jobs:
         # one real assembly. Guards the tool's packaged dependency closure: a package
         # missing e.g. Mono.Cecil installs fine and prints its banner, then dies on the
         # first rewrite -- a failure mode consumers otherwise hit before this repo does.
-        # Runs on every platform because packaging holes can be OS-specific.
+        # Windows only, like the pack itself: build.ps1 -nuget produces bin/nuget solely
+        # on Windows, and the published artifact comes from that leg.
+        if: ${{ matrix.platform == 'windows-latest' }}
         run: |
           $ErrorActionPreference = "Stop"
           $feed = (Resolve-Path ./bin/nuget).Path
