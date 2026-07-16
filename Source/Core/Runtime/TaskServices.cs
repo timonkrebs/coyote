@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System.Linq;
+using SystemCancellationToken = System.Threading.CancellationToken;
 using SystemTask = System.Threading.Tasks.Task;
 
 namespace Microsoft.Coyote.Runtime
@@ -71,6 +72,31 @@ namespace Microsoft.Coyote.Runtime
                 {
                     runtime.PauseOperationUntil(current, () => tasks.Any(t => t.IsCompleted), !isAnyTaskUncontrolled,
                         string.Format("any task ('{0}') to complete", string.Join("', '", tasks.Select(t => t.Id.ToString()))));
+                }
+                else if (runtime.SchedulingPolicy is SchedulingPolicy.Fuzzing)
+                {
+                    runtime.DelayOperation(current);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Pauses the current operation until any of the specified tasks completes or the
+        /// specified cancellation token is canceled.
+        /// </summary>
+        internal static void WaitUntilAnyTaskCompletesOrCanceled(CoyoteRuntime runtime, SystemTask[] tasks,
+            SystemCancellationToken cancellationToken)
+        {
+            bool isAnyTaskUncontrolled = IsAnyTaskUncontrolled(runtime, tasks);
+            if (runtime.TryGetExecutingOperation(out ControlledOperation current))
+            {
+                if (runtime.SchedulingPolicy is SchedulingPolicy.Interleaving)
+                {
+                    runtime.PauseOperationUntil(current,
+                        () => cancellationToken.IsCancellationRequested || tasks.Any(t => t.IsCompleted),
+                        !isAnyTaskUncontrolled,
+                        string.Format("any task ('{0}') to complete or the token to be canceled",
+                            string.Join("', '", tasks.Select(t => t.Id.ToString()))));
                 }
                 else if (runtime.SchedulingPolicy is SchedulingPolicy.Fuzzing)
                 {

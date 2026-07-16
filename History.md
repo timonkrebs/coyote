@@ -1,4 +1,16 @@
 ## vNext
+- Added support for the `System.Threading.Interlocked` overloads introduced in
+  .NET 9: `Exchange`/`CompareExchange` on `byte`, `sbyte`, `short` and `ushort`,
+  and the generic pair without its former reference-type constraint, are now
+  intercepted for atomic-operation race checking on `net10.0`.
+- Added systematic testing support for `Task.WhenEach` (all six overloads):
+  during controlled testing the async stream yields tasks in scheduler-driven
+  completion order, so the exploration covers the different orders consumers
+  can observe.
+- The CI pipeline now smoke tests the packed `Microsoft.Coyote.CLI` tool on
+  every platform (install from the built package, rewrite an assembly), so a
+  package missing part of its dependency closure fails this repository's build
+  instead of a consumer's.
 - Added support for systematically testing code that uses the
   `System.Threading.Lock` type introduced in .NET 9: the binary rewriting
   engine now models `Enter`, `TryEnter`, `Exit`, `EnterScope` and

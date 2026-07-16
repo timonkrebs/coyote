@@ -46,6 +46,31 @@ jobs:
       - name: Build Coyote projects
         run: ./Scripts/build.ps1 -ci -nuget
         shell: pwsh
+      - name: Smoke test the packed Coyote CLI
+        # Install the CLI from the just-packed nupkg (an exclusive local-feed config,
+        # so the identically-versioned nuget.org release cannot shadow it) and rewrite
+        # one real assembly. Guards the tool's packaged dependency closure: a package
+        # missing e.g. Mono.Cecil installs fine and prints its banner, then dies on the
+        # first rewrite -- a failure mode consumers otherwise hit before this repo does.
+        # Windows only, like the pack itself: build.ps1 -nuget produces bin/nuget solely
+        # on Windows, and the published artifact comes from that leg.
+        if: ${{ matrix.platform == 'windows-latest' }}
+        run: |
+          $ErrorActionPreference = "Stop"
+          $feed = (Resolve-Path ./bin/nuget).Path
+          $nupkg = Get-ChildItem $feed -Filter 'Microsoft.Coyote.CLI.*.nupkg' | Select-Object -First 1
+          $version = $nupkg.Name -replace '^Microsoft\.Coyote\.CLI\.', '' -replace '\.nupkg$', ''
+          Write-Host "Packed CLI version: $version"
+          $work = Join-Path $env:RUNNER_TEMP 'coyote-cli-smoke'
+          New-Item -ItemType Directory -Force -Path $work | Out-Null
+          "<?xml version=""1.0""?><configuration><packageSources><clear /><add key=""coyote-local"" value=""$feed"" /></packageSources></configuration>" | Set-Content (Join-Path $work 'nuget.config')
+          dotnet tool install Microsoft.Coyote.CLI --tool-path $work --version $version --configfile (Join-Path $work 'nuget.config')
+          if ($LASTEXITCODE -ne 0) { exit 1 }
+          Copy-Item ./bin/net10.0/System.CommandLine.dll $work
+          $env:PATH = "$work$([IO.Path]::PathSeparator)$env:PATH"
+          coyote rewrite (Join-Path $work 'System.CommandLine.dll')
+          if ($LASTEXITCODE -ne 0) { exit 1 }
+        shell: pwsh
       - name: Validate Coyote rewriting
         if: ${{ matrix.platform == 'windows-latest' }}
         run: ./Tests/compare-rewriting-diff-logs.ps1

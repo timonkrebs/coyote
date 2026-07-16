@@ -328,6 +328,178 @@ namespace Microsoft.Coyote.Rewriting.Types.Threading.Tasks
             return task;
         }
 
+#if NET10_0_OR_GREATER
+        /// <summary>
+        /// Creates an async enumerable that yields the supplied tasks as they complete.
+        /// </summary>
+        public static IAsyncEnumerable<SystemTask> WhenEach(params SystemTask[] tasks) =>
+            CoyoteRuntime.Current.SchedulingPolicy is SchedulingPolicy.None ?
+                SystemTask.WhenEach(tasks) :
+                new WhenEachAsyncEnumerable<SystemTask>(ValidateAndSnapshotTasks(tasks));
+
+        /// <summary>
+        /// Creates an async enumerable that yields the supplied tasks as they complete.
+        /// </summary>
+        public static IAsyncEnumerable<SystemTask> WhenEach(ReadOnlySpan<SystemTask> tasks) =>
+            WhenEach(tasks.ToArray());
+
+        /// <summary>
+        /// Creates an async enumerable that yields the supplied tasks as they complete.
+        /// </summary>
+        public static IAsyncEnumerable<SystemTask> WhenEach(IEnumerable<SystemTask> tasks) =>
+            CoyoteRuntime.Current.SchedulingPolicy is SchedulingPolicy.None ?
+                SystemTask.WhenEach(tasks) :
+                new WhenEachAsyncEnumerable<SystemTask>(ValidateAndSnapshotTasks(tasks));
+
+        /// <summary>
+        /// Creates an async enumerable that yields the supplied tasks as they complete.
+        /// </summary>
+        public static IAsyncEnumerable<SystemTasks.Task<TResult>> WhenEach<TResult>(
+            params SystemTasks.Task<TResult>[] tasks) =>
+            CoyoteRuntime.Current.SchedulingPolicy is SchedulingPolicy.None ?
+                SystemTask.WhenEach(tasks) :
+                new WhenEachAsyncEnumerable<SystemTasks.Task<TResult>>(ValidateAndSnapshotTasks(tasks));
+
+        /// <summary>
+        /// Creates an async enumerable that yields the supplied tasks as they complete.
+        /// </summary>
+        public static IAsyncEnumerable<SystemTasks.Task<TResult>> WhenEach<TResult>(
+            ReadOnlySpan<SystemTasks.Task<TResult>> tasks) =>
+            WhenEach(tasks.ToArray());
+
+        /// <summary>
+        /// Creates an async enumerable that yields the supplied tasks as they complete.
+        /// </summary>
+        public static IAsyncEnumerable<SystemTasks.Task<TResult>> WhenEach<TResult>(
+            IEnumerable<SystemTasks.Task<TResult>> tasks) =>
+            CoyoteRuntime.Current.SchedulingPolicy is SchedulingPolicy.None ?
+                SystemTask.WhenEach(tasks) :
+                new WhenEachAsyncEnumerable<SystemTasks.Task<TResult>>(ValidateAndSnapshotTasks(tasks));
+
+        /// <summary>
+        /// Validates the tasks argument like the invoked API does and snapshots it: a null
+        /// collection or a null entry must throw eagerly at the call, not lazily when the
+        /// (deferred) iterator is first moved, and not as a NullReferenceException from the
+        /// controlled wait.
+        /// </summary>
+        private static List<TTask> ValidateAndSnapshotTasks<TTask>(IEnumerable<TTask> tasks)
+            where TTask : SystemTask
+        {
+            if (tasks is null)
+            {
+                throw new ArgumentNullException(nameof(tasks));
+            }
+
+            var snapshot = new List<TTask>(tasks);
+            if (snapshot.Contains(null))
+            {
+                throw new ArgumentException("The tasks argument included a null value.", nameof(tasks));
+            }
+
+            return snapshot;
+        }
+
+        /// <summary>
+        /// The async enumerable a controlled WhenEach returns. Like the invoked API, only
+        /// the first enumeration yields the tasks; later enumerators observe an
+        /// already-drained stream instead of splitting one stream between consumers.
+        /// </summary>
+        private sealed class WhenEachAsyncEnumerable<TTask> : IAsyncEnumerable<TTask>
+            where TTask : SystemTask
+        {
+            /// <summary>
+            /// The tasks not yielded yet.
+            /// </summary>
+            private readonly List<TTask> Remaining;
+
+            /// <summary>
+            /// Set once the first enumerator has been handed out.
+            /// </summary>
+            private int IsEnumerated;
+
+            internal WhenEachAsyncEnumerable(List<TTask> remaining)
+            {
+                this.Remaining = remaining;
+            }
+
+            public IAsyncEnumerator<TTask> GetAsyncEnumerator(SystemCancellationToken cancellationToken = default)
+            {
+                var tasks = System.Threading.Interlocked.Exchange(ref this.IsEnumerated, 1) is 0 ?
+                    this.Remaining : new List<TTask>();
+                return WhenEachInCompletionOrder(tasks, cancellationToken).GetAsyncEnumerator(default);
+            }
+        }
+
+        /// <summary>
+        /// Yields the given tasks in completion order under scheduler control. Each round
+        /// performs the controlled equivalent of a WaitAny (pausing the consuming operation
+        /// until at least one remaining task completes at a scheduling point), then yields
+        /// a completed task; when several are already complete, the choice among them is a
+        /// controlled nondeterministic one, so every completion order the real enumerable
+        /// could surface stays reachable during exploration. Every await the consumer
+        /// performs on the returned enumerable resolves inline on an already-completed
+        /// value, so no task machinery escapes the scheduler's control.
+        /// </summary>
+        private static async IAsyncEnumerable<TTask> WhenEachInCompletionOrder<TTask>(
+            List<TTask> remaining, SystemCancellationToken cancellationToken)
+            where TTask : SystemTask
+        {
+            // Inline no-op await: gives the method the async-iterator shape the signature
+            // requires without introducing an uncontrolled asynchronous hop.
+            await SystemTask.CompletedTask;
+            while (remaining.Count > 0)
+            {
+                // The token arrives through WithCancellation/GetAsyncEnumerator. Like the
+                // invoked API, it is observed both before and during the wait: the controlled
+                // pause below also wakes when the token is canceled, so a cancellation issued
+                // by another controlled operation while every remaining task is still running
+                // surfaces as OperationCanceledException instead of a reported deadlock.
+                cancellationToken.ThrowIfCancellationRequested();
+
+                var runtime = CoyoteRuntime.Current;
+                if (runtime.SchedulingPolicy != SchedulingPolicy.None)
+                {
+                    TaskServices.WaitUntilAnyTaskCompletesOrCanceled(runtime, remaining.ToArray(), cancellationToken);
+                    cancellationToken.ThrowIfCancellationRequested();
+                }
+
+                var completed = new List<int>();
+                for (int i = 0; i < remaining.Count; i++)
+                {
+                    if (remaining[i].IsCompleted)
+                    {
+                        completed.Add(i);
+                    }
+                }
+
+                int index;
+                if (completed.Count is 0)
+                {
+                    // Under the fuzzing policy the controlled wait only injects a delay
+                    // rather than guaranteeing a completion, so fall through to the real
+                    // (token-aware) wait, exactly like the WaitAny model above does.
+                    index = SystemTask.WaitAny(remaining.ToArray(), cancellationToken);
+                }
+                else if (completed.Count is 1)
+                {
+                    index = completed[0];
+                }
+                else
+                {
+                    // Several tasks are already complete: the real enumerable yields them in
+                    // true completion order, which is schedule-dependent, so the pick among
+                    // them is a controlled nondeterministic choice -- systematic exploration
+                    // then covers each order a real execution could observe.
+                    index = completed[runtime.GetNextNondeterministicIntegerChoice(completed.Count, null, null)];
+                }
+
+                TTask next = remaining[index];
+                remaining.RemoveAt(index);
+                yield return next;
+            }
+        }
+#endif
+
         /// <summary>
         /// Waits for all of the provided task objects to complete execution.
         /// </summary>
