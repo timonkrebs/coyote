@@ -65,7 +65,7 @@ namespace Microsoft.Coyote.Telemetry
             if (isEnabled)
             {
                 TelemetryConfiguration configuration = TelemetryConfiguration.CreateDefault();
-                configuration.InstrumentationKey = "17a6badb-bf2d-4f5d-959b-6843b8bb1f7f";
+                configuration.ConnectionString = "InstrumentationKey=17a6badb-bf2d-4f5d-959b-6843b8bb1f7f";
                 this.Client = new AppInsightsClient(configuration);
                 this.LogWriter = logWriter;
 

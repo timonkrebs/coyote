@@ -46,7 +46,11 @@
   `TestOutputLogger` and the `coyote test` constructor injection typed
   against the v2 `xunit.abstractions` — is intentionally unchanged, and
   `$(TargetFramework)` in rewriting configurations now also resolves from
-  `net472` assemblies.
+  `net472` assemblies. The package's `Microsoft.ApplicationInsights`
+  dependency moved from `v2.20.0` to `v2.23.0`, the version the xunit v3
+  dependency chain references: on .NET Framework the generated binding
+  redirects target that higher version, so deploying the older assembly
+  failed every `TestingEngine` construction on `net472`.
 - Dropped support for the `netcoreapp3.1` target framework, which reached end of
   life.
 

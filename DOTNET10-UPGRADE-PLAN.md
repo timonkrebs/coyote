@@ -397,7 +397,14 @@ Items 1–5 carry the context gathered while executing the upgrade (#3, #4).
    hang guard at last (a stuck test fails in five minutes instead of riding
    the job timeout) with ample headroom for loaded CI runners. The
    `xUnit1028`-suppressed `Task<int>`-returning rewriting specimen still
-   executes under v3.
+   executes under v3. A second netfx-only discovery: v3's dependency chain
+   (`xunit.v3` → `xunit.v3.core.mtp-v1` → `Microsoft.Testing.Extensions.Telemetry`)
+   references `Microsoft.ApplicationInsights` `2.23.0`, while the product
+   pinned `2.20.0` and won NuGet's nearest-wins resolution — so the net472
+   test projects deployed the 2.20 assembly with generated binding
+   redirects targeting `2.23.0.29`, and every `TestingEngine` construction
+   (which builds the telemetry client even when telemetry is disabled)
+   failed the load. The product pin moved to `2.23.0` to align the graph.
 5. **Modernize the `Raft.Azure` sample off `Microsoft.Azure.ServiceBus`.**
    The package is retired and pulls vulnerable `IdentityModel` 5.4.0
    transitives, which the .NET 10 SDK's transitive NuGet audit flags; the
