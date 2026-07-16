@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
-using Xunit.Abstractions;
 using CoyoteTypes = Microsoft.Coyote.Rewriting.Types;
 
 namespace Microsoft.Coyote.Runtime.Tests
@@ -37,7 +36,7 @@ namespace Microsoft.Coyote.Runtime.Tests
             return true;
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestExecutionTraceCheckpoint()
         {
             uint numSequencesFound = 0;

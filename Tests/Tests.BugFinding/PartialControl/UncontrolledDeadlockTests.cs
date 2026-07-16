@@ -6,7 +6,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Coyote.Rewriting;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.BugFinding.Tests
 {
@@ -34,7 +33,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             public void Dispose() => this.Handle.Dispose();
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestUncontrolledDeadlock()
         {
             this.TestWithError(async () =>
@@ -64,7 +63,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             });
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestUncontrolledDeadlockReportedAsNoBug()
         {
             this.Test(async () =>

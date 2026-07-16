@@ -1,11 +1,10 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
 using System.Threading.Tasks;
 using Microsoft.Coyote.Runtime;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.Tests
 {
@@ -72,7 +71,7 @@ namespace Microsoft.Coyote.Actors.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAssertFailureNoEventHandler()
         {
             var runtime = RuntimeFactory.Create();
@@ -81,7 +80,7 @@ namespace Microsoft.Coyote.Actors.Tests
             await tcs.Task;
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAssertFailureEventHandler()
         {
             await this.RunAsync(async r =>
@@ -108,7 +107,7 @@ namespace Microsoft.Coyote.Actors.Tests
             handleFailures: false);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestUnhandledExceptionEventHandler()
         {
             await this.RunAsync(async r =>

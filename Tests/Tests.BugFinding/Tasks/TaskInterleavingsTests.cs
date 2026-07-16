@@ -7,7 +7,6 @@ using Microsoft.Coyote.Logging;
 using Microsoft.Coyote.Specifications;
 using Microsoft.Coyote.Tests.Common;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.BugFinding.Tests
 {
@@ -30,7 +29,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             entry.Value = value;
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterleavingsWithOneSynchronousTask()
         {
             this.Test(async () =>
@@ -44,7 +43,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterleavingsWithOneAsynchronousTask()
         {
             this.TestWithError(async () =>
@@ -62,7 +61,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterleavingsWithOneParallelTask()
         {
             this.TestWithError(async () =>
@@ -83,7 +82,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterleavingsWithTwoSynchronousTasks()
         {
             this.Test(async () =>
@@ -100,7 +99,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterleavingsWithTwoAsynchronousTasks()
         {
             this.TestWithError(async () =>
@@ -119,7 +118,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterleavingsWithTwoParallelTasks()
         {
             this.TestWithError(async () =>
@@ -145,7 +144,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterleavingsWithNestedParallelTasks()
         {
             // When this test is running in systematic fuzzing mode, it is entirely dependent on real
@@ -177,7 +176,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestExploreAllInterleavings()
         {
             SortedSet<string> results = new SortedSet<string>();

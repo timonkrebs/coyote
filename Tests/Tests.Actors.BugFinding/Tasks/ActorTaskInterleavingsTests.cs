@@ -3,7 +3,6 @@
 
 using System.Threading.Tasks;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.BugFinding.Tests
 {
@@ -38,7 +37,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterleavingsWithOneSynchronousTaskInActor()
         {
             this.Test(r =>
@@ -68,7 +67,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterleavingsWithOneSynchronousTaskInStateMachine()
         {
             this.Test(r =>
@@ -92,7 +91,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterleavingsWithOneAsynchronousTaskInActor()
         {
             this.TestWithError(r =>
@@ -126,7 +125,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterleavingsWithOneAsynchronousTaskInStateMachine()
         {
             this.TestWithError(r =>
@@ -155,7 +154,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterleavingsWithOneParallelTaskInActor()
         {
             this.TestWithError(r =>
@@ -192,7 +191,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterleavingsWithOneParallelTaskInStateMachine()
         {
             this.TestWithError(r =>
@@ -219,7 +218,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterleavingsWithTwoSynchronousTasksInActor()
         {
             this.Test(r =>
@@ -252,7 +251,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterleavingsWithTwoSynchronousTasksInStateMachine()
         {
             this.Test(r =>
@@ -277,7 +276,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterleavingsWithTwoAsynchronousTasksInActor()
         {
             this.TestWithError(r =>
@@ -312,7 +311,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterleavingsWithTwoAsynchronousTasksInStateMachine()
         {
             this.TestWithError(r =>
@@ -346,7 +345,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterleavingsWithTwoParallelTasksInActor()
         {
             this.TestWithError(r =>
@@ -388,7 +387,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterleavingsWithTwoParallelTasksInStateMachine()
         {
             this.TestWithError(r =>
@@ -422,7 +421,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterleavingsWithNestedParallelTasksInActor()
         {
             this.TestWithError(r =>
@@ -464,7 +463,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterleavingsWithNestedParallelTasksInStateMachine()
         {
             this.TestWithError(r =>

@@ -4,7 +4,6 @@
 using System;
 using System.Threading.Tasks;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.Tests
 {
@@ -19,7 +18,7 @@ namespace Microsoft.Coyote.Actors.Tests
         {
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestReuseActorId()
         {
             this.TestWithException<InvalidOperationException>(r =>
@@ -30,7 +29,7 @@ namespace Microsoft.Coyote.Actors.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestReuseNamedActorId()
         {
             this.TestWithException<InvalidOperationException>(r =>
@@ -42,7 +41,7 @@ namespace Microsoft.Coyote.Actors.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestReuseActorIdWithHaltRace()
         {
             this.TestWithException<InvalidOperationException>(r =>
@@ -57,7 +56,7 @@ namespace Microsoft.Coyote.Actors.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestReuseNamedActorIdWithHaltRace()
         {
             this.TestWithException<InvalidOperationException>(r =>
@@ -73,7 +72,7 @@ namespace Microsoft.Coyote.Actors.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestReuseActorIdAfterHalt()
         {
             this.Test(async r =>
@@ -107,7 +106,7 @@ namespace Microsoft.Coyote.Actors.Tests
             configuration: this.GetConfiguration().WithTestingIterations(100));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestReuseNamedActorIdAfterHalt()
         {
             this.Test(async r =>

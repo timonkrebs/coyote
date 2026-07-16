@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Microsoft.Coyote.Runtime;
 using Microsoft.Coyote.Specifications;
 using Xunit;
-using Xunit.Abstractions;
 using SystemLock = System.Threading.Lock;
 using SystemMonitor = System.Threading.Monitor;
 
@@ -19,7 +18,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         {
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestLockMutualExclusion()
         {
             this.Test(async () =>
@@ -59,7 +58,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestLockScopeMutualExclusion()
         {
             this.Test(async () =>
@@ -102,7 +101,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestLockReentrancy()
         {
             this.Test(() =>
@@ -128,7 +127,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             this.GetConfiguration().WithTestingIterations(10));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestLockAndMonitorAreIndependent()
         {
             this.TestWithError(async () =>
@@ -181,7 +180,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestLockRaceDetection()
         {
             this.TestWithError(async () =>

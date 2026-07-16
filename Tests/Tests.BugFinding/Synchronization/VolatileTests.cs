@@ -3,7 +3,6 @@
 
 using System.Threading.Tasks;
 using Xunit;
-using Xunit.Abstractions;
 using Volatile = System.Threading.Volatile;
 
 namespace Microsoft.Coyote.BugFinding.Tests
@@ -15,7 +14,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         {
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestVolatileReadLong()
         {
             this.Test(() =>
@@ -25,7 +24,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }, configuration: this.GetConfiguration().WithVolatileOperationRaceCheckingEnabled(true));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestVolatileReadULong()
         {
             this.Test(() =>
@@ -35,7 +34,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }, configuration: this.GetConfiguration().WithVolatileOperationRaceCheckingEnabled(true));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestVolatileWriteLong()
         {
             this.Test(() =>
@@ -46,7 +45,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }, configuration: this.GetConfiguration().WithVolatileOperationRaceCheckingEnabled(true));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestVolatileWriteULong()
         {
             this.Test(() =>

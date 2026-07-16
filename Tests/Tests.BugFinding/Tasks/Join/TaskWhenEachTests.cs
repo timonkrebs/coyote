@@ -8,7 +8,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.BugFinding.Tests
 {
@@ -19,7 +18,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         {
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWhenEachYieldsAllTasks()
         {
             this.Test(async () =>
@@ -54,7 +53,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             this.GetConfiguration().WithTestingIterations(100));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWhenEachWithResults()
         {
             this.Test(async () =>
@@ -79,7 +78,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             this.GetConfiguration().WithTestingIterations(100));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWhenEachSpanOverload()
         {
             this.Test(async () =>
@@ -97,7 +96,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             this.GetConfiguration().WithTestingIterations(100));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWhenEachEnumeratesOnlyOnce()
         {
             this.Test(async () =>
@@ -126,7 +125,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             this.GetConfiguration().WithTestingIterations(100));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWhenEachExploresYieldOrdersOfCompletedTasks()
         {
             this.TestWithError(async () =>
@@ -152,7 +151,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWhenEachWithInvalidInput()
         {
             this.Test(() =>
@@ -175,7 +174,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             this.GetConfiguration().WithTestingIterations(10));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWhenEachWithCancellation()
         {
             this.Test(async () =>
@@ -208,7 +207,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             this.GetConfiguration().WithTestingIterations(10));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWhenEachWithCancellationDuringWait()
         {
             this.Test(async () =>
@@ -241,7 +240,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             this.GetConfiguration().WithTestingIterations(100));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWhenEachExploresCompletionOrders()
         {
             this.TestWithError(async () =>

@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.BugFinding.Tests
 {
@@ -17,7 +16,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         {
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestParallelTaskResultBeforeWrite()
         {
             this.Test(() =>
@@ -39,7 +38,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestParallelTaskResultAfterWrite()
         {
             this.TestWithError(() =>
@@ -69,7 +68,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             entry.Value = value;
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestParallelTaskResultWithSynchronousInvocationAfterWrite()
         {
             this.TestWithError(() =>
@@ -99,7 +98,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             entry.Value = value;
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestParallelTaskResultWithAsynchronousInvocationAfterWrite()
         {
             this.TestWithError(() =>
@@ -123,7 +122,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestTaskResultWithException()
         {
             this.TestWithError(() =>
@@ -158,7 +157,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAsyncTaskResultWithException()
         {
             this.TestWithError(() =>

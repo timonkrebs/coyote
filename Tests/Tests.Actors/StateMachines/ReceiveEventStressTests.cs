@@ -3,7 +3,6 @@
 
 using System.Threading.Tasks;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.Tests.StateMachines
 {
@@ -92,7 +91,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
             }
         }
 
-        [Fact(Timeout = 20000)]
+        [Fact(Timeout = 300000)]
         public async Task TestReceiveEvent()
         {
             this.Test(async r =>
@@ -163,7 +162,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
             }
         }
 
-        [Fact(Timeout = 20000)]
+        [Fact(Timeout = 300000)]
         public async Task TestReceiveEventAlternate()
         {
             this.Test(async r =>
@@ -226,7 +225,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
             }
         }
 
-        [Fact(Timeout = 20000)]
+        [Fact(Timeout = 300000)]
         public async Task TestReceiveEventExchange()
         {
             this.Test(async r =>

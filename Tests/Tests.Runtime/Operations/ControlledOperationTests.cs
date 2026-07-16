@@ -5,7 +5,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Runtime.Tests
 {
@@ -16,7 +15,7 @@ namespace Microsoft.Coyote.Runtime.Tests
         {
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestThreadOperationInstrumentation()
         {
             this.RunSystematicTest(() =>

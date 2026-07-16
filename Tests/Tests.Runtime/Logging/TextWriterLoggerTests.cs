@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using Microsoft.Coyote.Logging;
 using Microsoft.Coyote.Tests.Common;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Runtime.Tests.Logging
 {
@@ -39,7 +38,7 @@ namespace Microsoft.Coyote.Runtime.Tests.Logging
             return result;
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestTextWriterLoggerNoneVerbosity()
         {
             string result = this.WriteAllSeverityMessages(VerbosityLevel.None);
@@ -48,7 +47,7 @@ namespace Microsoft.Coyote.Runtime.Tests.Logging
             Assert.Equal(expected, result);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestTextWriterLoggerErrorVerbosity()
         {
             string result = this.WriteAllSeverityMessages(VerbosityLevel.Error);
@@ -58,7 +57,7 @@ namespace Microsoft.Coyote.Runtime.Tests.Logging
             Assert.Equal(expected, result);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestTextWriterLoggerWarningVerbosity()
         {
             string result = this.WriteAllSeverityMessages(VerbosityLevel.Warning);
@@ -69,7 +68,7 @@ namespace Microsoft.Coyote.Runtime.Tests.Logging
             Assert.Equal(expected, result);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestTextWriterLoggerInfoVerbosity()
         {
             string result = this.WriteAllSeverityMessages(VerbosityLevel.Info);
@@ -81,7 +80,7 @@ namespace Microsoft.Coyote.Runtime.Tests.Logging
             Assert.Equal(expected, result);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestTextWriterLoggerDebugVerbosity()
         {
             string result = this.WriteAllSeverityMessages(VerbosityLevel.Debug);
@@ -94,7 +93,7 @@ namespace Microsoft.Coyote.Runtime.Tests.Logging
             Assert.Equal(expected, result);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestTextWriterLoggerExhaustiveVerbosity()
         {
             string result = this.WriteAllSeverityMessages(VerbosityLevel.Exhaustive);

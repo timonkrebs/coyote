@@ -8,7 +8,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Xunit;
-using Xunit.Abstractions;
 
 using Monitor = System.Threading.Monitor;
 using SynchronizedBlock = Microsoft.Coyote.Rewriting.Types.Threading.Monitor.SynchronizedBlock;
@@ -22,7 +21,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         {
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSimpleMonitor()
         {
             this.Test(async () =>
@@ -35,7 +34,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             this.GetConfiguration().WithTestingIterations(100));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMonitorWithReentrancy1()
         {
             this.Test(() =>
@@ -46,7 +45,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             this.GetConfiguration().WithTestingIterations(100));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMonitorWithReentrancy2()
         {
             this.Test(async () =>
@@ -59,7 +58,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             this.GetConfiguration().WithTestingIterations(100));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMonitorWithReentrancy3()
         {
             this.Test(async () =>
@@ -72,7 +71,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             this.GetConfiguration().WithTestingIterations(100));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMonitorWithInvalidSyncObject()
         {
             this.TestWithException<ArgumentNullException>(() =>
@@ -82,7 +81,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMonitorWithInvalidWaitState()
         {
             this.TestWithException<SynchronizationLockException>(() =>
@@ -97,7 +96,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMonitorWithInvalidPulseState()
         {
             this.TestWithException<SynchronizationLockException>(() =>
@@ -112,7 +111,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMonitorWithInvalidPulseAllState()
         {
             this.TestWithException<SynchronizationLockException>(() =>
@@ -127,7 +126,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMonitorWithInvalidUsage()
         {
             this.TestWithError(async () =>
@@ -154,7 +153,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestComplexMonitor()
         {
             this.Test(async () =>

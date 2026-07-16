@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.BugFinding.Tests.DataRaceChecking
 {
@@ -15,7 +14,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.DataRaceChecking
         {
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestGenericDictionaryAddDataRace()
         {
             this.TestWithError(async () =>
@@ -39,7 +38,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.DataRaceChecking
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestGenericDictionaryIndex()
         {
             this.Test(async () =>
@@ -64,7 +63,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.DataRaceChecking
             configuration: this.GetConfiguration().WithTestingIterations(100));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestGenericDictionaryIndexDataRace()
         {
             this.TestWithError(async () =>

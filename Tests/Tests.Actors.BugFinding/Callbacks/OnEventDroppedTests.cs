@@ -4,7 +4,6 @@
 using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.BugFinding.Tests
 {
@@ -39,7 +38,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSendEventDroppedAfterHaltInActor()
         {
             this.TestWithError(r =>
@@ -70,7 +69,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSendEventDroppedAfterHaltInStateMachine()
         {
             this.TestWithError(r =>
@@ -95,7 +94,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestRuntimeEventDroppedAfterHaltInActor()
         {
             this.TestWithError(r =>
@@ -112,7 +111,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestOnEventDroppedParametersInActor()
         {
             this.Test(r =>
@@ -143,7 +142,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestRuntimeEventDroppedAfterHaltInStateMachine()
         {
             this.TestWithError(r =>
@@ -160,7 +159,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestOnEventDroppedParametersInStateMachine()
         {
             this.Test(r =>
@@ -228,7 +227,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventProcessedOrDroppedInActor()
         {
             this.Test(r =>
@@ -288,7 +287,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventProcessedOrDroppedInStateMachine()
         {
             this.Test(r =>

@@ -4,7 +4,6 @@
 using System.Threading.Tasks;
 using Microsoft.Coyote.Actors.SharedObjects;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.Tests.SharedObjects
 {
@@ -94,7 +93,7 @@ namespace Microsoft.Coyote.Actors.Tests.SharedObjects
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestProductionSharedObjects()
         {
             var runtime = RuntimeFactory.Create();

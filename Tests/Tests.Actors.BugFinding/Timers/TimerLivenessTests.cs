@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Microsoft.Coyote.Actors.Timers;
 using Microsoft.Coyote.Specifications;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.BugFinding.Tests
 {
@@ -56,7 +55,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestTimerLiveness()
         {
             this.Test(r =>

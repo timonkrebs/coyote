@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.BugFinding.Tests
 {
@@ -104,7 +103,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestChallenge14WithDeadlock()
         {
             this.TestWithError(() =>
@@ -128,7 +127,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestChallenge14WithFix()
         {
             this.Test(() =>

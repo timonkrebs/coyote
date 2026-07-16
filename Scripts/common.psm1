@@ -69,8 +69,9 @@ function Invoke-DotnetTest([String]$dotnet, [String]$project, [String]$target, [
         # when evaluating the project for 'dotnet test', otherwise the run
         # silently executes zero tests.
         $command = "$command /p:BUILD_NET8=yes"
-    } elseif ($framework -eq "net462") {
-        # Same for the .NET Framework target and BUILD_NET462.
+    } elseif ($framework -eq "net472") {
+        # Same for the .NET Framework target of the test projects, which rides
+        # the BUILD_NET462 opt-in (see Common/build.props).
         $command = "$command /p:BUILD_NET462=yes"
     }
 

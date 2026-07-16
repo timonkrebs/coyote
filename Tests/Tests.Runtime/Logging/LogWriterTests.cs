@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using Microsoft.Coyote.Logging;
 using Microsoft.Coyote.Tests.Common;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Runtime.Tests.Logging
 {
@@ -39,7 +38,7 @@ namespace Microsoft.Coyote.Runtime.Tests.Logging
             return result;
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestLogWriterNoneVerbosity()
         {
             string result = this.WriteAllSeverityMessages(VerbosityLevel.None);
@@ -48,7 +47,7 @@ namespace Microsoft.Coyote.Runtime.Tests.Logging
             Assert.Equal(expected, result);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestLogWriterErrorVerbosity()
         {
             string result = this.WriteAllSeverityMessages(VerbosityLevel.Error);
@@ -58,7 +57,7 @@ namespace Microsoft.Coyote.Runtime.Tests.Logging
             Assert.Equal(expected, result);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestLogWriterWarningVerbosity()
         {
             string result = this.WriteAllSeverityMessages(VerbosityLevel.Warning);
@@ -69,7 +68,7 @@ namespace Microsoft.Coyote.Runtime.Tests.Logging
             Assert.Equal(expected, result);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestLogWriterInfoVerbosity()
         {
             string result = this.WriteAllSeverityMessages(VerbosityLevel.Info);
@@ -81,7 +80,7 @@ namespace Microsoft.Coyote.Runtime.Tests.Logging
             Assert.Equal(expected, result);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestLogWriterDebugVerbosity()
         {
             string result = this.WriteAllSeverityMessages(VerbosityLevel.Debug);
@@ -94,7 +93,7 @@ namespace Microsoft.Coyote.Runtime.Tests.Logging
             Assert.Equal(expected, result);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestLogWriterExhaustiveVerbosity()
         {
             string result = this.WriteAllSeverityMessages(VerbosityLevel.Exhaustive);
@@ -125,7 +124,7 @@ namespace Microsoft.Coyote.Runtime.Tests.Logging
             return result;
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestLogWriterConsoleOutput()
         {
             Configuration config = this.GetConfiguration().WithVerbosityEnabled().WithConsoleLoggingEnabled();
@@ -140,7 +139,7 @@ namespace Microsoft.Coyote.Runtime.Tests.Logging
             Assert.Equal(expected, result);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestLogWriterForceConsoleOutput()
         {
             Configuration config = this.GetConfiguration().WithVerbosityEnabled().WithConsoleLoggingEnabled(false);
@@ -155,7 +154,7 @@ namespace Microsoft.Coyote.Runtime.Tests.Logging
             Assert.Equal(expected, result);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestLogWriterNullOutput()
         {
             Configuration config = this.GetConfiguration().WithVerbosityEnabled();

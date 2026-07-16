@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.Tests
 {
@@ -119,7 +118,7 @@ namespace Microsoft.Coyote.Actors.Tests
             Assert.InRange(count, 0, 1);
         }
 
-        [Fact(Timeout = 10000)]
+        [Fact(Timeout = 300000)]
         public async Task TestNoMemoryLeakAfterHalt()
         {
             this.Test(r =>

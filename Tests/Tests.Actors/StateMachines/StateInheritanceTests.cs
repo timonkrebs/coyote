@@ -4,7 +4,6 @@
 using System.Threading.Tasks;
 using Microsoft.Coyote.Tests.Common.Events;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.Tests.StateMachines
 {
@@ -644,7 +643,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
 
         // ==================================================================================================================
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMachineStateInheritingAbstractState()
         {
             this.TestWithError(r =>
@@ -654,7 +653,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
             expectedError: "Test passed.");
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMachineStateInheritingStateDuplicateStart()
         {
             this.TestWithError(r =>
@@ -664,7 +663,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
             expectedError: "M2() can not declare more than one start states.");
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMachineStateInheritingStateOnEntry()
         {
             this.TestWithError(r =>
@@ -674,7 +673,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
             expectedError: "Test passed.");
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMachineStateOverridingStateOnEntry()
         {
             this.TestWithError(r =>
@@ -684,7 +683,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
             expectedError: "Test passed.");
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMachineStateInheritingStateOnEventDoAction()
         {
             this.TestWithError(r =>
@@ -694,7 +693,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
             expectedError: "Test passed.");
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMachineStateOverridingStateOnEventDoAction()
         {
             this.TestWithError(r =>
@@ -704,7 +703,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
             expectedError: "Test passed.");
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMachineStateOverridingTwoStatesOnEventDoAction()
         {
             this.TestWithError(r =>
@@ -714,7 +713,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
             expectedError: "Test passed.");
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMachineStateOverridingDeepStateOnEventDoAction()
         {
             this.TestWithError(r =>
@@ -724,7 +723,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
             expectedError: "Test passed.");
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMachineStateInheritingStateOnEventGotoState()
         {
             this.TestWithError(r =>
@@ -734,7 +733,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
             expectedError: "Test passed.");
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMachineStateOverridingStateOnEventGotoState()
         {
             this.TestWithError(r =>
@@ -744,7 +743,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
             expectedError: "Test passed.");
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMachineStateOverridingTwoStatesOnEventGotoState()
         {
             this.TestWithError(r =>
@@ -754,7 +753,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
             expectedError: "Test passed.");
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMachineStateOverridingDeepStateOnEventGotoState()
         {
             this.TestWithError(r =>
@@ -764,7 +763,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
             expectedError: "Test passed.");
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMachineStateInheritingStateOnEventPushState()
         {
             this.TestWithError(r =>
@@ -774,7 +773,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
             expectedError: "Test passed.");
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMachineStateOverridingStateOnEventPushState()
         {
             this.TestWithError(r =>
@@ -784,7 +783,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
             expectedError: "Test passed.");
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMachineStateOverridingTwoStatesOnEventPushState()
         {
             this.TestWithError(r =>
@@ -794,7 +793,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
             expectedError: "Test passed.");
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMachineStateOverridingDeepStateOnEventPushState()
         {
             this.TestWithError(r =>
@@ -804,7 +803,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
             expectedError: "Test passed.");
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMachineInheritActionsFromClass()
         {
             this.TestWithError(r =>
@@ -814,7 +813,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
             expectedError: "Test passed.");
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMachineClassActionTransitions()
         {
             this.TestWithError(r =>

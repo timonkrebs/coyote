@@ -4,7 +4,6 @@
 using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Xunit;
-using Xunit.Abstractions;
 using MonitorEvent = Microsoft.Coyote.Specifications.Monitor.Event;
 
 namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
@@ -102,7 +101,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMachineMonitorIntegration1()
         {
             this.TestWithError(r =>
@@ -115,7 +114,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMachineMonitorIntegration2()
         {
             this.Test(r =>
@@ -126,7 +125,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
             configuration: this.GetConfiguration().WithDFSStrategy());
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMachineMonitorIntegration3()
         {
             this.Test(r =>

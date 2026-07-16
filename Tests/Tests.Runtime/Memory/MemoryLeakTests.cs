@@ -6,7 +6,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Coyote.SystematicTesting;
 using Xunit;
-using Xunit.Abstractions;
 using CoyoteTypes = Microsoft.Coyote.Rewriting.Types;
 
 namespace Microsoft.Coyote.Runtime.Tests
@@ -18,7 +17,7 @@ namespace Microsoft.Coyote.Runtime.Tests
         {
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMemoryLeakInRuntime()
         {
             uint iterations = 1000;

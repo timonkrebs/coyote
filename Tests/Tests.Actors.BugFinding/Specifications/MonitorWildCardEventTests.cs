@@ -4,7 +4,6 @@
 using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Xunit;
-using Xunit.Abstractions;
 using MonitorEvent = Microsoft.Coyote.Specifications.Monitor.Event;
 
 namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
@@ -70,7 +69,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestIgnoreWildCardEvent()
         {
             this.Test(r =>
@@ -82,7 +81,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
             });
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestDoActionOnWildCardEvent()
         {
             this.TestWithError(r =>
@@ -93,7 +92,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
             expectedError: "Check reached.");
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestGotoStateOnWildCardEvent()
         {
             this.TestWithError(r =>

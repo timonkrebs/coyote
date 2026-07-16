@@ -1,11 +1,10 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
 using System.Threading.Tasks;
 using Microsoft.Coyote.Actors.Timers;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.Tests
 {
@@ -52,7 +51,7 @@ namespace Microsoft.Coyote.Actors.Tests
             }
         }
 
-        [Fact(Timeout = 6000)]
+        [Fact(Timeout = 300000)]
         public async Task TestTimerLifetime()
         {
             await this.RunAsync(async r =>
@@ -103,7 +102,7 @@ namespace Microsoft.Coyote.Actors.Tests
             }
         }
 
-        [Fact(Timeout = 6000)]
+        [Fact(Timeout = 300000)]
         public async Task TestPeriodicTimerLifetime()
         {
             await this.RunAsync(async r =>

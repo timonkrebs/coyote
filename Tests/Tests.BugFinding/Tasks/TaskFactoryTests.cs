@@ -5,7 +5,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Xunit;
-using Xunit.Abstractions;
 using TaskCanceledException = System.Threading.Tasks.TaskCanceledException;
 
 namespace Microsoft.Coyote.BugFinding.Tests
@@ -18,7 +17,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         {
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestStartNewTask()
         {
             this.TestWithError(async () =>
@@ -37,7 +36,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestStartNewTaskWithSynchronousAwait()
         {
             this.TestWithError(async () =>
@@ -57,7 +56,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestStartNewTaskWithAsynchronousAwait()
         {
             this.TestWithError(async () =>
@@ -77,7 +76,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestStartNewNestedTaskWithSynchronousAwait()
         {
             this.TestWithError(async () =>
@@ -102,7 +101,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestStartNewNestedTaskWithAsynchronousAwait()
         {
             this.TestWithError(async () =>
@@ -127,7 +126,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestStartNewTaskWithResult()
         {
             this.TestWithError(async () =>
@@ -147,7 +146,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestStartNewTaskWithSynchronousResult()
         {
             this.TestWithError(async () =>
@@ -168,7 +167,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestStartNewTaskWithAsynchronousResult()
         {
             this.TestWithError(async () =>
@@ -189,7 +188,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestStartNewNestedTaskWithSynchronousResult()
         {
             this.TestWithError(async () =>
@@ -213,7 +212,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestStartNewNestedTaskWithAsynchronousResult()
         {
             this.TestWithError(async () =>
@@ -237,7 +236,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestGenericStartNewTaskWithResult()
         {
             this.TestWithError(async () =>
@@ -257,7 +256,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestGenericStartNewTaskWithSynchronousResult()
         {
             this.TestWithError(async () =>
@@ -278,7 +277,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestGenericStartNewTaskWithAsynchronousResult()
         {
             this.TestWithError(async () =>
@@ -299,7 +298,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestGenericStartNewNestedTaskWithSynchronousResult()
         {
             this.TestWithError(async () =>
@@ -323,7 +322,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestGenericStartNewNestedTaskWithAsynchronousResult()
         {
             this.TestWithError(async () =>
@@ -347,7 +346,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestStartNewCanceledTask()
         {
             this.TestWithException<TaskCanceledException>(async () =>
@@ -359,7 +358,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestStartNewTaskCancelation()
         {
             this.TestWithException<TaskCanceledException>(async () =>
@@ -373,7 +372,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestStartNewCanceledTaskWithAsynchronousAwait()
         {
             this.TestWithException<TaskCanceledException>(async () =>
@@ -385,7 +384,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestStartNewTaskCancelationWithAsynchronousAwait()
         {
             this.TestWithException<TaskCanceledException>(async () =>

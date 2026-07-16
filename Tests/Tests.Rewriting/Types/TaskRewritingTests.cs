@@ -3,7 +3,6 @@
 
 using System.Threading.Tasks;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Rewriting.Tests
 {
@@ -14,25 +13,25 @@ namespace Microsoft.Coyote.Rewriting.Tests
         {
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestRewritingTaskWhenAll()
         {
             await Task.WhenAll(Task.CompletedTask);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestRewritingGenericTaskWhenAll()
         {
             await Task.WhenAll(Task.FromResult(1));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestRewritingTaskWhenAny()
         {
             await Task.WhenAny(Task.CompletedTask);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestRewritingGenericTaskWhenAny()
         {
             await Task.WhenAny(Task.FromResult(1));

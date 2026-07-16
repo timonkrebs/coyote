@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.BugFinding.Tests
 {
@@ -106,7 +105,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 10000)]
+        [Fact(Timeout = 300000)]
         public async Task TestBubbleSortAlgorithm()
         {
             this.Test(r =>

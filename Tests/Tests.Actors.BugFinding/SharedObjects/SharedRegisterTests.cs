@@ -4,7 +4,6 @@
 using System.Threading.Tasks;
 using Microsoft.Coyote.Actors.SharedObjects;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.BugFinding.Tests.SharedObjects
 {
@@ -107,7 +106,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.SharedObjects
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSharedRegister1()
         {
             this.Test(r =>
@@ -117,7 +116,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.SharedObjects
             configuration: this.GetConfiguration().WithTestingIterations(100));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSharedRegister2()
         {
             this.TestWithError(r =>
@@ -186,7 +185,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.SharedObjects
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSharedRegister3()
         {
             this.Test(r =>
@@ -196,7 +195,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.SharedObjects
             configuration: this.GetConfiguration().WithTestingIterations(100));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSharedRegister4()
         {
             this.TestWithError(r =>

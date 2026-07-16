@@ -1,8 +1,8 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using Microsoft.Coyote.BugFinding.Tests;
-using Xunit.Abstractions;
+using Xunit;
 
 namespace Microsoft.Coyote.Actors.BugFinding.Tests
 {

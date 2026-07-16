@@ -4,17 +4,20 @@
     <AssemblyName>Microsoft.Coyote.Tests.Rewriting</AssemblyName>
     <RootNamespace>Microsoft.Coyote.Rewriting.Tests</RootNamespace>
     <OutputPath>.\bin\</OutputPath>
+    <OutputType>Exe</OutputType>
     <NetStandard2Supported>false</NetStandard2Supported>
+    <Framework462Supported>false</Framework462Supported>
+    <Framework472Supported>true</Framework472Supported>
     <IsPackable>false</IsPackable>
-    <NoWarn>$(NoWarn),1591,1998,xUnit1030,xUnit1031</NoWarn>
+    <NoWarn>$(NoWarn),1591,1998,xUnit1030,xUnit1031,xUnit1051</NoWarn>
   </PropertyGroup>
   <Import Project="..\..\Common\build.props" />
   <Import Project="..\..\Common\key.props" />
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
     <PackageReference Include="Mono.Reflection" Version="2.0.0" />
-    <PackageReference Include="xunit" Version="2.9.3" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
+    <PackageReference Include="xunit.v3" Version="3.2.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tests.Common\Tests.Common.csproj" />
@@ -34,10 +37,19 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <PropertyGroup>
+    <!-- The coyote CLI has no net472 build; the net462 tool rewrites those test assemblies.
+         The netfx config also differs: the CLI resolves '$(TargetFramework)' in a config from
+         its own target framework, and the test assembly is an executable under xunit v3. -->
+    <CoyoteToolFramework>$(TargetFramework)</CoyoteToolFramework>
+    <CoyoteToolFramework Condition="'$(TargetFramework)'=='net472'">net462</CoyoteToolFramework>
+    <CoyoteRewriteConfig>rewrite.coyote.json</CoyoteRewriteConfig>
+    <CoyoteRewriteConfig Condition="'$(TargetFramework)'=='net472'">rewrite.netfx.coyote.json</CoyoteRewriteConfig>
+  </PropertyGroup>
   <Target Name="CoyoteRewriteWin" AfterTargets="AfterBuild" Condition="'$(OS)'=='Windows_NT'">
-    <Exec Command="..\..\bin\$(TargetFramework)\coyote.exe rewrite rewrite.coyote.json --dump-il-diff" />
+    <Exec Command="..\..\bin\$(CoyoteToolFramework)\coyote.exe rewrite $(CoyoteRewriteConfig) --dump-il-diff" />
   </Target>
   <Target Name="CoyoteRewriteUnix" AfterTargets="AfterBuild" Condition="'$(OS)'!='Windows_NT'">
-    <Exec Command="dotnet ../../bin/$(TargetFramework)/coyote.dll rewrite rewrite.coyote.json --dump-il-diff" />
+    <Exec Command="dotnet ../../bin/$(CoyoteToolFramework)/coyote.dll rewrite $(CoyoteRewriteConfig) --dump-il-diff" />
   </Target>
 </Project>

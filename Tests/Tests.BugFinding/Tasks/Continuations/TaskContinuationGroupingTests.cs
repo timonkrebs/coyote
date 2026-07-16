@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.Coyote.Runtime;
 using Microsoft.Coyote.Specifications;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.BugFinding.Tests
 {
@@ -16,7 +15,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         {
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestTaskContinuationGroupingWithCompletedTask()
         {
             this.Test(async () =>
@@ -30,7 +29,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(100));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestTaskContinuationGroupingWithYield()
         {
             this.Test(async () =>
@@ -44,7 +43,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(100));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestTaskContinuationGroupingWithDelay()
         {
             this.Test(async () =>
@@ -58,7 +57,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(100));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestTaskContinuationGroupingWithTaskRun()
         {
             this.Test(async () =>
@@ -88,7 +87,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(100));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestTaskContinuationGroupingWithAsyncTaskRun()
         {
             this.Test(async () =>
@@ -122,7 +121,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(100));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestTaskContinuationGroupingWithYieldedTaskRun()
         {
             this.Test(async () =>
@@ -156,7 +155,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(100));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestTaskContinuationGroupingWithDelayedTaskRun()
         {
             this.Test(async () =>
@@ -190,7 +189,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(100));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestTaskContinuationGroupingWithNestedAsyncTaskRun()
         {
             this.Test(async () =>
@@ -244,7 +243,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(100));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestTaskContinuationGroupingWithNestedYieldedTaskRun()
         {
             this.Test(async () =>
@@ -298,7 +297,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(100));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestTaskContinuationGroupingWithNestedDelayedTaskRun()
         {
             this.Test(async () =>

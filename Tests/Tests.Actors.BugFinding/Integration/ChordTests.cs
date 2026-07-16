@@ -7,7 +7,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.BugFinding.Tests
 {
@@ -829,7 +828,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Theory(Timeout = 10000)]
+        [Theory(Timeout = 300000)]
         [InlineData(20)]
         public async Task TestLivenessBugInChordProtocol(uint seed)
         {

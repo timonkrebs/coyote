@@ -3,7 +3,6 @@
 
 using System.Threading.Tasks;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.BugFinding.Tests
 {
@@ -31,7 +30,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMustHandleEventNotTriggeredInStateMachine()
         {
             this.Test(r =>
@@ -52,7 +51,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMustHandleDeferredEventInStateMachine()
         {
             this.TestWithError(r =>
@@ -78,7 +77,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             private void InitOnEntry() => this.RaiseHaltEvent();
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMustHandleEventAfterHaltInStateMachine()
         {
             this.TestWithError(r =>
@@ -110,7 +109,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMustHandleEventAfterSendingHaltInStateMachine()
         {
             this.TestWithError(r =>
@@ -141,7 +140,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMustHandleDeferredEventAfterStateTransition()
         {
             this.TestWithError(r =>

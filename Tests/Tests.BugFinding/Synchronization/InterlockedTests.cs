@@ -4,7 +4,6 @@
 using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Xunit;
-using Xunit.Abstractions;
 using Interlocked = System.Threading.Interlocked;
 
 namespace Microsoft.Coyote.BugFinding.Tests
@@ -16,7 +15,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         {
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedReadLong()
         {
             this.Test(() =>
@@ -27,7 +26,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
 #if NET
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedReadULong()
         {
             this.Test(() =>
@@ -38,7 +37,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 #endif
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedAddInt()
         {
             this.Test(() =>
@@ -57,7 +56,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedAddLong()
         {
             this.Test(() =>
@@ -77,7 +76,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
 #if NET
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedAddUInt()
         {
             this.Test(() =>
@@ -96,7 +95,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedAddULong()
         {
             this.Test(() =>
@@ -116,7 +115,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 #endif
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedIncrementInt()
         {
             this.Test(() =>
@@ -127,7 +126,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedIncrementLong()
         {
             this.Test(() =>
@@ -139,7 +138,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
 #if NET
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedIncrementUInt()
         {
             this.Test(() =>
@@ -150,7 +149,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedIncrementULong()
         {
             this.Test(() =>
@@ -162,7 +161,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 #endif
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedDecrementInt()
         {
             this.Test(() =>
@@ -173,7 +172,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedDecrementLong()
         {
             this.Test(() =>
@@ -185,7 +184,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
 #if NET
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedDecrementUInt()
         {
             this.Test(() =>
@@ -196,7 +195,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedDecrementULong()
         {
             this.Test(() =>
@@ -208,7 +207,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 #endif
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedExchangeInt()
         {
             this.Test(() =>
@@ -219,7 +218,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedExchangeLong()
         {
             this.Test(() =>
@@ -231,7 +230,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
 #if NET
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedExchangeUInt()
         {
             this.Test(() =>
@@ -242,7 +241,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedExchangeULong()
         {
             this.Test(() =>
@@ -254,7 +253,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 #endif
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedExchangeFloat()
         {
             this.Test(() =>
@@ -265,7 +264,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedExchangeDouble()
         {
             this.Test(() =>
@@ -276,7 +275,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedExchangeObject()
         {
             this.Test(() =>
@@ -290,7 +289,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedExchangeBoxedObject()
         {
             this.Test(() =>
@@ -307,7 +306,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedCompareExchangeInt()
         {
             this.Test(() =>
@@ -322,7 +321,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedCompareExchangeLong()
         {
             this.Test(() =>
@@ -338,7 +337,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
 #if NET
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedCompareExchangeUInt()
         {
             this.Test(() =>
@@ -353,7 +352,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedCompareExchangeULong()
         {
             this.Test(() =>
@@ -369,7 +368,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 #endif
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedCompareExchangeFloat()
         {
             this.Test(() =>
@@ -384,7 +383,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedCompareExchangeDouble()
         {
             this.Test(() =>
@@ -399,7 +398,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedCompareExchangeObject()
         {
             this.Test(() =>
@@ -416,7 +415,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedCompareExchangeBoxedObject()
         {
             this.Test(() =>
@@ -440,7 +439,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
 #if NET
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedAndInt()
         {
             this.Test(() =>
@@ -451,7 +450,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedAndLong()
         {
             this.Test(() =>
@@ -462,7 +461,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedAndUInt()
         {
             this.Test(() =>
@@ -473,7 +472,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedAndULong()
         {
             this.Test(() =>
@@ -484,7 +483,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedOrInt()
         {
             this.Test(() =>
@@ -495,7 +494,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedOrLong()
         {
             this.Test(() =>
@@ -506,7 +505,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedOrUInt()
         {
             this.Test(() =>
@@ -517,7 +516,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedOrULong()
         {
             this.Test(() =>
@@ -537,7 +536,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             Blue = 2,
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedExchangeByte()
         {
             this.Test(() =>
@@ -548,7 +547,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedExchangeSByte()
         {
             this.Test(() =>
@@ -559,7 +558,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedExchangeShort()
         {
             this.Test(() =>
@@ -570,7 +569,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedExchangeUShort()
         {
             this.Test(() =>
@@ -581,7 +580,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedExchangeEnum()
         {
             this.Test(() =>
@@ -594,7 +593,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedCompareExchangeByte()
         {
             this.Test(() =>
@@ -609,7 +608,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedCompareExchangeSByte()
         {
             this.Test(() =>
@@ -624,7 +623,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedCompareExchangeShort()
         {
             this.Test(() =>
@@ -639,7 +638,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedCompareExchangeUShort()
         {
             this.Test(() =>
@@ -654,7 +653,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             }, configuration: this.GetConfiguration().WithAtomicOperationRaceCheckingEnabled(true));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedByteLostUpdateDetection()
         {
             this.TestWithError(async () =>
@@ -685,7 +684,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedInt16LostUpdateDetection()
         {
             this.TestWithError(async () =>
@@ -713,7 +712,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 #endif
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInterlockedConcurrentIncrementInt()
         {
             this.Test(() =>

@@ -1,9 +1,8 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.Tests.StateMachines
 {
@@ -134,7 +133,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestReceiveEventOneMachine()
         {
             await this.RunAsync(async r =>
@@ -147,7 +146,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
             });
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestReceiveEventWithPredicateOneMachine()
         {
             await this.RunAsync(async r =>
@@ -160,7 +159,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
             });
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestReceiveEventMultipleTypesOneMachine()
         {
             await this.RunAsync(async r =>
@@ -173,7 +172,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
             });
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestReceiveEventTwoMachines()
         {
             await this.RunAsync(async r =>

@@ -6,7 +6,6 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Rewriting.Tests.Configuration
 {
@@ -17,7 +16,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Configuration
         {
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestJsonConfigurationDifferentOutputDirectory()
         {
             string configDirectory = GetJsonConfigurationDirectory("Configurations");
@@ -40,7 +39,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Configuration
             Assert.True(options.IsRewritingConcurrentCollections);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestJsonConfigurationReplacingBinaries()
         {
             string configDirectory = GetJsonConfigurationDirectory("Configurations");

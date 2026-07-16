@@ -14,7 +14,11 @@
   <Import Project="..\..\Common\build.props" />
   <Import Project="..\..\Common\key.props" />
   <ItemGroup>
-    <PackageReference Include="Microsoft.ApplicationInsights" Version="2.20.0" />
+    <!-- Keep in sync with the version referenced by the xunit v3 test stack
+         (Microsoft.Testing.Extensions.Telemetry): on .NET Framework the test
+         projects' generated binding redirects target the highest referenced
+         version, and a lower deployed assembly fails every load. -->
+    <PackageReference Include="Microsoft.ApplicationInsights" Version="2.23.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Mono.Cecil" Version="0.11.6" />
     <PackageReference Include="xunit.abstractions" Version="2.0.3" />

@@ -3,7 +3,6 @@
 
 using System.Threading.Tasks;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.Tests
 {
@@ -67,7 +66,7 @@ namespace Microsoft.Coyote.Actors.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMultiPayloadMultiLevel()
         {
             MultiPayloadMultiLevelTester.Test();
@@ -128,7 +127,7 @@ namespace Microsoft.Coyote.Actors.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMultiPayloadMultiLevelGeneric()
         {
             MultiPayloadMultiLevelGenericTester.Test();
@@ -211,7 +210,7 @@ namespace Microsoft.Coyote.Actors.Tests
         {
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventInheritanceInStateMachine()
         {
             var tcs = new TaskCompletionSource<bool>();

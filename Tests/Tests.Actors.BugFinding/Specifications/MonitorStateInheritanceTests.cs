@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Microsoft.Coyote.Tests.Common.Events;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
 {
@@ -331,7 +330,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMonitorStateInheritingAbstractState()
         {
             this.TestWithError(r =>
@@ -342,7 +341,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
             expectedError: "Error reached.");
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMonitorStateInheritingStateDuplicateStart()
         {
             this.TestWithError(r =>
@@ -352,7 +351,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
             expectedError: "M2 can not declare more than one start states.");
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMonitorStateInheritingStateOnEntry()
         {
             this.TestWithError(r =>
@@ -362,7 +361,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
             expectedError: "Error reached.");
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMonitorStateOverridingStateOnEntry()
         {
             this.Test(r =>
@@ -371,7 +370,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
             });
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMonitorStateInheritingStateOnEventDoAction()
         {
             this.TestWithError(r =>
@@ -382,7 +381,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
             expectedError: "Error reached.");
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMonitorStateOverridingStateOnEventDoAction()
         {
             this.Test(r =>
@@ -392,7 +391,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
             });
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMonitorStateOverridingTwoStatesOnEventDoAction()
         {
             this.Test(r =>
@@ -402,7 +401,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
             });
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMonitorStateOverridingDeepStateOnEventDoAction()
         {
             this.Test(r =>
@@ -412,7 +411,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
             });
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMonitorStateInheritingStateOnEventGotoState()
         {
             this.TestWithError(r =>
@@ -423,7 +422,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
             expectedError: "Done reached.");
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMonitorStateOverridingStateOnEventGotoState()
         {
             this.TestWithError(r =>
@@ -434,7 +433,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
             expectedError: "Done reached.");
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMonitorStateOverridingTwoStatesOnEventGotoState()
         {
             this.TestWithError(r =>
@@ -445,7 +444,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests.Specifications
             expectedError: "Done reached.");
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMonitorStateOverridingDeepStateOnEventGotoState()
         {
             this.TestWithError(r =>

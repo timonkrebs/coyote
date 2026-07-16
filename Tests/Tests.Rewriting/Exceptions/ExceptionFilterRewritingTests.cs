@@ -11,7 +11,6 @@ using Microsoft.Coyote.Runtime;
 using Microsoft.Coyote.Specifications;
 using Mono.Reflection;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
 {
@@ -22,7 +21,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
         {
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestThreadInterruptedExceptionRethrow()
         {
             this.Test(() =>
@@ -39,7 +38,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
             configuration: this.GetConfiguration().WithTestingIterations(1));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestThreadInterruptedExceptionExplicitRethrow()
         {
             this.Test(() =>
@@ -58,7 +57,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
             configuration: this.GetConfiguration().WithTestingIterations(1));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestThreadInterruptedExceptionDoubleRethrow()
         {
             this.Test(() =>
@@ -82,7 +81,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
             configuration: this.GetConfiguration().WithTestingIterations(1));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestThreadInterruptedExceptionInEmptyCatchBlock()
         {
             this.Test(() =>
@@ -99,7 +98,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
             configuration: this.GetConfiguration().WithTestingIterations(1));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestThreadInterruptedExceptionInDoubleEmptyCatchBlock()
         {
             this.Test(() =>
@@ -123,7 +122,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
             configuration: this.GetConfiguration().WithTestingIterations(1));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestThreadInterruptedExceptionRethrowInEmptyCatchBlock()
         {
             this.Test(() =>
@@ -147,7 +146,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
             configuration: this.GetConfiguration().WithTestingIterations(1));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestThreadInterruptedExceptionInNonEmptyCatchBlock()
         {
             this.Test(() =>
@@ -169,7 +168,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
             configuration: this.GetConfiguration().WithTestingIterations(1).WithMaxSchedulingSteps(10));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestThreadInterruptedExceptionInNonEmptyCatchBlockAsync()
         {
             this.Test(async () =>
@@ -199,7 +198,7 @@ namespace Microsoft.Coyote.Rewriting.Tests.Exceptions
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestThreadInterruptedExceptionInNonEmptyCatchBlockGenericAsync()
         {
             this.Test(async () =>

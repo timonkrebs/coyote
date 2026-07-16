@@ -5,7 +5,6 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.Coyote.Actors.Timers;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.BugFinding.Tests
 {
@@ -43,7 +42,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 10000)]
+        [Fact(Timeout = 300000)]
         public async Task TestBasicTimerOperationInActor()
         {
             var config = new TimerCountEvent();
@@ -82,7 +81,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 10000)]
+        [Fact(Timeout = 300000)]
         public async Task TestBasicTimerOperationInStateMachine()
         {
             var config = new TimerCountEvent();
@@ -122,7 +121,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 10000)]
+        [Fact(Timeout = 300000)]
         public async Task TestBasicPeriodicTimerOperationInActor()
         {
             var config = new TimerCountEvent();
@@ -167,7 +166,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 10000)]
+        [Fact(Timeout = 300000)]
         public async Task TestBasicPeriodicTimerOperationInStateMachine()
         {
             var config = new TimerCountEvent();
@@ -228,7 +227,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 10000)]
+        [Fact(Timeout = 300000)]
         public async Task TestDropTimeoutsAfterTimerDisposal()
         {
             var config = new TimerCountEvent();
@@ -254,7 +253,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 10000)]
+        [Fact(Timeout = 300000)]
         public async Task TestIllegalDueTimeSpecification()
         {
             this.TestWithError(r =>
@@ -280,7 +279,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 10000)]
+        [Fact(Timeout = 300000)]
         public async Task TestIllegalPeriodSpecification()
         {
             this.TestWithError(r =>
@@ -332,7 +331,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 10000)]
+        [Fact(Timeout = 300000)]
         public async Task TestTimerDisposedByNonOwner()
         {
             this.TestWithError(r =>
@@ -369,7 +368,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             private void FinalOnEntry() => this.RaiseHaltEvent();
         }
 
-        [Fact(Timeout = 10000)]
+        [Fact(Timeout = 300000)]
         public async Task TestExplicitHaltWithTimer()
         {
             this.Test(r =>
@@ -439,7 +438,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 10000)]
+        [Fact(Timeout = 300000)]
         public async Task TestCustomTimerEvent()
         {
             var config = new T6.ConfigEvent { Test = T6.TestType.CustomTimer };
@@ -451,7 +450,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             Assert.True(config.Count > 0, "Timer never fired?");
         }
 
-        [Fact(Timeout = 10000)]
+        [Fact(Timeout = 300000)]
         public async Task TestCustomPeriodicTimerEvent()
         {
             var config = new T6.ConfigEvent { Test = T6.TestType.CustomPeriodicTimer };

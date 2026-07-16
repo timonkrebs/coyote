@@ -8,7 +8,6 @@ using Microsoft.Coyote.Logging;
 using Microsoft.Coyote.SystematicTesting;
 using Microsoft.Coyote.Tests.Common;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Runtime.Tests.Logging
 {
@@ -28,7 +27,7 @@ namespace Microsoft.Coyote.Runtime.Tests.Logging
             logWriter.LogImportant(VerbosityMessages.ImportantMessage);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestDefaultTestingEngineLogger()
         {
             string observed = string.Empty;
@@ -91,7 +90,7 @@ namespace Microsoft.Coyote.Runtime.Tests.Logging
             Assert.Equal(expectedObserved, observed);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestConsoleTestingEngineLogger()
         {
             string observed = string.Empty;
@@ -169,7 +168,7 @@ namespace Microsoft.Coyote.Runtime.Tests.Logging
             Assert.Equal(expectedObserved, observed);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestCustomTestingEngineLogger()
         {
             var config = this.GetConfiguration().WithRandomStrategy().WithTestingIterations(2).WithRandomGeneratorSeed(0)

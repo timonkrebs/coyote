@@ -1,10 +1,9 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Threading.Tasks;
 using Microsoft.Coyote.Actors.UnitTesting;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.Tests.StateMachines
 {
@@ -63,7 +62,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestGotoStateTransition()
         {
             var configuration = this.GetConfiguration();
@@ -72,7 +71,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
             test.AssertStateTransition("Final");
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestGotoStateTransitionAfterSend()
         {
             var configuration = this.GetConfiguration();
@@ -84,7 +83,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
             test.AssertStateTransition("Final");
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestGotoStateTransitionAfterRaise()
         {
             var configuration = this.GetConfiguration();

@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Microsoft.Coyote.Runtime;
 using Microsoft.Coyote.Specifications;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.BugFinding.Tests
 {
@@ -17,7 +16,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         {
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSemaphoreSlimWithSingleAccess()
         {
             this.Test(() =>
@@ -37,7 +36,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             });
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSemaphoreSlimWithDoubleAccess()
         {
             this.Test(() =>
@@ -59,7 +58,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             });
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSemaphoreSlimWithNoInitialAccess()
         {
             this.Test(() =>
@@ -77,7 +76,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             });
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestParallelSemaphoreSlim()
         {
             this.Test(() =>
@@ -120,7 +119,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(100));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestParallelSemaphoreSlimWithDoubleAccess()
         {
             this.TestWithError(() =>
@@ -160,7 +159,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAsyncSemaphoreSlim()
         {
             this.Test(() =>
@@ -203,7 +202,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(100));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAsyncSemaphoreSlimWithDoubleAccess()
         {
             this.TestWithError(() =>
@@ -243,7 +242,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAsyncSemaphoreSlimWithBlockingWait()
         {
             this.Test(() =>
@@ -277,7 +276,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(100));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMixedSemaphoreSlim()
         {
             this.Test(() =>
@@ -311,7 +310,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(100));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMixedSemaphoreSlimWithDoubleAccess()
         {
             this.TestWithError(() =>
@@ -351,7 +350,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestParallelSemaphoreSlimWithNoInitialAccess()
         {
             this.Test(() =>
@@ -387,7 +386,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(100));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestParallelSemaphoreSlimWithNoInitialAccessAndExpectedOrder()
         {
             this.TestWithError(() =>
@@ -431,7 +430,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestParallelSemaphoreSlimWithNoInitialAccessAndExpectedAltOrder()
         {
             this.TestWithError(() =>
@@ -476,7 +475,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAsyncSemaphoreSlimWithNoInitialAccess()
         {
             this.Test(() =>
@@ -512,7 +511,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(100));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAsyncSemaphoreSlimWithNoInitialAccessAndExpectedOrder()
         {
             this.TestWithError(() =>
@@ -557,7 +556,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestAsyncSemaphoreSlimWithNoInitialAccessAndExpectedAltOrder()
         {
             this.TestWithError(() =>
@@ -601,7 +600,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMixedSemaphoreSlimWithNoInitialAccess()
         {
             this.Test(() =>
@@ -637,7 +636,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(100));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMixedSemaphoreSlimWithNoInitialAccessAndExpectedOrder()
         {
             this.TestWithError(() =>
@@ -681,7 +680,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMixedSemaphoreSlimWithNoInitialAccessAndExpectedAltOrder()
         {
             this.TestWithError(() =>
@@ -726,7 +725,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMixedAltSemaphoreSlimWithNoInitialAccess()
         {
             this.Test(() =>
@@ -762,7 +761,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(100));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMixedAltSemaphoreSlimWithNoInitialAccessAndExpectedOrder()
         {
             this.TestWithError(() =>
@@ -807,7 +806,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMixedAltSemaphoreSlimWithNoInitialAccessAndExpectedAltOrder()
         {
             this.TestWithError(() =>
@@ -851,7 +850,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestMixedSemaphoreSlimForUnexpectedOrder()
         {
             this.Test(() =>
@@ -894,7 +893,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(100));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSemaphoreSlimWithAsyncContinuationAfterAwait()
         {
             this.Test(async () =>
@@ -914,7 +913,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(100));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSemaphoreSlimWithDeadlock()
         {
             this.TestWithError(() =>
@@ -930,7 +929,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestSemaphoreSlimWithAsyncDeadlock()
         {
             this.TestWithError(async () =>

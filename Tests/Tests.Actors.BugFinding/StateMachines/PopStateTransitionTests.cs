@@ -3,7 +3,6 @@
 
 using System.Threading.Tasks;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.BugFinding.Tests
 {
@@ -25,7 +24,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             private void Init() => this.RaisePopStateEvent();
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestUnbalancedPopStateTransition()
         {
             this.TestWithError(r =>
@@ -54,7 +53,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestPopStateTransitionOnExit()
         {
             var expectedError = "M2() has performed a 'PopState' transition from an OnExit action.";

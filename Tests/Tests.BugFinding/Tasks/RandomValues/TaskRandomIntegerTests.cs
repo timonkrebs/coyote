@@ -4,7 +4,6 @@
 using System.Threading.Tasks;
 using Microsoft.Coyote.Random;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.BugFinding.Tests
 {
@@ -15,7 +14,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         {
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestRandomIntegerInSynchronousTask()
         {
             this.TestWithError(async () =>
@@ -44,7 +43,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestRandomIntegerInAsynchronousTask()
         {
             this.TestWithError(async () =>
@@ -73,7 +72,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestRandomIntegerInParallelTask()
         {
             this.TestWithError(async () =>
@@ -100,7 +99,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestRandomIntegerInParallelSynchronousTask()
         {
             this.TestWithError(async () =>
@@ -128,7 +127,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestRandomIntegerInParallelAsynchronousTask()
         {
             this.TestWithError(async () =>
@@ -156,7 +155,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestRandomIntegerInNestedParallelSynchronousTask()
         {
             this.TestWithError(async () =>

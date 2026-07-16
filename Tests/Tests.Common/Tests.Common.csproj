@@ -5,8 +5,10 @@
     <RootNamespace>Microsoft.Coyote.Tests.Common</RootNamespace>
     <OutputPath>.\bin\</OutputPath>
     <NetStandard2Supported>false</NetStandard2Supported>
+    <Framework462Supported>false</Framework462Supported>
+    <Framework472Supported>true</Framework472Supported>
     <IsPackable>false</IsPackable>
-    <NoWarn>$(NoWarn),1591,1998,xUnit1030,xUnit1031</NoWarn>
+    <NoWarn>$(NoWarn),1591,1998,xUnit1030,xUnit1031,xUnit1051</NoWarn>
   </PropertyGroup>
   <Import Project="..\..\Common\build.props" />
   <Import Project="..\..\Common\key.props" />
@@ -14,6 +16,9 @@
     <ProjectReference Include="..\..\Source\Test\Test.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="xunit" Version="2.9.3" />
+    <!-- Shared test library: references the extensibility/assert split instead of the
+         'xunit.v3' metapackage, which is reserved for the runnable test projects. -->
+    <PackageReference Include="xunit.v3.extensibility.core" Version="3.2.2" />
+    <PackageReference Include="xunit.v3.assert" Version="3.2.2" />
   </ItemGroup>
 </Project>

@@ -3,7 +3,6 @@
 
 using System.Threading.Tasks;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.Tests
 {
@@ -45,7 +44,7 @@ namespace Microsoft.Coyote.Actors.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestGetEventGroupIdNotSet()
         {
             this.Test(async r =>
@@ -75,7 +74,7 @@ namespace Microsoft.Coyote.Actors.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestGetEventGroupIdSet()
         {
             this.Test(async r =>

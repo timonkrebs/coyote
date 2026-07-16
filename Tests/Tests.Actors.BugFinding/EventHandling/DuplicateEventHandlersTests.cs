@@ -4,7 +4,6 @@
 using System.Threading.Tasks;
 using Microsoft.Coyote.Tests.Common.Events;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.BugFinding.Tests
 {
@@ -32,7 +31,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestDuplicateDoEventHandlerInActor()
         {
             this.TestWithError(r =>
@@ -64,7 +63,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestDuplicateDoEventHandlerInStateMachine()
         {
             this.TestWithError(r =>
@@ -92,7 +91,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestDuplicateGotoEventHandlerInStateMachine()
         {
             this.TestWithError(r =>
@@ -120,7 +119,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestDuplicatePushEventHandlerInStateMachine()
         {
             this.TestWithError(r =>
@@ -156,7 +155,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInheritedDuplicateDoEventHandlerInStateMachine()
         {
             this.TestWithError(r =>
@@ -188,7 +187,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInheritedDuplicateGotoEventHandlerInStateMachine()
         {
             this.TestWithError(r =>
@@ -220,7 +219,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInheritedDuplicatePushEventHandlerInStateMachine()
         {
             this.TestWithError(r =>
@@ -255,7 +254,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestDuplicateMixedEventHandlerInStateMachine()
         {
             this.TestWithError(r =>

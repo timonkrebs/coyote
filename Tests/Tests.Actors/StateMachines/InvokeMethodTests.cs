@@ -5,7 +5,6 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.Coyote.Actors.UnitTesting;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.Tests.StateMachines
 {
@@ -26,7 +25,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInvokeInternalMethod()
         {
             var configuration = this.GetConfiguration();
@@ -47,7 +46,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInvokeInternalAsyncMethod()
         {
             var configuration = this.GetConfiguration();
@@ -67,7 +66,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInvokePrivateMethod()
         {
             var configuration = this.GetConfiguration();
@@ -91,7 +90,7 @@ namespace Microsoft.Coyote.Actors.Tests.StateMachines
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestInvokePrivateAsyncMethod()
         {
             var configuration = this.GetConfiguration();

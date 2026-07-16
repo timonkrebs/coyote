@@ -4,7 +4,6 @@
 using System.Threading.Tasks;
 using Microsoft.Coyote.Tests.Common.Events;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.BugFinding.Tests
 {
@@ -73,7 +72,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventHandlerInActor1()
         {
             this.TestWithError(r =>
@@ -99,7 +98,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventHandlerInActor2()
         {
             this.TestWithError(r =>
@@ -119,7 +118,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventHandlerInActor3()
         {
             this.TestWithError(r =>
@@ -161,7 +160,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventHandlerInStateMachine1()
         {
             this.TestWithError(r =>
@@ -192,7 +191,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventHandlerInStateMachine2()
         {
             this.TestWithError(r =>
@@ -228,7 +227,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventHandlerInStateMachine3()
         {
             this.TestWithError(r =>
@@ -278,7 +277,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventHandlerInStateMachine4()
         {
             this.TestWithError(r =>
@@ -316,7 +315,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventHandlerInStateMachine5()
         {
             this.TestWithError(r =>
@@ -349,7 +348,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventHandlerInStateMachine6()
         {
             this.TestWithError(r =>
@@ -392,7 +391,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventHandlerInStateMachine7()
         {
             this.TestWithError(r =>
@@ -444,7 +443,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventHandlerInStateMachine8()
         {
             this.TestWithError(r =>
@@ -496,7 +495,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventHandlerInStateMachine9()
         {
             this.TestWithError(r =>
@@ -547,7 +546,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventHandlerInStateMachine10()
         {
             this.TestWithError(r =>
@@ -604,7 +603,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventHandlerInStateMachine11()
         {
             this.TestWithError(r =>
@@ -664,7 +663,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventHandlerInStateMachine12()
         {
             this.TestWithError(r =>
@@ -721,7 +720,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventHandlerInStateMachine13()
         {
             this.TestWithError(r =>
@@ -768,7 +767,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventHandlerInStateMachine14()
         {
             this.TestWithError(r =>
@@ -804,7 +803,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventHandlerInStateMachine15()
         {
             this.TestWithError(r =>
@@ -855,7 +854,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventHandlerInStateMachine16()
         {
             this.TestWithError(r =>
@@ -902,7 +901,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventHandlerInStateMachine17()
         {
             this.TestWithError(r =>
@@ -934,7 +933,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventHandlerInStateMachine18()
         {
             this.TestWithError(r =>
@@ -987,7 +986,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventHandlerInStateMachine19()
         {
             this.TestWithError(r =>
@@ -1017,7 +1016,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventHandlerInStateMachine20()
         {
             this.Test(r =>
@@ -1115,7 +1114,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventHandlerInStateMachine21()
         {
             this.TestWithError(r =>
@@ -1220,7 +1219,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventHandlerInStateMachine22()
         {
             this.TestWithError(r =>
@@ -1317,7 +1316,7 @@ namespace Microsoft.Coyote.Actors.BugFinding.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEventHandlerInStateMachine23()
         {
             this.TestWithError(r =>

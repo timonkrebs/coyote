@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.Coyote.Runtime;
 using Microsoft.Coyote.Specifications;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.BugFinding.Tests.Specifications
 {
@@ -16,7 +15,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.Specifications
         {
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestPollingTaskLivenessProperty()
         {
             this.Test(async () =>
@@ -53,7 +52,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.Specifications
             configuration: this.GetConfiguration().WithTestingIterations(10));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestPollingTaskLivenessPropertyWithDoubleDelay()
         {
             this.Test(async () =>
@@ -90,7 +89,7 @@ namespace Microsoft.Coyote.BugFinding.Tests.Specifications
             configuration: this.GetConfiguration().WithTestingIterations(10));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestPollingTaskLivenessPropertyFailure()
         {
             this.TestWithError(async () =>

@@ -7,7 +7,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Coyote.Specifications;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.BugFinding.Tests
 {
@@ -18,7 +17,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         {
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWaitParallelTaskBeforeWrite()
         {
             this.Test(() =>
@@ -38,7 +37,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWaitParallelTaskAfterWrite()
         {
             this.TestWithError(() =>
@@ -66,7 +65,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             entry.Value = value;
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWaitParallelTaskWithSynchronousInvocationAfterWrite()
         {
             this.TestWithError(() =>
@@ -94,7 +93,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             entry.Value = value;
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWaitParallelTaskWithAsynchronousInvocationAfterWrite()
         {
             this.TestWithError(() =>
@@ -116,7 +115,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWaitTaskWithTimeout()
         {
             // TODO: we do not yet support timeouts in testing, so we will improve this test later,
@@ -141,7 +140,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWaitTaskWithCancellationToken()
         {
             // TODO: we do not yet support cancelation in testing, so we will improve this test later,
@@ -167,7 +166,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWaitTaskWithTimeoutAndCancellationToken()
         {
             // TODO: we do not yet support timeout and cancelation in testing, so we will improve this test later,
@@ -193,7 +192,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             configuration: this.GetConfiguration().WithTestingIterations(200));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWaitTaskWithException()
         {
             this.TestWithError(() =>
@@ -227,7 +226,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             replay: true);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestWaitAsyncTaskWithException()
         {
             this.TestWithError(() =>

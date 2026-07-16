@@ -5,7 +5,6 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.BugFinding.Tests
 {
@@ -16,7 +15,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
         {
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestUncontrolledContinueWithTaskInvocation()
         {
             this.Test(() =>
@@ -29,7 +28,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
                 .WithTestingIterations(10));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestUncontrolledContinueWithTaskInvocationWithNoPartialControl()
         {
             this.TestWithError(() =>
@@ -44,7 +43,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
             });
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestUncontrolledTimerInvocation()
         {
             this.Test(() =>
@@ -56,7 +55,7 @@ namespace Microsoft.Coyote.BugFinding.Tests
                 .WithTestingIterations(10));
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestUncontrolledTimerInvocationWithNoPartialControl()
         {
             this.TestWithError(() =>

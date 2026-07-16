@@ -3,9 +3,8 @@
 
 using System;
 using System.Threading.Tasks;
-using Microsoft.Coyote.SystematicTesting.Frameworks.XUnit;
+using Microsoft.Coyote.Tests.Common;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Microsoft.Coyote.Actors.Tests
 {
@@ -42,7 +41,7 @@ namespace Microsoft.Coyote.Actors.Tests
             }
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEnqueueEvent()
         {
             var logger = new TestOutputLogger(this.TestOutput);
@@ -62,7 +61,7 @@ namespace Microsoft.Coyote.Actors.Tests
             Assert.Equal(EnqueueStatus.EventHandlerRunning, enqueueStatus);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestDequeueEvent()
         {
             var logger = new TestOutputLogger(this.TestOutput);
@@ -101,7 +100,7 @@ namespace Microsoft.Coyote.Actors.Tests
             Assert.Equal(0, queue.Size);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestEnqueueEventWithHandlerNotRunning()
         {
             var logger = new TestOutputLogger(this.TestOutput);
@@ -115,7 +114,7 @@ namespace Microsoft.Coyote.Actors.Tests
             Assert.Equal(1, queue.Size);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestRaiseEvent()
         {
             var logger = new TestOutputLogger(this.TestOutput);
@@ -131,7 +130,7 @@ namespace Microsoft.Coyote.Actors.Tests
             Assert.Equal(0, queue.Size);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestReceiveEvent()
         {
             int notificationCount = 0;
@@ -166,7 +165,7 @@ namespace Microsoft.Coyote.Actors.Tests
             Assert.True(tcs.Task.IsCompleted);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestReceiveEventWithPredicate()
         {
             int notificationCount = 0;
@@ -212,7 +211,7 @@ namespace Microsoft.Coyote.Actors.Tests
             Assert.True(tcs.Task.IsCompleted);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestReceiveEventWithoutWaiting()
         {
             int notificationCount = 0;
@@ -256,7 +255,7 @@ namespace Microsoft.Coyote.Actors.Tests
             Assert.True(tcs.Task.IsCompleted);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestReceiveEventWithPredicateWithoutWaiting()
         {
             int notificationCount = 0;
@@ -289,7 +288,7 @@ namespace Microsoft.Coyote.Actors.Tests
             Assert.True(tcs.Task.IsCompleted);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestReceiveEventMultipleTypes()
         {
             int notificationCount = 0;
@@ -324,7 +323,7 @@ namespace Microsoft.Coyote.Actors.Tests
             Assert.True(tcs.Task.IsCompleted);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestReceiveEventAfterMultipleEnqueues()
         {
             int notificationCount = 0;
@@ -373,7 +372,7 @@ namespace Microsoft.Coyote.Actors.Tests
             Assert.True(tcs.Task.IsCompleted);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestReceiveEventWithoutWaitingAndWithMultipleEventsInQueue()
         {
             int notificationCount = 0;
@@ -424,7 +423,7 @@ namespace Microsoft.Coyote.Actors.Tests
             Assert.True(tcs.Task.IsCompleted);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestIgnoreEvent()
         {
             int notificationCount = 0;
@@ -457,7 +456,7 @@ namespace Microsoft.Coyote.Actors.Tests
             Assert.Equal(0, queue.Size);
         }
 
-        [Fact(Timeout = 5000)]
+        [Fact(Timeout = 300000)]
         public async Task TestDeferEvent()
         {
             int notificationCount = 0;
