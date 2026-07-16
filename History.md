@@ -3,7 +3,10 @@
   `System.Threading.Lock` type introduced in .NET 9: the binary rewriting
   engine now models `Enter`, `TryEnter`, `Exit`, `EnterScope` and
   `Lock.Scope.Dispose` (the pattern that the C# 13+ `lock` statement lowers
-  to), as well as the `IsHeldByCurrentThread` property.
+  to), as well as the `IsHeldByCurrentThread` property. The model keys its
+  synchronization on a per-instance surrogate, so a modeled `Lock` and a
+  `Monitor` lock on the same instance remain independent mechanisms, as they
+  are at runtime.
 - Added support for the `net10.0` target framework, which is now the primary
   target framework.
 - Dropped support for the end-of-life `net6.0` target framework; the optional
