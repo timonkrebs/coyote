@@ -330,6 +330,15 @@ Items 1–5 carry the context gathered while executing the upgrade (#3, #4).
    value, so the rewriting pass must handle the `EnterScope`/`Dispose` pair
    rather than a plain method-call substitution. Add bug-finding tests
    mirroring the existing `Monitor` tests.
+   **Status: delivered** (`Rewriting.Types.Threading.Lock`, keyed on a
+   per-instance surrogate so `Lock` and `Monitor` synchronization on the same
+   instance stay independent, as at runtime). Residual fidelity gap, shared
+   with the `Monitor` model: `TryEnter` and the timeout overloads are modeled
+   as blocking acquires that always succeed, so failed-probe fallback paths
+   are never explored. Giving both models a genuine nonblocking probe needs a
+   `SynchronizedBlock.TryLock` that consults ownership at a scheduling point
+   instead of waiting; out-of-LIFO disposal of manually held `Lock.Scope`s is
+   likewise not modeled (controlled scopes carry no lock identity).
 2. **Intercept the newer `Interlocked` overloads.** .NET 9+ added
    `Interlocked.Exchange`/`CompareExchange` overloads for small integer types
    (`byte`, `sbyte`, `short`, `ushort`, plus widened `And`/`Or` coverage).
