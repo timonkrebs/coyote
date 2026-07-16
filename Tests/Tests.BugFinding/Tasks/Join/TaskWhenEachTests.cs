@@ -154,6 +154,39 @@ namespace Microsoft.Coyote.BugFinding.Tests
         }
 
         [Fact(Timeout = 5000)]
+        public void TestWhenEachWithCancellationDuringWait()
+        {
+            this.Test(async () =>
+            {
+                // A token canceled by ANOTHER operation while the stream is waiting on tasks
+                // that never complete must wake the wait and cancel the stream, rather than
+                // leaving the consumer paused forever (which would be reported as a deadlock).
+                using var cts = new CancellationTokenSource();
+                var tcs = new TaskCompletionSource<bool>();
+                Task canceler = Task.Run(() => cts.Cancel());
+
+                bool canceled = false;
+                var enumerator = Task.WhenEach(tcs.Task).GetAsyncEnumerator(cts.Token);
+                try
+                {
+                    await enumerator.MoveNextAsync();
+                }
+                catch (OperationCanceledException)
+                {
+                    canceled = true;
+                }
+                finally
+                {
+                    await enumerator.DisposeAsync();
+                }
+
+                Specification.Assert(canceled, "The canceled token did not cancel the waiting stream.");
+                await canceler;
+            },
+            this.GetConfiguration().WithTestingIterations(100));
+        }
+
+        [Fact(Timeout = 5000)]
         public void TestWhenEachExploresCompletionOrders()
         {
             this.TestWithError(async () =>

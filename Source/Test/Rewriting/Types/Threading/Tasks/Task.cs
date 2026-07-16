@@ -417,15 +417,18 @@ namespace Microsoft.Coyote.Rewriting.Types.Threading.Tasks
             await SystemTask.CompletedTask;
             while (remaining.Count > 0)
             {
-                // The token arrives through WithCancellation/GetAsyncEnumerator. The invoked
-                // API observes it while waiting for the next completion; the controlled wait
-                // has no token, so it is approximated at the top of every round.
+                // The token arrives through WithCancellation/GetAsyncEnumerator. Like the
+                // invoked API, it is observed both before and during the wait: the controlled
+                // pause below also wakes when the token is canceled, so a cancellation issued
+                // by another controlled operation while every remaining task is still running
+                // surfaces as OperationCanceledException instead of a reported deadlock.
                 cancellationToken.ThrowIfCancellationRequested();
 
                 var runtime = CoyoteRuntime.Current;
                 if (runtime.SchedulingPolicy != SchedulingPolicy.None)
                 {
-                    TaskServices.WaitUntilAnyTaskCompletes(runtime, remaining.ToArray());
+                    TaskServices.WaitUntilAnyTaskCompletesOrCanceled(runtime, remaining.ToArray(), cancellationToken);
+                    cancellationToken.ThrowIfCancellationRequested();
                 }
 
                 int index = remaining.FindIndex(t => t.IsCompleted);
@@ -433,8 +436,8 @@ namespace Microsoft.Coyote.Rewriting.Types.Threading.Tasks
                 {
                     // Under the fuzzing policy the controlled wait only injects a delay
                     // rather than guaranteeing a completion, so fall through to the real
-                    // wait, exactly like the WaitAny model above does.
-                    index = SystemTask.WaitAny(remaining.ToArray());
+                    // (token-aware) wait, exactly like the WaitAny model above does.
+                    index = SystemTask.WaitAny(remaining.ToArray(), cancellationToken);
                 }
 
                 TTask next = remaining[index];
