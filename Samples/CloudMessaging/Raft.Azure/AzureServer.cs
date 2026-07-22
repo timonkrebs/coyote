@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Azure.ServiceBus.Management;
 using Microsoft.Coyote.Actors;
 using Microsoft.Coyote.Random;
 using Microsoft.Coyote.Runtime;
@@ -23,11 +22,6 @@ namespace Microsoft.Coyote.Samples.CloudMessaging
         /// The Coyote runtime responsible for executing the hosted state machine.
         /// </summary>
         private readonly IActorRuntime Runtime;
-
-        /// <summary>
-        /// Client providing access to the Azure Service Bus account.
-        /// </summary>
-        private readonly ManagementClient ManagementClient;
 
         /// <summary>
         /// Connection string to the Azure Service Bus account.
@@ -93,7 +87,6 @@ namespace Microsoft.Coyote.Samples.CloudMessaging
             int serverId, int numServers, ActorId clusterManager)
         {
             this.Runtime = runtime;
-            this.ManagementClient = new ManagementClient(connectionString);
             this.ConnectionString = connectionString;
             this.TopicName = topicName;
             this.NumServers = numServers;

@@ -85,7 +85,13 @@ function Invoke-DotnetTest([String]$dotnet, [String]$project, [String]$target, [
 
     $start_time = Get-Date
     $error_msg = "Failed to test '$project'"
-    Invoke-ToolCommand -tool $dotnet -cmd $command -error_msg $error_msg
+
+    # Do not exit on failure yet: first parse the results file so a failing
+    # run also reports which tests failed (the interesting detail is often
+    # megabytes above the end of the CI log otherwise).
+    Write-Host "Invoking $dotnet $command"
+    Invoke-Expression "$dotnet $command"
+    $test_exit_code = $LASTEXITCODE
 
     # The 'trx' logger above writes a results file into the project's
     # TestResults directory. If this run produced no new results file then no
@@ -104,13 +110,25 @@ function Invoke-DotnetTest([String]$dotnet, [String]$project, [String]$target, [
     $counters = Get-TestResultCounters -path $trx.FullName
     if ($null -eq $counters) {
         Write-Comment -prefix "....." -text "Unable to parse the test counters from '$($trx.Name)'." -color "yellow"
-        return
+    } else {
+        Write-Comment -prefix "....." -text "Executed $($counters.executed) tests: $($counters.passed) passed, $($counters.failed) failed" -color "green"
+        foreach ($failed_test in $counters.failedTests) {
+            Write-Comment -prefix "....." -text "Failed: $failed_test" -color "red"
+        }
+
+        if ($env:GITHUB_STEP_SUMMARY) {
+            "| $project | $framework | $($counters.total) | $($counters.passed) | $($counters.failed) | $($counters.notExecuted) |" | `
+                Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Encoding utf8 -Append
+            foreach ($failed_test in $counters.failedTests) {
+                "| ``$failed_test`` | $framework | failed | | | |" | `
+                    Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Encoding utf8 -Append
+            }
+        }
     }
 
-    Write-Comment -prefix "....." -text "Executed $($counters.executed) tests: $($counters.passed) passed, $($counters.failed) failed" -color "green"
-    if ($env:GITHUB_STEP_SUMMARY) {
-        "| $project | $framework | $($counters.total) | $($counters.passed) | $($counters.failed) | $($counters.notExecuted) |" | `
-            Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Encoding utf8 -Append
+    if (-not ($test_exit_code -eq 0)) {
+        Write-Error $error_msg
+        exit $test_exit_code
     }
 }
 
@@ -119,17 +137,29 @@ function Invoke-DotnetTest([String]$dotnet, [String]$project, [String]$target, [
 # and can grow far beyond the document size limits of the '[xml]' cast.
 function Get-TestResultCounters([String]$path) {
     $counters = $null
+    $failed_tests = @()
     try {
         $reader = [System.Xml.XmlReader]::Create($path)
         try {
             while ($reader.Read()) {
-                if ($reader.NodeType -eq [System.Xml.XmlNodeType]::Element -and $reader.LocalName -eq "Counters") {
+                if ($reader.NodeType -ne [System.Xml.XmlNodeType]::Element) {
+                    continue
+                }
+
+                if ($reader.LocalName -eq "UnitTestResult") {
+                    # The result elements precede the summary, so collect the
+                    # failed test names in the same forward-only pass.
+                    if ($reader.GetAttribute("outcome") -eq "Failed") {
+                        $failed_tests += $reader.GetAttribute("testName")
+                    }
+                } elseif ($reader.LocalName -eq "Counters") {
                     $counters = @{
                         total = $reader.GetAttribute("total")
                         executed = $reader.GetAttribute("executed")
                         passed = $reader.GetAttribute("passed")
                         failed = $reader.GetAttribute("failed")
                         notExecuted = $reader.GetAttribute("notExecuted")
+                        failedTests = $failed_tests
                     }
                     break
                 }

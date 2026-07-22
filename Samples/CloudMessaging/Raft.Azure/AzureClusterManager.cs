@@ -1,10 +1,9 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System.Runtime.Serialization;
-using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Azure.ServiceBus;
+using Azure.Messaging.ServiceBus;
 using Microsoft.Coyote.Actors;
 using Newtonsoft.Json;
 
@@ -15,90 +14,89 @@ namespace Microsoft.Coyote.Samples.CloudMessaging
         [DataContract]
         public class RegisterMessageBusEvent : Event
         {
-            public ITopicClient TopicClient;
+            public ServiceBusSender TopicSender;
         }
 
-        public ITopicClient TopicClient;
+        public ServiceBusSender TopicSender;
 
         protected override Task OnInitializeAsync(Event initialEvent)
         {
             var reg = initialEvent as RegisterMessageBusEvent;
-            this.TopicClient = reg.TopicClient;
+            this.TopicSender = reg.TopicSender;
             return base.OnInitializeAsync(initialEvent);
         }
 
         public override async Task BroadcastVoteRequestAsync(Event e)
         {
             var request = e as VoteRequestEvent;
-            Message message = new Message(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(request)))
+            ServiceBusMessage message = new ServiceBusMessage(JsonConvert.SerializeObject(request))
             {
-                Label = "VoteRequest",
+                Subject = "VoteRequest",
                 ReplyTo = request.CandidateId
             };
 
-            await this.TopicClient.SendAsync(message);
+            await this.TopicSender.SendMessageAsync(message);
         }
 
         public override async Task SendVoteResponseAsync(Event e)
         {
             var response = e as VoteResponseEvent;
 
-            Message message = new Message(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(response)))
+            ServiceBusMessage message = new ServiceBusMessage(JsonConvert.SerializeObject(response))
             {
-                Label = "VoteResponse",
+                Subject = "VoteResponse",
                 To = response.TargetId
             };
 
-            await this.TopicClient.SendAsync(message);
+            await this.TopicSender.SendMessageAsync(message);
         }
 
         public override async Task BroadcastClientRequestAsync(Event e)
         {
             var req = e as ClientRequestEvent;
-            Message message = new Message(Encoding.UTF8.GetBytes(
-                JsonConvert.SerializeObject(req)))
+            ServiceBusMessage message = new ServiceBusMessage(JsonConvert.SerializeObject(req))
             {
-                Label = "ClientRequest"
+                Subject = "ClientRequest"
             };
 
-            await this.TopicClient.SendAsync(message);
+            await this.TopicSender.SendMessageAsync(message);
         }
 
         public override async Task SendClientResponseAsync(Event e)
         {
             var response = e as ClientResponseEvent;
-            Message message = new Message(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(response)))
+            ServiceBusMessage message = new ServiceBusMessage(JsonConvert.SerializeObject(response))
             {
-                Label = "ClientResponse"
+                Subject = "ClientResponse"
             };
 
-            await this.TopicClient.SendAsync(message);
+            await this.TopicSender.SendMessageAsync(message);
         }
 
         public override async Task SendAppendEntriesRequestAsync(Event e)
         {
             var request = e as AppendLogEntriesRequestEvent;
-            Message message = new Message(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(request)))
+            ServiceBusMessage message = new ServiceBusMessage(JsonConvert.SerializeObject(request))
             {
-                Label = "AppendEntriesRequest",
+                Subject = "AppendEntriesRequest",
                 To = request.To,
                 ReplyTo = request.LeaderId
             };
 
-            await this.TopicClient.SendAsync(message);
+            await this.TopicSender.SendMessageAsync(message);
         }
 
         public override async Task SendAppendEntriesResponseAsync(Event e)
         {
             var response = e as AppendLogEntriesResponseEvent;
-            Message message = new Message(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(response)))
+            ServiceBusMessage message = new ServiceBusMessage(JsonConvert.SerializeObject(response))
             {
-                Label = "AppendEntriesResponse",
+                Subject = "AppendEntriesResponse",
                 To = response.To,
                 ReplyTo = response.SenderId
             };
 
-            await this.TopicClient.SendAsync(message);
+            await this.TopicSender.SendMessageAsync(message);
         }
     }
 }

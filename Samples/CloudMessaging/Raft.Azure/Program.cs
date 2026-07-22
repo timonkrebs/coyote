@@ -7,8 +7,8 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Azure.ServiceBus;
-using Microsoft.Azure.ServiceBus.Management;
+using Azure.Messaging.ServiceBus;
+using Azure.Messaging.ServiceBus.Administration;
 using Microsoft.Coyote.Actors;
 
 namespace Microsoft.Coyote.Samples.CloudMessaging
@@ -155,8 +155,8 @@ namespace Microsoft.Coyote.Samples.CloudMessaging
                 // Otherwise the Message is considered a "broadcast" to all servers and each server will handle it.
                 // The client also has a subcription on the same topic and is how it broadcasts requests and receives
                 // the final response from the elected Leader.
-                var managementClient = new ManagementClient(this.ConnectionString);
-                if (!await managementClient.TopicExistsAsync(this.TopicName))
+                var managementClient = new ServiceBusAdministrationClient(this.ConnectionString);
+                if (!(await managementClient.TopicExistsAsync(this.TopicName)).Value)
                 {
                     await managementClient.CreateTopicAsync(this.TopicName);
                 }
@@ -164,10 +164,9 @@ namespace Microsoft.Coyote.Samples.CloudMessaging
                 // then we need a subscription, whether we are client or server and the subscription name will be
                 // the same as our local actorid.
                 string subscriptionName = (this.ServerId < 0) ? "Client" : $"Server-{this.ServerId}";
-                if (!await managementClient.SubscriptionExistsAsync(this.TopicName, subscriptionName))
+                if (!(await managementClient.SubscriptionExistsAsync(this.TopicName, subscriptionName)).Value)
                 {
-                    await managementClient.CreateSubscriptionAsync(
-                        new SubscriptionDescription(this.TopicName, subscriptionName));
+                    await managementClient.CreateSubscriptionAsync(this.TopicName, subscriptionName);
                 }
 
                 Console.WriteLine("Running " + subscriptionName);
@@ -178,10 +177,12 @@ namespace Microsoft.Coyote.Samples.CloudMessaging
                 // that increases the verbosity level to see the Coyote runtime log.
                 runtime.OnFailure += RuntimeOnFailure;
 
-                var topicClient = new TopicClient(this.ConnectionString, this.TopicName);
+                // The Service Bus client owns the connection; the sender publishes to the topic.
+                await using var serviceBusClient = new ServiceBusClient(this.ConnectionString);
+                var topicSender = serviceBusClient.CreateSender(this.TopicName);
 
-                // cluster manager needs the topic client in order to be able to broadcast messages using Azure Service Bus
-                var clusterManager = runtime.CreateActor(typeof(AzureClusterManager), new AzureClusterManager.RegisterMessageBusEvent() { TopicClient = topicClient });
+                // cluster manager needs the topic sender in order to be able to broadcast messages using Azure Service Bus
+                var clusterManager = runtime.CreateActor(typeof(AzureClusterManager), new AzureClusterManager.RegisterMessageBusEvent() { TopicSender = topicSender });
                 if (this.ServerId < 0)
                 {
                     await this.RunClient(runtime, clusterManager, subscriptionName);

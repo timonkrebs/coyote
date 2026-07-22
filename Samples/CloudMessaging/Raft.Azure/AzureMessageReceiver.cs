@@ -1,12 +1,10 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Azure.ServiceBus;
-using Microsoft.Azure.ServiceBus.Core;
+using Azure.Messaging.ServiceBus;
 using Microsoft.Coyote.Actors;
 using Microsoft.Coyote.Runtime;
 using Newtonsoft.Json;
@@ -19,9 +17,14 @@ namespace Microsoft.Coyote.Samples.CloudMessaging
     internal class AzureMessageReceiver
     {
         /// <summary>
+        /// The client that owns the connection to the Azure Service Bus.
+        /// </summary>
+        private readonly ServiceBusClient Client;
+
+        /// <summary>
         /// The receiver for receiving messages from the topic.
         /// </summary>
-        public IMessageReceiver SubscriptionReceiver;
+        public ServiceBusReceiver SubscriptionReceiver;
 
         /// <summary>
         /// Id of the local actor that owns this cluster manager.
@@ -48,9 +51,9 @@ namespace Microsoft.Coyote.Samples.CloudMessaging
             this.ActorRuntime = runtime;
             this.LocalActorId = actorId;
             this.LocalActorName = (actorId == null) ? "Client" : actorId.Name;
-            this.SubscriptionReceiver = new MessageReceiver(connectionString,
-                EntityNameHelper.FormatSubscriptionPath(topicName, subscriptionName),
-                ReceiveMode.ReceiveAndDelete);
+            this.Client = new ServiceBusClient(connectionString);
+            this.SubscriptionReceiver = this.Client.CreateReceiver(topicName, subscriptionName,
+                new ServiceBusReceiverOptions { ReceiveMode = ServiceBusReceiveMode.ReceiveAndDelete });
         }
 
         public async Task RunAsync(CancellationToken cancellationToken)
@@ -68,23 +71,23 @@ namespace Microsoft.Coyote.Samples.CloudMessaging
             while (!cancellationToken.IsCancellationRequested)
             {
                 // Receive the next message through Azure Service Bus.
-                Message message = await this.SubscriptionReceiver.ReceiveAsync(TimeSpan.FromMilliseconds(50));
+                ServiceBusReceivedMessage message = await this.SubscriptionReceiver.ReceiveMessageAsync(TimeSpan.FromMilliseconds(50));
 
                 // Now if the To field is empty then it is a broadcast (ClientRequest and VoteRequest)
                 // otherwise ignore the message if it was meant for someone else.
                 if (message != null && (string.IsNullOrEmpty(message.To) || message.To == this.LocalActorName))
                 {
                     Event e = default;
-                    string messageBody = Encoding.UTF8.GetString(message.Body);
-                    if (message.Label == "ClientRequest")
+                    string messageBody = message.Body.ToString();
+                    if (message.Subject == "ClientRequest")
                     {
                         e = JsonConvert.DeserializeObject<ClientRequestEvent>(messageBody);
                     }
-                    else if (message.Label == "ClientResponse")
+                    else if (message.Subject == "ClientResponse")
                     {
                         e = JsonConvert.DeserializeObject<ClientResponseEvent>(messageBody);
                     }
-                    else if (message.Label == "VoteRequest")
+                    else if (message.Subject == "VoteRequest")
                     {
                         var request = JsonConvert.DeserializeObject<VoteRequestEvent>(messageBody);
                         // do not broadcast back to ourselves!
@@ -93,15 +96,15 @@ namespace Microsoft.Coyote.Samples.CloudMessaging
                             e = request;
                         }
                     }
-                    else if (message.Label == "VoteResponse")
+                    else if (message.Subject == "VoteResponse")
                     {
                         e = JsonConvert.DeserializeObject<VoteResponseEvent>(messageBody);
                     }
-                    else if (message.Label == "AppendEntriesRequest")
+                    else if (message.Subject == "AppendEntriesRequest")
                     {
                         e = JsonConvert.DeserializeObject<AppendLogEntriesRequestEvent>(messageBody);
                     }
-                    else if (message.Label == "AppendEntriesResponse")
+                    else if (message.Subject == "AppendEntriesResponse")
                     {
                         e = JsonConvert.DeserializeObject<AppendLogEntriesResponseEvent>(messageBody);
                     }
@@ -125,6 +128,7 @@ namespace Microsoft.Coyote.Samples.CloudMessaging
             }
 
             await this.SubscriptionReceiver.CloseAsync();
+            await this.Client.DisposeAsync();
         }
     }
 }

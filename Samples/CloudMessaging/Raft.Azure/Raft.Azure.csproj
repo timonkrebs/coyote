@@ -19,7 +19,10 @@
     <DefineConstants>TRACE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Azure.ServiceBus" Version="4.1.1" />
+    <PackageReference Include="Azure.Messaging.ServiceBus" Version="7.20.2" />
+    <!-- Lifts the transitive 4.x reference from the Service Bus dependency chain up to
+         the version the rest of the closure unifies on (silences MSB3277). -->
+    <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="10.0.10" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
   <ItemGroup>
