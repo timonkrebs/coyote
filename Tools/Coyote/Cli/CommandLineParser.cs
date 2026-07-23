@@ -1,11 +1,9 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
 using System.Collections.Generic;
 using System.CommandLine;
-using System.CommandLine.Builder;
-using System.CommandLine.Invocation;
 using System.CommandLine.Parsing;
 using System.IO;
 using System.Linq;
@@ -44,12 +42,12 @@ namespace Microsoft.Coyote.Cli
         private readonly Command RewriteCommand;
 
         /// <summary>
-        /// Mao from argument names to arguments.
+        /// Map from argument names to arguments.
         /// </summary>
         private readonly Dictionary<string, Argument> Arguments;
 
         /// <summary>
-        /// Mao from option names to options.
+        /// Map from option names to options.
         /// </summary>
         private readonly Dictionary<string, Option> Options;
 
@@ -83,26 +81,26 @@ namespace Microsoft.Coyote.Cli
                 "exhaustive"
             };
 
-            var verbosityOption = new Option<string>(
-                aliases: new[] { "-v", "--verbosity" },
-                getDefaultValue: () => "error",
-                description: "Enable verbosity with an optional verbosity level. " +
-                    $"Allowed values are {string.Join(", ", allowedVerbosityLevels)}. " +
-                    "Skipping the argument sets the verbosity level to 'info'.")
+            var verbosityOption = new Option<string>("--verbosity", "-v")
             {
-                ArgumentHelpName = "LEVEL",
-                Arity = ArgumentArity.ZeroOrOne
+                Description = "Enable verbosity with an optional verbosity level. " +
+                    $"Allowed values are {string.Join(", ", allowedVerbosityLevels)}. " +
+                    "Skipping the argument sets the verbosity level to 'info'.",
+                DefaultValueFactory = _ => "error",
+                HelpName = "LEVEL",
+                Arity = ArgumentArity.ZeroOrOne,
+                Recursive = true
             };
 
-            var consoleLoggingOption = new Option<bool>(
-                name: "--console",
-                description: "Log all runtime messages to the console unless overridden by a custom ILogger.")
+            var consoleLoggingOption = new Option<bool>("--console")
             {
-                Arity = ArgumentArity.Zero
+                Description = "Log all runtime messages to the console unless overridden by a custom ILogger.",
+                Arity = ArgumentArity.Zero,
+                Recursive = true
             };
 
             // Add validators.
-            verbosityOption.AddValidator(result => ValidateOptionValueIsAllowed(result, allowedVerbosityLevels));
+            verbosityOption.Validators.Add(result => ValidateOptionValueIsAllowed(result, allowedVerbosityLevels));
 
             // Create the commands.
             this.TestCommand = this.CreateTestCommand(this.Configuration);
@@ -113,22 +111,25 @@ namespace Microsoft.Coyote.Cli
             var rootCommand = new RootCommand("The Coyote systematic testing tool.\n\n" +
                 $"Learn how to use Coyote at {Documentation.LearnAboutCoyoteUrl}.\nLearn what is new at {Documentation.LearnWhatIsNewUrl}.");
             this.AddGlobalOption(rootCommand, verbosityOption);
-            this.TestCommand.AddGlobalOption(consoleLoggingOption);
-            this.ReplayCommand.AddGlobalOption(consoleLoggingOption);
-            rootCommand.AddCommand(this.TestCommand);
-            rootCommand.AddCommand(this.ReplayCommand);
-            rootCommand.AddCommand(this.RewriteCommand);
+            this.AddGlobalOption(this.TestCommand, consoleLoggingOption);
+            this.AddGlobalOption(this.ReplayCommand, consoleLoggingOption);
+            rootCommand.Subcommands.Add(this.TestCommand);
+            rootCommand.Subcommands.Add(this.ReplayCommand);
+            rootCommand.Subcommands.Add(this.RewriteCommand);
             rootCommand.TreatUnmatchedTokensAsErrors = true;
 
-            var commandLineBuilder = new CommandLineBuilder(rootCommand);
-            commandLineBuilder.UseDefaults();
-            commandLineBuilder.EnablePosixBundling(false);
-
-            var parser = commandLineBuilder.Build();
-            this.Results = parser.Parse(args);
-            if (this.Results.Errors.Any() || IsHelpRequested(this.Results))
+            var parserConfiguration = new ParserConfiguration
             {
-                // There are parsing errors, so invoke the result to print the errors and help message.
+                EnablePosixBundling = false
+            };
+
+            this.Results = rootCommand.Parse(args, parserConfiguration);
+            if (this.Results.Errors.Any() || this.Results.Action is not null)
+            {
+                // There are parsing errors, or a help or version request materialized as a
+                // parse-time action (the command handlers are attached after parsing, so any
+                // action present here cannot be one of them). Invoke the result to print the
+                // errors, help or version message.
                 this.Results.Invoke();
                 this.IsSuccessful = false;
             }
@@ -154,7 +155,7 @@ namespace Microsoft.Coyote.Cli
         /// </summary>
         internal void SetTestCommandHandler(Func<Configuration, ExitCode> testHandler)
         {
-            this.TestCommand.SetHandler((InvocationContext context) => context.ExitCode = (int)testHandler(this.Configuration));
+            this.TestCommand.SetAction(parseResult => (int)testHandler(this.Configuration));
         }
 
         /// <summary>
@@ -162,7 +163,7 @@ namespace Microsoft.Coyote.Cli
         /// </summary>
         internal void SetReplayCommandHandler(Func<Configuration, ExitCode> replayHandler)
         {
-            this.ReplayCommand.SetHandler((InvocationContext context) => context.ExitCode = (int)replayHandler(this.Configuration));
+            this.ReplayCommand.SetAction(parseResult => (int)replayHandler(this.Configuration));
         }
 
         /// <summary>
@@ -170,7 +171,7 @@ namespace Microsoft.Coyote.Cli
         /// </summary>
         internal void SetRewriteCommandHandler(Func<Configuration, RewritingOptions, ExitCode> rewriteHandler)
         {
-            this.RewriteCommand.SetHandler((InvocationContext context) => context.ExitCode = (int)rewriteHandler(
+            this.RewriteCommand.SetAction(parseResult => (int)rewriteHandler(
                 this.Configuration, this.RewritingOptions));
         }
 
@@ -179,34 +180,32 @@ namespace Microsoft.Coyote.Cli
         /// </summary>
         private Command CreateTestCommand(Configuration configuration)
         {
-            var pathArg = new Argument<string>("path", $"Path to the assembly (*.dll, *.exe) to test.")
+            var pathArg = new Argument<string>("path")
             {
+                Description = $"Path to the assembly (*.dll, *.exe) to test.",
                 HelpName = "PATH"
             };
 
-            var methodOption = new Option<string>(
-                aliases: new[] { "-m", "--method" },
-                description: "Suffix of the test method to execute.")
+            var methodOption = new Option<string>("--method", "-m")
             {
-                ArgumentHelpName = "METHOD",
+                Description = "Suffix of the test method to execute.",
+                HelpName = "METHOD",
                 Arity = ArgumentArity.ExactlyOne
             };
 
-            var iterationsOption = new Option<int>(
-                aliases: new[] { "-i", "--iterations" },
-                getDefaultValue: () => (int)configuration.TestingIterations,
-                description: "Number of testing iterations to run.")
+            var iterationsOption = new Option<int>("--iterations", "-i")
             {
-                ArgumentHelpName = "ITERATIONS",
+                Description = "Number of testing iterations to run.",
+                DefaultValueFactory = _ => (int)configuration.TestingIterations,
+                HelpName = "ITERATIONS",
                 Arity = ArgumentArity.ExactlyOne
             };
 
-            var timeoutOption = new Option<int>(
-                aliases: new[] { "-t", "--timeout" },
-                getDefaultValue: () => configuration.TestingTimeout,
-                description: "Timeout in seconds after which no more testing iterations will run (disabled by default).")
+            var timeoutOption = new Option<int>("--timeout", "-t")
             {
-                ArgumentHelpName = "TIMEOUT",
+                Description = "Timeout in seconds after which no more testing iterations will run (disabled by default).",
+                DefaultValueFactory = _ => configuration.TestingTimeout,
+                HelpName = "TIMEOUT",
                 Arity = ArgumentArity.ExactlyOne
             };
 
@@ -221,26 +220,24 @@ namespace Microsoft.Coyote.Cli
                 "q-learning"
             };
 
-            var strategyOption = new Option<string>(
-                aliases: new[] { "-s", "--strategy" },
-                getDefaultValue: () => configuration.ExplorationStrategy.GetName(),
-                description: "Set exploration strategy to use during testing. The exploration strategy controls " +
+            var strategyOption = new Option<string>("--strategy", "-s")
+            {
+                Description = "Set exploration strategy to use during testing. The exploration strategy controls " +
                     "all scheduling decisions and nondeterministic choices. Note that explicitly setting this " +
                     "value disables the default exploration mode that uses a tuned portfolio of strategies. " +
-                    $"Allowed values are {string.Join(", ", allowedStrategies)}.")
-            {
-                ArgumentHelpName = "STRATEGY",
+                    $"Allowed values are {string.Join(", ", allowedStrategies)}.",
+                DefaultValueFactory = _ => configuration.ExplorationStrategy.GetName(),
+                HelpName = "STRATEGY",
                 Arity = ArgumentArity.ExactlyOne
             };
 
-            var strategyValueOption = new Option<int>(
-                aliases: new[] { "-sv", "--strategy-value" },
-                description: "Set exploration strategy specific value. Supported strategies (and values): " +
+            var strategyValueOption = new Option<int>("--strategy-value", "-sv")
+            {
+                Description = "Set exploration strategy specific value. Supported strategies (and values): " +
                     "probabilistic (probability of deviating from a scheduled operation), " +
                     "(fair-)prioritization (maximum number of priority changes per iteration), " +
-                    "(fair-)delay-bounding (maximum number of delays per iteration).")
-            {
-                ArgumentHelpName = "VALUE",
+                    "(fair-)delay-bounding (maximum number of delays per iteration).",
+                HelpName = "VALUE",
                 Arity = ArgumentArity.ExactlyOne
             };
 
@@ -250,229 +247,201 @@ namespace Microsoft.Coyote.Cli
                 "unfair"
             };
 
-            var portfolioModeOption = new Option<string>(
-                name: "--portfolio-mode",
-                getDefaultValue: () => configuration.PortfolioMode.ToString().ToLower(),
-                description: "Set the portfolio mode to use during testing. Portfolio mode uses a tuned portfolio " +
+            var portfolioModeOption = new Option<string>("--portfolio-mode")
+            {
+                Description = "Set the portfolio mode to use during testing. Portfolio mode uses a tuned portfolio " +
                     "of strategies, instead of the default or user-specified strategy. If fair mode is enabled, " +
                     "then the portfolio will upgrade any unfair strategies to fair, by adding a fair execution " +
                     "suffix after the the max fair scheduling steps bound has been reached. " +
-                    $"Allowed values are {string.Join(", ", allowedPortfolioMode)}.")
-            {
-                ArgumentHelpName = "MODE",
+                    $"Allowed values are {string.Join(", ", allowedPortfolioMode)}.",
+                DefaultValueFactory = _ => configuration.PortfolioMode.ToString().ToLower(),
+                HelpName = "MODE",
                 Arity = ArgumentArity.ExactlyOne
             };
 
-            var maxStepsOption = new Option<int>(
-                aliases: new[] { "-ms", "--max-steps" },
-                description: "Max scheduling steps (i.e. decisions) to be explored during testing. " +
-                    "Choosing value 'STEPS' sets 'STEPS' unfair max-steps and 'STEPS*10' fair steps.")
+            var maxStepsOption = new Option<int>("--max-steps", "-ms")
             {
-                ArgumentHelpName = "STEPS",
+                Description = "Max scheduling steps (i.e. decisions) to be explored during testing. " +
+                    "Choosing value 'STEPS' sets 'STEPS' unfair max-steps and 'STEPS*10' fair steps.",
+                HelpName = "STEPS",
                 Arity = ArgumentArity.ExactlyOne
             };
 
-            var maxFairStepsOption = new Option<int>(
-                name: "--max-fair-steps",
-                getDefaultValue: () => configuration.MaxFairSchedulingSteps,
-                description: "Max fair scheduling steps (i.e. decisions) to be explored during testing. " +
-                    "Used by exploration strategies that perform fair scheduling.")
+            var maxFairStepsOption = new Option<int>("--max-fair-steps")
             {
-                ArgumentHelpName = "STEPS",
+                Description = "Max fair scheduling steps (i.e. decisions) to be explored during testing. " +
+                    "Used by exploration strategies that perform fair scheduling.",
+                DefaultValueFactory = _ => configuration.MaxFairSchedulingSteps,
+                HelpName = "STEPS",
                 Arity = ArgumentArity.ExactlyOne
             };
 
-            var maxUnfairStepsOption = new Option<int>(
-                name: "--max-unfair-steps",
-                getDefaultValue: () => configuration.MaxUnfairSchedulingSteps,
-                description: "Max unfair scheduling steps (i.e. decisions) to be explored during testing. " +
-                    "Used by exploration strategies that perform unfair scheduling.")
+            var maxUnfairStepsOption = new Option<int>("--max-unfair-steps")
             {
-                ArgumentHelpName = "STEPS",
+                Description = "Max unfair scheduling steps (i.e. decisions) to be explored during testing. " +
+                    "Used by exploration strategies that perform unfair scheduling.",
+                DefaultValueFactory = _ => configuration.MaxUnfairSchedulingSteps,
+                HelpName = "STEPS",
                 Arity = ArgumentArity.ExactlyOne
             };
 
-            var fuzzOption = new Option<bool>(
-                name: "--fuzz",
-                description: "Use systematic fuzzing instead of controlled testing.")
+            var fuzzOption = new Option<bool>("--fuzz")
             {
+                Description = "Use systematic fuzzing instead of controlled testing.",
                 Arity = ArgumentArity.Zero
             };
 
-            var coverageOption = new Option<bool>(
-                aliases: new[] { "-c", "--coverage" },
-                description: "Generate coverage reports if supported for the programming model used by the test.")
+            var coverageOption = new Option<bool>("--coverage", "-c")
             {
+                Description = "Generate coverage reports if supported for the programming model used by the test.",
                 Arity = ArgumentArity.Zero
             };
 
-            var scheduleCoverageOption = new Option<bool>(
-                name: "--schedule-coverage",
-                description: "Output a '.coverage.schedule.txt' file containing scheduling coverage information during testing.")
+            var scheduleCoverageOption = new Option<bool>("--schedule-coverage")
             {
+                Description = "Output a '.coverage.schedule.txt' file containing scheduling coverage information during testing.",
                 Arity = ArgumentArity.Zero
             };
 
-            var serializeCoverageInfoOption = new Option<bool>(
-                name: "--serialize-coverage",
-                description: "Output a '.coverage.ser' file that contains the serialized coverage information.")
+            var serializeCoverageInfoOption = new Option<bool>("--serialize-coverage")
             {
+                Description = "Output a '.coverage.ser' file that contains the serialized coverage information.",
                 Arity = ArgumentArity.Zero
             };
 
-            var graphOption = new Option<bool>(
-                name: "--actor-graph",
-                description: "Output a DGML graph that visualizes the failing actor execution path if a bug is found.")
+            var graphOption = new Option<bool>("--actor-graph")
             {
+                Description = "Output a DGML graph that visualizes the failing actor execution path if a bug is found.",
                 Arity = ArgumentArity.Zero
             };
 
-            var xmlLogOption = new Option<bool>(
-                name: "--xml-trace",
-                description: "Output an XML formatted runtime log file.")
+            var xmlLogOption = new Option<bool>("--xml-trace")
             {
+                Description = "Output an XML formatted runtime log file.",
                 Arity = ArgumentArity.Zero
             };
 
-            var reduceExecutionTraceCyclesOption = new Option<bool>(
-                name: "--reduce-execution-trace-cycles",
-                description: "Enable execution trace cycle detection and reduction heuristics.")
+            var reduceExecutionTraceCyclesOption = new Option<bool>("--reduce-execution-trace-cycles")
             {
+                Description = "Enable execution trace cycle detection and reduction heuristics.",
                 Arity = ArgumentArity.Zero
             };
 
-            var samplePartialOrdersOption = new Option<bool>(
-                name: "--partial-order-sampling",
-                description: "Enable partial-order sampling based on 'READ' and 'WRITE' scheduling points.")
+            var samplePartialOrdersOption = new Option<bool>("--partial-order-sampling")
             {
+                Description = "Enable partial-order sampling based on 'READ' and 'WRITE' scheduling points.",
                 Arity = ArgumentArity.Zero
             };
 
-            var seedOption = new Option<uint>(
-                name: "--seed",
-                description: "Specify the random value generator seed.")
+            var seedOption = new Option<uint>("--seed")
             {
-                ArgumentHelpName = "VALUE",
+                Description = "Specify the random value generator seed.",
+                HelpName = "VALUE",
                 Arity = ArgumentArity.ExactlyOne
             };
 
-            var livenessTemperatureThresholdOption = new Option<int>(
-                name: "--liveness-temperature-threshold",
-                getDefaultValue: () => configuration.LivenessTemperatureThreshold,
-                description: "Specify the threshold (in number of steps) that triggers a liveness bug.")
+            var livenessTemperatureThresholdOption = new Option<int>("--liveness-temperature-threshold")
             {
-                ArgumentHelpName = "THRESHOLD",
+                Description = "Specify the threshold (in number of steps) that triggers a liveness bug.",
+                DefaultValueFactory = _ => configuration.LivenessTemperatureThreshold,
+                HelpName = "THRESHOLD",
                 Arity = ArgumentArity.ExactlyOne
             };
 
-            var timeoutDelayOption = new Option<int>(
-                name: "--timeout-delay",
-                getDefaultValue: () => (int)configuration.TimeoutDelay,
-                description: "Specify the frequency of timeouts (not a unit of time).")
+            var timeoutDelayOption = new Option<int>("--timeout-delay")
             {
-                ArgumentHelpName = "DELAY",
+                Description = "Specify the frequency of timeouts (not a unit of time).",
+                DefaultValueFactory = _ => (int)configuration.TimeoutDelay,
+                HelpName = "DELAY",
                 Arity = ArgumentArity.ExactlyOne
             };
 
-            var deadlockTimeoutOption = new Option<int>(
-                name: "--deadlock-timeout",
-                getDefaultValue: () => (int)configuration.DeadlockTimeout,
-                description: "Specify how much time (in ms) to wait before reporting a potential deadlock.")
+            var deadlockTimeoutOption = new Option<int>("--deadlock-timeout")
             {
-                ArgumentHelpName = "TIMEOUT",
+                Description = "Specify how much time (in ms) to wait before reporting a potential deadlock.",
+                DefaultValueFactory = _ => (int)configuration.DeadlockTimeout,
+                HelpName = "TIMEOUT",
                 Arity = ArgumentArity.ExactlyOne
             };
 
-            var maxFuzzDelayOption = new Option<int>(
-                name: "--max-fuzz-delay",
-                getDefaultValue: () => (int)configuration.MaxFuzzingDelay,
-                description: "Specify the maximum time (in number of busy loops) an operation might " +
-                    "get delayed during systematic fuzzing.")
+            var maxFuzzDelayOption = new Option<int>("--max-fuzz-delay")
             {
-                ArgumentHelpName = "DELAY",
+                Description = "Specify the maximum time (in number of busy loops) an operation might " +
+                    "get delayed during systematic fuzzing.",
+                DefaultValueFactory = _ => (int)configuration.MaxFuzzingDelay,
+                HelpName = "DELAY",
                 Arity = ArgumentArity.ExactlyOne
             };
 
-            var uncontrolledConcurrencyResolutionAttemptsOption = new Option<int>(
-                name: "--resolve-uncontrolled-concurrency-attempts",
-                getDefaultValue: () => (int)configuration.UncontrolledConcurrencyResolutionAttempts,
-                description: "Specify how many times to try resolve each instance of uncontrolled concurrency.")
+            var uncontrolledConcurrencyResolutionAttemptsOption = new Option<int>("--resolve-uncontrolled-concurrency-attempts")
             {
-                ArgumentHelpName = "ATTEMPTS",
+                Description = "Specify how many times to try resolve each instance of uncontrolled concurrency.",
+                DefaultValueFactory = _ => (int)configuration.UncontrolledConcurrencyResolutionAttempts,
+                HelpName = "ATTEMPTS",
                 Arity = ArgumentArity.ExactlyOne
             };
 
-            var uncontrolledConcurrencyResolutionDelayOption = new Option<int>(
-                name: "--resolve-uncontrolled-concurrency-delay",
-                getDefaultValue: () => (int)configuration.UncontrolledConcurrencyResolutionDelay,
-                description: "Specify how much time (in number of busy loops) to wait between each attempt to " +
-                    "resolve each instance of uncontrolled concurrency.")
+            var uncontrolledConcurrencyResolutionDelayOption = new Option<int>("--resolve-uncontrolled-concurrency-delay")
             {
-                ArgumentHelpName = "DELAY",
+                Description = "Specify how much time (in number of busy loops) to wait between each attempt to " +
+                    "resolve each instance of uncontrolled concurrency.",
+                DefaultValueFactory = _ => (int)configuration.UncontrolledConcurrencyResolutionDelay,
+                HelpName = "DELAY",
                 Arity = ArgumentArity.ExactlyOne
             };
 
-            var skipTraceAnalysisOption = new Option<bool>(
-                name: "--skip-trace-analysis",
-                description: "Disable execution graph analysis during testing.")
+            var skipTraceAnalysisOption = new Option<bool>("--skip-trace-analysis")
             {
+                Description = "Disable execution graph analysis during testing.",
                 Arity = ArgumentArity.Zero
             };
 
-            var skipPotentialDeadlocksOption = new Option<bool>(
-                name: "--skip-potential-deadlocks",
-                description: "Only report a deadlock when the runtime can fully determine that it is genuine " +
-                    "and not due to partially-controlled concurrency.")
+            var skipPotentialDeadlocksOption = new Option<bool>("--skip-potential-deadlocks")
             {
+                Description = "Only report a deadlock when the runtime can fully determine that it is genuine " +
+                    "and not due to partially-controlled concurrency.",
                 Arity = ArgumentArity.Zero
             };
 
-            var skipCollectionRacesOption = new Option<bool>(
-                name: "--skip-collection-races",
-                description: "Disable exploration of race conditions when accessing collections.")
+            var skipCollectionRacesOption = new Option<bool>("--skip-collection-races")
             {
+                Description = "Disable exploration of race conditions when accessing collections.",
                 Arity = ArgumentArity.Zero
             };
 
-            var skipLockRacesOption = new Option<bool>(
-                name: "--skip-lock-races",
-                description: "Disable exploration of race conditions when accessing lock-based synchronization primitives.")
+            var skipLockRacesOption = new Option<bool>("--skip-lock-races")
             {
+                Description = "Disable exploration of race conditions when accessing lock-based synchronization primitives.",
                 Arity = ArgumentArity.Zero
             };
 
-            var skipAtomicRacesOption = new Option<bool>(
-                name: "--skip-atomic-races",
-                description: "Disable exploration of race conditions when performing atomic operations.")
+            var skipAtomicRacesOption = new Option<bool>("--skip-atomic-races")
             {
+                Description = "Disable exploration of race conditions when performing atomic operations.",
                 Arity = ArgumentArity.Zero
             };
 
-            var skipVolatileRacesOption = new Option<bool>(
-                name: "--skip-volatile-races",
-                description: "Disable exploration of race conditions when performing volatile operations.")
+            var skipVolatileRacesOption = new Option<bool>("--skip-volatile-races")
             {
+                Description = "Disable exploration of race conditions when performing volatile operations.",
                 Arity = ArgumentArity.Zero
             };
 
-            var enableMemoryAccessRacesOption = new Option<bool>(
-                name: "--enable-memory-access-races",
-                description: "Enable exploration of race conditions at memory-access locations.")
+            var enableMemoryAccessRacesOption = new Option<bool>("--enable-memory-access-races")
             {
+                Description = "Enable exploration of race conditions at memory-access locations.",
                 Arity = ArgumentArity.Zero
             };
 
-            var enableControlFlowRacesOption = new Option<bool>(
-                name: "--enable-control-flow-races",
-                description: "Enable exploration of race conditions at control-flow branching locations.")
+            var enableControlFlowRacesOption = new Option<bool>("--enable-control-flow-races")
             {
+                Description = "Enable exploration of race conditions at control-flow branching locations.",
                 Arity = ArgumentArity.Zero
             };
 
-            var fuzzingFallbackOption = new Option<bool>(
-                name: "--fuzzing-fallback",
-                description: "Enable automatic fallback to systematic fuzzing upon detecting uncontrolled concurrency.")
+            var fuzzingFallbackOption = new Option<bool>("--fuzzing-fallback")
             {
+                Description = "Enable automatic fallback to systematic fuzzing upon detecting uncontrolled concurrency.",
                 Arity = ArgumentArity.Zero
             };
 
@@ -483,86 +452,79 @@ namespace Microsoft.Coyote.Cli
                 "data"
             };
 
-            var partialControlOption = new Option<string>(
-                name: "--partial-control",
-                description: "Set the partial controlled mode to use during testing. If set to 'concurrency' then " +
+            var partialControlOption = new Option<string>("--partial-control")
+            {
+                Description = "Set the partial controlled mode to use during testing. If set to 'concurrency' then " +
                     "only concurrency can be partially controlled. If set to 'data' then only data non-determinism " +
                     "can be partially controlled. If set to 'none' then partially controlled testing is disabled. " +
                     "By default, both concurrency and data non-determinism can be partially controlled. " +
-                    $"Allowed values are {string.Join(", ", allowedPartialControlModes)}.")
-            {
-                ArgumentHelpName = "MODE",
+                    $"Allowed values are {string.Join(", ", allowedPartialControlModes)}.",
+                HelpName = "MODE",
                 Arity = ArgumentArity.ExactlyOne
             };
 
-            var noReproOption = new Option<bool>(
-                name: "--no-repro",
-                description: "Disable bug trace repro to ignore uncontrolled concurrency errors.")
+            var noReproOption = new Option<bool>("--no-repro")
             {
+                Description = "Disable bug trace repro to ignore uncontrolled concurrency errors.",
                 Arity = ArgumentArity.Zero
             };
 
-            var logUncontrolledInvocationStackTracesOption = new Option<bool>(
-                name: "--log-uncontrolled-invocation-stack-traces",
-                description: "Enable logging the stack traces of uncontrolled invocations detected during testing.")
+            var logUncontrolledInvocationStackTracesOption = new Option<bool>("--log-uncontrolled-invocation-stack-traces")
             {
+                Description = "Enable logging the stack traces of uncontrolled invocations detected during testing.",
                 Arity = ArgumentArity.Zero
             };
 
-            var failOnMaxStepsOption = new Option<bool>(
-                name: "--fail-on-max-steps",
-                description: "Reaching the specified max-steps is treated as a bug.")
+            var failOnMaxStepsOption = new Option<bool>("--fail-on-max-steps")
             {
+                Description = "Reaching the specified max-steps is treated as a bug.",
                 Arity = ArgumentArity.Zero
             };
 
-            var exploreOption = new Option<bool>(
-                name: "--explore",
-                description: "Keep testing until the bound (e.g. iteration or time) is reached.")
+            var exploreOption = new Option<bool>("--explore")
             {
+                Description = "Keep testing until the bound (e.g. iteration or time) is reached.",
                 Arity = ArgumentArity.Zero,
-                IsHidden = true
+                Hidden = true
             };
 
-            var breakOption = new Option<bool>(
-                aliases: new[] { "-b", "--break" },
-                description: "Attach the debugger and add a breakpoint when an assertion fails.")
+            var breakOption = new Option<bool>("--break", "-b")
             {
+                Description = "Attach the debugger and add a breakpoint when an assertion fails.",
                 Arity = ArgumentArity.Zero
             };
 
-            var outputDirectoryOption = new Option<string>(
-                aliases: new[] { "-o", "--outdir" },
-                description: "Output directory for emitting reports. This can be an absolute path or relative to current directory.")
+            var outputDirectoryOption = new Option<string>("--outdir", "-o")
             {
-                ArgumentHelpName = "PATH",
+                Description = "Output directory for emitting reports. This can be an absolute path or relative to current directory.",
+                HelpName = "PATH",
                 Arity = ArgumentArity.ExactlyOne
             };
 
             // Add validators.
-            pathArg.AddValidator(result => ValidateArgumentValueIsExpectedFile(result, ".dll", ".exe"));
-            iterationsOption.AddValidator(result => ValidateOptionValueIsUnsignedInteger(result));
-            timeoutOption.AddValidator(result => ValidateOptionValueIsUnsignedInteger(result));
-            strategyOption.AddValidator(result => ValidateOptionValueIsAllowed(result, allowedStrategies));
-            strategyOption.AddValidator(result => ValidateExclusiveOptionValueIsAvailable(result, portfolioModeOption));
-            strategyValueOption.AddValidator(result => ValidatePrerequisiteOptionValueIsAvailable(result, strategyOption));
-            portfolioModeOption.AddValidator(result => ValidateOptionValueIsAllowed(result, allowedPortfolioMode));
-            maxStepsOption.AddValidator(result => ValidateOptionValueIsUnsignedInteger(result));
-            maxStepsOption.AddValidator(result => ValidateExclusiveOptionValueIsAvailable(result, maxFairStepsOption));
-            maxStepsOption.AddValidator(result => ValidateExclusiveOptionValueIsAvailable(result, maxUnfairStepsOption));
-            maxFairStepsOption.AddValidator(result => ValidateOptionValueIsUnsignedInteger(result));
-            maxFairStepsOption.AddValidator(result => ValidateExclusiveOptionValueIsAvailable(result, maxStepsOption));
-            maxUnfairStepsOption.AddValidator(result => ValidateOptionValueIsUnsignedInteger(result));
-            maxUnfairStepsOption.AddValidator(result => ValidateExclusiveOptionValueIsAvailable(result, maxStepsOption));
-            serializeCoverageInfoOption.AddValidator(result => ValidatePrerequisiteOptionValueIsAvailable(result, coverageOption));
-            seedOption.AddValidator(result => ValidateOptionValueIsUnsignedInteger(result));
-            livenessTemperatureThresholdOption.AddValidator(result => ValidateOptionValueIsUnsignedInteger(result));
-            timeoutDelayOption.AddValidator(result => ValidateOptionValueIsUnsignedInteger(result));
-            deadlockTimeoutOption.AddValidator(result => ValidateOptionValueIsUnsignedInteger(result));
-            maxFuzzDelayOption.AddValidator(result => ValidateOptionValueIsUnsignedInteger(result));
-            uncontrolledConcurrencyResolutionAttemptsOption.AddValidator(result => ValidateOptionValueIsUnsignedInteger(result));
-            uncontrolledConcurrencyResolutionDelayOption.AddValidator(result => ValidateOptionValueIsUnsignedInteger(result));
-            partialControlOption.AddValidator(result => ValidateOptionValueIsAllowed(result, allowedPartialControlModes));
+            pathArg.Validators.Add(result => ValidateArgumentValueIsExpectedFile(result, ".dll", ".exe"));
+            iterationsOption.Validators.Add(result => ValidateOptionValueIsUnsignedInteger(result));
+            timeoutOption.Validators.Add(result => ValidateOptionValueIsUnsignedInteger(result));
+            strategyOption.Validators.Add(result => ValidateOptionValueIsAllowed(result, allowedStrategies));
+            strategyOption.Validators.Add(result => ValidateExclusiveOptionValueIsAvailable(result, portfolioModeOption));
+            strategyValueOption.Validators.Add(result => ValidatePrerequisiteOptionValueIsAvailable(result, strategyOption));
+            portfolioModeOption.Validators.Add(result => ValidateOptionValueIsAllowed(result, allowedPortfolioMode));
+            maxStepsOption.Validators.Add(result => ValidateOptionValueIsUnsignedInteger(result));
+            maxStepsOption.Validators.Add(result => ValidateExclusiveOptionValueIsAvailable(result, maxFairStepsOption));
+            maxStepsOption.Validators.Add(result => ValidateExclusiveOptionValueIsAvailable(result, maxUnfairStepsOption));
+            maxFairStepsOption.Validators.Add(result => ValidateOptionValueIsUnsignedInteger(result));
+            maxFairStepsOption.Validators.Add(result => ValidateExclusiveOptionValueIsAvailable(result, maxStepsOption));
+            maxUnfairStepsOption.Validators.Add(result => ValidateOptionValueIsUnsignedInteger(result));
+            maxUnfairStepsOption.Validators.Add(result => ValidateExclusiveOptionValueIsAvailable(result, maxStepsOption));
+            serializeCoverageInfoOption.Validators.Add(result => ValidatePrerequisiteOptionValueIsAvailable(result, coverageOption));
+            seedOption.Validators.Add(result => ValidateOptionValueIsUnsignedInteger(result));
+            livenessTemperatureThresholdOption.Validators.Add(result => ValidateOptionValueIsUnsignedInteger(result));
+            timeoutDelayOption.Validators.Add(result => ValidateOptionValueIsUnsignedInteger(result));
+            deadlockTimeoutOption.Validators.Add(result => ValidateOptionValueIsUnsignedInteger(result));
+            maxFuzzDelayOption.Validators.Add(result => ValidateOptionValueIsUnsignedInteger(result));
+            uncontrolledConcurrencyResolutionAttemptsOption.Validators.Add(result => ValidateOptionValueIsUnsignedInteger(result));
+            uncontrolledConcurrencyResolutionDelayOption.Validators.Add(result => ValidateOptionValueIsUnsignedInteger(result));
+            partialControlOption.Validators.Add(result => ValidateOptionValueIsAllowed(result, allowedPartialControlModes));
 
             // Build command.
             var command = new Command("test", "Run tests using the Coyote systematic testing engine.\n" +
@@ -617,42 +579,41 @@ namespace Microsoft.Coyote.Cli
         /// </summary>
         private Command CreateReplayCommand()
         {
-            var pathArg = new Argument<string>("path", $"Path to the assembly (*.dll, *.exe) to replay.")
+            var pathArg = new Argument<string>("path")
             {
+                Description = $"Path to the assembly (*.dll, *.exe) to replay.",
                 HelpName = "PATH"
             };
 
-            var traceFileArg = new Argument<string>("trace", $"*.trace file containing the execution path to replay.")
+            var traceFileArg = new Argument<string>("trace")
             {
+                Description = $"*.trace file containing the execution path to replay.",
                 HelpName = "TRACE_FILE"
             };
 
-            var methodOption = new Option<string>(
-                aliases: new[] { "-m", "--method" },
-                description: "Suffix of the test method to execute.")
+            var methodOption = new Option<string>("--method", "-m")
             {
-                ArgumentHelpName = "METHOD",
+                Description = "Suffix of the test method to execute.",
+                HelpName = "METHOD",
                 Arity = ArgumentArity.ExactlyOne
             };
 
-            var breakOption = new Option<bool>(
-                aliases: new[] { "-b", "--break" },
-                description: "Attaches the debugger and adds a breakpoint when an assertion fails.")
+            var breakOption = new Option<bool>("--break", "-b")
             {
+                Description = "Attaches the debugger and adds a breakpoint when an assertion fails.",
                 Arity = ArgumentArity.Zero
             };
 
-            var outputDirectoryOption = new Option<string>(
-                aliases: new[] { "-o", "--outdir" },
-                description: "Output directory for emitting reports. This can be an absolute path or relative to current directory.")
+            var outputDirectoryOption = new Option<string>("--outdir", "-o")
             {
-                ArgumentHelpName = "PATH",
+                Description = "Output directory for emitting reports. This can be an absolute path or relative to current directory.",
+                HelpName = "PATH",
                 Arity = ArgumentArity.ExactlyOne
             };
 
             // Add validators.
-            pathArg.AddValidator(result => ValidateArgumentValueIsExpectedFile(result, ".dll", ".exe"));
-            traceFileArg.AddValidator(result => ValidateArgumentValueIsExpectedFile(result, ".trace"));
+            pathArg.Validators.Add(result => ValidateArgumentValueIsExpectedFile(result, ".dll", ".exe"));
+            traceFileArg.Validators.Add(result => ValidateArgumentValueIsExpectedFile(result, ".trace"));
 
             // Build command.
             var command = new Command("replay", "Replay bugs that Coyote discovered during systematic testing.\n" +
@@ -671,72 +632,66 @@ namespace Microsoft.Coyote.Cli
         /// </summary>
         private Command CreateRewriteCommand(RewritingOptions options)
         {
-            var pathArg = new Argument<string>("path", "Path to the assembly (*.dll, *.exe) to rewrite or to a JSON rewriting configuration file.")
+            var pathArg = new Argument<string>("path")
             {
+                Description = "Path to the assembly (*.dll, *.exe) to rewrite or to a JSON rewriting configuration file.",
                 HelpName = "PATH"
             };
 
-            var rewriteMemoryLocationsOption = new Option<bool>(
-                name: "--rewrite-memory-locations",
-                getDefaultValue: () => options.IsRewritingMemoryLocations,
-                description: "Rewrite memory locations (such as field loads and stores) for race checking.")
+            var rewriteMemoryLocationsOption = new Option<bool>("--rewrite-memory-locations")
             {
+                Description = "Rewrite memory locations (such as field loads and stores) for race checking.",
+                DefaultValueFactory = _ => options.IsRewritingMemoryLocations,
                 Arity = ArgumentArity.ExactlyOne
             };
 
-            var rewriteConcurrentCollectionsOption = new Option<bool>(
-                name: "--rewrite-concurrent-collections",
-                getDefaultValue: () => options.IsRewritingConcurrentCollections,
-                description: "Rewrite concurrent collections for race checking.")
+            var rewriteConcurrentCollectionsOption = new Option<bool>("--rewrite-concurrent-collections")
             {
+                Description = "Rewrite concurrent collections for race checking.",
+                DefaultValueFactory = _ => options.IsRewritingConcurrentCollections,
                 Arity = ArgumentArity.ExactlyOne
             };
 
-            var rewriteDependenciesOption = new Option<bool>(
-                name: "--rewrite-dependencies",
-                getDefaultValue: () => options.IsRewritingDependencies,
-                description: "Rewrite all dependent assemblies that are found in the same location as the given path.")
+            var rewriteDependenciesOption = new Option<bool>("--rewrite-dependencies")
             {
+                Description = "Rewrite all dependent assemblies that are found in the same location as the given path.",
+                DefaultValueFactory = _ => options.IsRewritingDependencies,
                 Arity = ArgumentArity.Zero,
-                IsHidden = true
+                Hidden = true
             };
 
-            var rewriteUnitTestsOption = new Option<bool>(
-                name: "--rewrite-unit-tests",
-                getDefaultValue: () => options.IsRewritingUnitTests,
-                description: "Rewrite unit tests to automatically inject the Coyote testing engine.")
+            var rewriteUnitTestsOption = new Option<bool>("--rewrite-unit-tests")
             {
+                Description = "Rewrite unit tests to automatically inject the Coyote testing engine.",
+                DefaultValueFactory = _ => options.IsRewritingUnitTests,
                 Arity = ArgumentArity.Zero,
-                IsHidden = true
+                Hidden = true
             };
 
-            var assertDataRacesOption = new Option<bool>(
-                name: "--assert-data-races",
-                getDefaultValue: () => options.IsDataRaceCheckingEnabled,
-                description: "Add assertions for read/write data races.")
+            var assertDataRacesOption = new Option<bool>("--assert-data-races")
             {
+                Description = "Add assertions for read/write data races.",
+                DefaultValueFactory = _ => options.IsDataRaceCheckingEnabled,
                 Arity = ArgumentArity.Zero,
-                IsHidden = true
+                Hidden = true
             };
 
-            var dumpILOption = new Option<bool>(
-                name: "--dump-il",
-                getDefaultValue: () => options.IsLoggingAssemblyContents,
-                description: "Dumps the original and rewritten IL in JSON for debugging purposes.")
+            var dumpILOption = new Option<bool>("--dump-il")
             {
+                Description = "Dumps the original and rewritten IL in JSON for debugging purposes.",
+                DefaultValueFactory = _ => options.IsLoggingAssemblyContents,
                 Arity = ArgumentArity.Zero
             };
 
-            var dumpILDiffOption = new Option<bool>(
-                name: "--dump-il-diff",
-                getDefaultValue: () => options.IsDiffingAssemblyContents,
-                description: "Dumps the IL diff in JSON for debugging purposes.")
+            var dumpILDiffOption = new Option<bool>("--dump-il-diff")
             {
+                Description = "Dumps the IL diff in JSON for debugging purposes.",
+                DefaultValueFactory = _ => options.IsDiffingAssemblyContents,
                 Arity = ArgumentArity.Zero
             };
 
             // Add validators.
-            pathArg.AddValidator(result => ValidateArgumentValueIsExpectedFile(result, ".dll", ".exe", ".json"));
+            pathArg.Validators.Add(result => ValidateArgumentValueIsExpectedFile(result, ".dll", ".exe", ".json"));
 
             // Build command.
             var command = new Command("rewrite", "Rewrite your assemblies to inject logic that allows " +
@@ -759,7 +714,7 @@ namespace Microsoft.Coyote.Cli
         /// </summary>
         private void AddArgument(Command command, Argument argument)
         {
-            command.AddArgument(argument);
+            command.Arguments.Add(argument);
             if (!this.Arguments.ContainsKey(argument.Name))
             {
                 this.Arguments.Add(argument.Name, argument);
@@ -771,11 +726,8 @@ namespace Microsoft.Coyote.Cli
         /// </summary>
         private void AddGlobalOption(Command command, Option option)
         {
-            command.AddGlobalOption(option);
-            if (!this.Options.ContainsKey(option.Name))
-            {
-                this.Options.Add(option.Name, option);
-            }
+            option.Recursive = true;
+            this.AddOption(command, option);
         }
 
         /// <summary>
@@ -783,12 +735,19 @@ namespace Microsoft.Coyote.Cli
         /// </summary>
         private void AddOption(Command command, Option option)
         {
-            command.AddOption(option);
-            if (!this.Options.ContainsKey(option.Name))
+            command.Options.Add(option);
+            string name = GetNormalizedName(option);
+            if (!this.Options.ContainsKey(name))
             {
-                this.Options.Add(option.Name, option);
+                this.Options.Add(name, option);
             }
         }
+
+        /// <summary>
+        /// Returns the name of the specified option without its '--' prefix, matching
+        /// the prefix-less names this parser keys its lookup tables and switches on.
+        /// </summary>
+        private static string GetNormalizedName(Option option) => option.Name.TrimStart('-');
 
         /// <summary>
         /// Validates that the specified argument result is found and has an expected file extension.
@@ -801,17 +760,17 @@ namespace Microsoft.Coyote.Cli
             {
                 if (extensions.Length is 1)
                 {
-                    result.ErrorMessage = $"File '{fileName}' does not have the expected '{extensions[0]}' extension.";
+                    result.AddError($"File '{fileName}' does not have the expected '{extensions[0]}' extension.");
                 }
                 else
                 {
-                    result.ErrorMessage = $"File '{fileName}' does not have one of the expected extensions: " +
-                        $"{string.Join(", ", extensions)}.";
+                    result.AddError($"File '{fileName}' does not have one of the expected extensions: " +
+                        $"{string.Join(", ", extensions)}.");
                 }
             }
             else if (!File.Exists(fileName))
             {
-                result.ErrorMessage = $"File '{fileName}' does not exist.";
+                result.AddError($"File '{fileName}' does not exist.");
             }
         }
 
@@ -822,7 +781,7 @@ namespace Microsoft.Coyote.Cli
         {
             if (result.Tokens.Select(token => token.Value).Where(v => !uint.TryParse(v, out _)).Any())
             {
-                result.ErrorMessage = $"Please give a positive integer to option '{result.Option.Name}'.";
+                result.AddError($"Please give a positive integer to option '{result.Option.Name}'.");
             }
         }
 
@@ -833,8 +792,8 @@ namespace Microsoft.Coyote.Cli
         {
             if (result.Tokens.Select(token => token.Value).Where(v => !allowedValues.Contains(v)).Any())
             {
-                result.ErrorMessage = $"Please give an allowed value to option '{result.Option.Name}': " +
-                    $"{string.Join(", ", allowedValues)}.";
+                result.AddError($"Please give an allowed value to option '{result.Option.Name}': " +
+                    $"{string.Join(", ", allowedValues)}.");
             }
         }
 
@@ -843,10 +802,10 @@ namespace Microsoft.Coyote.Cli
         /// </summary>
         private static void ValidatePrerequisiteOptionValueIsAvailable(OptionResult result, Option prerequisite)
         {
-            OptionResult prerequisiteResult = result.FindResultFor(prerequisite);
-            if (!result.IsImplicit && (prerequisiteResult is null || prerequisiteResult.IsImplicit))
+            OptionResult prerequisiteResult = result.GetResult(prerequisite);
+            if (!result.Implicit && (prerequisiteResult is null || prerequisiteResult.Implicit))
             {
-                result.ErrorMessage = $"Setting option '{result.Option.Name}' requires option '{prerequisite.Name}'.";
+                result.AddError($"Setting option '{result.Option.Name}' requires option '{prerequisite.Name}'.");
             }
         }
 
@@ -855,10 +814,10 @@ namespace Microsoft.Coyote.Cli
         /// </summary>
         private static void ValidateExclusiveOptionValueIsAvailable(OptionResult result, Option exclusive)
         {
-            OptionResult exclusiveResult = result.FindResultFor(exclusive);
-            if (!result.IsImplicit && exclusiveResult != null && !exclusiveResult.IsImplicit)
+            OptionResult exclusiveResult = result.GetResult(exclusive);
+            if (!result.Implicit && exclusiveResult != null && !exclusiveResult.Implicit)
             {
-                result.ErrorMessage = $"Setting options '{result.Option.Name}' and '{exclusive.Name}' at the same time is not allowed.";
+                result.AddError($"Setting options '{result.Option.Name}' and '{exclusive.Name}' at the same time is not allowed.");
             }
         }
 
@@ -949,9 +908,9 @@ namespace Microsoft.Coyote.Cli
         /// </summary>
         private void UpdateConfigurationsWithParsedOption(OptionResult result)
         {
-            if (!result.IsImplicit)
+            if (!result.Implicit)
             {
-                switch (result.Option.Name)
+                switch (GetNormalizedName(result.Option))
                 {
                     case "method":
                         this.Configuration.TestMethodName = result.GetValueOrDefault<string>();
@@ -963,7 +922,7 @@ namespace Microsoft.Coyote.Cli
                         this.Configuration.TestingTimeout = result.GetValueOrDefault<int>();
                         break;
                     case "strategy":
-                        var strategyBound = result.FindResultFor(this.Options["strategy-value"]);
+                        var strategyBound = result.GetResult(this.Options["strategy-value"]);
                         string strategy = result.GetValueOrDefault<string>();
                         switch (strategy)
                         {
@@ -1005,13 +964,13 @@ namespace Microsoft.Coyote.Cli
                         this.Configuration.WithMaxSchedulingSteps((uint)result.GetValueOrDefault<int>());
                         break;
                     case "max-fair-steps":
-                        var maxUnfairSteps = result.FindResultFor(this.Options["max-unfair-steps"]);
+                        var maxUnfairSteps = result.GetResult(this.Options["max-unfair-steps"]);
                         this.Configuration.WithMaxSchedulingSteps(
                             (uint)(maxUnfairSteps?.GetValueOrDefault<int>() ?? this.Configuration.MaxUnfairSchedulingSteps),
                             (uint)result.GetValueOrDefault<int>());
                         break;
                     case "max-unfair-steps":
-                        var maxFairSteps = result.FindResultFor(this.Options["max-fair-steps"]);
+                        var maxFairSteps = result.GetResult(this.Options["max-fair-steps"]);
                         this.Configuration.WithMaxSchedulingSteps(
                             (uint)result.GetValueOrDefault<int>(),
                             (uint)(maxFairSteps?.GetValueOrDefault<int>() ?? this.Configuration.MaxFairSchedulingSteps));
@@ -1147,7 +1106,10 @@ namespace Microsoft.Coyote.Cli
                         this.RewritingOptions.IsDiffingAssemblyContents = true;
                         break;
                     case "verbosity":
-                        switch (result.GetValueOrDefault<string>())
+                        // A bare '-v' with no level token means 'info'; unlike the previous
+                        // parser version, GetValueOrDefault falls back to the option's default
+                        // value in that case, so detect it from the token count instead.
+                        switch (result.Tokens.Count is 0 ? "info" : result.GetValueOrDefault<string>())
                         {
                             case "error":
                                 this.Configuration.WithVerbosityEnabled(VerbosityLevel.Error);
@@ -1178,13 +1140,6 @@ namespace Microsoft.Coyote.Cli
                 }
             }
         }
-
-        /// <summary>
-        /// Returns true if the user is asking for help.
-        /// </summary>
-        private static bool IsHelpRequested(ParseResult result) => result.CommandResult.Children
-            .OfType<OptionResult>()
-            .Any(result => result.Option.Name is "help" && !result.IsImplicit);
 
         /// <summary>
         /// Prints the detailed Coyote version.

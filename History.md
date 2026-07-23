@@ -58,6 +58,10 @@
   advisories traced to `Microsoft.Azure.Cosmos` `v3.10.1`, now `v3.12.0`), so
   the .NET 10 SDK's full transitive vulnerability audit is active across the
   repository.
+- Upgraded `System.CommandLine` from the 2022 `v2.0.0-beta4` pin to the stable
+  `v2.0.10` release in the `coyote` command-line tool and the documentation
+  generator. The command-line surface (commands, options, validation messages
+  and exit codes) is unchanged.
 - Dropped support for the `netcoreapp3.1` target framework, which reached end of
   life.
 

@@ -1,10 +1,8 @@
-﻿// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 using System;
 using System.CommandLine;
-using System.CommandLine.Builder;
-using System.CommandLine.Invocation;
 using System.CommandLine.Parsing;
 using System.IO;
 using System.Linq;
@@ -21,11 +19,11 @@ namespace Microsoft.Coyote.GenDoc
             var generateCommand = CreateGenerateCommand();
             var mergeCommand = CreateMergeCommand();
 
-            rootCommand.AddCommand(generateCommand);
-            rootCommand.AddCommand(mergeCommand);
+            rootCommand.Subcommands.Add(generateCommand);
+            rootCommand.Subcommands.Add(mergeCommand);
             rootCommand.TreatUnmatchedTokensAsErrors = true;
 
-            return rootCommand.Invoke(args);
+            return rootCommand.Parse(args).Invoke();
         }
 
         /// <summary>
@@ -33,50 +31,49 @@ namespace Microsoft.Coyote.GenDoc
         /// </summary>
         private static Command CreateGenerateCommand()
         {
-            var pathArg = new Argument<string>("path", $"Path to the assembly (*.dll) to generate documentation.")
+            var pathArg = new Argument<string>("path")
             {
+                Description = $"Path to the assembly (*.dll) to generate documentation.",
                 HelpName = "PATH"
             };
 
-            var outputOption = new Option<string>(
-                name: "-o",
-                description: "The output path.")
+            var outputOption = new Option<string>("-o")
             {
-                ArgumentHelpName = "OUTPUT"
+                Description = "The output path.",
+                HelpName = "OUTPUT"
             };
 
-            var namespaceOption = new Option<string>(
-                name: "--namespace",
-                description: "The root namespace of the input assembly.")
+            var namespaceOption = new Option<string>("--namespace")
             {
-                ArgumentHelpName = "NAMESPACE"
+                Description = "The root namespace of the input assembly.",
+                HelpName = "NAMESPACE"
             };
 
             // Add validators.
-            pathArg.AddValidator(result => ValidateArgumentValueIsExpectedFile(result, ".dll"));
+            pathArg.Validators.Add(result => ValidateArgumentValueIsExpectedFile(result, ".dll"));
 
             // Build command.
             var command = new Command("gen", "Generate the documentation.");
-            command.AddArgument(pathArg);
-            command.AddOption(outputOption);
-            command.AddOption(namespaceOption);
+            command.Arguments.Add(pathArg);
+            command.Options.Add(outputOption);
+            command.Options.Add(namespaceOption);
             command.TreatUnmatchedTokensAsErrors = true;
 
-            command.SetHandler((string assembly, string output, string name) =>
+            command.SetAction(parseResult =>
             {
                 var settings = new XmlDocMarkdownSettings()
                 {
                     GenerateToc = true,
                     TocPrefix = "ref",
-                    RootNamespace = name,
+                    RootNamespace = parseResult.GetValue(namespaceOption),
                     VisibilityLevel = XmlDocVisibilityLevel.Protected,
                     ShouldClean = true,
                     SkipUnbrowsable = true,
                     NamespacePages = true
                 };
 
-                XmlDocMarkdownGenerator.Generate(assembly, output, settings);
-            }, pathArg, outputOption, namespaceOption);
+                XmlDocMarkdownGenerator.Generate(parseResult.GetValue(pathArg), parseResult.GetValue(outputOption), settings);
+            });
 
             return command;
         }
@@ -86,32 +83,35 @@ namespace Microsoft.Coyote.GenDoc
         /// </summary>
         private static Command CreateMergeCommand()
         {
-            var sourceTocArg = new Argument<string>("src", $"Path to the source mkdocs.yml file.")
+            var sourceTocArg = new Argument<string>("src")
             {
+                Description = $"Path to the source mkdocs.yml file.",
                 HelpName = "SRC_TOC"
             };
 
-            var destinationTocArg = new Argument<string>("dst", $"Path to the destination toc.yml file.")
+            var destinationTocArg = new Argument<string>("dst")
             {
+                Description = $"Path to the destination toc.yml file.",
                 HelpName = "DST_TOC"
             };
 
             // Add validators.
-            sourceTocArg.AddValidator(result => ValidateArgumentValueIsExpectedFile(result, ".yml"));
-            destinationTocArg.AddValidator(result => ValidateArgumentValueIsExpectedFile(result, ".yml"));
+            sourceTocArg.Validators.Add(result => ValidateArgumentValueIsExpectedFile(result, ".yml"));
+            destinationTocArg.Validators.Add(result => ValidateArgumentValueIsExpectedFile(result, ".yml"));
 
             // Build command.
             var command = new Command("merge", "Merges the ToC information into the mkdocs.yml nav section.");
-            command.AddArgument(sourceTocArg);
-            command.AddArgument(destinationTocArg);
+            command.Arguments.Add(sourceTocArg);
+            command.Arguments.Add(destinationTocArg);
             command.TreatUnmatchedTokensAsErrors = true;
 
-            command.SetHandler((string src, string dst) =>
+            command.SetAction(parseResult =>
             {
+                string src = parseResult.GetValue(sourceTocArg);
+                string dst = parseResult.GetValue(destinationTocArg);
                 FixXmlDocs(Path.GetDirectoryName(dst));
-                int result = MergeToc(src, dst);
-                Environment.ExitCode = result;
-            }, sourceTocArg, destinationTocArg);
+                return MergeToc(src, dst);
+            });
 
             return command;
         }
@@ -256,17 +256,17 @@ namespace Microsoft.Coyote.GenDoc
             {
                 if (extensions.Length is 1)
                 {
-                    result.ErrorMessage = $"File '{fileName}' does not have the expected '{extensions[0]}' extension.";
+                    result.AddError($"File '{fileName}' does not have the expected '{extensions[0]}' extension.");
                 }
                 else
                 {
-                    result.ErrorMessage = $"File '{fileName}' does not have one of the expected extensions: " +
-                        $"{string.Join(", ", extensions)}.";
+                    result.AddError($"File '{fileName}' does not have one of the expected extensions: " +
+                        $"{string.Join(", ", extensions)}.");
                 }
             }
             else if (!File.Exists(fileName))
             {
-                result.ErrorMessage = $"File '{fileName}' does not exist.";
+                result.AddError($"File '{fileName}' does not exist.");
             }
         }
 

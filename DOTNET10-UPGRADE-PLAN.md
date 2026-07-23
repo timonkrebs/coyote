@@ -424,6 +424,25 @@ Items 1–5 carry the context gathered while executing the upgrade (#3, #4).
    already use, which the audit accepts). The full transitive NuGet audit
    is now active repository-wide with no overrides.
 6. Migrate `System.CommandLine` beta4 → stable 2.0 (breaking API changes).
+   **Status: delivered** (`2.0.10` across the `coyote` CLI, its tool wrapper
+   and `GenDoc`). The GA API replaced the builder pipeline with
+   `ParserConfiguration` + `RootCommand.Parse(...)`, `SetHandler`/
+   `InvocationContext` with `SetAction(parseResult => ...)` (actions resolve
+   at invoke time, so the parse-first-attach-handlers-later flow survives),
+   `AddValidator`/`ErrorMessage` with `Validators`/`AddError`,
+   `AddGlobalOption` with `Option.Recursive`, and prefixed option names
+   (`Option.Name` is now `--verbosity`), which the parser normalizes to keep
+   its prefix-less lookup tables. Help and version requests now materialize
+   as parse-time actions and are handled explicitly — including preserving
+   the historical nonzero exit code for `--version`. One behavioral trap
+   caught empirically: a bare `-v` (zero-or-one arity) now yields the
+   option's default value rather than `null`, so the documented
+   "skipping the level means info" behavior keys off the token count.
+   Verified end-to-end: help/version output, all validator classes
+   (extension, existence, allowed values, prerequisite, exclusive), a real
+   `coyote test` run with option flow into `Configuration`, `coyote rewrite`
+   of an assembly, and byte-identical IL-diff logs before and after the
+   migration (the CI baselines are unaffected).
 7. Replace `Microsoft.CodeAnalysis.FxCopAnalyzers` with NetAnalyzers; raise
    `LangVersion` beyond 10.0.
 8. Drop `net8.0` secondary target after its EOL (November 2026).
